@@ -1,0 +1,295 @@
+database:
+  create:
+    tables:
+      - table: przelewy24_account
+        columns:
+          id_account: int(10) UNSIGNED AUTO_INCREMENT NOT NULL
+          id_shop: int(10) UNSIGNED NOT NULL
+          id_currency: int(10) UNSIGNED NOT NULL
+          test_mode: tinyint(1) NOT NULL DEFAULT 0
+        primary: [ 'id_account' ]
+        engine: InnoDb
+
+      - table: przelewy24_credentials_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          id_merchant: varchar(15) NOT NULL
+          shop_id: varchar(255) NOT NULL
+          salt: varchar(255) NOT NULL
+          api_key: varchar(255) NOT NULL
+          test_mode: tinyint(1) NOT NULL DEFAULT 0
+        primary: [ 'id_account', 'test_mode' ]
+        engine: InnoDb
+
+      - table: przelewy24_state_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          id_state_before_payment: int(10) UNSIGNED NOT NULL
+          id_state_after_payment: int(10) UNSIGNED NOT NULL
+        primary: [ 'id_account' ]
+        engine: InnoDb
+
+      - table: przelewy24_order_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          alter_stock: tinyint(1) NOT NULL DEFAULT 0
+          create_order: 'ENUM("AFTER_PAYMENT", "AFTER_CONFIRM", "AFTER_CHOOSE")'
+          standard_return_page: tinyint(1) NOT NULL DEFAULT 0
+          skip_confirmation: tinyint(1) NOT NULL DEFAULT 0
+          accept_in_shop: tinyint(1) NOT NULL DEFAULT 1
+          intro_text: tinyint(1) NOT NULL DEFAULT 0
+          order_identification: 'ENUM("ID", "REFERENCE")'
+        primary: [ 'id_account' ]
+        engine: InnoDb
+
+      - table: przelewy24_installments_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          enable_calculator_on_product: tinyint(1) NOT NULL DEFAULT 0
+        primary: [ 'id_account' ]
+        engine: InnoDb
+
+      - table: przelewy24_time_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          wait_for_result: tinyint(1) NOT NULL DEFAULT 0
+          time_limit: int(10) NOT NULL DEFAULT 0
+          time_limit_fast_transfer: int(10) NOT NULL DEFAULT 1
+          time_limit_long_term: int(10) NOT NULL DEFAULT 12
+        primary: [ 'id_account' ]
+        engine: InnoDb
+
+      - table: przelewy24_extra_charge_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          extra_charge_amount: decimal(6,2) UNSIGNED NOT NULL DEFAULT 0
+          extra_charge_percent: int(10) UNSIGNED NOT NULL DEFAULT 0
+        primary: [ 'id_account' ]
+        engine: InnoDb
+
+      - table: przelewy24_payment_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+#          one_click_card: tinyint(1) NOT NULL DEFAULT 0
+          payment_method_in_main: tinyint(1) NOT NULL DEFAULT 0
+          payment_method_separate: tinyint(1) NOT NULL DEFAULT 0
+        primary: [ 'id_account' ]
+        engine: InnoDb
+
+      - table: przelewy24_cards_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          payment_in_store: tinyint(1) NOT NULL DEFAULT 0
+          one_click_card: tinyint(1) NOT NULL DEFAULT 0
+          click_to_pay: tinyint(1) NOT NULL DEFAULT 0
+          click_to_pay_guest: tinyint(1) NOT NULL DEFAULT 0
+        primary: [ 'id_account' ]
+        engine: InnoDb
+
+      - table: przelewy24_google_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          id_merchant: varchar(255) NOT NULL
+          merchant_name: varchar(255) NOT NULL
+          one_click: tinyint(1) NOT NULL DEFAULT 0
+        primary: [ 'id_account' ]
+        engine: InnoDb
+
+      - table: przelewy24_apple_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          id_merchant: varchar(255) NOT NULL
+          merchant_name: varchar(255) NOT NULL
+          one_click: tinyint(1) NOT NULL DEFAULT 0
+          cert: text NOT NULL
+          private_key: text NOT NULL
+        primary: [ 'id_account' ]
+        engine: InnoDb
+
+
+      - table: przelewy24_payment_method_main
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          id_payment: int(10) UNSIGNED NOT NULL
+          position: int(10) UNSIGNED NOT NULL
+        primary: [ 'id_account', 'id_payment' ]
+        engine: InnoDb
+
+      - table: przelewy24_payment_method_separate
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          id_payment: int(10) UNSIGNED NOT NULL
+          position: int(10) UNSIGNED NOT NULL
+        primary: [ 'id_account', 'id_payment' ]
+        engine: InnoDb
+
+      - table: przelewy24_payment_method_name
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          id_payment: int(10) UNSIGNED NOT NULL
+          name: varchar(255) NOT NULL
+        primary: [ 'id_account', 'id_payment' ]
+        engine: InnoDb
+      - table: przelewy24_transaction
+        columns:
+          session_id: varchar(100) NOT NULL
+          id_account: int(10) UNSIGNED NOT NULL
+          test_mode: tinyint(1) NOT NULL DEFAULT 0
+          merchant_id: varchar(15) NOT NULL
+          id_payment: int(10) UNSIGNED NOT NULL
+          shop_id: varchar(255) NOT NULL
+          id_cart: int(10) UNSIGNED NOT NULL
+          p24_id_order: varchar(100) DEFAULT NULL
+          ps_id_order: int(10) UNSIGNED DEFAULT NULL
+          amount: int(10) UNSIGNED NOT NULL
+          received: datetime DEFAULT NULL
+          date_add: datetime NOT NULL
+          save_card: tinyint(1) NOT NULL DEFAULT 0
+          crc: varchar(255) NOT NULL
+          iso_currency: varchar(3) NOT NULL
+        primary: [ 'session_id' ]
+        engine: InnoDb
+      - table: przelewy24_order_canceled
+        columns:
+          id_order: int(10) UNSIGNED NOT NULL
+          date_add: datetime NOT NULL
+        primary: [ 'id_order' ]
+        engine: InnoDb
+      - table: przelewy24_order_payed
+        columns:
+          id_order: int(10) UNSIGNED NOT NULL
+          date_add: datetime NOT NULL
+        primary: [ 'id_order' ]
+        engine: InnoDb
+      - table: przelewy24_refund
+        columns:
+          id_refund: int(10) UNSIGNED AUTO_INCREMENT NOT NULL
+          session_id: varchar(100) NOT NULL
+          amount: int(10) UNSIGNED NOT NULL
+          reference: varchar(32) NOT NULL
+          description: varchar(100) NOT NULL
+          date_add: datetime NOT NULL
+          received: datetime DEFAULT NULL
+        primary: [ 'id_refund' ]
+        engine: InnoDb
+      - table: przelewy24_repay_token
+        columns:
+          id_cart: int(10) UNSIGNED  NOT NULL
+          token: varchar(100) NOT NULL
+        primary: [ 'id_cart' ]
+        engine: InnoDb
+      - table: przelewy24_cards
+        columns:
+          id_card: int(10) UNSIGNED AUTO_INCREMENT NOT NULL
+          id_customer: int(10) UNSIGNED NOT NULL
+          ref_id: varchar(64) NOT NULL
+          mask: varchar(64) NOT NULL
+          card_date: varchar(10) NOT NULL
+          type: varchar(25) NOT NULL
+          default: tinyint(1) DEFAULT 0 NOT NULL
+        primary: [ 'id_card' ]
+        engine: InnoDb
+      - table: przelewy24_blik_transaction
+        columns:
+          session_id: varchar(100) NOT NULL
+          order_id: int(10) UNSIGNED NOT NULL
+          method: int(10) UNSIGNED NOT NULL
+          error: varchar(100) NOT NULL
+          message: varchar(255) NOT NULL
+          status: varchar(100) NOT NULL
+          trx_ref: varchar(100) NULL
+          date_add: datetime NOT NULL
+        primary: [ 'session_id' ]
+        engine: InnoDb
+      - table: przelewy24_blik_config
+        columns:
+          id_account: int(10) UNSIGNED NOT NULL
+          blik_level_0: tinyint(1) NOT NULL DEFAULT 0
+        primary: [ 'id_account' ]
+        engine: InnoDb
+  add:
+    columns:
+      - table: przelewy24_transaction
+        column: session_hash
+        definition: varchar(100) NOT NULL AFTER `session_id`
+    indexes:
+      - table: przelewy24_account
+        index_name: przelewy24Account_shopCurrency
+        type: UNIQUE
+        columns: [ 'id_currency', 'id_shop' ]
+
+    constraint_keys:
+      - name: przelewy24CredentialsConfig_przelewy24Account
+        table: przelewy24_credentials_config
+        table_referenced: przelewy24_account
+        update: NO ACTION
+        delete: CASCADE
+        column_name: id_account
+        column_name_referenced: id_account
+
+      - name: przelewy24StateConfig_przelewy24Account
+        table: przelewy24_state_config
+        table_referenced: przelewy24_account
+        update: NO ACTION
+        delete: CASCADE
+        column_name: id_account
+        column_name_referenced: id_account
+
+      - name: przelewy24OrderConfig_przelewy24Account
+        table: przelewy24_order_config
+        table_referenced: przelewy24_account
+        update: NO ACTION
+        delete: CASCADE
+        column_name: id_account
+        column_name_referenced: id_account
+
+      - name: przelewy24TimeConfig_przelewy24Account
+        table: przelewy24_time_config
+        table_referenced: przelewy24_account
+        update: NO ACTION
+        delete: CASCADE
+        column_name: id_account
+        column_name_referenced: id_account
+
+      - name: przelewy24ExtraChargeConfig_przelewy24Account
+        table: przelewy24_extra_charge_config
+        table_referenced: przelewy24_account
+        update: NO ACTION
+        delete: CASCADE
+        column_name: id_account
+        column_name_referenced: id_account
+
+      - name: przelewy24PaymentConfig_przelewy24Account
+        table: przelewy24_payment_config
+        table_referenced: przelewy24_account
+        update: NO ACTION
+        delete: CASCADE
+        column_name: id_account
+        column_name_referenced: id_account
+
+      - name: przelewy24PaymentMethodSeparate_przelewy24Account
+        table: przelewy24_payment_method_separate
+        table_referenced: przelewy24_account
+        update: NO ACTION
+        delete: CASCADE
+        column_name: id_account
+        column_name_referenced: id_account
+
+      - name: przelewy24PaymentMethodMain_przelewy24Account
+        table: przelewy24_payment_method_main
+        table_referenced: przelewy24_account
+        update: NO ACTION
+        delete: CASCADE
+        column_name: id_account
+        column_name_referenced: id_account
+
+      - name: przelewy24PaymentMethodName_przelewy24Account
+        table: przelewy24_payment_method_name
+        table_referenced: przelewy24_account
+        update: NO ACTION
+        delete: CASCADE
+        column_name: id_account
+        column_name_referenced: id_account
+
+
+

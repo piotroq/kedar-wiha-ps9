@@ -1,0 +1,48 @@
+{#**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    Przelewy24 powered by Waynet
+ * @copyright Przelewy24
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ *#}
+{% if paymentMethod is not empty %}
+    <div
+        class="przelewy24-payments__item js-przelewy24-payment-collection-item"
+        data-id="{{ paymentMethod.id }}"
+    >
+        <div class="przelewy24-payments__card card">
+            <div class="przelewy24-payments__card-body card-body p-2">
+                {% if paymentMethod.imgUrl is not empty %}
+                    <div class="przelewy24-payments__img-wrapper text-center mb-1">
+                        <img
+                            class="przelewy24-payments__img img-fluid"
+                            src="{{ paymentMethod.imgUrl }}"
+                            alt="{{ paymentMethod.name }}"
+                        >
+                    </div>
+                {% endif %}
+                {% if paymentMethod.name is not empty and hideName|default(false) is same as(false) %}
+                    <p class="przelewy24-payments__name text-center mb-0">
+                        {{ paymentMethod.name }}
+                    </p>
+                {% endif %}
+                {% if extraContent is defined %}
+                    <div class="przelewy24-payments__extra-content">
+                        {{ extraContent | raw }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

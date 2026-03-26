@@ -1,0 +1,450 @@
+imports:
+  - { resource: services/common.yml }
+
+services:
+  _defaults:
+    public: true
+    autoconfigure: true
+    autowire: true
+    bind:
+      $commandBus: '@prestashop.core.command_bus'
+
+  Przelewy24\Controller\Admin\ConfigController:
+    class: Przelewy24\Controller\Admin\ConfigController
+    tags: ['controller.service_arguments']
+    arguments:
+      - '@przelewy24.translator'
+    bind:
+      $oldModuleInstalled: '@=service("prestashop.module.manager").isEnabled("przelewy24")'
+
+  Przelewy24\Controller\Admin\RefundController:
+    class: Przelewy24\Controller\Admin\RefundController
+    tags: [ 'controller.service_arguments' ]
+
+  Przelewy24\Handler\Config\CredentialsConfigHandler:
+    class: Przelewy24\Handler\Config\CredentialsConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\CredentialsConfig
+
+  Przelewy24\Handler\Config\ExtraChargeConfigHandler:
+    class: Przelewy24\Handler\Config\ExtraChargeConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\ExtraChargeConfig
+
+  Przelewy24\Handler\Config\OrderConfigHandler:
+    class: Przelewy24\Handler\Config\OrderConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\OrderConfig
+
+  Przelewy24\Handler\Config\AppleConfigHandler:
+    class: Przelewy24\Handler\Config\AppleConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\AppleConfig
+
+  Przelewy24\Handler\Config\GoogleConfigHandler:
+    class: Przelewy24\Handler\Config\GoogleConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\GoogleConfig
+
+  Przelewy24\Handler\Config\CardsConfigHandler:
+    class: Przelewy24\Handler\Config\CardsConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\CardsConfig
+
+  Przelewy24\Handler\Config\BlikConfigHandler:
+    class: Przelewy24\Handler\Config\BlikConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\BlikConfig
+
+  Przelewy24\Handler\Config\InstallmentsConfigHandler:
+    class: Przelewy24\Handler\Config\InstallmentsConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\InstallmentsConfig
+
+  Przelewy24\Handler\Config\PaymentConfigHandler:
+    class: Przelewy24\Handler\Config\PaymentConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\PaymentConfig
+
+  Przelewy24\Handler\Config\StateConfigHandler:
+    class: Przelewy24\Handler\Config\StateConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\StateConfig
+
+  Przelewy24\Handler\Config\TimeConfigHandler:
+    class: Przelewy24\Handler\Config\TimeConfigHandler
+    tags:
+      - messenger.message_handler
+      - name: tactician.handler
+        command: Przelewy24\Model\Dto\TimeConfig
+
+  Przelewy24\Form\Type\RefundType:
+    class: Przelewy24\Form\Type\RefundType
+    arguments:
+      - '@router'
+    tags:
+      - form.type
+
+
+  Przelewy24\Migrator\ConfigurationMigrator:
+    class: Przelewy24\Migrator\ConfigurationMigrator
+    arguments:
+      - '@Przelewy24\Migrator\Provider\OldConfigurationProvider'
+      - '@przelewy24.translator'
+
+  Przelewy24\Migrator\Provider\OldConfigurationProvider:
+    class: Przelewy24\Migrator\Provider\OldConfigurationProvider
+
+  Przelewy24\Form\Type\PaymentMethodDragAndDropType:
+    class: Przelewy24\Form\Type\PaymentMethodDragAndDropType
+    arguments:
+      - '@twig.form.renderer'
+      - '@Przelewy24\Form\Transformer\PaymentMethodTransformer'
+    tags:
+      - form.type
+
+
+  Przelewy24\Form\Type\AccountType:
+    class: Przelewy24\Form\Type\AccountType
+    arguments:
+      - '@przelewy24.translator'
+      - '@Przelewy24\Provider\Choice\CurrencyChoiceProvider'
+      - '@router'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\CredentialsType:
+    class: Przelewy24\Form\Type\CredentialsType
+    arguments:
+      - '@przelewy24.translator'
+      - '@router'
+      - '@twig.form.renderer'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\ExtraChargeType:
+    class: Przelewy24\Form\Type\ExtraChargeType
+    arguments:
+      - '@przelewy24.translator'
+      - '@router'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\AppleType:
+    class: Przelewy24\Form\Type\AppleType
+    arguments:
+      - '@przelewy24.translator'
+      - '@router'
+      - '@Przelewy24\Form\Transformer\CertTransformer'
+      - '@twig.form.renderer'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\GoogleType:
+    class: Przelewy24\Form\Type\GoogleType
+    arguments:
+      - '@przelewy24.translator'
+      - '@router'
+      - '@twig.form.renderer'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\CardsType:
+    class: Przelewy24\Form\Type\CardsType
+    arguments:
+      - '@przelewy24.translator'
+      - '@router'
+      - '@twig.form.renderer'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\BlikType:
+    class: Przelewy24\Form\Type\BlikType
+    arguments:
+      - '@przelewy24.translator'
+      - '@router'
+      - '@twig.form.renderer'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\OrderType:
+    class: Przelewy24\Form\Type\OrderType
+    arguments:
+      - '@przelewy24.translator'
+      - '@Przelewy24\Provider\Choice\OrderIdChoiceProvider'
+      - '@router'
+      - '@twig.form.renderer'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\InstallmentsType:
+    class: Przelewy24\Form\Type\InstallmentsType
+    arguments:
+      - '@przelewy24.translator'
+      - '@router'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\PaymentType:
+    class: Przelewy24\Form\Type\PaymentType
+    arguments:
+      - '@przelewy24.translator'
+      - '@router'
+      - '@twig.form.renderer'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\StateType:
+    class: Przelewy24\Form\Type\StateType
+    arguments:
+      - '@przelewy24.translator'
+      - '@Przelewy24\Provider\Choice\StatusChoiceProvider'
+      - '@router'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\TimeConfigType:
+    class: Przelewy24\Form\Type\TimeConfigType
+    arguments:
+      - '@przelewy24.translator'
+      - '@router'
+      - '@twig.form.renderer'
+    tags:
+      - form.type
+
+  Przelewy24\Form\Type\PaymentMethodType:
+    class: Przelewy24\Form\Type\PaymentMethodType
+    arguments:
+      - '@twig.form.renderer'
+    tags:
+      - form.type
+
+  Przelewy24\Tabs\Tabs:
+    class: Przelewy24\Tabs\Tabs
+    arguments:
+      - '@twig'
+
+  Przelewy24\Tabs\Tab\CredentialsTab:
+    class: Przelewy24\Tabs\Tab\CredentialsTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Tabs\Tab\ExtraChargeTab:
+    class: Przelewy24\Tabs\Tab\ExtraChargeTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Tabs\Tab\OrderTab:
+    class: Przelewy24\Tabs\Tab\OrderTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Tabs\Tab\InstallmentsTab:
+    class: Przelewy24\Tabs\Tab\InstallmentsTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Tabs\Tab\PaymentTab:
+    class: Przelewy24\Tabs\Tab\PaymentTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Tabs\Tab\ApplePayTab:
+    class: Przelewy24\Tabs\Tab\ApplePayTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Tabs\Tab\BlikTab:
+    class: Przelewy24\Tabs\Tab\BlikTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Tabs\Tab\CardsTab:
+    class: Przelewy24\Tabs\Tab\CardsTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Tabs\Tab\GooglePayTab:
+    class: Przelewy24\Tabs\Tab\GooglePayTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Tabs\Tab\StateTab:
+    class: Przelewy24\Tabs\Tab\StateTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Tabs\Tab\TimeTab:
+    class: Przelewy24\Tabs\Tab\TimeTab
+    arguments:
+      - '@twig'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Factory\Form\FormTabFactory'
+      - '@Przelewy24\Configuration\Enum\FormTypeEnum'
+    tags:
+      - przelewy24.tab
+
+  Przelewy24\Factory\Tabs\TabsFactory:
+    class: Przelewy24\Factory\Tabs\TabsFactory
+    arguments:
+      - !tagged przelewy24.tab
+      - '@Przelewy24\Tabs\Tabs'
+
+  Przelewy24\Factory\Form\FormTabFactory:
+    class: Przelewy24\Factory\Form\FormTabFactory
+    arguments:
+      - '@form.factory'
+
+
+  Przelewy24\Configuration\Enum\FormTypeEnum:
+    class: Przelewy24\Configuration\Enum\FormTypeEnum
+    arguments:
+      - '@przelewy24.translator'
+
+
+  Przelewy24\Form\Transformer\PaymentMethodTransformer:
+    class: Przelewy24\Form\Transformer\PaymentMethodTransformer
+
+  Przelewy24\Form\Transformer\CertTransformer:
+    class: Przelewy24\Form\Transformer\CertTransformer
+
+
+
+  Przelewy24\Transformer\FormDataToRefundOrderTransformer:
+    class: Przelewy24\Transformer\FormDataToRefundOrderTransformer
+
+  Przelewy24\Handler\Order\OrderRefundHandler:
+    class: Przelewy24\Handler\Order\OrderRefundHandler
+    arguments:
+      - '@Przelewy24\Provider\Refund\RefundProvider'
+      - '@Przelewy24\Refund\RefundTransaction'
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+
+  Przelewy24\Event\Adapter\EventDispatcher:
+    class: Przelewy24\Event\Adapter\EventDispatcher
+    arguments:
+      - '@event_dispatcher'
+
+  Przelewy24\Subscriber\ConfigSaveEventSubscriber:
+    class: Przelewy24\Subscriber\ConfigSaveEventSubscriber
+    tags:
+      - { name: kernel.event_subscriber }
+
+  Przelewy24\Presenter\Order\Przelewy24OrderPresenter:
+    class: Przelewy24\Presenter\Order\Przelewy24OrderPresenter
+    arguments:
+      - '@Przelewy24\Renderer\Przelewy24OrderRenderer'
+      - '@Przelewy24\Transformer\ModelToTransactionHistoryCollectionTransformer'
+      - '@Przelewy24\Factory\Form\RefundFormFactory'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Helper\Price\PriceHelper'
+
+  Przelewy24\Renderer\Przelewy24OrderRenderer:
+    class: Przelewy24\Renderer\Przelewy24OrderRenderer
+    arguments:
+      - '@Przelewy24\Renderer\Przelewy24RefundFormRenderer'
+      - '@Przelewy24\Renderer\Przelewy24HistoryPaymentRenderer'
+      - '@?twig'
+
+  Przelewy24\Renderer\Przelewy24RefundFormRenderer:
+    class: Przelewy24\Renderer\Przelewy24RefundFormRenderer
+    arguments:
+      - '@?twig'
+
+  Przelewy24\Renderer\Przelewy24HistoryPaymentRenderer:
+    class: Przelewy24\Renderer\Przelewy24HistoryPaymentRenderer
+    arguments:
+      - '@?twig'
+
+  Przelewy24\Factory\Form\RefundFormFactory:
+    class: Przelewy24\Factory\Form\RefundFormFactory
+    arguments:
+      - '@?form.factory'
+
+  Przelewy24\Hook\DisplayAdminOrder:
+    class: Przelewy24\Hook\DisplayAdminOrder
+    tags: [ przelewy24.hook ]
+    arguments:
+      - '@Przelewy24\Presenter\Order\Przelewy24OrderPresenter'
+
+
+
+
+
+
+
+
+
+
+
+

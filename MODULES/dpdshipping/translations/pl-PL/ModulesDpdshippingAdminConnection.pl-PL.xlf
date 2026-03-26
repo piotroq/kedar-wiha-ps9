@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="f520b5edc239a93eb04418897d5b2c3a">
+        <source>Select connection</source>
+        <target>Wybierz konto API</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="37b6061c10229c1807a07eee2e90f9c5">
+        <source>Select payer</source>
+        <target>Wybierz płatnika</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="49ee3087348e8d44e1feda1917443987">
+        <source>Name</source>
+        <target>Nazwa</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="99dea78007133396a7b8ed70578ac6ae">
+        <source>Login</source>
+        <target>Login</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="dc647eb65e6711e155375218212b3964">
+        <source>Password</source>
+        <target>Hasło</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="70624500cf90a1728f4b180af451f8aa">
+        <source>Master FID</source>
+        <target>Numer płatnika (MASTERFID)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a129e91b489ef0ad78457fec5a38c2d7">
+        <source>DPD Poland API Connection</source>
+        <target>Konto API DPD Polska</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9f82518d468b9fee614fcc92f76bb163">
+        <source>Shop</source>
+        <target>Sklep</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="15ebc7b95188471ca593fe0e50e7d166">
+        <source>Masterfid</source>
+        <target>MasterFID</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0ba29c6a1afacf586b03a26162c72274">
+        <source>Environment</source>
+        <target>Środowisko</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7a1920d61156abc05a60135aefe8bc67">
+        <source>Default</source>
+        <target>Domyślny</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="06df33001c1d7187fdd81ea1f5b277aa">
+        <source>Actions</source>
+        <target>Akcje</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7dce122004969d56ae2e0245cb754d35">
+        <source>Edit</source>
+        <target>Edytuj</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f2a6c498fb90ee345d997f888fce3b18">
+        <source>Delete</source>
+        <target>Usuń</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b69120f025424daa72509a6e073acebc">
+        <source>Remove selected row?</source>
+        <target>Czy chcesz usunąć zaznaczone wiersze?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d3d2e617335f08df83599665eef8a418">
+        <source>Close</source>
+        <target>Zamknij</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="68316cc3f7592e22df395efefb40b96f">
+        <source>Connection with DPD Poland</source>
+        <target>Połączenie z API DPD Polska</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9c1b667f793e7893cf237087c87d3516">
+        <source>Payer data</source>
+        <target>Dane płatnika</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7e9b76c938aa6f95dcebd1dd57e64be1">
+        <source>FID number</source>
+        <target>Nazwa płatnika</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4938769faba74db205954397ad06cc24">
+        <source>FID name</source>
+        <target>Numer płatnika (FID)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
+        <source>Save</source>
+        <target>Zapisz</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

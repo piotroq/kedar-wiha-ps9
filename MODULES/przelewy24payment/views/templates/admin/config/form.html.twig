@@ -1,0 +1,126 @@
+{#**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    Przelewy24 powered by Waynet
+ * @copyright Przelewy24
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ *#}
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+
+{% block content %}
+    <div class="card przelewy24-card p-1">
+        <div class="card-body p-4">
+            <div class="row mt-n2">
+                <div class="col-12 col-lg-6 d-flex flex-column justify-content-center mt-2">
+                    <div class="przelewy24-card__logo-wrapper mb-3">
+                        <img
+                            class="img-fluid"
+                            src="{{ '/modules/przelewy24payment/views/img/przelewy24-logo.svg' }}"
+                            width="100"
+                            height="35"
+                            alt="{{ 'Przelewy24 logo'|trans({}, 'Modules.Przelewy24payment.Config') }}"
+                            loading="lazy"
+                        >
+                    </div>
+                    <h1 class="przelewy24-card__header">
+                        {{ 'Witamy w Przelewy24'|trans({}, 'Modules.Przelewy24payment.Config') }}
+                    </h1>
+                    <p class="przelewy24-card__description">
+                        {{ 'Zacznij akceptować płatności za pomocą przelewów online, BLIK, kart płatniczych lub innych metod dostosowanych do Twojego biznesu.'|trans({}, 'Modules.Przelewy24payment.Config') }}
+                    </p>
+                </div>
+                <div class="col-12 col-lg-6 d-flex align-items-center justify-content-lg-end mt-2">
+                    <a href="https://www.przelewy24.pl/prestashop-placement-adv/" target="_blank">
+                        <img
+                            class="img-fluid"
+                            src="https://www.przelewy24.pl/storage/app/media/do-pobrania/gotowe-wtyczki/prestashop/banner/ps-adv-p24-700x230.png"
+                            width="700"
+                            height="230"
+                            alt="{{ 'Przelewy24 banner'|trans({}, 'Modules.Przelewy24payment.Config') }}"
+                            loading="lazy"
+                        >
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if old_module_installed %}
+        <div class="card-header p-3">
+            <h3 class="card-title">
+                {{ 'Migration'|trans({}, 'Modules.Przelewy24payment.Config') }}
+            </h3>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <p class="alert-text mb-2">
+                        {{ 'You have an old Przelewy24 module installed. Would you like to migrate your data?'|trans({}, 'Modules.Przelewy24payment.Config') }}
+                        <br>
+                        <strong class="text-warning">{{ 'Please note that this will overwrite your current configuration!'|trans({}, 'Modules.Przelewy24payment.Config') }}</strong>
+                    </p>
+                    <div>
+                        <button
+                                class="js-przelewy24-migrate-button btn btn-primary"
+                                data-url="{{ migration_url }}"
+                                data-message="{{ 'Are you sure you want to migrate?'|trans({}, 'Modules.Przelewy24payment.Config') }}"
+                        >
+                            {{ 'Migrate'|trans({}, 'Modules.Przelewy24payment.Config') }}
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+    <div class="card przelewy24-card">
+        {% if sandbox_mode %}
+            <div class="alert alert-warning d-block w-100 text-center py-2 mb-3" style="font-size: 18px; font-weight: bold; background-color: #ffc107; color: #000; border: none; border-radius: 0;">
+                <i class="icon-warning"></i>
+                {{ 'Note: Test mode (sandbox) is enabled. '|trans({}, 'Modules.Przelewy24payment.Config') }}
+                <p>{{ 'The module is currently operating in test mode – all transactions are simulated and no real charges will be made.'|trans({}, 'Modules.Przelewy24payment.Config') }}</p>
+                <p>{{ 'Before going live, make sure to disable the test mode in the settings.'|trans({}, 'Modules.Przelewy24payment.Config') }}</p>
+            </div>
+        {% endif %}
+        {{ form_start(form) }}
+            {% include '@Modules/przelewy24payment/views/templates/admin/config/form_card.html.twig' with {
+                form: form,
+                title: 'Account'|trans({}, 'Modules.Przelewy24payment.Config'),
+                header_card: '<p><b>' ~
+                    'Select the currency for which you want to configure the merchant settings.'|trans({}, 'Modules.Przelewy24payment.Config') ~ '</b></br>' ~
+                    'You need to configure the settings separately for each selected currency.'|trans({}, 'Modules.Przelewy24payment.Config') ~ '</p>',
+                alert_type: 'info',
+            } %}
+        {{ form_end(form) }}
+
+        <div class="card-header p-3">
+            <h3 class="card-title">
+                {{ 'Config'|trans({}, 'Modules.Przelewy24payment.Config') }}
+            </h3>
+        </div>
+        <div class="card-body js-przelewy24-tabs-content">
+            {{ tabs.render() | raw }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('../modules/przelewy24payment/views/js/admin/form.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('../modules/przelewy24payment/views/css/admin/form.css') }}"/>
+{% endblock %}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="d58219097a8173b22441cd752803db97">
+        <source>Correct Transaction</source>
+        <target>Prawidłowa transakcja</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="08e6dc32e3c03dafa575215cbcd30459">
+        <source>Incorrect BLIK code was entered. Try again.</source>
+        <target>Wprowadzono nieprawidłowy kod BLIK. Spróbuj ponownie.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3644998fff99304eea7a8595e2bae84f">
+        <source>Payment failed. Check the reason in the banking application and try again.</source>
+        <target>Płatność nieudana. Sprawdź przyczynę w aplikacji bankowej i spróbuj ponownie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fe70643b9af077e070098c575deb326c">
+        <source>Payment failed - not confirmed on time in the banking application. Try again.</source>
+        <target>Płatność nieudana - nie została potwierdzona na czas w aplikacji bankowej. Spróbuj ponownie</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

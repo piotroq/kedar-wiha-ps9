@@ -1,0 +1,43 @@
+Changelog:
+
+v2.0.0 - 20.10.2025
+ - Obsługa Prestashop 9
+
+v1.6.6 - 15.10.2025
+ - Obsługa cennika specjalnego dla Automatów Paczkowych
+
+v1.6.5 - 07.10.2025
+ - Drobne modyfikacje
+
+v1.6.4 - 06.10.2025
+ - Obsługa integracji z EMPIK
+
+v1.5.0 - 12.08.2025
+ - DPD Poland - Swip box shipping method
+
+v1.4.0 - 9.04.2025
+ - Block confirm order without Pickup Point for custom checkout - Easycheckout
+ - Block confirm order without Pickup Point for custom checkout - One Page Checkout - PrestaTeam - Prestashop 1.7
+ - Block confirm order without Pickup Point for custom checkout - One Page Checkout - PrestaTeam - Prestashop 8
+ - Block confirm order without Pickup Point for custom checkout - The Checkout - PrestaSmart
+ - Block confirm order without Pickup Point for custom checkout - One Page Checkout - PrestaSmart
+
+v1.3.1 - 28.02.2025
+ - Declared value service - get amount and currency
+
+v1.3.0 - 18.01.2025
+ - Multistore support
+ - Special Price import and export with support pagination
+ - Generate shipping - Pickup map for receiver country
+ - Order courier fix
+ - Get pickup number for old carriers
+ - Change join carrier method
+
+v1.2.0 - 22.11.2024
+- Hide generate shipping form if carrier is not DPD
+
+v1.1.5 - 24.09.2024
+ - Set default package weight when product weight is <= 0
+
+v1.1.4 - 30.07.2024
+ - Show courier pickup option for one time range

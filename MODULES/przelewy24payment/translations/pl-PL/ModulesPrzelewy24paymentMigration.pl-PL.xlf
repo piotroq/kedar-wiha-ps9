@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="4a5a703f7102daf4a8ba29be977c7ff9">
+        <source>Account (SHOP: %shop%, CURRENCY: %currency%, SANDBOX: %testMode%) </source>
+        <target>Konto (SKLEP: %shop%, WALUTA: %currency%, SANDBOX: %testMode%)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e265f11b16d7a4b9965fc83081111ccf">
+        <source>Migrated credentials</source>
+        <target>Zmigrowane dane uwierzytelniające</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d6792780032050bb8317180bc8aca6f2">
+        <source>Error while migrated credentials</source>
+        <target>Błąd podczas migracji danych uwierzytelniających</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e62091d188ea481ec61e87e1ae6525ef">
+        <source>Migrated extra charge</source>
+        <target>Zmigrowana dodatkowa opłata</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="dc5b162b06d85f1130314342898b2a0d">
+        <source>Error while migrated extra charge</source>
+        <target>Błąd podczas migracji dodatkowej opłaty</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4ce3b672e860e630558eaee4ea0f4dac">
+        <source>Migrated cards</source>
+        <target>Zmigrowane karty</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

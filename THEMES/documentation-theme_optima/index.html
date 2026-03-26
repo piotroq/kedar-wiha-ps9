@@ -1,0 +1,762 @@
+<!doctype html>  
+<!--[if IE 6 ]><html lang="en-us" class="ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="en-us" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en-us" class="ie8"> <![endif]-->
+<!--[if (gt IE 7)|!(IE)]><!-->
+<html lang="en-us"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	
+	<title>Pos Optima</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="assets/images/favicon.ico.png" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="assets/css/documenter_style.css" media="all">
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+	
+	<script src="assets/js/jquery.js"></script>
+	
+	<script src="assets/js/jquery.malihu.PageScroll2id.min.js"></script>
+	<script src="assets/js/jquery.easing.js"></script>
+	
+	<script>document.createElement('section');var duration='500',easing='swing';</script>
+	<script src="assets/js/backtotop.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+		
+		
+		$('#documenter_sidebar #documenter_nav li a').on('click', function(){
+			if($(this).hasClass('open_menu')) {
+				$(this).parent().siblings().find('a').removeClass( 'open_menu' );   
+				$(this).removeClass( 'open_menu' );  
+				$(this).next('#documenter_sidebar #documenter_nav ul').slideUp();
+				$(this).parent().siblings().find('ul').slideUp();
+			}
+			else {	
+				$(this).parent().siblings().find('a').removeClass( 'open_menu' );  
+				$(this).parent().siblings().find('ul').slideUp();
+				$(this).addClass( 'open_menu' );   
+				$(this).next('#documenter_sidebar #documenter_nav ul').slideDown();
+		
+			}
+			
+		});
+		(function(){
+			$(window).ready(function () {
+				
+				/ Page Scroll to id fn call /
+				$("#documenter_nav li a ").mPageScroll2id({
+					highlightSelector:"#documenter_nav li a ",
+					//offset:100,
+				});
+			});
+		})(jQuery); 
+	});
+	</script>
+	<style>
+		html{background-color:#EEEEEE;color:#383838;}
+		::-moz-selection{background:#333636;color:#989898;}
+		::selection{background:#333636;color:#4fb68d;}
+		a{color:#4fb68d;}
+		.btn {
+			border-radius:3px;
+		}
+		.btn-primary {
+			  background-image: -moz-linear-gradient(top, #4fb68d, #006673);
+			  background-image: -ms-linear-gradient(top, #4fb68d, #006673);
+			  background-image: -webkit-gradient(linear, 0 0, 0 #fe5b5a), from(#EEE), to(#006673);
+			  background-image: -webkit-linear-gradient(top, #4fb68d, #006673);
+			  background-image: -o-linear-gradient(top, #4fb68d, #006673);
+			  background-image: linear-gradient(to top, #4fb68d, #006673);
+			  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4fb68d', endColorstr='#006673', GradientType=0);
+			  border-color: #006673 #006673 #bfbfbf;
+			  color:#FFFFFF;
+		}
+		.btn-primary:hover,
+		.btn-primary:active,
+		.btn-primary.active,
+		.btn-primary.disabled,
+		.btn-primary[disabled] {
+		  border-color: #4fb68d #4fb68d #bfbfbf;
+		  background-color: #006673;
+		}
+		hr{border-top:1px solid #D4D4D4;border-bottom:1px solid #FFFFFF;}
+		#documenter_sidebar, #documenter_sidebar ul a{background-color:#EEE;color:#333;}
+		#documenter_sidebar ul{border-top:1px solid #CFCFCF;}
+		#documenter_sidebar ul a{border-top:1px solid #CFCFCF;}
+		#documenter_sidebar ul a:hover{color:#4fb68d;}
+		#documenter_sidebar ul a.open_menu,#documenter_sidebar ul a.mPS2id-highlight{color:#4fb68d;}
+		#documenter_copyright{display:block !important;visibility:visible !important;}
+	</style>
+	
+</head>
+<body class="documenter-project">
+	<div class="container-fluid clearfix">
+		<div id="documenter_sidebar">
+			<a href="http://posthemes.com/" id="documenter_logo">
+				<img class="img-responsive" style="margin: 0 auto;" src="assets/images/logo.jpg" alt="logo"/>
+			</a>
+			<ul id="documenter_nav">
+				<li><a href="#installation" title="Installation">Installation<b class="caret"></b></a>
+					<ul class='menu-1'>
+						<li class='sub-1'><a href='#requirements'>Requirements</a></li>
+						<li class='sub-1'><a href='#install_theme'>Install Theme</a></li>
+					</ul>
+				</li>
+				<li><a href="#images_settings" title="Installation">Images Settings</a>
+				</li>
+				<li><a href="#features" title=" Features"> PrestaShop’s Features</a></li>
+				<li><a href="#creative_elements" title="Logo">Creative Elements page builder<b class="caret"></b></a>
+					<ul class='menu-1'>
+						<li class='sub-1'><a href='#edit_content_page'>How to edit Header, Footer, Homepage content with Creative Elements</a></li>
+						<li class='sub-1'><a href='#multilanguage_layout'>Multilanguage Layouts Configuration</a></li>
+					</ul>
+				</li>
+				<li><a href="#edit_static_block" title="Layout">Static Blocks in Optima theme</a>
+					
+				</li>
+				<li><a href="#product_types" title="Module"> Product Types & Product Categories <b class="caret"></b></a>
+					<ul class='menu-1'>
+						<li class='sub-1'><a href="#set_new_product" title="related">How to set a product as new product</a></li>
+						<li class='sub-1'><a href="#set_countdown_timer" title="related">How to set time for discount product</a></li>
+						<li class='sub-1'><a href="#set_related_product" title="related">How to display related products on product detail page</a></li>
+						<li class="sub-1"><a href="#set_thumbnail_category" title="related" class="">How to upload thumbnail image for the product category</a></li>
+					</ul>
+				</li>
+				
+				
+				
+				<li><a href="#module" title="Module">Module Config<b class="caret"></b></a>
+					<ul class='menu-1'>
+						<li class='sub-1'><a href='#config'>General Configuration</a></li>
+						<li class='sub-1'><a href='#module_config'>Posthemes Module Configuration</a></li>		
+						<li class='sub-1'><a href='#other'>Other modules</a></li>
+					</ul>
+				</li>
+				
+				<li><a href="#translate" title="Translate">Translate Optima theme<b class="caret"></b></a>
+					<ul class='menu-1'>
+						<li class='sub-1'><a href='#theme'>Back office translations</a></li>
+						<li class='sub-1'><a href='#theme_trans'>Themes translations</a></li>
+						<li class='sub-1'><a href='#module_content'>Translate module content</a></li>
+					</ul>
+				</li>
+				<li><a href="#support" title="Module">Posthemes Support</a></li>
+			</ul>
+			<div id="documenter_copyright">Copyright ©<a href="http://posthemes.com/">Posthemes</a>.<br>All rights reserved.
+			</div>
+		</div>
+		<div id="documenter_content">
+		<!-- Start -->
+		<section id="documenter_cover">
+		<h1>Pos Optima Responsive Prestashop Theme 1.7.x.x, 8.x Theme</h1>
+		<hr>
+		<p><i>Pos Optima is a <a href="http://posthemes.com/"><b> premium Responsive Prestashop theme</b></a> with advanced admin modules, extremely customizable and fully responsive. It is suitable for every type of store. It is a standalone design package so you can easily create your own sub-themes.</i></p>
+		<br>
+		<p><i><b>PosThemes</b></i></p>
+		</section>
+		<!-- End Start -->
+		
+		<!-- Installation --> 
+		<section id="installation">
+		<div class="page-header"><h2>Installation</h2></div>
+		<p>- To install the theme you must have a working version of Prestashop already installed. For information in regard to installing the Prestashop platform, please see the <a href="https://doc.prestashop.com/display/PS17/PrestaShop+1.7+documentation" rel="nofollow" target="_blank"> Prestashop Documentation</a>.</p>
+		<p>- Once the installation is done, delete the <i>/install</i> folder and write down the new of the <i>/admin</i>folder, which has been generated in order to be unique to you, for security reasons.</p>
+		<!-- Requirements -->
+		<section id="requirements">
+		<div class="page-header"><h3>Requirements</h3></div>
+			<ul>
+				<li><p>Before you get started, make sure you have all the requirements available: Server space at a Hosting Provider, Domain Name, FTP client, Text Editor.<p>
+					<ul>
+						<li><strong>System</strong>: Unix, Linux or Windows. Unix is highly recommended.</li>
+						<li><strong>Web server</strong>: Apache Web Server 2.2 or any later version.</li>
+						<li><strong>PHP</strong>: We recommend PHP 7.1 or later.</li>
+						<li><strong>MySQL</strong>: 5.6 minimum, a recent version is recommended.</li>
+						<li><strong>Server RAM </strong>: The more the merrier. We recommend setting the memory allocation per script (memory_limit) to a minimum of 256M.</li>
+					</ul>
+				</li>
+			</ul>
+			<h4>Must-have PHP extensions:</h4>
+			<ul>
+				<li><strong>CURL</strong>. The <a href="https://php.net/manual/en/book.curl.php" rel="nofollow" target="_blank">Client URL extension</a> is used to download remote resources like modules and localization packages.</li>
+				<li><strong>DOM</strong>. The <a href="https://php.net/manual/en/book.dom.php" rel="nofollow" target="_blank">DOM extension</a> is needed to parse XML documents. PrestaShop uses it for various functionalities, like the Store Locator. It is also used by some modules, as well as the pear_xml_parse library.</li>
+				<li><strong>Fileinfo</strong>. The <a href="https://php.net/manual/en/book.fileinfo.php" rel="nofollow" target="_blank">File information extension</a> is used to find out the file type of uploaded files.</li>
+				<li><strong>GD</strong>. The <a href="https://php.net/manual/en/book.image.php" rel="nofollow" target="_blank">GD extension</a> is used to create thumbnails for the images that you upload.</li>
+				<li><strong>Iconv</strong>. The <a href="https://www.php.net/manual/en/book.iconv.php" rel="nofollow" target="_blank">ICONV extension</a> is used to convert character sets.</li>
+				<li><strong>Intl</strong>. The <a href="https://php.net/manual/en/book.intl.php" rel="nofollow" target="_blank">Internationalization extension</a> is used to display localized data, such as amounts in different currencies.</li>
+				<li><strong>JSON</strong>. The <a href="https://www.php.net/manual/en/json.installation.php" rel="nofollow" target="_blank">JSON extension</a> is used to manage JSON format.</li>
+				<li><strong>Mbstring</strong>. The <a href="https://www.php.net/manual/en/book.mbstring.php" rel="nofollow" target="_blank">Multibyte string extension</a> to perform string operations everywhere.</li>
+				<li><strong>OpenSSL</strong>. The <a href="https://www.php.net/manual/en/book.openssl.php" rel="nofollow" target="_blank">OpenSSL extension</a> is used to improve security.</li>
+				<li><strong>PDO</strong>. The <a href="https://www.php.net/manual/en/book.pdo.php" rel="nofollow" target="_blank">PHP Data Objects extension</a> is used to connect to databases.</li>
+				<li><strong>PDO (MySQL)</strong>. The <a href="https://www.php.net/manual/en/ref.pdo-mysql.php" rel="nofollow" target="_blank">PDO_MYSQL driver</a> is used to connect to MySQL databases.</li>
+				<li><strong>SimpleXML</strong>. The <a href="https://www.php.net/manual/en/intro.simplexml.php" rel="nofollow" target="_blank">SimpleXML extension</a> is used to manage XML files.</li>
+				<li><strong>Zip</strong>. The <a href="https://php.net/manual/en/book.zip.php" rel="nofollow" target="_blank">Zip extension</a> is used to expand compressed files such as modules and localization packages.</li>
+			</ul>
+			<h4>Permissions:</h4>
+			<ul>
+				<li>Permissions for all files should be set to "644"</li>
+				<li>Permissions for all folders should be set to "755"</li>
+			</ul>
+			<h4> How to verify your server meets PrestaShop’s requirements:</h4>
+			<p>You can use our <a href="https://github.com/PrestaShop/php-ps-info/" rel="nofollow" target="_blank">system requirements tool</a> to easily check if your environment fulfills PrestaShop&rsquo;s requirements. Here&rsquo;s how:</p>
+			<ol>
+				<li>Download the <a href="https://github.com/PrestaShop/php-ps-info/releases" rel="nofollow" target="_blank">latest version from GitHub</a>.</li>
+				<li>Extract the zip file.</li>
+				<li>Upload the <code>phppsinfo.php</code> file to your server and put it inside your current shop&rsquo;s directory or the one where you intend to install it.</li>
+				<li>Open it up on your browser (<code>http://your-domain.com/path-to-your-prestashop/phppsinfo.php</code>).</li>
+				<li>Type in the login and password if prompted (use <code>prestashop</code> for both).</li>
+			</ol>
+
+		</section>
+		<!-- End Requirements --> 
+		
+			<!-- Install theme -->
+		<section id="install_theme">
+		<div class="page-header"><h3>Install Theme</h3></div>
+				<p> - You must install default prestashop before. You can see instruction install default prestashop on Prestashop Wiki: <a href="http://doc.prestashop.com/display/PS17/Installing+PrestaShop" rel="nofollow" target="_blank">http://doc.prestashop.com/display/PS17/Installing+PrestaShop</a></p>
+				<p>- Once the installation is done, delete the <i>/install</i> folder and write down the new of the <i>/admin</i> folder, which has been generated in order to be unique to you, for security reasons.</p>
+				<h4>Installation Tutorial Video: <a href="https://www.youtube.com/v/vCEUjLcDerY" rel="nofollow" target="_blank"> How to Install Optima Prestashop theme (Creative Elements) </a></h4>
+				<p><embed allowscriptaccess="never" src="http://www.youtube.com/v/vCEUjLcDerY" type="application/x-shockwave-flash" height="480" width="853"></p>
+				<h5>Follow the steps below to setup your site template:</h5>
+				<ul>
+					<li><p>Log into your Prestashop Back-Office and go to <strong>Design > Theme & Logo </strong></p></li>
+					<li><p>Then click on the <strong> Add new theme </strong> button. Next browse for the zipped theme file. </p>
+						<p> <img src="assets/images/install_theme1.jpg" alt="" /> </p>
+						<p><i>***Make sure you take the "Installable zip" as this is what you would upload. "Installable zip" file is called "pos_optima_theme_x.x.x.zip"</i></p>
+					</li>
+					<li><p>Once Prestashop has unpacked and installed the theme, just click to <strong> Use this theme </strong>  button</p>
+						<p> <img src="assets/images/install_theme2.jpg" alt="" /> </p>
+					</li>
+					<li>TO INSTALL OTHER DEMO, PLEASE FOLLOW STEPS BELOW:</li>
+					<li><p>Go to <strong> POSTHEMES > Modules > Theme settings</strong> </p>
+						<p> <img src="assets/images/install_theme3.jpg" alt="" /> </p>
+					</li>
+					<li><p>Choose <strong> Demo Setup</strong> : Choose demo (which has not been imported yet) you want to import then click <strong> Import </strong> button. Example, here: import <strong> Cosmetic 1 </strong> demo. If the demo has already been imported, skip this step.</p>
+						<p> <img src="assets/images/install_theme4.jpg" alt="" /> </p>
+					</li>
+					<li><p>Click <strong> Header</strong> : At <strong> Header template </strong>: Choose header template from imported templates which you want to show.(Example: If you want header like header of Cosmetic 1: Select <strong> Cosmetic 1 - Header </strong>)</p>
+						<p> <img src="assets/images/install_theme5.jpg" alt="" /> </p>
+					</li>
+					<li><p>Click <strong> Homepage</strong> : At <strong> Homepage template </strong>: Choose homepage template from imported templates which you want to show.(Example: If you want homepage like homepage of Cosmetic 1: Select <strong> Cosmetic 1 - Home </strong>) </p>
+						<p> <img src="assets/images/install_theme6.jpg" alt="" /> </p>
+					</li>
+					<li><p>Click <strong> Footer</strong> : At <strong> Footer template </strong>: Choose footer template from imported templates which you want to show. (Example: If you want footer like footer of Cosmetic 1: Select <strong> Cosmetic 1 - Footer </strong>)  </p>
+						<p> <img src="assets/images/install_theme7.jpg" alt="" /> </p>
+					</li>
+					<li><p>Click <strong> Save</strong> button save your config.</p>
+					</li>
+					<li>Finish installer.</li>
+				</ul>
+			<br>
+		</section>
+			<!-- End Install theme -->	
+		<!-- End Installation -->
+		</section>
+		
+		<!--  Image settings -->
+		<section id="images_settings">
+		<div class="page-header"><h2>Images Settings</h2></div>
+			<h4><u><strong>Create or edit size image and Regenerate thumbnails</strong></u></h4>
+			<ol>
+				<li>
+					<p>Go to <strong>Design</strong> > <strong>Images Settings</strong></p>
+					<p><img src="assets/images/design_images.jpg" alt="" /></p>
+				</li>
+				<li>	
+					<p>Create or edit size image</p>
+					<p><img src="assets/images/edit_images.jpg" alt="" /></p>
+				</li>
+				<li>
+					<p>Choose <strong>Regenerate thumbnails</strong> button</p>
+					<p><img src="assets/images/regenerate1.jpg" alt="" />
+					<p><img src="assets/images/regenerate2.jpg" alt="" /></p>
+				</li>
+				<li>
+					<p>After that, we got:</p>
+					<p><img src="assets/images/regenerate3.jpg" alt="" /></p>
+				</li>
+			</ol>
+			<br>
+		</section>
+		<!-- End Image settings -->
+		
+		<!--  PrestaShop’s features -->
+		<section id="features">
+		<div class="page-header"><h2>PrestaShop’s Features</h2></div>
+			<p>User will also be able to efficiently manage your PrestaShop site without related the programming skill. You work in the front-office interface directly (in the <strong>Administration Area</strong>), which can be helpful to everyone, special for shop owners. To find more informations, please read on <i><a rel="nofollow" href="http://doc.prestashop.com/display/PS17/User+Guide" rel="nofollow" target="_blank">http://doc.prestashop.com/display/PS17/User+Guide</a></i></p>
+			<p><strong>Note</strong>: When you finish install theme, you should disable cache. This step will help your Prestashop site active normally.</p>
+			<ul>
+				<li><strong>Advanced Parameters</strong> > <strong>Performance</strong></li>
+				<li>At field <strong>Cache</strong>, choose <strong>No</strong></li>
+				<li class="img-in"><img src="assets/images/disable_cache.jpg" alt="" />
+				<li>Click <strong>Save</strong> button</li>
+			</ul>
+		</section>
+		<!-- End  PrestaShop’s features -->
+
+		<section id="creative_elements">
+		<div class="page-header"><h2>Creative Elements</h2></div>
+		<p>- Please read more at <a href='modules_list/creative_element.html'> Creative Elements </a> & <a href='modules_list/element.html'> Pos Elements </a> </hp>
+		<!-- How to edit header, homepage, footer with Creative Elements -->
+		<section id="edit_content_page">
+		<div class="page-header"><h3>How to edit Header, Footer, Homepage content with Creative Elements</h3></div>
+		<h4>- Tutorial video: <a href="https://www.youtube.com/v/l15605xf_J0" rel="nofollow" target="_blank"> How to edit content page with Creative Elements page builder</a> </h4>
+				<p><embed allowscriptaccess="never" src="http://www.youtube.com/v/l15605xf_J0" type="application/x-shockwave-flash" height="480" width="853"></p>
+		<h4> The first way:</h4>
+		<ul>
+			<li> Login your prestashop admin</li>
+			<li> Open the frontend   </li>
+			<li> Hover the header, homepage content, footer, you will see the icon <strong> Edit with Creative Elements </strong> <img src="assets/images/icon_element.jpg" alt="" /> and then click it. The Creative Elements panel will be shown.</li>
+			<li class="img-in"><img src="assets/images/element1.jpg" alt="" /></li>
+			<li>Hover each widget/element you want to edit, then double click or click <strong> Edit </strong> icon to customize</li>
+			<li class="img-in"><img src="assets/images/element2.jpg" alt="" /></li>
+			<li>On the Panel header, you can choose to edit the widget's content and style. Every Widget has a different setting.</li>
+			<li>You can Save your current changes at any stage.</li>
+			<li> When you have finished designing, click the 'X' button at the bottom panel and view the page. </li>
+		</ul>
+		<h4> The second way:</h4>
+		<ul>
+			<li> Login your prestashop admin</li>
+			<li> Go to <strong> IMPROVE > Creative Elements > Saved Templates</strong> </li>
+			<li class="img-in"><img src="assets/images/element3.jpg" alt="" /></li>
+			<li>   Choose tab <strong> Show All </strong> : You will see template list contains templates you imported in <strong> Pos Themeopptions </strong>. At the template you are using or want to edit, click <strong> Edit </strong>
+			</li>
+			<li class="img-in"><img src="assets/images/element4.jpg" alt="" /></li>
+			<li> At<strong> Content </strong> : Click <strong> Edit with Creative Elements </strong> to enter Live Page Builder.</li>
+			<li class="img-in"><img src="assets/images/element5.jpg" alt="" /></li>
+			<li>Hover each widget/element you want to edit, then double click or click <strong> Edit </strong> icon to customize</li>
+			<li class="img-in"><img src="assets/images/element2.jpg" alt="" /></li>
+			<li>On the Panel header, you can choose to edit the widget's content and style. Every Widget has a different setting.</li>
+			<li>You can Save your current changes at any stage.</li>
+			<li> When you have finished designing, click the 'X' button at the bottom panel and view the page. </li>
+		</ul>
+		</section>
+		<!-- How to edit header, homepage, footer with Creative Elements -->
+		
+		<!-- Multilanguage Layout Configuration -->
+		<section id="multilanguage_layout">
+		<div class="page-header"><h3>Multilanguage Layouts Configuration</h3></div>
+		<h4> Tutorial Video: <a href="https://www.youtube.com/v/R0ARKPoHuXA" rel="nofollow" target="_blank"> Multilanguage Layouts Configuration(Creative Elements) </a></h4>
+		<p><embed allowscriptaccess="never" src="http://www.youtube.com/v/R0ARKPoHuXA" type="application/x-shockwave-flash" height="480" width="853"></p>
+		<h4>*** Multilanguage Homepage Configuration</h4>
+		<ul>
+			<li> Login your prestashop admin</li>
+			<li> Go to <strong> POSTHEMES > Modules > Theme Settings </strong></li>
+			<li class="img-in"><img src="assets/images/install_theme3.jpg" alt="" /></li>
+			<li>At <strong> Homepage </strong> : At <strong> Homepage template</strong> : Choose <strong> -- Hook "DisplayHomeBuilder" -- </strong> </li>
+			<li class="img-in"><img src="assets/images/element6.jpg" alt="" /></li>
+			<li> Go to <strong> IMPROVE > Creative Elements > Content Anywhere </strong></li>
+			<li class="img-in"><img src="assets/images/creative_elements1.jpg" alt="" /></li>
+			<li>Create a new layout (or edit existing) and assign it to that hook <strong>displayHomeBuilder</strong>. Then <strong>Save</strong></li>
+			<li class="img-in"><img src="assets/images/element7.jpg" alt="" /></li>
+			<li class="img-in"><img src="assets/images/element8.jpg" alt="" /></li>
+			<li>At <strong> Content </strong>: Click <strong>Edit with Creative Elements</strong> and find language icon in the bottom left corner</li>
+			<li>Config/Create content for language you choose.</li>
+		</ul>
+		<h4>*** Multilanguage Header Configuration</h4>
+		<ul>
+			<li> Login your prestashop admin</li>
+			<li> Go to <strong> POSTHEMES > Modules > Theme Settings </strong></li>
+			<li class="img-in"><img src="assets/images/install_theme3.jpg" alt="" /></li>
+			<li>At <strong> Header </strong> : At <strong> Header template</strong> : Choose <strong> -- Hook "DisplayHeaderBuilder" -- </strong> </li>
+			<li class="img-in"><img src="assets/images/element_header.jpg" alt="" /></li>
+			<li> Go to <strong> IMPROVE > Creative Elements > Content Anywhere </strong></li>
+			<li class="img-in"><img src="assets/images/creative_elements1.jpg" alt="" /></li>
+			<li>Create a new layout (or edit existing) and assign it to that hook <strong>displayHeaderBuilder</strong>. Then <strong>Save</strong></li>
+			<li class="img-in"><img src="assets/images/element7.jpg" alt="" /></li>
+			<li class="img-in"><img src="assets/images/element_header2.jpg" alt="" /></li>
+			<li>At <strong> Content </strong>: Click <strong>Edit with Creative Elements</strong> and find language icon in the bottom left corner</li>
+			<li>Config/Create content for language you choose.</li>
+		</ul>
+		<h4>*** Multilanguage Footer Configuration</h4>
+		<ul>
+			<li> Login your prestashop admin</li>
+			<li> Go to <strong> POSTHEMES > Modules > Theme Settings </strong></li>
+			<li class="img-in"><img src="assets/images/install_theme3.jpg" alt="" /></li>
+			<li>At <strong> Footer </strong> : At <strong> Footer template</strong> : Choose <strong> -- Hook "DisplayFooterBuilder" -- </strong> </li>
+			<li class="img-in"><img src="assets/images/element_footer.jpg" alt="" /></li>
+			<li> Go to <strong> IMPROVE > Creative Elements > Content Anywhere </strong></li>
+			<li class="img-in"><img src="assets/images/creative_elements1.jpg" alt="" /></li>
+			<li>Create a new layout (or edit existing) and assign it to that hook <strong>displayFooterBuilder</strong>. Then <strong>Save</strong></li>
+			<li class="img-in"><img src="assets/images/element7.jpg" alt="" /></li>
+			<li class="img-in"><img src="assets/images/element_footer2.jpg" alt="" /></li>
+			<li>At <strong> Content </strong>: Click <strong>Edit with Creative Elements</strong> and find language icon in the bottom left corner</li>
+			<li>Config/Create content for language you choose.</li>
+		</ul>
+		</section>
+		<!-- How to edit header, homepage, footer with Creative Elements -->
+		
+		</section>
+		<!-- End Creative Elements-->
+		
+		<!-- Layout -->
+		<section id="edit_static_block">
+		<div class="page-header"><h2>Static Blocks in Optima theme</h2></div>
+		<h4><u><strong>Enabling Static Block with other language</strong></u></h4>
+		<p>In your theme, if there are 3 languages or more,  please enabling static block by below guide:</p>
+		<ul>
+			<li>Login your prestashop admin</li>
+			<li>Go to <strong>International </strong> > <strong>Localization </strong>.</li>
+			<li class="img-in"><img src="assets/images/translate.jpg" alt="" />
+			<li>Choose tab <strong>Languages</strong>.</li>
+			<li class="img-in"><img src="assets/images/translate1.jpg" alt="" />
+			<li>Go to <strong>POSTHEMES > Modules</strong> > <strong>Pos Staticblocks</strong>
+			<li class="img-in"><img src="assets/images/staticblocks1.jpg" alt="" />
+			<li>Click "<strong>Edit</strong>" button of your selected block</li>
+			<li>Choose <strong>Source Code</strong> <img src="assets/images/source_code.jpg" alt="" /> to show code HTML of this block in <strong>English</strong>. Then copy source code.</li>
+			<li class="img-in"><img src="assets/images/translate2.jpg" alt="" />
+			<li>Click <img src="assets/images/lang.jpg" alt="" /> to choose language you want to translate. Choose <strong>Source Code</strong> <img src="assets/images/source_code.jpg" alt="" />
+			<li class="img-in"><img src="assets/images/translate3.jpg" alt="" />
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ul>
+		<h4>*** Static blocks in Optima theme:</h4>
+		<ul>
+			<li><p><strong>Map Block</strong> : In <strong> Contact Us </strong> page</p>
+				<p><img src="assets/images/ex_map_block.jpg" alt="" /></p>
+			</li>
+			<li><p><strong>payment block</strong> : In detail page</p>
+				<p><img src="assets/images/ex_payment_block.jpg" alt="" /></p>
+			</li>
+		</ul>
+		<h3>*** How to edit these static blocks:</h3>
+		<ul>
+			<li>Login your prestashop admin</li>
+			<li><p>Go to <strong>POSTHEMES > Modules > Pos Staticblocks</strong></p>
+				<p><img src="assets/images/edit_block1.jpg" alt="" /></p>
+			</li>
+			<li><p>At the static block you want to edit > Click <strong>Edit</strong></p>
+				<p><img src="assets/images/edit_block2.jpg" alt="" /></p>
+			</li>
+			<li><p>Then, you can edit the static block as you want</p>
+				<p>Click <strong> Save </strong> button to save your changes</p>
+			</li>
+		</ul>
+		
+		
+		<!-- End Layout --->
+		</section>
+		
+		<section id="product_types">
+		<div class="page-header"><h2> Product Types & Product Categories</h2></div>
+		
+		<!-- How to set a product as new product -->
+		<section id="set_new_product">
+		<div class="page-header"><h3>How to set a product as new product</h3></div>
+		<ul>
+			<li> Login your prestashop admin</li>
+			<li> Navigate to <strong> CONFIGURE > Shop Parameters</strong> > <strong>Product Settings</strong></li>
+			<li class="img-in"><img src="assets/images/parameters_product.jpg" alt="" />
+			<li>In "<strong>Products (general)</strong>", enter "<strong>Number of days for which the product is considered 'new'</strong>"</li>
+			<li class="img-in"><img src="assets/images/set_days.jpg" alt="" />
+			<li>Click "<strong>Save</strong>" button.</li>
+		</ul>
+		</section>
+		<!-- End How to set a product as new product -->
+		
+		<!-- Set time for discount product -->
+		<section id="set_countdown_timer">
+		<div class="page-header"><h3>How to set time for discount product</h3></div>
+		<ul>
+			<li>You set product as discount product. Please see in <a href='#set_special_product' target="_blank">How to set a product as discount product</a></li> 
+			<li>From the <strong>Specific Prices</strong> tab, when you <strong>Add a new specific price</strong>, you choose discount prior and set discount:<br>
+		- <i>from</i>: Select a beginning date for this discount.<br>
+		- <i>to</i>: Select an expiration date for this discount.</li>
+			<li class="img-in"><img src="assets/images/count_down2.jpg" alt="" />
+			<li>Click "<strong>Save</strong>" button</li>
+		</ul>
+		</section>
+		<!-- End Set time for discount product -->
+
+		<!-- How to display related products on product detail page -->
+		<section id="set_related_product">
+		<div class="page-header"><h3>How to display related products on product detail page</h3></div>
+		<ol>
+			<li>Login your prestashop admin</li>
+			<li>
+				<p>Go to <strong>Catalog</strong> > <strong>Products</strong></p>
+				<p><img src="assets/images/catalog_products.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>Choose item you want to edit, click <img src="assets/images/edit.jpg" alt="" /></p>
+				<p><img src="assets/images/set_rotator1.jpg" alt="" /></p>
+			</li>
+			<li>At tab <strong>Basic settings</strong>, then click <strong>Add a related product</strong> button</li>
+			<li>
+				<p>Then search and add a related product</p>
+				<p><img src="assets/images/related_products.jpg" alt="" /></p>
+			</li>
+			<li>Click “<strong>Save</strong>” button when you finish.</li>
+		</ol>
+		</section>
+		<!-- End How to display related products on product detail page-->		
+		
+				<!-- How to upload thumbnail image for the product category -->
+		<section id="set_thumbnail_category" class="_mPS2id-t">
+		<div class="page-header"><h3>How to upload thumbnail image for the product category	</h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>Catalog</strong> &gt; <strong>Categories</strong></p>
+				<p><img src="assets/images/catalog_categories.jpg" alt=""></p>
+			</li>
+			<li>
+				<p>At <strong>Actions</strong> of the category you want to show thumbnail : Choose <strong> Edit </strong> to edit </p>
+				<p><img src="assets/images/catalog_categories2.jpg" alt=""></p>
+				</li>
+			<li>
+				<p>At <strong>Category thumbnail</strong> : Click <strong> Choose file(s) </strong> to upload new thumbnail image. </p>
+				<p><img src="assets/images/catalog_categories3.jpg" alt=""></p>
+			</li>
+			<li>
+				<p>Click <strong>Save</strong> button to save your change.</p>
+			</li>
+		</ol>
+		</section>
+		<!-- How to upload thumbnail image for the product category -->
+		
+		</section>
+		
+		
+
+		<!-- Pos Optima's Modules -->
+		<section id="module">
+		<div class="page-header"><h2>Module Config</h2></div>	
+		<!-- End Optima's Module -->
+		<!-- Configure Module-->
+		
+		<section id="config"><h3>General Configuration</h3>
+			<ol>
+				<li>Login your Prestashop admin</li>
+				<li>
+					<p>Go to <strong>Modules</strong> > <strong>Modules Manager</strong></p>
+					<p><img src="assets/images/modules.jpg" alt="" /></p>
+				</li>
+				<li>
+					<p>Choose “<strong>Modules</strong>” tab</p>
+					<p><img src="assets/images/installed_modules.jpg" alt="" /></p>
+				</li>
+				<li>
+					<p>On selected module, click "<strong>Configure</strong>" button. </p>
+					<p><img src="assets/images/config_module.jpg" alt="" /></p>
+					<p>You will get a form with parameters of the module. Let's change the specified parameter with one suitable for your theme.</p>
+				</li>
+				<li>Click “<strong>Update</strong>” button to save config.</li>
+			</ol>
+		</section>
+		<!-- End Configure Module-->
+		<!-- Prestashop Module List-->
+		<section id="module_config"><h3>Module Configuration</h3>
+		<p><strong>Below is a list of all modules in Optima theme. Click on the name of module you want to read configuration guide.</strong></p>
+			<ol class="custom-counter">
+				<li><a href='modules_list/megamenu.html' target="_blank">Megamenu custommer</a></li>
+				<li><a href='modules_list/vermenu.html' target="_blank">Vertical Megamenu</a></li>
+				<li><a href='modules_list/creative_element.html' target="_blank">Creative Elements - Elementor based PageBuilder [in-stock]</a></li>
+				<li><a href='modules_list/element.html' target="_blank">Pos Elements</a></li>
+				<li><a href='modules_list/staticblocks.html' target="_blank">Pos Static Blocks</a></li>	
+				<li><a href='modules_list/themeoptions.html' target="_blank">Pos Themeoptions</a></li>
+				<li><a href='modules_list/search.html' target="_blank">Pos search products by category</a></li>
+				<li><a href='modules_list/shopping_cart.html' target="_blank">Pos Shopping cart</a></li>
+				<li><a href='modules_list/mobile_links.html' target="_blank">Quick menu mobile</a></li>
+				<li><a href='modules_list/size_chart.html' target="_blank">Pos size chart</a></li>
+				<li><a href='modules_list/fake_orders.html' target="_blank">Pos Fake Orders</a></li>
+				<li><a href='modules_list/compare.html' target="_blank">Pos Compare</a></li>
+				<li><a href='modules_list/wishlist.html' target="_blank">Pos Wishlist</a></li>
+				<li><a href='modules_list/extra_tab.html' target="_blank">Pos Product Extra Tab</a></li>
+				<li><a href='modules_list/product_comment.html' target="_blank">Pos Product Comments</a></li>
+				<li><a href='modules_list/cookie_law.html' target="_blank">Pos Cookie Law</a></li>
+				<li><a href='modules_list/newsletter_popup.html' target="_blank">Pos Newsletter Popup</a></li>
+				<li><a href='modules_list/rotator.html' target="_blank">Rotator img</a></li>	
+			</ol>
+			<p>*** You can go to Admin > Dashboard > <strong> POSTHEMES </strong> > <strong>Modules</strong> to config modules below: </p>
+			<li class="img-in"><img src="assets/images/posthemes_menu.jpg" alt="" />
+			<ul>
+				<li><strong> Theme settings </strong>: <a href='modules_list/themeoptions.html' target="_blank">Pos Themeoptions</a></li>
+				<li><strong> Cookie law </strong>: <a href='modules_list/cookie_law.html' target="_blank">Pos Cookie Law</a></li>
+				<li><strong> Fake orders </strong>: <a href='modules_list/fake_orders.html' target="_blank">Pos Fake Orders</a></li>
+				<li><strong> Popup </strong>: <a href='modules_list/newsletter_popup.html' target="_blank">Pos Newsletter Popup</a></li>
+				<li><strong> Product Extra Tab </strong>: <a href='modules_list/extra_tab.html' target="_blank">Pos Product Extra Tab</a></li>
+				<li><strong> Mega menu </strong>: <a href='modules_list/megamenu.html' target="_blank">Megamenu custommer</a></li>
+				<li><strong> Vertical menu</strong>: <a href='modules_list/vermenu.html' target="_blank">Vertical Megamenu</a></li>
+				<li><strong> Pos Staticblocks </strong>: <a href='modules_list/staticblocks.html' target="_blank">Pos Static Blocks</a></li>		
+				<li><strong> Mobile quick links </strong>: <a href='modules_list/mobile_links.html' target="_blank">Quick menu mobile</a></li>
+				<li><strong> Size chart </strong>: <a href='modules_list/size_chart.html' target="_blank">Pos size chart</a></li>
+				
+			</ul>
+		</section>
+		<!-- End Configure Module-->
+		<!-- Other modules-->
+		<section id="other"><h3>Other modules</h3>
+		<p><i>Included external modules (3rd party developers) and Prestashop module</i></p>
+		<ol>
+			<li>Smart Blog
+				<ul>
+					<li><strong>About Smart Blog module</strong>
+						<ul>
+							<li>Login your prestashop admin</li>
+							<li>Go to <strong>POSTHEMES > Blog</strong></li>
+							<li class="img-in"><img src="assets/images/blog1.jpg" alt="" />
+							<p>- Posts : Add, Delete or Edit Posts of Blog</p>
+							<p>- Category : Add, Delete or Edit Categories of Blog</p>
+							<p>- Comments : Manage Comments</p>
+							<p>- Image Type : Manage type of images</p>
+							<p>- Settings : Settings of Smart blog</p>
+						</ul>
+					</li>
+					<li><strong>Add Blog Post</strong>
+						<ul>
+							<li>Login your prestashop admin</li>
+							<li>Go to <strong>POSTHEMES > Blog</strong> > <strong> Posts</strong></li>
+							<li class="img-in"><img src="assets/images/add_blog.jpg" alt="" />
+							<li class="img-in"><img src="assets/images/add_blog1.jpg" alt="" />
+							<li>Click “<strong>Save</strong>” button when you finish.</li>
+						</ul>
+					</li>
+					<li><strong>Edit Blog Post</strong>
+						<ul>
+							<li>Login your prestashop admin</li>
+							<li>Go to <strong>POSTHEMES > Blog</strong> > <strong> Posts</strong></li>
+							<li>Choose item you want to edit, click <strong>Edit</strong></li>
+							<li>Then edit</li>
+							<li>Click “<strong>Save</strong>” button when you finish.</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>Newsletter subscription
+			<p><img src="assets/images/ad_newsletter.jpg" alt="" /></p>
+			</li>
+			<li>Faceted search
+			<p> Displays a block allowing multiple filters.</p>
+			<p><img src="assets/images/ad_faceted.jpg" alt="" /></p>
+			</li>
+			<li>Products in the same category
+			<p><strong>Products in the same category</strong> show products on the same category.</p>
+			<p><img src="assets/images/ad_product_category.jpg" alt="" /></p>	
+			</li>
+			<li>Social media follow links  
+			<p><strong>Social media follow links</strong> allows you to add information about your brand's social networking accounts</p>
+			<p><img src="assets/images/ad_social.jpg" alt="" /></p>	
+			</li>
+			<li>Social media share buttons
+			<p><img src="assets/images/ex_social_media_share.jpg" alt="" /></p>
+			<p><strong>Social media share buttons</strong> displays social media sharing buttons (Twitter, Facebook, Google+ and Pinterest) on every product page</p>
+			<p><img src="assets/images/ad_social_button.jpg" alt="" /></p>	
+			</li>
+			<li>Customer reassurance
+			<p><img src="assets/images/ex_customer_reassurance.jpg" alt="" /></p>
+			<p><strong>Customer reassurance</strong> module offering helpful information to reassure customers that your store is trustworthy.</p>
+			<p><img src="assets/images/ad_customer_reassurance.jpg" alt="" /></p>	
+			</li>
+			<li>Category tree links
+			<p><strong>Category tree links</strong> displays a block featuring product categories</p>
+			<p><img src="assets/images/ad_category.jpg" alt="" /></p>	
+			</li>
+		</ol>
+		</section>
+		<!-- End Other modules-->
+		<!-- End Pos Optima 's Modules -->
+		</section>
+		
+	
+		<!-- Translate theme-->
+		<section id="translate">
+		<div class="page-header"><h2>Translate Optima theme</h2></div>
+		<!-- Back office translations-->
+		<section id="theme"><h3>Back office translations</h3>
+		<ul>
+			<li> Login your prestashop admin</li>
+			<li> Go to <strong>International</strong> > <strong>Translations</strong></li>
+			<li class="img-in"><img src="assets/images/international_translations.jpg" alt="" />
+			<li>At "<strong>Modify translations</strong>" section:
+				<ul>
+					<li><strong>Type of translation</strong> : <i>Back office translations</i></li>
+					<li><strong>Select your language</strong> : Choose language you want to translate</li>
+				</ul>
+			</li>
+			<li>Choose <strong>Modify</strong></li>
+			<li>Then search <i>text</i> need translate</li>
+			<li class="img-in"><img src="assets/images/back_office.jpg" alt="" />
+			<li>After typing your language, click <strong>Save</strong> to finish.</li>
+			<li><strong>Note:</strong> To find more informations, please read on <i><a rel="nofollow" href="http://doc.prestashop.com/display/PS17/Translations">http://doc.prestashop.com/display/PS17/Translations</a></i>
+		</ul>
+		</section>
+		<!-- End Back office translations-->
+		<!-- Themes translations-->
+		<section id="theme_trans"><h3>Themes Translations</h3>
+			<ul>
+				<li> Login your prestashop admin</li>
+				<li> Go to <strong>International</strong> > <strong>Translations</strong></li>
+				<li class="img-in"><img src="assets/images/modules_translations.jpg" alt="" />
+				<li>At "<strong>Modify translations</strong>" section:
+					<ul>
+						<li><strong>Type of translation</strong> : <i>Themes translations</i></li>
+						<li><strong>Select your theme</strong> : Select theme you want to translate</li>
+						<li><strong>Select your language</strong> : Choose language you want to translate</li>
+					</ul>
+				</li>
+				<li>Choose <strong>Modify</strong></li>
+				<li>Then Search <i>titles</i> or <i>text</i> need translate</li>
+				<li>After typing your language, click <strong>Save and stay</strong> or <strong>Save</strong> to finish.</li>
+				<li><strong>Note:</strong> To find more informations, please read on <i><a rel="nofollow" href="http://doc.prestashop.com/display/PS17/Translations">http://doc.prestashop.com/display/PS17/Translations</a></i>
+			</ul>
+		</section>
+		<!-- End Themes translations-->
+		<!-- Translate module content-->
+		<section id="module_content"><h3>Translate module content</h3>
+		<h4>1. Pos Staticblocks</h4>
+			<ul>
+				<li>Login your prestashop admin</li>
+				<li>Go to <strong>POSTHEMES > Modules</strong> > <strong>Pos Staticblocks</strong>
+				<li class="img-in"><img src="assets/images/staticblocks1.jpg" alt="" />
+				<li>Click "<strong>Edit</strong>" button of your selected block.</li>
+				<li class="img-in"><img src="assets/images/staticblocks2.jpg" alt="" />
+				<li>Choose <strong>Source Code</strong> <img src="assets/images/source_code.jpg" alt="" /> to show code HTML of this block in <strong>English</strong>. Then copy source code. </li>
+				<li>Click <img src="assets/images/lang.jpg" alt="" /> to choose language you want to translate</li>
+				<li>Choose <strong>Source Code</strong> <img src="assets/images/source_code.jpg" alt="" /> and paste code HTML. Then translate</li>
+				<li>Click <strong>Save</strong> button when you finish</li>
+			</ul>
+		<h4>2. Megamenu custommer</h4>
+			<ul>
+				<li>Login your prestashop admin</li>
+				<li>Go to <strong>POSTHEMES > Modules</strong> > <strong>Mega menu</strong>
+				<li class="img-in"><img src="assets/images/megamenu_trans1.jpg" alt="" />
+				<li>Click "<strong>Edit</strong>" button of your selected menu item.</li>
+				<li class="img-in"><img src="assets/images/megamenu_trans.jpg" alt="" />
+				<li>Click <img src="assets/images/lang.jpg" alt="" /> to choose language you want to translate.</li>
+				<li class="img-in"><img src="assets/images/megamenu_trans2.jpg" alt="" />
+				<li>At <strong>Title</strong>, <strong>Sub Title</strong>: Translate text into your language.</li>
+				<li>Click <strong>Save</strong> button when you finish</li>
+			</ul>
+		<h4>3. Vertical Megamenu</h4>
+			<ul>
+				<li>Login your prestashop admin</li>
+				<li>Go to <strong>POSTHEMES > Modules</strong> > <strong>Vertical menu</strong>
+				<li class="img-in"><img src="assets/images/megamenu_trans3.jpg" alt="" />
+				<li>Click "<strong>Edit</strong>" button of your selected menu item.</li>
+				<li class="img-in"><img src="assets/images/megamenu_trans.jpg" alt="" />
+				<li>Click <img src="assets/images/lang.jpg" alt="" /> to choose language you want to translate.</li>
+				<li class="img-in"><img src="assets/images/megamenu_trans2.jpg" alt="" />
+				<li>At <strong>Title</strong>, <strong>Sub Title</strong>: Translate text into your language.</li>
+				<li>Click <strong>Save</strong> button when you finish</li>
+			</ul>
+		</section>
+		<!-- End Translate module content-->
+		</section>
+		<!-- End Translate theme -->
+		<!-- Posthemes Support-->
+		<section id="support">
+		<div class="page-header"><h2>Posthemes Support</h2></div>
+		<p>Support Working time: Monday - Friday</p>
+		<p>Estimated ticket and answers review time: 1-3 business days.</p>
+		<p>We have hundreds of questions and provide answers asap, but this can take up to 3 days after your submitted request. Please be patient and wait for answer.</p>
+		<p><i>Send us email to <a href="mailto:posthemes@gmail.com">posthemes@gmail.com</a>.</i></p>
+		</section>
+		</div>
+	</div>
+	<span id="back-top"><a href="javascript:void(0);"><span class="icon fa fa-arrow-up"></span></a></span>
+</body>
+</html>

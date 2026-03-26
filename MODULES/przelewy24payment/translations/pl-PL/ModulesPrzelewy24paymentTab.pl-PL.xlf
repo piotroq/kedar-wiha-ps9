@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="ba5376b5ba3216a7a51eabb18265d921">
+        <source>Installments</source>
+        <target>Przelewy24 Raty</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="00f1532c1cb7cad69907ece6a41897ba">
+        <source>Extra Charge</source>
+        <target>Dodatkowa opłata</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="697abb9a95cfe2c76cc3b71312ea176a">
+        <source>Apple Pay</source>
+        <target>Apple Pay</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2daf1cb573c2c61422faf64610cf9402">
+        <source>Credentials</source>
+        <target>Dane uwierzytelniające</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="38696bed73d2f0e4b9eb46d886cf29ce">
+        <source>Processing Time</source>
+        <target>Czas przetwarzania</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c453a4b8e8d98e82f35b67f433e3b4da">
+        <source>Payment</source>
+        <target>Metody płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="338115dbcf7170acf3778ce159a7be1f">
+        <source>Blik</source>
+        <target>BLIK</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a240fa27925a635b08dc28c9e4f9216d">
+        <source>Order</source>
+        <target>Zamówienie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a69a8e250d7465b3357efed7e4251deb">
+        <source>Google Pay</source>
+        <target>Google Pay</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="cd81f9f55969c822377f076017bb3484">
+        <source>Cards</source>
+        <target>Karty płatnicze</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="46a2a41cc6e552044816a2d04634545d">
+        <source>State</source>
+        <target>Statusy</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

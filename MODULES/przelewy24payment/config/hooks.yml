@@ -1,0 +1,12 @@
+hooks:
+  - displayPrzelewy24
+  - paymentOptions
+  - actionFrontControllerSetMedia
+  - displayAdminOrder
+  - displayOrderDetail
+  - displayCustomerAccount
+  - displayExpressCheckout
+  - displayBeforeBodyClosingTag
+  - displayProductAdditionalInfo
+  - actionFrontControllerInitAfter
+  - actionFrontControllerAfterInit

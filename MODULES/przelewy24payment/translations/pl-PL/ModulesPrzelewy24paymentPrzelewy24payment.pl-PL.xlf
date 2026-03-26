@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="560d3d172373a2c53e128742583a60e2">
+        <source>Przelewy24 Payments for PrestaShop</source>
+        <target>Płatności Przelewy24 dla Prestashop</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="117991ecec42552d5c8242fdf3e8f4c4">
+        <source>Przelewy24 module for PrestaShop – fast, secure online payments supporting cards, BLIK, transfers, and wallets. Easy setup and increased sales for your store.</source>
+        <target>Moduł Przelewy24 dla PrestaShop – szybkie, bezpieczne płatności online obsługujące karty, BLIK, przelewy i portfele. Łatwa konfiguracja i zwiększenie sprzedaży w Twoim sklepie</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

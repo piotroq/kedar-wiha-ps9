@@ -1,0 +1,94 @@
+services:
+  _defaults:
+    public: true
+
+  prestashop.module.dpdshipping.domain.order.get.receiver.address.list.handler:
+    class: 'DpdShipping\Domain\Order\Query\GetReceiverAddressListHandler'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Order\Query\GetReceiverAddressList', method: 'handle' }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Order\Query\GetReceiverAddressList' }
+
+  prestashop.module.dpdshipping.domain.order.get.default.order.receiver.address.handler:
+    class: 'DpdShipping\Domain\Order\Query\GetDefaultOrderReceiverAddressHandler'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Order\Query\GetDefaultOrderReceiverAddress', method: 'handle' }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Order\Query\GetDefaultOrderReceiverAddress' }
+
+  prestashop.module.dpdshipping.domain.order.command.add.dpd.order.handler:
+    class: 'DpdShipping\Domain\Order\Command\AddDpdOrderCommandHandler'
+    arguments:
+      - '@prestashop.module.dpdshipping.api'
+      - '@prestashop.core.command_bus'
+      - '@translator'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Order\Command\AddDpdOrderCommand', method: 'handle' }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Order\Command\AddDpdOrderCommand' }
+    calls:
+      - [ 'setLogger', [ '@logger' ] ]
+
+  prestashop.module.dpdshipping.domain.order.command.after.shipment.handler:
+    class: 'DpdShipping\Domain\Order\Command\AfterShipmentHandler'
+    arguments:
+      - '@prestashop.core.command_bus'
+      - '@translator'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Order\Command\AfterShipmentCommand', method: 'handle' }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Order\Command\AfterShipmentCommand' }
+    calls:
+      - [ 'setLogger', [ '@logger' ] ]
+
+  prestashop.module.dpdshipping.domain.order.get.order.pudo.code:
+    class: 'DpdShipping\Domain\Order\Query\GetOrderPudoCodeHandler'
+    arguments:
+      - '@prestashop.module.dpdshipping.repository.dpdshipping.cart.pickup.repository'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Order\Query\GetOrderPudoCode', method: 'handle' }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Order\Query\GetOrderPudoCode' }
+
+
+  prestashop.module.dpdshipping.domain.get.country.iso.code:
+    class: 'DpdShipping\Domain\Order\Query\GetCountryIsoCodeHandler'
+    arguments:
+      - '@logger'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Order\Query\GetCountryIsoCode', method: 'handle' }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Order\Query\GetCountryIsoCode' }
+
+  prestashop.module.dpdshipping.domain.get.order.source:
+    class: 'DpdShipping\Domain\Order\Query\GetOrderSourceHandler'
+    arguments:
+      - '@logger'
+      - '@prestashop.core.command_bus'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Order\Query\GetOrderSource', method: 'handle' }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Order\Query\GetOrderSource' }
+
+  prestashop.module.dpdshipping.domain.get.empik.pickup.number:
+    class: 'DpdShipping\Domain\Order\Query\GetEmpikPickupNumberHandler'
+    arguments:
+      - '@logger'
+      - '@prestashop.core.command_bus'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Order\Query\GetEmpikPickupNumber', method: 'handle' }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Order\Query\GetEmpikPickupNumber' }
+
+  prestashop.module.dpdshipping.domain.get.empik.order.reference:
+    class: 'DpdShipping\Domain\Order\Query\GetEmpikOrderReferenceHandler'
+    arguments:
+      - '@logger'
+      - '@prestashop.core.command_bus'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Order\Query\GetEmpikOrderReference', method: 'handle' }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Order\Query\GetEmpikOrderReference' }
+
+  DpdShipping\Controller\Order\DpdShippingBulkGenerateShippingController:
+    class: 'DpdShipping\Controller\Order\DpdShippingBulkGenerateShippingController'
+    public: true
+    autowire: true
+    arguments:
+      - '@prestashop.core.command_bus'
+      - '@translator'
+      - '@prestashop.module.dpdshipping.form.dpdshipping_generate_shipping_form_data_provider'
+      - '@DpdShipping\Controller\ShippingHistory\DpdShippingShippingHistoryController'
+    tags:
+      - { name: controller.service_arguments }

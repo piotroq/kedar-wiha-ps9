@@ -1,0 +1,429 @@
+<!doctype html>  
+<!--[if IE 6 ]><html lang="en-us" class="ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="en-us" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en-us" class="ie8"> <![endif]-->
+<!--[if (gt IE 7)|!(IE)]><!-->
+<html lang="en-us"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	
+	<title>Pos Themeoptions module</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="assets/images/favicon.ico.png" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="assets/css/documenter_style.css" media="all">
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+	
+	<script src="assets/js/jquery.js"></script>
+	
+	<script src="assets/js/jquery.malihu.PageScroll2id.min.js"></script>
+	<script src="assets/js/jquery.easing.js"></script>
+	
+	<script>document.createElement('section');var duration='500',easing='swing';</script>
+	<script src="assets/js/backtotop.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+		
+		
+		$('#documenter_sidebar #documenter_nav li a').on('click', function(){
+			if($(this).hasClass('open_menu')) {
+				$(this).parent().siblings().find('a').removeClass( 'open_menu' );   
+				$(this).removeClass( 'open_menu' );  
+				$(this).next('#documenter_sidebar #documenter_nav ul').slideUp();
+				$(this).parent().siblings().find('ul').slideUp();
+			}
+			else {	
+				$(this).parent().siblings().find('a').removeClass( 'open_menu' );  
+				$(this).parent().siblings().find('ul').slideUp();
+				$(this).addClass( 'open_menu' );   
+				$(this).next('#documenter_sidebar #documenter_nav ul').slideDown();
+		
+			}
+			
+		});
+		(function(){
+			$(window).ready(function () {
+				
+				/ Page Scroll to id fn call /
+				$("#documenter_nav li a ").mPageScroll2id({
+					highlightSelector:"#documenter_nav li a ",
+					
+					//offset:100,
+				});
+			});
+		})(jQuery); 
+	});
+	</script>
+	<style>
+		html{background-color:#EEEEEE;color:#383838;}
+		::-moz-selection{background:#333636;color:#989898;}
+		::selection{background:#333636;color:#e53131;}
+		a{color:#e53131;}
+		.btn {
+			border-radius:3px;
+		}
+		.btn-primary {
+			  background-image: -moz-linear-gradient(top, #e53131, #006673);
+			  background-image: -ms-linear-gradient(top, #e53131, #006673);
+			  background-image: -webkit-gradient(linear, 0 0, 0 #fe5b5a), from(#EEE), to(#006673);
+			  background-image: -webkit-linear-gradient(top, #e53131, #006673);
+			  background-image: -o-linear-gradient(top, #e53131, #006673);
+			  background-image: linear-gradient(to top, #e53131, #006673);
+			  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e53131', endColorstr='#006673', GradientType=0);
+			  border-color: #006673 #006673 #bfbfbf;
+			  color:#FFFFFF;
+		}
+		.btn-primary:hover,
+		.btn-primary:active,
+		.btn-primary.active,
+		.btn-primary.disabled,
+		.btn-primary[disabled] {
+		  border-color: #e53131 #e53131 #bfbfbf;
+		  background-color: #006673;
+		}
+		hr{border-top:1px solid #D4D4D4;border-bottom:1px solid #FFFFFF;}
+		#documenter_sidebar, #documenter_sidebar ul a{background-color:#EEE;color:#333;}
+		#documenter_sidebar ul{border-top:1px solid #CFCFCF;}
+		#documenter_sidebar ul a{border-top:1px solid #CFCFCF;}
+		#documenter_sidebar ul a:hover{color:#e53131;}
+		#documenter_sidebar ul a.open_menu,#documenter_sidebar ul a.mPS2id-highlight{color:#e53131;}
+		#documenter_copyright{display:block !important;visibility:visible !important;}
+	</style>
+	
+</head>
+<body class="documenter-project">
+	<div class="container-fluid clearfix">
+		<div id="documenter_sidebar">
+			<a href="http://posthemes.com/" id="documenter_logo">
+				<img class="img-responsive" style="margin: 0 auto;" src="assets/images/logo.png" alt="logo"/>
+			</a>
+			<ul id="documenter_nav">
+				<li><a href="#documenter_cover"><span class="icon fa fa-home"></span> Start</a></li>
+				<li><a href="#config" title="Configure Pos Themeoptions module"><span class="icon fa fa-cogs"></span> Configure Pos Themeoptions module<b class="caret"></b></a>
+					<ul class='menu-1'>
+						<li class='sub-1'><a href='#general_config'>GENERAL tab</a></li>
+						<li class='sub-1'><a href='#header_config'>HEADER tab</a></li>
+						<li class='sub-1'><a href='#homepage_config'>HOMEPAGE tab</a></li>
+						<li class='sub-1'><a href='#footer_config'>FOOTER tab</a></li>
+						<li class='sub-1'><a href='#page_title_config'>PAGE TITLE tab</a></li>
+						<li class='sub-1'><a href='#config_product_grid'>PRODUCT GRID SETTINGS tab</a></li>
+						<li class='sub-1'><a href='#config_category'>CATEGORY PAGE SETTINGS tab</a></li>
+						<li class='sub-1'><a href='#config_product'>PRODUCT PAGE SETTINGS tab</a></li>
+						<li class='sub-1'><a href='#config_custom'>CUSTOM CSS/JS tab</a></li>
+						<li class='sub-1'><a href='#config_setup'>DEMO SETUP tab</a></li>
+					</ul>
+				</li>
+				<li><a href="#support" title="support"><span class="icon fa fa-bell"></span> Posthemes Support</a></li>
+			</ul>
+			<div id="documenter_copyright">Copyright ©<a href="http://posthemes.com/">Posthemes</a>.<br>All rights reserved.
+			</div>
+		</div>
+		<div id="documenter_content">
+		<!-- Start -->
+		<section id="documenter_cover">
+		<h1>Pos Themeoptions</h1>
+		<hr>
+		<p><i>This module allow change the theme's colors, theme's settings  easily via use color picker, options in your admin panel.</i></p>
+		<br>
+		<p>And here you can find out more about theme updates, new features and about our upcoming themes:</p>
+		<p>-	Follow us on <a href="https://www.facebook.com/posthemes"><b> Facebook </b></a></p>
+		<p>- 	Follow us on <a href="https://twitter.com/posthemes"><b> Twitter </b></a></p>
+		<p>-	Follow us on <a href="http://posthemes.com/"><b> Posthemes </b></a></p>
+		<br>
+		<p><i><b>PosThemes,</b></i></p>
+		</section>
+		<!-- End Start -->
+		
+		<!-- Configure Pos Themeoptions -->
+		<section id="config">
+		<div class="page-header"><h2>Configure Pos Themeoptions module</h2></div>
+		<section id="general_config">
+		<div class="page-header"><h3>General Configuration</h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>POSTHEMES</strong> > <strong>Modules</strong>  > <strong>Theme settings</strong></p>
+				<p><img src="assets/images/pos_themeoptions.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>GENERAL</strong> tab</p>
+				<p><img src="assets/images/general_themeoptions.jpg"  alt="general_themeoptions" /></p>
+				<p>We got:</p>
+				<p>* In <strong>Layout</strong> part:</p>
+				<ul>
+					<li><strong>Layout</strong>: Select wide or boxed for layout</li>
+					<li><strong>Container max width </strong>: Set maxium width of page. You must provide px or percent suffix (example 1240px or 100%) </li>
+					<li><strong>Sidebar width </strong>: Choose width of sidebar with 3 options: normal, narrow, wide.</li>
+				</ul>
+				<p>* In <strong>Body font & color</strong> part:</p>
+				<ul>
+					<li><strong>Main color</strong>: Select main color for this theme</li>
+					<li><strong>Google font URL</strong>: Add google font URL(<i>Example: https://fonts.googleapis.com/css?family=Open+Sans:400,700 . Add 400 and 700 font weigh if exist. If you need adds latin-ext or cyrilic too. Go to <a href="https://www.google.com/fonts" target="_blank">Google font</a> to get font URL </i>)</li>
+					<li><strong>Google font name</strong>: Add Google font name (<i>Example: 'Montserrat', sans-serif </i>)</li>
+					<li><strong>Body font size</strong>: Font size of body</li>
+					<li><strong>Body font color</strong>: Select color of body</li>
+				</ul>
+				<p>* In <strong>Body background</strong> part:</p>
+				<ul>
+					<li><strong>Body background color</strong>: Select the background color of body</li>
+					<li><strong>Body background image </strong>: Select the background image of body</li>
+					<li><strong>Body background repeat</strong>: Set how background images are repeated. A background image can be repeated along the horizontal and vertical axes, or not repeated at all</li>
+					<li><strong>Body background attachment </strong>: Set whether a background image scrolls with the rest of the page, or is fixed</li>
+					<li><strong>Body background size</strong>: Select the size of the background images: auto, cover</li>
+				</ul>
+				<p>* In <strong>Title block</strong> part:</p>
+				<ul>
+					<li><strong>Title block- Google font URL</strong>: Add google font URL(<i>Example: https://fonts.googleapis.com/css?family=Open+Sans:400,700 . Add 400 and 700 font weigh if exist. If you need adds latin-ext or cyrilic too. Go to <a href="https://www.google.com/fonts" target="_blank">Google font</a> to get font URL </i>)</li>
+					<li><strong>Title block- Google font name</strong>: Add Google font name (<i>Example: 'Montserrat', sans-serif </i>)</li>
+					<li><strong>Title block font size</strong>: Font size of the title</li>
+					<li><strong>Title block color</strong>: Select color of the title</li>
+					<li><strong>Title block font-weight</strong>: Select font-weight of the title</li>
+					<li><strong>Title block transform</strong>: Select text-transform for title (<i>None/Capitalize/UPPERCASE</i>)</li>
+					<li><strong>Title block fontsize in column</strong>: Font size of the module's title, that modules can be placed within any column position.</li>
+				</ul>
+			<p>=> Configure parameters as you want</p></li>
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ol>
+		</section>
+		
+		<section id="header_config">
+		<div class="page-header"><h3>Header</h3></div>
+		<p><i>This allows you to choose header template, enable header sticky and choose background color for sticky header.</i></p>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>POSTHEMES</strong> > <strong>Modules</strong>  > <strong>Theme settings</strong></p>
+				<p><img src="assets/images/pos_themeoptions.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>HEADER</strong> tab</p>
+				<p><img src="assets/images/header_themeoptions.jpg"  alt="header_themeoptions" /></p>
+				<p>We got:</p>
+				<ul>
+					<li><strong> Header template </strong>: Select layout of header you want to show</li>
+					<li><strong> Header sticky </strong>: Choose<strong> Yes </strong> to enable header sticky</li>
+					<li><strong>Stick background</strong>: Background of header sticky</li>
+				</ul>
+
+			<p>=> Configure parameters as you want</p></li>
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ol>
+		</section>
+		
+		<section id="homepage_config">
+		<div class="page-header"><h3>Homepage</h3></div>
+		<p><i>This allows you to choose homepage template.</i></p>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>POSTHEMES</strong> > <strong>Modules</strong>  > <strong>Theme settings</strong></p>
+				<p><img src="assets/images/pos_themeoptions.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>HOMEPAGE</strong> tab</p>
+				<p><img src="assets/images/homepage_themeoptions.jpg"  alt="header_themeoptions" /></p>
+				<p>We got:</p>
+				<ul>
+					<li><strong> Homepage Template </strong>: Select homepage template to show</li>
+				</ul>	
+			<p>=> Configure parameters as you want</p></li>
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ol>
+		</section>
+		
+		<section id="footer_config">
+		<div class="page-header"><h3>Footer</h3></div>
+		<p><i>This allows you to choose footer layout.</i></p>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>POSTHEMES</strong> > <strong>Modules</strong>  > <strong>Theme settings</strong></p>
+				<p><img src="assets/images/pos_themeoptions.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>FOOTER</strong> tab</p>
+				<p><img src="assets/images/footer_themeoptions.jpg"  alt="header_themeoptions" /></p>
+				<p>We got:</p>
+				<ul>
+					<li><strong> Footer Template </strong>: Select footer template to show</li>
+				</ul>
+			<p>=> Configure parameters as you want</p></li>
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ol>
+		</section>
+		
+		<section id="page_title_config">
+		<div class="page-header"><h3>Page Title</h3></div>
+		<p><i>This allows you to choose background image, text color, title size of other pages in theme.</i></p>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>POSTHEMES</strong> > <strong>Modules</strong>  > <strong>Theme settings</strong></p>
+				<p><img src="assets/images/pos_themeoptions.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>PAGE TITLE</strong> tab</p>
+				<p><img src="assets/images/page_title_themeoptions.jpg"  alt="header_themeoptions" /></p>
+				<p>We got:</p>
+				<ul>
+					<li><strong> Background image </strong>: Select image as background for other pages in theme. You can set background image for category page by uploading in <strong> Catalog > Categories </strong> - choose category you want to set background image > Upload background image at <strong> Category cover image  </strong></li>
+					<li><strong> Background color </strong>: Select color of background for page title</li>
+					<li><strong> Text color </strong>: Color of text for page title</li>
+					<li><strong> Page title size </strong>: Select size of page title: small, default, big.</li>
+				</ul>
+			<p>=> Configure parameters as you want</p></li>
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ol>
+		</section>
+		
+		<section id="config_product_grid">
+		<div class="page-header"><h3>Product Grid Settings</h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>POSTHEMES</strong> > <strong>Modules</strong>  > <strong>Theme settings</strong></p>
+				<p><img src="assets/images/pos_themeoptions.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>PRODUCT GRID SETTINGS</strong> tab</p>
+				<p><img src="assets/images/product_grid_themeoptions.jpg"  alt="product_grid_themeoptions" /></p>
+				<p>We got:</p>
+				<ul>
+					<li><strong>Product grid display</strong>: Select style to display buttons on product</li>
+					<li><strong>Use no border</strong>: Select <strong> Yes </strong> if you don't want to show border arround product box.</li>
+					<li><strong>Use no padding</strong>: Select <strong> Yes </strong> if you don't want to have padding  between products </li>
+					<li><strong>Disable quickview</strong>: Select <strong> Yes </strong> if you don't want to show quickview </li>
+					<li><strong>Product name color</strong>: Color of product name</li>
+					<li><strong>Product name color hover</strong>: Color of product name when hover</li>
+					<li><strong>Product name font weight</strong>: Choose font-weight of product name</li>
+					<li><strong>Product name font size</strong>: Set font size of product name</li>
+					<li><strong>Product name length</strong>: Select 2 options for length of product name: 1 line or 2 lines</li>
+					<li><strong>Product name transform</strong>: Select text-transform for the product name (<i>None/Capitalize/UPPERCASE</i>)</li>
+					<li><strong>Price color</strong>: Select color of the price</li>
+					<li><strong>Price font size</strong>: Font size of the price</li>
+					<li><strong>Show brand</strong>: Select <strong> Yes </strong> if you want to have show brand for each product</li>
+					<li><strong>Show rating</strong>: Select <strong> Yes </strong> if you want to show rating for each product</li>
+				</ul>
+			<p>=> Configure parameters as you want</p></li>
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ol>
+		</section>
+		<section id="config_category">
+		<div class="page-header"><h3>Category Page Settings</h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>POSTHEMES</strong> > <strong>Modules</strong>  > <strong>Theme settings</strong></p>
+				<p><img src="assets/images/pos_themeoptions.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>CATEGORY PAGE SETTINGS</strong> tab </p>
+				<p><img src="assets/images/category_themeoptions.jpg"  alt="category_themeoptions" /></p>
+				<p>We got:</p>
+				<ul>
+					<li><strong>Category layout</strong>: Select layout for category page : Left column, Fullwidth, Right column</li>
+					<li><strong>Show subcategories</strong>: Choose <strong>Yes/No</strong> to show subcategories or not</li>
+					<li><strong>Product per page</strong>: Set number of products per page</li>
+					<li><strong>Number product per row</strong>: Set number of products per row</li>
+				</ul>
+			<p>=> Configure parameters as you want</p></li>
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ol>
+		</section>
+		<section id="config_product">
+		<div class="page-header"><h3>Product Page Settings</h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>POSTHEMES</strong> > <strong>Modules</strong>  > <strong>Theme settings</strong></p>
+				<p><img src="assets/images/pos_themeoptions.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>PRODUCT PAGE SETTINGS</strong> tab</p>
+				<p><img src="assets/images/product_themeoptions.jpg"  alt="general_themeoptions" /></p>
+				<p>We got:</p>
+				<p>In <strong>Product page layout</strong> : </p>
+				<ul>
+					<li><strong>Product layout</strong>: Select layout for product detail page</li>
+					<li><strong>Product image</strong>: Product thumbnails can be displayed horizontal slider(thumbnails left/right)  or vertical slider(thumbnails bottom), grid, one column.</li>
+					<li><strong>Product infomation tab display</strong>: Product infomation tab can be displayed horizontal/vertical/accordion </li>
+					<li><strong>Product infomation position</strong>: Select position of product information </li>
+				</ul>
+				<ul>
+				<p>In <strong>Configurations</strong> : </p>
+					<li><strong>Product name color</strong>: Select color of the product name</li>
+					<li><strong>Product name font size</strong>: Font size of the product name</li>
+					<li><strong>Product name transform</strong>: Select text-transform for the product name (<i>None/Capitalize/UPPERCASE</i>)</li>
+					<li><strong>Price color</strong>: Select color of the price</li>
+					<li><strong>Price font size</strong>: Font size of the price</li>
+					<li><strong>Hide buy now button</strong>: Choose <strong> Yes </strong> to hide <strong> Buy Now </strong> button in the product page.
+						<p><img src="assets/images/product_themeoptions1.jpg"  alt="general_themeoptions" /></p>
+					</li>
+				</ul>
+			<p>=> Configure parameters as you want</p></li>
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ol>
+		</section>
+		
+		<section id="config_custom">
+		<div class="page-header"><h3>Custom CSS/JS</h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>POSTHEMES</strong> > <strong>Modules</strong>  > <strong>Theme settings</strong></p>
+				<p><img src="assets/images/pos_themeoptions.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>CUSTOM CSS/JS</strong> tab</p>
+				<p><img src="assets/images/custom_themeoptions.jpg"  alt="general_themeoptions" /></p>
+				<p>We got:</p>
+				<ul>
+					<li><strong>Custom CSS</strong>: Add CSS you want to customize</li>
+					<li><strong>Custom JS</strong>: Add JS you want to customize</li>
+				</ul>
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ol>
+		</section>
+		
+		<section id="config_setup">
+		<div class="page-header"><h3>Demo Setup</h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>POSTHEMES</strong> > <strong>Modules</strong>  > <strong>Theme settings</strong></p>
+				<p><img src="assets/images/pos_themeoptions.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>DEMO SETUP</strong> tab</p>
+				<p><img src="assets/images/setup_themeoptions.jpg"  alt="general_themeoptions" /></p>
+				<p>We got:</p>
+				<ul>
+					<li><strong>Demo Setup</strong>: Select demo you want to import</li>
+					<li><strong>View our list demo</strong>: Link to our demo</li>
+					<li><strong>Import</strong>: Click this button to import demo</li>
+				</ul>
+			<li>Click <strong>Save</strong> button when you finish</li>
+		</ol>
+		</section>
+		
+		</section>
+		<!-- End Configure Pos Themeoptions -->
+		
+		<!-- Posthemes Support-->
+		<section id="support">
+		<div class="page-header"><h2>Posthemes Support</h2></div>
+		<p>Support Working time: Monday - Friday</p>
+		<p>Estimated ticket and answers review time: 1-3 business days.</p>
+		<p>We have hundreds of questions and provide answers asap, but this can take up to 3 days after your submitted request. Please be patient and wait for answer.</p>
+		<p><i>Send us email to <a href="mailto:posthemes@gmail.com">posthemes@gmail.com</a>.</i></p>
+		</section>
+		</div>
+	</div>
+	<span id="back-top"><a href="javascript(0)"><span class="icon fa fa-arrow-up"></span></a></span>
+</body>
+</html>

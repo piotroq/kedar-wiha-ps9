@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="1d0b33d5a7b8f3e8c6f9a2e4d5c7b8a9">
+        <source>cart</source>
+        <target>koszyk</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2e1c44e6b8c9f4f9d7g0b3f5e6d8c9b0">
+        <source>order</source>
+        <target>zamówienie</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

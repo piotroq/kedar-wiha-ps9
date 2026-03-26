@@ -1,0 +1,522 @@
+parameters:
+  przelewy24.logger.max_files: 6
+
+services:
+  _defaults:
+    public: true
+    autoconfigure: true
+    autowire: false
+
+  przelewy24.module:
+    class: przelewy24payment
+    public: true
+    autowire: false
+    factory: [ \Module, 'getInstanceByName' ]
+    arguments:
+      - 'przelewy24payment'
+
+  Przelewy24\Hook\HookExecutor:
+    class: Przelewy24\Hook\HookExecutor
+    arguments:
+      - !tagged przelewy24.hook
+
+
+  przelewy24.context:
+    class: Context
+    factory: [ \Context, 'getContext' ]
+
+
+  przelewy24.translator:
+    class: Przelewy24\Translator\Adapter\Translator
+    autoconfigure: false
+    arguments:
+      - '@przelewy24.context'
+
+  przelewy24.logs_dir_provider:
+    class: Przelewy24\Provider\Logger\LogsDirProvider
+    public: false
+
+  # Custom logger with rotating file handler
+  przelewy24.logger.handler:
+    class: Monolog\Handler\RotatingFileHandler
+    public: false
+    factory: ['@przelewy24.logs_dir_provider', 'createHandler']
+    arguments:
+      - '%przelewy24.logger.max_files%'
+
+  przelewy24.logger:
+    class: Monolog\Logger
+    public: true
+    arguments:
+      - 'przelewy24'
+    calls:
+      - [pushHandler, ['@przelewy24.logger.handler']]
+
+  Przelewy24\Configuration\Enum\CreateOrderEnum:
+    class: Przelewy24\Configuration\Enum\CreateOrderEnum
+    arguments:
+      - '@przelewy24.translator'
+
+  Przelewy24\Configuration\Enum\CardImageEnum:
+    class: Przelewy24\Configuration\Enum\CardImageEnum
+    arguments:
+      - '@Przelewy24\Helper\Image\ImageHelper'
+
+  Przelewy24\Configuration\Enum\BlikMessageEnum:
+    class: Przelewy24\Configuration\Enum\BlikMessageEnum
+    arguments:
+      - '@przelewy24.translator'
+
+  Przelewy24\Configuration\Enum\BlikStatusEnum:
+    class: Przelewy24\Configuration\Enum\BlikStatusEnum
+
+  Przelewy24\Resolver\Cards\CardsLogoResolver:
+    class: Przelewy24\Resolver\Cards\CardsLogoResolver
+    arguments:
+      - '@Przelewy24\Configuration\Enum\CardImageEnum'
+
+  Przelewy24\Configuration\Enum\OrderIdEnum:
+    class: Przelewy24\Configuration\Enum\OrderIdEnum
+    arguments:
+      - '@przelewy24.translator'
+
+  Przelewy24\Provider\Choice\CreateOrderChoiceProvider:
+    class: Przelewy24\Provider\Choice\CreateOrderChoiceProvider
+    arguments:
+      - '@Przelewy24\Configuration\Enum\CreateOrderEnum'
+
+  Przelewy24\Provider\Choice\CurrencyChoiceProvider:
+    class: Przelewy24\Provider\Choice\CurrencyChoiceProvider
+
+  Przelewy24\Provider\Choice\OrderIdChoiceProvider:
+    class: Przelewy24\Provider\Choice\OrderIdChoiceProvider
+    arguments:
+      - '@Przelewy24\Configuration\Enum\OrderIdEnum'
+
+  Przelewy24\Provider\Choice\StatusChoiceProvider:
+    class: Przelewy24\Provider\Choice\StatusChoiceProvider
+
+  Przelewy24\Api\Przelewy24\Factory\ConnectionFactory:
+    class: Przelewy24\Api\Przelewy24\Factory\ConnectionFactory
+    arguments:
+      - '@przelewy24.translator'
+      - '@przelewy24.logger'
+
+  Przelewy24\Api\Przelewy24\Factory\PaymentRequestFactory:
+    class: Przelewy24\Api\Przelewy24\Factory\PaymentRequestFactory
+
+  Przelewy24\Factory\PaymentMethod\PaymentMethodCollectionFactory:
+    class: Przelewy24\Factory\PaymentMethod\PaymentMethodCollectionFactory
+    arguments:
+      - '@Przelewy24\Api\Przelewy24\Factory\ConnectionFactory'
+      - '@Przelewy24\Api\Przelewy24\Factory\PaymentRequestFactory'
+      - '@Przelewy24\Processor\Payment\PaymentTypeProcessor'
+
+  Przelewy24\Processor\Payment\PaymentTypeProcessor:
+    class: Przelewy24\Processor\Payment\PaymentTypeProcessor
+    arguments:
+      - !tagged przelewy24.paymentType.resolver
+
+  Przelewy24\Resolver\PaymentType\AppleTypeResolver:
+    class: Przelewy24\Resolver\PaymentType\AppleTypeResolver
+    tags: [ przelewy24.paymentType.resolver ]
+
+  Przelewy24\Resolver\PaymentType\Blik0TypeResolver:
+    class: Przelewy24\Resolver\PaymentType\Blik0TypeResolver
+    tags: [ przelewy24.paymentType.resolver ]
+
+  Przelewy24\Resolver\PaymentType\InstallmentTypeResolver:
+    class: Przelewy24\Resolver\PaymentType\InstallmentTypeResolver
+    tags: [ przelewy24.paymentType.resolver ]
+
+  Przelewy24\Resolver\PaymentType\GoogleTypeResolver:
+    class: Przelewy24\Resolver\PaymentType\GoogleTypeResolver
+    tags: [ przelewy24.paymentType.resolver ]
+
+  Przelewy24\Resolver\PaymentType\CardTypeResolver:
+    class: Przelewy24\Resolver\PaymentType\CardTypeResolver
+    tags: [ przelewy24.paymentType.resolver ]
+
+  Przelewy24\Provider\Configuration\PaymentConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\PaymentConfigurationProvider
+    arguments:
+      - '@Przelewy24\Factory\PaymentMethod\PaymentMethodCollectionFactory'
+
+  Przelewy24\Provider\Configuration\CredentialsConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\CredentialsConfigurationProvider
+
+  Przelewy24\Provider\Configuration\ExtraChargeConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\ExtraChargeConfigurationProvider
+
+  Przelewy24\Provider\Configuration\AppleConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\AppleConfigurationProvider
+
+  Przelewy24\Provider\Configuration\GoogleConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\GoogleConfigurationProvider
+
+  Przelewy24\Provider\Configuration\CardsConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\CardsConfigurationProvider
+
+  Przelewy24\Provider\Configuration\BlikConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\BlikConfigurationProvider
+
+  Przelewy24\Provider\Configuration\OrderConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\OrderConfigurationProvider
+
+  Przelewy24\Provider\Configuration\InstallmentsConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\InstallmentsConfigurationProvider
+
+  Przelewy24\Provider\Configuration\StateConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\StateConfigurationProvider
+
+  Przelewy24\Provider\Configuration\TimeConfigurationProvider:
+    class: Przelewy24\Provider\Configuration\TimeConfigurationProvider
+
+  Przelewy24\Model\Dto\Przelewy24Config:
+    class: Przelewy24\Model\Dto\Przelewy24Config
+    shared: false
+    arguments:
+      - '@Przelewy24\Provider\Configuration\TimeConfigurationProvider'
+      - '@Przelewy24\Provider\Configuration\ExtraChargeConfigurationProvider'
+      - '@Przelewy24\Provider\Configuration\OrderConfigurationProvider'
+      - '@Przelewy24\Provider\Configuration\InstallmentsConfigurationProvider'
+      - '@Przelewy24\Provider\Configuration\StateConfigurationProvider'
+      - '@Przelewy24\Provider\Configuration\PaymentConfigurationProvider'
+      - '@Przelewy24\Provider\Configuration\CredentialsConfigurationProvider'
+      - '@Przelewy24\Provider\Configuration\AppleConfigurationProvider'
+      - '@Przelewy24\Provider\Configuration\GoogleConfigurationProvider'
+      - '@Przelewy24\Provider\Configuration\CardsConfigurationProvider'
+      - '@Przelewy24\Provider\Configuration\BlikConfigurationProvider'
+
+  Przelewy24\Helper\Url\UrlHelper:
+    class: Przelewy24\Helper\Url\UrlHelper
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+
+  Przelewy24\Helper\Image\ImageHelper:
+    class: Przelewy24\Helper\Image\ImageHelper
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+
+  Przelewy24\Helper\Price\PriceHelper:
+    class: Przelewy24\Helper\Price\PriceHelper
+    arguments:
+      - '@przelewy24.context'
+
+  Przelewy24\Provider\Payload\TransactionRegisterPayloadProvider:
+    class: Przelewy24\Provider\Payload\TransactionRegisterPayloadProvider
+    arguments:
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+      - '@Przelewy24\Factory\Session\SessionIdFactory'
+      - '@przelewy24.translator'
+
+  Przelewy24\Factory\Session\SessionIdFactory:
+    class: Przelewy24\Factory\Session\SessionIdFactory
+    arguments:
+      - '@przelewy24.module'
+
+  Przelewy24\Payment\Voter\RegisterTransactionResultVoter:
+    class: Przelewy24\Payment\Voter\RegisterTransactionResultVoter
+    arguments:
+      - '@przelewy24.translator'
+
+  Przelewy24\Payment\Voter\BlikChargeByCodeResultVoter:
+    class: Przelewy24\Payment\Voter\BlikChargeByCodeResultVoter
+    arguments:
+      - '@przelewy24.translator'
+
+  Przelewy24\Payment\Voter\PaymentVoter:
+    class: Przelewy24\Payment\Voter\PaymentVoter
+    arguments:
+      - '@Przelewy24\Factory\PaymentMethod\PaymentMethodCollectionFactory'
+      - '@Przelewy24\Payment\Checker\CartTransactionChecker'
+      - '@przelewy24.translator'
+
+  Przelewy24\Payment\Voter\PrestashopOrderExistVoter:
+    class: Przelewy24\Payment\Voter\PrestashopOrderExistVoter
+
+  Przelewy24\Factory\Payment\PaymentFactory:
+    class: Przelewy24\Factory\Payment\PaymentFactory
+    arguments:
+      - !tagged przelewy24.payment
+
+  Przelewy24\Payment\Payment\DefaultPayment:
+    class: Przelewy24\Payment\Payment\DefaultPayment
+    tags: [ przelewy24.payment ]
+    arguments:
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+      - '@Przelewy24\Api\Przelewy24\Factory\ConnectionFactory'
+      - '@Przelewy24\Payment\Voter\PaymentVoter'
+      - '@Przelewy24\Payment\Voter\RegisterTransactionResultVoter'
+      - '@Przelewy24\Provider\Payload\TransactionRegisterPayloadProvider'
+      - '@przelewy24.module'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@przelewy24.translator'
+
+  Przelewy24\Payment\Payment\CardPayment:
+    class: Przelewy24\Payment\Payment\CardPayment
+    tags: [ przelewy24.payment ]
+    arguments:
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+      - '@Przelewy24\Api\Przelewy24\Factory\ConnectionFactory'
+      - '@Przelewy24\Payment\Voter\PaymentVoter'
+      - '@Przelewy24\Payment\Voter\RegisterTransactionResultVoter'
+      - '@Przelewy24\Provider\Payload\TransactionRegisterPayloadProvider'
+      - '@przelewy24.module'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+
+  Przelewy24\Payment\Payment\GooglePayPayment:
+    class: Przelewy24\Payment\Payment\GooglePayPayment
+    tags: [ przelewy24.payment ]
+    arguments:
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+      - '@Przelewy24\Api\Przelewy24\Factory\ConnectionFactory'
+      - '@Przelewy24\Payment\Voter\PaymentVoter'
+      - '@Przelewy24\Payment\Voter\RegisterTransactionResultVoter'
+      - '@Przelewy24\Provider\Payload\TransactionRegisterPayloadProvider'
+      - '@przelewy24.module'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@przelewy24.translator'
+
+  Przelewy24\Payment\Payment\BlikPayment:
+    class: Przelewy24\Payment\Payment\BlikPayment
+    tags: [ przelewy24.payment ]
+    arguments:
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+      - '@Przelewy24\Api\Przelewy24\Factory\ConnectionFactory'
+      - '@Przelewy24\Payment\Voter\PaymentVoter'
+      - '@Przelewy24\Payment\Voter\RegisterTransactionResultVoter'
+      - '@Przelewy24\Provider\Payload\TransactionRegisterPayloadProvider'
+      - '@przelewy24.module'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Payment\Voter\BlikChargeByCodeResultVoter'
+
+  Przelewy24\Payment\Payment\ApplePayPayment:
+    class: Przelewy24\Payment\Payment\ApplePayPayment
+    tags: [ przelewy24.payment ]
+    arguments:
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+      - '@Przelewy24\Api\Przelewy24\Factory\ConnectionFactory'
+      - '@Przelewy24\Payment\Voter\PaymentVoter'
+      - '@Przelewy24\Payment\Voter\RegisterTransactionResultVoter'
+      - '@Przelewy24\Provider\Payload\TransactionRegisterPayloadProvider'
+      - '@przelewy24.module'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@przelewy24.translator'
+
+  Przelewy24\Payment\Przelewy24PaymentAbstract:
+    class: Przelewy24\Payment\Przelewy24PaymentAbstract
+
+
+  Przelewy24\Handler\Transaction\PaymentConfirmHandler:
+    class: Przelewy24\Handler\Transaction\PaymentConfirmHandler
+    arguments:
+      - '@Przelewy24\Handler\Transaction\TransactionVerifyHandler'
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+      - '@Przelewy24\Payment\Voter\VerifyTransactionVoter'
+      - '@Przelewy24\Provider\Refund\RefundProvider'
+      - '@Przelewy24\Refund\RefundTransaction'
+      - '@Przelewy24\Order\OrderCreator'
+      - '@Przelewy24\Payment\Voter\PrestashopOrderExistVoter'
+
+  Przelewy24\Handler\Transaction\BlikTransactionHandler:
+    class: Przelewy24\Handler\Transaction\BlikTransactionHandler
+    arguments:
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+      - '@Przelewy24\Order\OrderCreator'
+
+  Przelewy24\Handler\Transaction\TransactionVerifyHandler:
+    class: Przelewy24\Handler\Transaction\TransactionVerifyHandler
+    arguments:
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+      - '@przelewy24.translator'
+
+  Przelewy24\Factory\Transaction\TransactionScopeFactory:
+    class: Przelewy24\Factory\Transaction\TransactionScopeFactory
+    arguments:
+      - '@Przelewy24\Api\Przelewy24\Factory\ConnectionFactory'
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+      - '@przelewy24.translator'
+
+  Przelewy24\Payment\Checker\TransactionStatusChecker:
+    class: Przelewy24\Payment\Checker\TransactionStatusChecker
+    arguments:
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+
+  Przelewy24\Calculator\AmountExtraChargeCalculator:
+    class: Przelewy24\Calculator\AmountExtraChargeCalculator
+    arguments:
+      - '@przelewy24.translator'
+
+  Przelewy24\Payment\Checker\CartTransactionChecker:
+    class: Przelewy24\Payment\Checker\CartTransactionChecker
+
+  Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie:
+    class: Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie
+    arguments:
+      - '@przelewy24.context'
+
+  Przelewy24\Payment\Voter\VerifyTransactionVoter:
+    class: Przelewy24\Payment\Voter\VerifyTransactionVoter
+
+  Przelewy24\Refund\Voter\ResponseTransactionRefundVoter:
+    class: Przelewy24\Refund\Voter\ResponseTransactionRefundVoter
+
+  Przelewy24\Refund\Voter\RefundVoter:
+    class: Przelewy24\Refund\Voter\RefundVoter
+    arguments:
+      - '@przelewy24.translator'
+
+  Przelewy24\Provider\Refund\RefundProvider:
+    class: Przelewy24\Provider\Refund\RefundProvider
+    arguments:
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Factory\Session\SessionIdFactory'
+
+  Przelewy24\Refund\RefundTransaction:
+    class: Przelewy24\Refund\RefundTransaction
+    arguments:
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+      - '@Przelewy24\Refund\Voter\ResponseTransactionRefundVoter'
+      - '@Przelewy24\Refund\Voter\RefundVoter'
+
+  Przelewy24\Provider\Order\OrderToCancelShortTermProvider:
+    class: Przelewy24\Provider\Order\OrderToCancelShortTermProvider
+    tags: [ przelewy24.orderCancelProvider ]
+
+  Przelewy24\Provider\Order\OrderToCancelLongTermProvider:
+    class: Przelewy24\Provider\Order\OrderToCancelLongTermProvider
+    tags: [ przelewy24.orderCancelProvider ]
+
+  Przelewy24\Handler\Order\OrderCancelHandler:
+    class: Przelewy24\Handler\Order\OrderCancelHandler
+    arguments:
+      - !tagged przelewy24.orderCancelProvider
+
+
+
+  Przelewy24\Hook\DisplayExpressCheckout:
+    class: Przelewy24\Hook\DisplayExpressCheckout
+    tags: [ przelewy24.hook ]
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Provider\Calculator\CalculatorConfigurationProvider'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+      - '@Przelewy24\Provider\Configuration\ExtraChargeConfigurationProvider'
+
+  Przelewy24\Hook\DisplayProductAdditionalInfo:
+    class: Przelewy24\Hook\DisplayProductAdditionalInfo
+    tags: [ przelewy24.hook ]
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Provider\Calculator\CalculatorConfigurationProvider'
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+
+
+  Przelewy24\Hook\DisplayBeforeBodyClosingTag:
+    class: Przelewy24\Hook\DisplayBeforeBodyClosingTag
+    tags: [ przelewy24.hook ]
+    arguments:
+      - '@przelewy24.context'
+
+
+  Przelewy24\Hook\DisplayOrderDetail:
+    class: Przelewy24\Hook\DisplayOrderDetail
+    tags: [ przelewy24.hook ]
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+
+  Przelewy24\Hook\DisplayCustomerAccount:
+    class: Przelewy24\Hook\DisplayCustomerAccount
+    tags: [ przelewy24.hook ]
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+
+
+
+
+
+  Przelewy24\Transformer\ModelToTransactionHistoryCollectionTransformer:
+    class: Przelewy24\Transformer\ModelToTransactionHistoryCollectionTransformer
+    arguments:
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Helper\Price\PriceHelper'
+
+
+
+  Przelewy24\Handler\Transaction\RefundConfirmHandler:
+    class: Przelewy24\Handler\Transaction\RefundConfirmHandler
+
+  Przelewy24\Handler\Status\Driver\RefundStatusDriver:
+    class: Przelewy24\Handler\Status\Driver\RefundStatusDriver
+    tags: [ przelewy24.statusDriver ]
+    arguments:
+      - '@Przelewy24\Handler\Transaction\RefundConfirmHandler'
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+
+  Przelewy24\Handler\Status\Driver\CardStatusHandler:
+    class: Przelewy24\Handler\Status\Driver\CardStatusHandler
+    tags: [ przelewy24.statusDriver ]
+    arguments:
+      - '@Przelewy24\Manager\Cards\CardsManager'
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+
+  Przelewy24\Handler\Status\Driver\BlikStatusHandler:
+    class: Przelewy24\Handler\Status\Driver\BlikStatusHandler
+    tags: [ przelewy24.statusDriver ]
+    arguments:
+      - '@Przelewy24\Handler\Transaction\BlikTransactionHandler'
+
+  Przelewy24\Handler\Status\Driver\TransactionStatusDriver:
+    class: Przelewy24\Handler\Status\Driver\TransactionStatusDriver
+    tags: [ przelewy24.statusDriver ]
+    arguments:
+      - '@Przelewy24\Handler\Transaction\PaymentConfirmHandler'
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+
+  Przelewy24\Handler\Status\StatusHandler:
+    class: Przelewy24\Handler\Status\StatusHandler
+    arguments:
+      - !tagged przelewy24.statusDriver
+      - '@przelewy24.translator'
+
+  Przelewy24\Payment\Voter\LastTransactionTimeVoter:
+    class: Przelewy24\Payment\Voter\LastTransactionTimeVoter
+    arguments:
+      - '@przelewy24.translator'
+
+  Przelewy24\Manager\Cards\CardsManager:
+    class: Przelewy24\Manager\Cards\CardsManager
+    arguments:
+      - '@Przelewy24\Factory\Transaction\TransactionScopeFactory'
+
+  Przelewy24\Api\Apple\Request\ValidateMerchantRequest:
+    class: Przelewy24\Api\Apple\Request\ValidateMerchantRequest
+
+  Przelewy24\Provider\Calculator\CalculatorConfigurationProvider:
+    class: Przelewy24\Provider\Calculator\CalculatorConfigurationProvider
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+
+  Przelewy24\Order\OrderCreator:
+    class: Przelewy24\Order\OrderCreator
+    arguments:
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+      - '@przelewy24.module'

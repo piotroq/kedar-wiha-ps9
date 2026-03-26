@@ -1,0 +1,153 @@
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+
+{% form_theme form '@PrestaShop/Admin/TwigTemplateForm/prestashop_ui_kit.html.twig' %}
+
+{% block content %}
+
+    {% include '@Modules/dpdshipping/views/templates/admin/_partials/navbar.html.twig' %}
+
+    <div class="row">
+        <div class="col-sm-12 col-md-3">
+            {% include '@Modules/dpdshipping/views/templates/admin/_partials/navbar-configuration.html.twig' %}
+        </div>
+
+        <div class="col-sm-12 col-md-9">
+            {{ form_start(form) }}
+            <div class="card">
+                <h3 class="card-header bg-white">
+                    {{ 'Special prices'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}
+                </h3>
+                <div class="card-body">
+                    {% if shopContext > 1 %}
+                        <div class="alert alert-warning" role="alert">
+                            {{ 'You are editing settings for multiple shops contexts. These settings will be applied to other contexts and may override current values.'|trans({}, 'Modules.Dpdshipping.Admin') }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        <p>
+                            {{ 'Select an available shipping method for the Create Prestashop carrier. You can manage carriers on the standard prestashop page.'|trans({}, 'Modules.Dpdshipping.AdminCarrier') }}
+                        </p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="pl-2">
+                                {{ form_label(form.specialPrice) }}
+                                {{ form_widget(form.specialPrice) }}
+                                {{ form_errors(form.specialPrice) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pagination-info" class="text-right" style="margin-top: 1rem;">
+                        <span id="pagination-info-rows-from"></span> - <span id="pagination-info-rows-to"></span>
+                        {{ 'from'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}
+                        <span id="pagination-info-pages"></span>
+                    </div>
+                    <table id="specialPriceTable">
+                        <thead>
+                        <tr>
+                            <th class="col-1">{{ 'Country'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</th>
+                            <th class="col-1">{{ 'Cart price from (PLN)'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</th>
+                            <th class="col-1">{{ 'Cart price up to (PLN)'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</th>
+                            <th class="col-1">{{ 'Package weight from (kg)'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</th>
+                            <th class="col-1">{{ 'Package weight up to (kg)'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</th>
+                            <th class="col-1">{{ 'Price per package (PLN)'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</th>
+                            <th class="col-4">{{ 'Delivery method'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</th>
+                            <th class="col-1">{{ 'Price for COD service (PLN)'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</th>
+                            <th class="col-1">{{ 'Action'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in form.specialPriceList %}
+                            <tr>
+                                <td>{{ form_widget(item.isoCountry) }}</td>
+                                <td>{{ form_widget(item.priceFrom) }}</td>
+                                <td>{{ form_widget(item.priceTo) }}</td>
+                                <td>{{ form_widget(item.weightFrom) }}</td>
+                                <td>{{ form_widget(item.weightTo) }}</td>
+                                <td>{{ form_widget(item.parcelPrice) }}</td>
+                                <td>{{ form_widget(item.carrierType) }}</td>
+                                <td>{{ form_widget(item.codPrice) }}</td>
+                                <td>
+                                    <i class="material-icons btn btn-sm text-secondary delete-icon-gray dpdshipping-remove-row float-right">delete</i>
+                                    <i class="material-icons btn btn-sm text-secondary delete-icon-gray dpdshipping-duplicate-row float-right">content_copy</i>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                    <div class="col pb-2 pt-2 mb-4">
+                        <button type="button" class="btn btn-sm btn-secondary float-right" id="addFidRow">
+                            {{ 'Add row'|trans({}, 'Modules.Dpdshipping.Button') }}
+                        </button>
+                    </div>
+                </div>
+                <div id="dpdSpecialPricePagination" class="text-center mb-2"></div>
+                <div class="card-footer bg-white">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-secondary float-right" id="save-button">
+                            {{ 'Save'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+            <div class="card">
+                <h3 class="card-header bg-white">
+                    {{ 'Special price configuration'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}
+                </h3>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 border-right">
+                            <h4>{{ 'Export Data'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</h4>
+                            <p class="text-muted">
+                                {{ 'Click the button below to export your special price configuration data as a CSV file.'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}
+                            </p>
+                            <button class="btn btn-secondary export-btn w-20" id="dpdSpecialPriceExportButton">
+                                <i class="fas fa-file-export"></i> {{ 'Export to CSV'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}
+                            </button>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h4>{{ 'Import Data'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</h4>
+                            <p class="text-muted">
+                                {{ 'Choose a CSV file to upload and update your special price configuration data.'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <label for="dpdSpecialPriceImportFile" class="btn btn-secondary m-0">
+                                    <i class="fas fa-file-upload"></i> {{ 'Choose File'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}
+                                </label>
+                                <input
+                                        type="file"
+                                        id="dpdSpecialPriceImportFile"
+                                        class="import-file d-none"
+                                        accept=".csv"
+                                />
+                                <span id="selectedFileName" class="ml-2 text-muted">{{ 'No file chosen'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}</span>
+                            </div>
+                            <button class="btn btn-secondary import-btn w-20 mt-3" id="dpdSpecialPriceImportFileButton">
+                                <i class="fas fa-upload"></i> {{ 'Import CSV'|trans({}, 'Modules.Dpdshipping.AdminSpecialPrice') }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('../modules/dpdshipping/views/js/configuration/special-price.js') }}"></script>
+    <script src="{{ asset('../modules/dpdshipping/views/js/configuration/special-price-data.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% set currentTimestampOrderDetailsCss = date("now")|date("U") %}
+    <link rel="stylesheet" href="{{ asset('../modules/dpdshipping/views/admin/special-price.css?' ~ currentTimestampOrderDetailsCss) }}"/>
+{% endblock %}
+
+

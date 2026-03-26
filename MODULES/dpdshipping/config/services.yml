@@ -1,0 +1,132 @@
+imports:
+  # Load YAML service files from the immediate services directory
+  - { resource: 'services/*.yml' }
+  # Load YAML service files from one-level nested subdirectories (configuration/, domain/, etc.)
+  - { resource: 'services/*/*.yml' }
+
+services:
+  _defaults:
+    public: true
+    autowire: true
+    autoconfigure: true
+
+  DpdShipping\Controller\RedirectController:
+    class: 'DpdShipping\Controller\RedirectController'
+    public: true
+    tags:
+      - { name: controller.service_arguments }
+
+  # Register controllers referenced in routes but not yet declared as services
+  DpdShipping\Controller\ShippingHistory\DpdShippingShippingHistoryDetailController:
+    class: 'DpdShipping\Controller\ShippingHistory\DpdShippingShippingHistoryDetailController'
+    public: true
+    autowire: false
+    arguments:
+      - '@translator'
+    tags:
+      - { name: controller.service_arguments }
+
+  DpdShipping\Controller\PickupCourier\DpdShippingPickupCourierController:
+    class: 'DpdShipping\Controller\PickupCourier\DpdShippingPickupCourierController'
+    public: true
+    autowire: false
+    arguments:
+      - '@prestashop.core.query_bus'
+      - '@prestashop.core.command_bus'
+      - '@dpdshipping.grid.factory.pickup.courier'
+      - '@translator'
+      - '@prestashop.bundle.grid.response_builder'
+      - '@dpdshipping.grid.definition.factory.pickup.courier'
+      - '@prestashop.module.dpdshipping.form.dpdshipping_pickup_courier_edit_form_data_handler'
+    tags:
+      - { name: controller.service_arguments }
+
+  DpdShipping\Controller\Configuration\DpdShippingPickupCourierSettingsController:
+    class: 'DpdShipping\Controller\Configuration\DpdShippingPickupCourierSettingsController'
+    public: true
+    autowire: false
+    arguments:
+      - '@prestashop.core.command_bus'
+      - '@dpdshipping.grid.factory.configuration.pickup.courier.settings.list'
+      - '@prestashop.module.dpdshipping.form.dpdshipping_pickup_courier_settings_form_data_handler'
+      - '@translator'
+    tags:
+      - { name: controller.service_arguments }
+
+  DpdShipping\Controller\Configuration\DpdShippingConnectionController:
+    class: 'DpdShipping\Controller\Configuration\DpdShippingConnectionController'
+    public: true
+    autowire: false
+    arguments:
+      - '@prestashop.core.command_bus'
+      - '@dpdshipping.grid.factory.configuration.connection'
+      - '@prestashop.module.dpdshipping.form.dpdshipping_connection_form_data_handler'
+      - '@translator'
+    tags:
+      - { name: controller.service_arguments }
+
+  DpdShipping\Controller\Configuration\DpdShippingAddressController:
+    class: 'DpdShipping\Controller\Configuration\DpdShippingAddressController'
+    public: true
+    autowire: false
+    arguments:
+      - '@prestashop.core.command_bus'
+      - '@dpdshipping.grid.factory.configuration.address'
+      - '@prestashop.module.dpdshipping.form.dpdshipping_address_form_data_handler'
+      - '@translator'
+    tags:
+      - { name: controller.service_arguments }
+
+  DpdShipping\Controller\Configuration\DpdShippingConfigurationController:
+    class: 'DpdShipping\Controller\Configuration\DpdShippingConfigurationController'
+    public: true
+    autowire: false
+    arguments:
+      - '@prestashop.core.query_bus'
+      - '@prestashop.module.dpdshipping.form.dpdshipping_configuration_form_data_handler'
+      - '@translator'
+    tags:
+      - { name: controller.service_arguments }
+
+  DpdShipping\Controller\Configuration\DpdShippingParameterController:
+    class: 'DpdShipping\Controller\Configuration\DpdShippingParameterController'
+    public: true
+    autowire: false
+    arguments:
+      - '@prestashop.module.dpdshipping.form.dpdshipping_parameters_form_data_handler'
+      - '@translator'
+    tags:
+      - { name: controller.service_arguments }
+
+  DpdShipping\Controller\Configuration\DpdShippingCarrierController:
+    class: 'DpdShipping\Controller\Configuration\DpdShippingCarrierController'
+    public: true
+    autowire: false
+    arguments:
+      - '@prestashop.core.query_bus'
+      - '@prestashop.module.dpdshipping.form.dpdshipping_carrier_form_data_handler'
+      - '@translator'
+    tags:
+      - { name: controller.service_arguments }
+
+  DpdShipping\Controller\Configuration\DpdShippingSpecialPriceController:
+    class: 'DpdShipping\Controller\Configuration\DpdShippingSpecialPriceController'
+    public: true
+    autowire: false
+    arguments:
+      - '@prestashop.module.dpdshipping.form.dpdshipping_special_prices_form_data_handler'
+      - '@router'
+      - '@translator'
+    tags:
+      - { name: controller.service_arguments }
+
+  DpdShipping\Controller\Configuration\DpdShippingOnboardingController:
+    class: 'DpdShipping\Controller\Configuration\DpdShippingOnboardingController'
+    public: true
+    autowire: false
+    arguments:
+      - '@prestashop.module.dpdshipping.form.dpdshipping_onboarding_form_data_handler'
+      - '@translator'
+    tags:
+      - { name: controller.service_arguments }
+

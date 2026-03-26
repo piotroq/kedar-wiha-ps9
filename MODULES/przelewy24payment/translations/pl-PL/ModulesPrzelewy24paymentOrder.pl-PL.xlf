@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="6c84c224bdd2a244708284a8e9f9fe3a">
+        <source>Przelewy24 - Refunds</source>
+        <target>Przelewy24 - Zwroty</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8b703016705a1bfd31b8925bbe32de9c">
+        <source>Here you can send returns to customers. The returned amount cannot exceed the value of the order and free funds in your account.</source>
+        <target>Tutaj możesz wysyłać zwroty do klientów. Zwracana kwota nie może przekraczać wartości zamówienia i wolnych środków na koncie.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bdd26586b6ee592f54681e56accd1ab2">
+        <source>Max amout to refund</source>
+        <target>Maksymalna kwota do zwrotu</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="974ee70bf2aad656c54702c5e499722c">
+        <source>Refund successfully added</source>
+        <target>Zwrot został pomyślnie dodany</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="29112058c861eebde909cc97c5781ccf">
+        <source>Przelewy24 - Transaction history</source>
+        <target>Przelewy24 - Historia transakcji</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="44749712dbec183e983dcd78a7736c41">
+        <source>Date</source>
+        <target>Data</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ac5bb077c33753116b5e91ff1766e7bc">
+        <source>Received</source>
+        <target>Otrzymano</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b2f40690858b404ed10e62bdf422c704">
+        <source>Amount</source>
+        <target>Kwota</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bafd7322c6e97d25b6299b5d6fe8920b">
+        <source>No</source>
+        <target>Nie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="67d633ea625f39e47e41fc36960bdefc">
+        <source>Check transactions status</source>
+        <target>Sprawdź status transakcji</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3240641cfd816be0317e5866789a8328">
+        <source>Return created</source>
+        <target>Zwrot utworzony</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f7dacb059f306d51baf38929513096f6">
+        <source>refund not recieved</source>
+        <target>zwrot nie został otrzymany</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="63d5049791d9d79d86e9a108b0a999ca">
+        <source>Reference</source>
+        <target>Numer referencyjny</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2967c9fad2d0b2b13cc6545934d885b8">
+        <source>Returned amount</source>
+        <target>Zwrócona kwota</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d3a4cc742ed59a60e383fda6d5b1c72a">
+        <source>Repayment link copied to clipboard</source>
+        <target>Link do ponownej płatności skopiowany do schowka</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9161dd4e5fd53a7be4856e7f0687166f">
+        <source>Copy repayment link</source>
+        <target>Skopiuj link do ponownej płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="c503a3918498fd5d26bdcba8ed6cc7d8">
+        <source>Account not found</source>
+        <target>Konto nie zostało znalezione</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="89aefe92db0fdf5eabb057a9afcf84b5">
+        <source>Wrong session id</source>
+        <target>Nieprawidłowy identyfikator sesji</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e61f52d02b9f52fbe1fd41ed320e29c3">
+        <source>Cart not found</source>
+        <target>Nie znaleziono koszyka</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="28ca4ab8455ffa19e6f0577aefa9f1c9">
+        <source>Customer not found</source>
+        <target>Nie znaleziono klienta</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="24909e87dc242b9dd539e10609b8b050">
+        <source>Order not found</source>
+        <target>Nie znaleziono zamówienia</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a76f400531a80a31335c5fb578e4062c">
+        <source>Order not Exist</source>
+        <target>Zamówienie nie istnieje</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fd2d393e8202e51fd502f4dbee8c01b6">
+        <source>Wrong status driver</source>
+        <target>Nieprawidłowy sterownik statusu</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="022f55abe1d535425633c0092593afa2">
+        <source>Transaction verify failed</source>
+        <target>Weryfikacja transakcji nie powiodła się</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="54203a484ac66188fb537f82cf8225f9">
+        <source>Error when registering blik code</source>
+        <target>Błąd podczas rejestracji kodu BLIK</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="79489e424d6dac4754464b9ee2f77687">
+        <source>orderId is null</source>
+        <target>ID zamówienia jest puste</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e7ca89fbc73e93a6895bf9f8a0982842">
+        <source>Cannot repay this transaction</source>
+        <target>Nie można ponowić tej płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="13e44eed7ac91bd308b0644fa93f71ad">
+        <source>You must wait to: %date% to repay this transaction</source>
+        <target>Musisz poczekać do: %date%, aby ponowić płatność</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2ae5ab6c7ec275cd233f3d3bae581db6">
+        <source>Cart is not configured.</source>
+        <target>Koszyk nie jest skonfigurowany.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="70648a86585114cc3e119463af107431">
+        <source>Account is not configured.</source>
+        <target>Konto nie jest skonfigurowane.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7b20570f478ba97e4729867dbb677904">
+        <source>Wrong payment method id.</source>
+        <target>Nieprawidłowy identyfikator metody płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b9b8aef45ed247c686801199694dce83">
+        <source>Payment method not available.</source>
+        <target>Metoda płatności niedostępna.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bb77db82af0c8543884ba8d68d1b24c5">
+        <source>Customer is not owner Cart.</source>
+        <target>Klient nie jest właścicielem koszyka.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c00cb51874470c0d66944862569e236b">
+        <source>Cart is already payed.</source>
+        <target>Koszyk został już opłacony.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5a02695cb082a3c587b34e720355b453">
+        <source>Cart is canceled.</source>
+        <target>Koszyk został anulowany.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="791987295f68bd8ab3237f5a8e1cafbe">
+        <source>Error when registering transaction</source>
+        <target>Błąd podczas rejestracji transakcji</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8e796da6ccad36df410630e0a6814768">
+        <source>Token is null</source>
+        <target>Token jest pusty</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e9156c60715b6c72ed5ac05dd6a62756">
+        <source>Agreement is required</source>
+        <target>Wymagana jest zgoda</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c5cbeba533edffeb0e0070ef2f121a3f">
+        <source>Blik code is invalid</source>
+        <target>Kod BLIK jest nieprawidłowy</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ed4040292366c618b9f28d02dc060e0c">
+        <source>Payment method is not valid</source>
+        <target>Metoda płatności jest nieprawidłowa</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5fe66c810f9f7873917c9660e6cbcd17">
+        <source>Wrong data refund</source>
+        <target>Nieprawidłowe dane zwrotu</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="80c0c37773f5bc7439da61e3313676cb">
+        <source>Amount cannot be greater than the transaction amount</source>
+        <target>Kwota nie może być większa niż wartość transakcji</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="599f80d67185f2373b2bcb0cd5101e56">
+        <source>Transaction full refund</source>
+        <target>Pełny zwrot transakcji</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    Przelewy24 powered by Waynet
+ * @copyright Przelewy24
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+
+namespace Przelewy24\Api\Przelewy24\Request;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
+use Przelewy24\Api\Przelewy24\Dto\Body\Interfaces\PrzelewyBodyInterface;
+use Przelewy24\Api\Przelewy24\Dto\QueryParameters\TransactionBySessionQueryParameters;
+use Przelewy24\Api\Przelewy24\Request\Interfaces\PrzelewyRequestInterface;
+
+class TransactionBySessionRequest extends RequestAbstarct implements PrzelewyRequestInterface
+{
+    /**
+     * @var TransactionBySessionQueryParameters
+     */
+    private $transactionBySessionQueryParameters;
+
+    public function __construct(TransactionBySessionQueryParameters $transactionBySessionQueryParameters)
+    {
+        $this->transactionBySessionQueryParameters = $transactionBySessionQueryParameters;
+    }
+
+    public function getMethod(): string
+    {
+        return self::GET;
+    }
+
+    public function getUrl(): string
+    {
+        return 'transaction/by/sessionId/' . $this->transactionBySessionQueryParameters->buildQuery();
+    }
+
+    public function getHeaders(): array
+    {
+        return [];
+    }
+
+    public function getBody(): ?PrzelewyBodyInterface
+    {
+        return null;
+    }
+}

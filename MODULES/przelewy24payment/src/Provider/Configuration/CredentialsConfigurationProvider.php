@@ -1,0 +1,61 @@
+<?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    Przelewy24 powered by Waynet
+ * @copyright Przelewy24
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
+
+namespace Przelewy24\Provider\Configuration;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
+use Przelewy24\Helper\Style\StyleHelper;
+use Przelewy24\Model\Dto\CredentialsConfig;
+use Przelewy24\Model\Przlewy24AccountModel;
+use Przelewy24\Provider\Configuration\Interfaces\ConfigurationProviderInterface;
+
+class CredentialsConfigurationProvider extends AbstractConfigurationProvider implements ConfigurationProviderInterface
+{
+    protected function getType(): string
+    {
+        return 'credentials';
+    }
+
+    protected function getObject(): object
+    {
+        return new CredentialsConfig();
+    }
+
+    public function getConfiguration(Przlewy24AccountModel $model)
+    {
+        $config = $model->getCredentialsConfig();
+        $object = $this->getObject();
+        $object->setIdAccount($model->id);
+        if (!empty($config)) {
+            foreach ($config as $key => $value) {
+                $seter = StyleHelper::seterForUnderscoreField($key);
+                if (is_callable([$object, $seter])) {
+                    $object->{$seter}($value);
+                }
+            }
+        }
+        $object->setTestMode($model->test_mode);
+
+        return $object;
+    }
+}

@@ -1,0 +1,15 @@
+Stwórz dla firmy KEDAR-WIHA.pl https://kedar-wiha.pl/ cały gotowy dla klienta profesjonalny brandbook marki firmy opierając się na załączonych danych, zdjęciach i aktualnej strony internetowej: https://kedar-wiha.pl/ . Dobierz odpowiednią kolorystykę na podstawie loga i strony internetowej firmy i rozszerz to do pełnej palety kolorystycznej brandu firmy. Zaproponuj odpowiednie fonty o wyglądzie premium. Fetchuj aktualną stronę internetową po więcej danych. Zaplanuj i przygotuj cały profesjonalny Brandbook dla KEDAR-WIHA.pl. Przeczytaj załączony research i uwzględnij w tym mocne strony atuty firmy.
+Kolorystyka podstawowa sklepu KEDAR-WIHA.pl (do rozszerzenia do pełnej palety barw takie jak na strony internetowe):
+:root {
+ --color-theme-primary: #8B0000;
+ --color-theme-secondary: [dodaj jakiś spójny kolor];
+ --color-theme-three: #ca0000;
+ --color-heading-primary: [dodaj jakiś spójny kolor];
+ --swiper-theme-color: #8B0000;
+ --background-theme-color: #f1f1f1;
+ --background-theme-color-top-bar: #606060;
+ --primary-all-text-for-all-color-fonts: #151515;
+ --button-theme-color: #8B0000;
+ --button-theme-color-hover: #ca0000;
+}
+Fonty dobierz odpowiednie z Google Fonts - https://fonts.google.com/ . Brandbook stwórz w koncowym finalnym formacie .docx (Word) i Markdown .md .

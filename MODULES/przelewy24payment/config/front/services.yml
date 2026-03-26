@@ -1,0 +1,212 @@
+imports:
+  - { resource: ../services/common.yml }
+
+services:
+  _defaults:
+    public: true
+#    autoconfigure: true
+#    autowire: true
+
+  Przelewy24\Manager\PaymentOptions\PaymentOptionsManager:
+    class: Przelewy24\Manager\PaymentOptions\PaymentOptionsManager
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Factory\PaymentMethod\PaymentMethodCollectionFactory'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+      - '@Przelewy24\Helper\Image\ImageHelper'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Api\Przelewy24\Factory\ConnectionFactory'
+      - '@Przelewy24\Manager\PaymentOptions\Providers\MainPaymentOptionProvider'
+      - '@Przelewy24\Manager\PaymentOptions\Providers\SeparatedPaymentOptionsProvider'
+      - '@Przelewy24\Helper\Price\PriceHelper'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+
+  Przelewy24\Manager\PaymentOptions\Presenter\CardPaymentOptionPresenter:
+    class: Przelewy24\Manager\PaymentOptions\Presenter\CardPaymentOptionPresenter
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@Przelewy24\Helper\Image\ImageHelper'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Resolver\Cards\CardsLogoResolver'
+
+  Przelewy24\Manager\PaymentOptions\Presenter\GooglePayPaymentOptionPresenter:
+    class: Przelewy24\Manager\PaymentOptions\Presenter\GooglePayPaymentOptionPresenter
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@Przelewy24\Helper\Image\ImageHelper'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Resolver\Cards\CardsLogoResolver'
+
+  Przelewy24\Manager\PaymentOptions\Presenter\ApplePayPaymentOptionPresenter:
+    class: Przelewy24\Manager\PaymentOptions\Presenter\ApplePayPaymentOptionPresenter
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@Przelewy24\Helper\Image\ImageHelper'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Resolver\Cards\CardsLogoResolver'
+
+  Przelewy24\Manager\PaymentOptions\Presenter\Blik0PaymentOptionPresenter:
+    class: Przelewy24\Manager\PaymentOptions\Presenter\Blik0PaymentOptionPresenter
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@Przelewy24\Helper\Image\ImageHelper'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Resolver\Cards\CardsLogoResolver'
+
+
+  Przelewy24\Manager\PaymentOptions\Presenter\MainPaymentOptionPresenter:
+    class: Przelewy24\Manager\PaymentOptions\Presenter\MainPaymentOptionPresenter
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@Przelewy24\Helper\Image\ImageHelper'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Resolver\Cards\CardsLogoResolver'
+
+  Przelewy24\Manager\PaymentOptions\Presenter\PaymentOptionPresenter:
+    class: Przelewy24\Manager\PaymentOptions\Presenter\PaymentOptionPresenter
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Cookie\LastPaymentMethod\LastPaymentMethodCookie'
+      - '@Przelewy24\Helper\Image\ImageHelper'
+      - '@przelewy24.translator'
+      - '@Przelewy24\Resolver\Cards\CardsLogoResolver'
+
+  Przelewy24\Manager\PaymentOptions\Providers\SeparatedPaymentOptionsProvider:
+    class: Przelewy24\Manager\PaymentOptions\Providers\SeparatedPaymentOptionsProvider
+    arguments:
+      - '@Przelewy24\Manager\PaymentOptions\Presenter\ApplePayPaymentOptionPresenter'
+      - '@Przelewy24\Manager\PaymentOptions\Presenter\GooglePayPaymentOptionPresenter'
+      - '@Przelewy24\Manager\PaymentOptions\Presenter\CardPaymentOptionPresenter'
+      - '@Przelewy24\Manager\PaymentOptions\Presenter\Blik0PaymentOptionPresenter'
+      - '@Przelewy24\Manager\PaymentOptions\Presenter\PaymentOptionPresenter'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+
+  Przelewy24\Manager\PaymentOptions\Providers\MainPaymentOptionProvider:
+    class: Przelewy24\Manager\PaymentOptions\Providers\MainPaymentOptionProvider
+    arguments:
+      - '@Przelewy24\Manager\PaymentOptions\Presenter\MainPaymentOptionPresenter'
+
+  Przelewy24\Hook\PaymentOptions:
+    class: Przelewy24\Hook\PaymentOptions
+    tags: [ przelewy24.hook ]
+    arguments:
+      - '@Przelewy24\Manager\PaymentOptions\PaymentOptionsManager'
+      - '@przelewy24.context'
+
+  Przelewy24/Hook/ActionFrontControllerSetMedia:
+    class: Przelewy24\Hook\ActionFrontControllerSetMedia
+    tags: [ przelewy24.hook ]
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Resolver\Media\ControllerSetMediaResolver'
+
+
+  Przelewy24/Hook/ActionFrontControllerInitAfter:
+    class: Przelewy24\Hook\ActionFrontControllerInitAfter
+    tags: [ przelewy24.hook ]
+    arguments:
+      - '@przelewy24.context'
+
+  Przelewy24/Hook/ActionFrontControllerAfterInit:
+    class: Przelewy24\Hook\ActionFrontControllerAfterInit
+    tags: [ przelewy24.hook ]
+    arguments:
+      - '@przelewy24.context'
+
+  Przelewy24\Resolver\Media\Driver\AccountSetMediaDriver:
+    class: Przelewy24\Resolver\Media\Driver\AccountSetMediaDriver
+    tags: [ przelewy24.media.resolver ]
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+
+  Przelewy24\Resolver\Media\Driver\CardsSetMediaDriver:
+    class: Przelewy24\Resolver\Media\Driver\CardsSetMediaDriver
+    tags: [ przelewy24.media.resolver ]
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+
+
+  Przelewy24\Resolver\Media\Driver\ConfirmationSetMediaDriver:
+    class: Przelewy24\Resolver\Media\Driver\ConfirmationSetMediaDriver
+    tags: [ przelewy24.media.resolver ]
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+
+  Przelewy24\Resolver\Media\Driver\OrderSetMediaDriver:
+    class: Przelewy24\Resolver\Media\Driver\OrderSetMediaDriver
+    tags: [ przelewy24.media.resolver ]
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+
+  Przelewy24\Resolver\Media\Driver\SupercheckoutSetMediaDriver:
+    class: Przelewy24\Resolver\Media\Driver\SupercheckoutSetMediaDriver
+    tags: [ przelewy24.media.resolver ]
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+
+  Przelewy24\Resolver\Media\Driver\EtsonepagecheckoutSetMediaDriver:
+    class: Przelewy24\Resolver\Media\Driver\EtsonepagecheckoutSetMediaDriver
+    tags: [ przelewy24.media.resolver ]
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+
+  Przelewy24\Resolver\Media\Driver\CartSetMediaDriver:
+    class: Przelewy24\Resolver\Media\Driver\CartSetMediaDriver
+    tags: [ przelewy24.media.resolver ]
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+
+  Przelewy24\Resolver\Media\Driver\ProductSetMediaDriver:
+    class: Przelewy24\Resolver\Media\Driver\ProductSetMediaDriver
+    tags: [ przelewy24.media.resolver ]
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+
+  Przelewy24\Resolver\Media\Driver\RepaymentSetMediaDriver:
+    class: Przelewy24\Resolver\Media\Driver\RepaymentSetMediaDriver
+    tags: [ przelewy24.media.resolver ]
+    arguments:
+      - '@przelewy24.context'
+      - '@przelewy24.module'
+      - '@Przelewy24\Helper\Url\UrlHelper'
+      - '@Przelewy24\Calculator\AmountExtraChargeCalculator'
+
+  Przelewy24\Factory\Javascript\ConfigurationFactory:
+    class: Przelewy24\Factory\Javascript\ConfigurationFactory
+    arguments:
+      - '@przelewy24.context'
+      - '@Przelewy24\Provider\Configuration\CredentialsConfigurationProvider'
+
+  Przelewy24\Resolver\Media\ControllerSetMediaResolver:
+    class: Przelewy24\Resolver\Media\ControllerSetMediaResolver
+    arguments:
+      - '@Przelewy24\Factory\Javascript\ConfigurationFactory'
+      - '@przelewy24.context'
+      - '@Przelewy24\Model\Dto\Przelewy24Config'
+      - !tagged przelewy24.media.resolver

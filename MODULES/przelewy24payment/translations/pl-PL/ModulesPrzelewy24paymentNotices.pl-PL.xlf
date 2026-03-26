@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="8be8904b71a2581666936243b71b1667">
+        <source>Error while loading service.</source>
+        <target>Błąd podczas ładowania usługi.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2a770142445bb4a03942b38a3c0cf76c">
+        <source>Please select a card.</source>
+        <target>Proszę wybrać kartę.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3cea7fe6fcbdb211c38dabd2b3f1871d">
+        <source>Error while preparing data from tokenizer.</source>
+        <target>Błąd podczas przygotowywania danych z tokenizera.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8c3249cd269e64fc38e8516c7fd6875d">
+        <source>Error while processing transaction.</source>
+        <target>Błąd podczas przetwarzania transakcji.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="89ade25479e3a7535eac58839a804ca7">
+        <source>Google Pay is not available.</source>
+        <target>Google Pay jest niedostępne.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="65abe62067be5e56d1e87349564f3dcc">
+        <source>Apple Pay is not available.</source>
+        <target>Apple Pay jest niedostępne.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a9455635a0aaf755431857b2432dbee2">
+        <source>We were unable to confirm your payment. Please try again or choose another payment method.</source>
+        <target>Nie udało się potwierdzić płatności. Spróbuj ponownie lub wybierz inny sposób płatnośc</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ffbee4461b63fb132f06d6962222c5e0">
+        <source>Please complete your address information before proceeding with payment.</source>
+        <target>Uzupełnij dane adresowe przed dokonaniem płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="cc12f816537976e59a46ccb90701f9f1">
+        <source>Please log in before proceeding with payment.</source>
+        <target>Zaloguj się przed dokonaniem płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

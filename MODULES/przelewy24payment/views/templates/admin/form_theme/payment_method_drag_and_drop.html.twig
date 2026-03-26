@@ -1,0 +1,89 @@
+{#**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    Przelewy24 powered by Waynet
+ * @copyright Przelewy24
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ *#}
+{% use '@PrestaShop/Admin/TwigTemplateForm/bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block form_row_class %}{{ parent() }} {{ form.vars.name }} d-none{% endblock form_row_class %}
+
+{% block payment_method_drag_and_drop_widget %}
+    <input
+        type="hidden"
+        class="form-control"
+        id="{{ form.vars.id }}"
+        name="{{ form.vars.full_name }}"
+        value="{{ form.vars.value }}"
+    >
+
+    {% set formNameMapper = {
+        'payment_method_in_main_list': 'paymentMethodInMainList',
+        'payment_method_separate_list': 'paymentMethodSeparateList',
+        'payment_method_name_list': 'paymentMethodNameList',
+    } %}
+
+    {% set collectionName = form.vars.name %}
+    {% set allPaymentsMethodsListName = 'payment_method_name_list' %}
+
+    {% set paymentMethodSelectedList = attribute(form.parent.vars.value, attribute(formNameMapper, collectionName)) %}
+    {% set paymentMethodAllList = attribute(form.parent.vars.value, attribute(formNameMapper, allPaymentsMethodsListName)) %}
+    {% set paymentMethodAllList = paymentMethodAllList.diffCollection(paymentMethodSelectedList) %}
+
+    {% if paymentMethodAllList.count() > 0 %}
+        <div class="przelewy24-payments">
+            <p class="przelewy24-payments__title mb-1">
+
+                {{ 'Selected payment methods'|trans({}, 'Modules.Przelewy24payment.Config') }}
+            </p>
+            <div class="przelewy24-payments__wrapper pb-1 mb-4">
+                <div
+                    class="przelewy24-payments__list js-przelewy24-payment-collection"
+                    data-group="{{ form.vars.id }}"
+                    data-list-type="selected"
+                >
+                    {% for paymentMethod in paymentMethodSelectedList %}
+                        {% include '@Modules/przelewy24payment/views/templates/admin/form_theme/_partials/payment_method.html.twig' with {
+                            paymentMethod: paymentMethod
+                        } %}
+                    {% endfor %}
+                </div>
+                <p class="przelewy24-payments__info text-center mb-0">
+                    {{ 'Drag and drop the payment methods to change their order'|trans({}, 'Modules.Przelewy24payment.Config') }}
+                </p>
+            </div>
+        </div>
+        <div class="przelewy24-payments">
+            <p class="przelewy24-payments__title mb-1">
+                {{ 'All payment methods'|trans({}, 'Modules.Przelewy24payment.Config') }}
+            </p>
+            <div class="przelewy24-payments__wrapper mb-4">
+                <div
+                    class="przelewy24-payments__list js-przelewy24-payment-collection"
+                    data-group="{{ form.vars.id }}"
+                    data-list-type="all"
+                >
+                    {% for paymentMethod in paymentMethodAllList %}
+                        {% include '@Modules/przelewy24payment/views/templates/admin/form_theme/_partials/payment_method.html.twig' with {
+                            paymentMethod: paymentMethod
+                        } %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock payment_method_drag_and_drop_widget %}
+
+

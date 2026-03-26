@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="OBJECTS" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #8b0000;
+      }
+
+      .cls-2, .cls-3 {
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+      }
+
+      .cls-4 {
+        font-family: Poppins-Black, Poppins;
+        font-weight: 800;
+      }
+
+      .cls-5 {
+        font-size: 25.38px;
+      }
+
+      .cls-5, .cls-3 {
+        fill: #3a372e;
+      }
+
+      .cls-3 {
+        font-size: 8.07px;
+        letter-spacing: .45em;
+      }
+    </style>
+  </defs>
+  <g>
+    <text class="cls-3" transform="translate(176.97 448.18)"><tspan x="0" y="0">narzędzia specjalistyczne</tspan></text>
+    <text class="cls-5" transform="translate(177.26 434.51)"><tspan class="cls-4" x="0" y="0">KEDAR-</tspan><tspan class="cls-2" x="103.36" y="0">WIHA.pl</tspan></text>
+  </g>
+  <path class="cls-1" d="M145.83,401.03c-15.88,0-28.75,12.87-28.75,28.75s12.87,28.75,28.75,28.75,28.75-12.87,28.75-28.75-12.87-28.75-28.75-28.75ZM139.33,414.36h13.88l-10.13,16.52h-13.88l10.13-16.52ZM136.25,448.18l13.22-21.81h13.88l-27.1,21.81Z"/>
+</svg>

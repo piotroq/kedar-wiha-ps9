@@ -1,0 +1,93 @@
+{% use '@PrestaShop/Admin/TwigTemplateForm/bootstrap_4_horizontal_layout.html.twig' %}
+
+{%- block form_widget -%}
+    {% if compound %}
+        {{- block('form_widget_compound') -}}
+    {% else %}
+        {{- block('form_widget_simple') -}}
+    {% endif %}
+{%- endblock form_widget -%}
+
+{% block form_label -%}
+    {% if label is same as(false) %}
+        <div class="{{ block('form_label_class') }}"></div>
+    {% else %}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif %}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif %}
+
+        {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' control-label ' ~ block('form_label_class'))|trim}) %}
+
+        {% set has_popover = label_attr['popover'] is defined %}
+        {% set popover_content = has_popover ? label_attr['popover'] : '' %}
+        {% set popover_placement = label_attr['popover_placement'] is defined ? label_attr['popover_placement'] : 'top' %}
+
+        {% set has_tooltip = label_attr['tooltip'] is defined %}
+        {% set tooltip_content = has_tooltip ? label_attr['tooltip'] : '' %}
+        {% set tooltip_placement = label_attr['tooltip_placement'] is defined ? label_attr['tooltip_placement'] : 'top' %}
+
+        {% set clean_label_attr = {} %}
+        {% for attrname, attrvalue in label_attr %}
+            {% if attrname != 'popover' and attrname != 'popover_placement' and attrname != 'tooltip' and attrname != 'tooltip_placement' %}
+                {% set clean_label_attr = clean_label_attr|merge({ (attrname): attrvalue }) %}
+            {% endif %}
+        {% endfor %}
+
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+
+        <label{% for attrname, attrvalue in clean_label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        {{ translation_domain is same as(false) ? label|raw : label|raw }}
+
+        {% if has_tooltip %}
+            <i class="icon-question" data-toggle="pstooltip" data-placement="{{ tooltip_placement }}"
+               title="{{ tooltip_content }}"></i>
+        {% endif %}
+
+        {% if has_popover %}
+            <span class="help-box" data-toggle="popover" data-placement="{{ popover_placement }}"
+                  data-content="{{ popover_content }}"></span>
+        {% endif %}
+
+
+        </label>
+    {% endif %}
+{%- endblock form_label -%}
+
+
+{% block form_row %}
+    {% if block('form_help') is not defined %}
+    <div class="{{ block('form_row_class')|default('form-group row') }} {% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{ form_label(form) }}
+        <div class="{{ block('form_group_class')|default('col-sm') }}">
+            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+            {% if help %}
+                <small class="form-text">{{ help|raw }}</small>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock form_row %}
+
+{%- block integer_widget -%}
+    {%- set type = type|default('number') -%}
+    <div class="input-group">
+        {{- block('form_unit_prepend') -}}
+        {{- block('form_widget_simple') -}}
+        {{- block('form_unit') -}}
+    </div>
+{%- endblock integer_widget -%}

@@ -1,0 +1,110 @@
+{# **
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    Przelewy24 powered by Waynet
+ * @copyright Przelewy24
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ * #}
+<div class="panel card">
+    <div class="panel-heading card-header">
+        <i class="icon-money"></i>
+        {{ 'Przelewy24 - Transaction history'|trans({}, 'Modules.Przelewy24payment.Order') }}
+    </div>
+    <div class="panel-body {% if is_177 %}card-body{% endif %}">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>{{ 'Date'|trans({}, 'Modules.Przelewy24payment.Order') }}</th>
+                    <th class="text-center">{{ 'Received'|trans({}, 'Modules.Przelewy24payment.Order') }}</th>
+                    <th></th>
+                    <th class="text-right">{{ 'Amount'|trans({}, 'Modules.Przelewy24payment.Order') }}</th>
+                <tr>
+                </thead>
+                <tbody>
+                {% for transactionHistory in transactionHistoryCollection.collection %}
+                    <tr>
+                        <td class="padding-y-lg">{{ transactionHistory.dateAdd }}</td>
+                        <td class="padding-y-lg text-center">
+                            {% if transactionHistory.received %}
+                                <span class="badge badge-success">{{ transactionHistory.received }}</span>
+                            {% else %}
+                                <span class="badge badge-info">
+                                    {{ 'No'|trans({}, 'Modules.Przelewy24payment.Order') }}
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td class="padding-y-lg">
+                            {% if transactionHistory.link %}
+                                <a
+                                    href="{{ transactionHistory.link }}"
+                                    target="_blank"
+                                    class="d-block"
+                                >
+                                    {{ 'Check transactions status'|trans({}, 'Modules.Przelewy24payment.Order') }}
+                                </a>
+                            {% endif %}
+                        </td>
+                        <td class="padding-y-lg text-right">
+                            <span class="badge badge-success">
+                                {{ transactionHistory.payedAmount }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% if transactionHistory.refunds.collection %}
+
+                        {% for refund in transactionHistory.refunds.collection %}
+                            <tr>
+                                <td colspan="text-right padding-y-lg">
+                                    {{ refund.refundDate }}
+                                    ({{ 'Return created'|trans({}, 'Modules.Przelewy24payment.Order') }})
+                                </td>
+                                <td class="padding-y-lg text-center">
+                                    {% if refund.received %}
+                                        <span class="badge badge-success">{{ refund.received }}</span>
+                                    {% else %}
+                                        <span class="badge badge-info">
+                                            {{ 'refund not recieved' |trans({}, 'Modules.Przelewy24payment.Order') }}
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                <td colspan="text-right padding-y-lg">
+                                    {{ 'Reference'|trans({}, 'Modules.Przelewy24payment.Order') }}: {{ refund.reference }}
+                                </td>
+                                <td class="padding-y-lg text-right">
+                                    ({{ 'Returned amount'|trans({}, 'Modules.Przelewy24payment.Order') }})
+                                    <span class="badge badge-danger">
+                                        {{ refund.refundAmount }}
+                                    </span>&nbsp;
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if repayLink %}
+                <div class="padding-y-lg text-right">
+                    <a
+                        data-repayment-link="{{ repayLink }}"
+                        data-success-message="{{ 'Repayment link copied to clipboard'|trans({}, 'Modules.Przelewy24payment.Order') }}"
+                        class="btn btn-primary js-przelewy24-repayment-link"
+                    >
+                        {{ 'Copy repayment link'|trans({}, 'Modules.Przelewy24payment.Order') }}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+services:
+  _defaults:
+    public: true
+
+  prestashop.module.dpdshipping.form.type.dpdshipping_connection:
+    class: 'DpdShipping\Form\Configuration\Connection\DpdShippingConnectionType'
+    parent: 'form.type.translatable.aware'
+    public: true
+    tags:
+      - { name: form.type }
+
+  prestashop.module.dpdshipping.form.dpdshipping_connection_form_data_provider:
+    class: 'DpdShipping\Form\Configuration\Connection\DpdShippingConnectionFormDataProvider'
+    arguments:
+      - '@prestashop.core.query_bus'
+      - '@prestashop.core.command_bus'
+
+  prestashop.module.dpdshipping.form.dpdshipping_connection_form_data_handler:
+    class: 'PrestaShop\PrestaShop\Core\Form\Handler'
+    arguments:
+      - '@form.factory'
+      - '@prestashop.core.hook.dispatcher'
+      - '@prestashop.module.dpdshipping.form.dpdshipping_connection_form_data_provider'
+      - 'DpdShipping\Form\Configuration\Connection\DpdShippingConnectionType'
+      - 'DpdShippingConnection'
+
+  dpdshipping.grid.definition.factory.configuration.connection:
+    class: 'DpdShipping\Grid\Configuration\Connection\Definition\Factory\ConnectionGridDefinitionFactory'
+    parent: 'prestashop.core.grid.definition.factory.abstract_grid_definition'
+    public: false
+
+  dpdshipping.grid.query_builder.configuration.connection:
+    class: 'DpdShipping\Grid\Configuration\Connection\Query\ConnectionQueryBuilder'
+    parent: 'prestashop.core.grid.abstract_query_builder'
+    public: true
+    arguments:
+      - '@prestashop.core.query.doctrine_search_criteria_applicator'
+      - "@=service('prestashop.adapter.legacy.context').getContext().language.id"
+      - "@=service('prestashop.adapter.legacy.context').getContext().shop.id"
+      - "@=service('prestashop.adapter.legacy.context').getContext().shop.id_shop_group"
+      - "@=service('prestashop.adapter.legacy.context').getContext().shop.getGroup().share_stock"
+      - '@prestashop.core.grid.query.filter.doctrine_filter_applicator'
+
+  dpdshipping.grid.data_provider.configuration.connection:
+    class: '%prestashop.core.grid.data.factory.doctrine_grid_data_factory%'
+    arguments:
+      - '@dpdshipping.grid.query_builder.configuration.connection'
+      - '@prestashop.core.hook.dispatcher'
+      - '@prestashop.core.grid.query.doctrine_query_parser'
+      - 'dpdshipping_sender_connection'
+
+  dpdshipping.grid.factory.configuration.connection:
+    class: 'PrestaShop\PrestaShop\Core\Grid\GridFactory'
+    public: true
+    arguments:
+      - '@dpdshipping.grid.definition.factory.configuration.connection'
+      - '@dpdshipping.grid.data_provider.configuration.connection'
+      - '@prestashop.core.grid.filter.form_factory'
+      - '@prestashop.core.hook.dispatcher'
+
+
+  prestashop.module.dpdshipping.domain.configuration.query_handler.get_connection:
+    class: 'DpdShipping\Domain\Configuration\Connection\Query\GetConnectionHandler'
+    arguments:
+      - '@prestashop.module.dpdshipping.repository.dpdshipping.connection.repository'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Configuration\Connection\Query\GetConnection', method: 'handle'  }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Configuration\Connection\Query\GetConnection' }
+
+  prestashop.module.dpdshipping.domain.configuration.query_handler.get_connection_list:
+    class: 'DpdShipping\Domain\Configuration\Connection\Query\GetConnectionListHandler'
+    arguments:
+      - '@prestashop.module.dpdshipping.repository.dpdshipping.connection.repository'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Configuration\Connection\Query\GetConnectionList', method: 'handle'  }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Configuration\Connection\Query\GetConnectionList' }
+
+  prestashop.module.dpdshipping.domain.configuration.command_handler.save_connection:
+    class: 'DpdShipping\Domain\Configuration\Connection\Command\SaveConnectionHandler'
+    arguments:
+      - '@prestashop.module.dpdshipping.repository.dpdshipping.connection.repository'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Configuration\Connection\Command\SaveConnectionCommand', method: 'handle'  }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Configuration\Connection\Command\SaveConnectionCommand' }
+
+  prestashop.module.dpdshipping.domain.configuration.command_handler.delete_connection:
+    class: 'DpdShipping\Domain\Configuration\Connection\Command\DeleteConnectionHandler'
+    arguments:
+      - '@prestashop.module.dpdshipping.repository.dpdshipping.connection.repository'
+    tags:
+      - { name: 'messenger.message_handler', handles: 'DpdShipping\Domain\Configuration\Connection\Command\DeleteConnectionCommand', method: 'handle'  }
+      - { name: 'tactician.handler', command: 'DpdShipping\Domain\Configuration\Connection\Command\DeleteConnectionCommand' }

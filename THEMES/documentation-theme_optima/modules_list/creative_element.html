@@ -1,0 +1,418 @@
+<!doctype html>  
+<!--[if IE 6 ]><html lang="en-us" class="ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="en-us" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en-us" class="ie8"> <![endif]-->
+<!--[if (gt IE 7)|!(IE)]><!-->
+<html lang="en-us"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	
+	<title>Creative Elements page builder & Pos Elements module</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="assets/images/favicon.ico.png" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="assets/css/documenter_style.css" media="all">
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+	
+	<script src="assets/js/jquery.js"></script>
+	
+	<script src="assets/js/jquery.malihu.PageScroll2id.min.js"></script>
+	<script src="assets/js/jquery.easing.js"></script>
+	
+	<script>document.createElement('section');var duration='500',easing='swing';</script>
+	<script src="assets/js/backtotop.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+		
+		
+		$('#documenter_sidebar #documenter_nav li a').on('click', function(){
+			if($(this).hasClass('open_menu')) {
+				$(this).parent().siblings().find('a').removeClass( 'open_menu' );   
+				$(this).removeClass( 'open_menu' );  
+				$(this).next('#documenter_sidebar #documenter_nav ul').slideUp();
+				$(this).parent().siblings().find('ul').slideUp();
+			}
+			else {	
+				$(this).parent().siblings().find('a').removeClass( 'open_menu' );  
+				$(this).parent().siblings().find('ul').slideUp();
+				$(this).addClass( 'open_menu' );   
+				$(this).next('#documenter_sidebar #documenter_nav ul').slideDown();
+		
+			}
+			
+		});
+		(function(){
+			$(window).ready(function () {
+				
+				/ Page Scroll to id fn call /
+				$("#documenter_nav li a ").mPageScroll2id({
+					highlightSelector:"#documenter_nav li a ",
+					
+					//offset:100,
+				});
+			});
+		})(jQuery); 
+	});
+	</script>
+	<style>
+		html{background-color:#EEEEEE;color:#383838;}
+		::-moz-selection{background:#333636;color:#989898;}
+		::selection{background:#333636;color:#e53131;}
+		a{color:#e53131;}
+		.btn {
+			border-radius:3px;
+		}
+		.btn-primary {
+			  background-image: -moz-linear-gradient(top, #e53131, #006673);
+			  background-image: -ms-linear-gradient(top, #e53131, #006673);
+			  background-image: -webkit-gradient(linear, 0 0, 0 #fe5b5a), from(#EEE), to(#006673);
+			  background-image: -webkit-linear-gradient(top, #e53131, #006673);
+			  background-image: -o-linear-gradient(top, #e53131, #006673);
+			  background-image: linear-gradient(to top, #e53131, #006673);
+			  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e53131', endColorstr='#006673', GradientType=0);
+			  border-color: #006673 #006673 #bfbfbf;
+			  color:#FFFFFF;
+		}
+		.btn-primary:hover,
+		.btn-primary:active,
+		.btn-primary.active,
+		.btn-primary.disabled,
+		.btn-primary[disabled] {
+		  border-color: #e53131 #e53131 #bfbfbf;
+		  background-color: #006673;
+		}
+		hr{border-top:1px solid #D4D4D4;border-bottom:1px solid #FFFFFF;}
+		#documenter_sidebar, #documenter_sidebar ul a{background-color:#EEE;color:#333;}
+		#documenter_sidebar ul{border-top:1px solid #CFCFCF;}
+		#documenter_sidebar ul a{border-top:1px solid #CFCFCF;}
+		#documenter_sidebar ul a:hover{color:#e53131;}
+		#documenter_sidebar ul a.open_menu,#documenter_sidebar ul a.mPS2id-highlight{color:#e53131;}
+		#documenter_copyright{display:block !important;visibility:visible !important;}
+	</style>
+	
+</head>
+<body class="documenter-project">
+	<div class="container-fluid clearfix">
+		<div id="documenter_sidebar">
+			<a href="http://posthemes.com/" id="documenter_logo">
+				<img class="img-responsive" style="margin: 0 auto;" src="assets/images/logo.png" alt="logo"/>
+			</a>
+			<ul id="documenter_nav">
+				<li><a href="#documenter_cover"><span class="icon fa fa-home"></span> Start</a></li>
+				<li><a href="#config" title="Configure Creative Elements module"><span class="icon fa fa-globe"></span> Creative Elements Content Anywhere<b class="caret"></b></a>
+					<ul class='menu-1'>
+						<li class='sub-1'><a href='#config'>Place Content Anywhere</a></li>
+						<li class='sub-1'><a href='#pages_elememt'>Pages</a></li>
+						<li class='sub-1'><a href='#products_element'>Products</a></li>
+						<li class='sub-1'><a href='#categories_element'>Categories</a></li>
+						<li class='sub-1'><a href='#brands_element'>Brands</a></li>
+						<li class='sub-1'><a href='#suppliers_element'>Suppliers</a></li>
+					</ul>
+				</li>
+				<li><a href="#settings_element" title="Configure Creative Elements module"><span class="icon fa fa-cogs"></span> Creative Elements Settings </a>
+				</li>
+				<li><a href="#menu_panel_element" title="Configure Creative Elements module"><span class="icon fa fa-cogs"></span> Menu Panel of Creative Elements </a>
+				</li>
+				<li><a href="#widgets_element" title="Widgets"><span class="icon fa fa-anchor"></span>Creative Elements Widgets</b></a> 
+
+				</li>
+				<li><a href="#support" title="support"><span class="icon fa fa-bell"></span> Posthemes Support</a></li>
+			</ul>
+			<div id="documenter_copyright">Copyright ©<a href="http://posthemes.com/">Posthemes</a>.<br>All rights reserved.
+			</div>
+		</div>
+		<div id="documenter_content">
+		<!-- Start -->
+		<section id="documenter_cover">
+		<h1>Creative Elements page builder</h1>
+		<hr>
+		<p><i><strong>Creative Elements - Elementor based PageBuilder module </strong> is a visual page builder module for PrestaShop enabling the creation of web pages in a live, visual way. Please follow instruction at <a href ="http://docs.webshopworks.com/creative-elements" rel="nofollow" target="_blank" > Creative Elements</a> to install and understand basic functions, widgets of this module. 
+		 </i></p>
+		<br>
+		<p>And here you can find out more about theme updates, new features and about our upcoming themes:</p>
+		<p>-	Follow us on <a href="https://www.facebook.com/posthemes"><b> Facebook </b></a></p>
+		<p>- 	Follow us on <a href="https://twitter.com/posthemes"><b> Twitter </b></a></p>
+		<p>-	Follow us on <a href="http://posthemes.com/"><b> Posthemes </b></a></p>
+		<br>
+		<p><i><b>PosThemes,</b></i></p>
+		
+		<p>- Complete guide how to build a page with Creative Elements from scratch: 
+		<a href="https://www.youtube.com/v/Jb12NUgdmko" rel="nofollow" target="_blank">Build a PrestaShop homepage with Creative Elements - Elementor based page builder [Tutorial]
+ </a></p>
+		<p><embed allowscriptaccess="never" src="http://www.youtube.com/v/Jb12NUgdmko" type="application/x-shockwave-flash" height="480" width="853"></p>
+		<p> - Please read <a href ="http://docs.webshopworks.com/creative-elements/" rel="nofollow" target="_blank"> Creative Elements document </a></strong> to understand more about Creative Elements. </p>
+		
+		</section>
+		<!-- End Start -->
+		
+		<!-- Configure Creative Elements -->
+		<section id="config">
+		<div class="page-header"><h2>Creative Elements Content Anywhere</h2></div>
+
+		<div class="page-header"><h3> Place Content Anywhere </h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>IMPROVE > Creative Elements > Content Anywhere</strong></p>
+				<p><img src="assets/images/creative_elements1.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>We got:</p>
+				<p><img src="assets/images/content_anywhere.jpg"  alt="content_anywhere2" /></p>
+				<p>We got:</p>
+				<ul>
+					<li>Click <strong> Add New </strong> button to add new content</li>
+					<li>Click<strong> Edit </strong> at content you want to edit</li>
+				</ul>
+			</li>
+		</ol>
+		<p>* <strong>Add new content anywhere</strong>: </p>
+		<ul>
+					<li> Click <strong> Add New </strong> button
+						<p><img src="assets/images/content_anywhere1.jpg"  alt="content_anywhere2" /></p>
+					</li>
+					<li><p> We got: </p>
+						<p><img src="assets/images/content_anywhere2.jpg"  alt="content_anywhere2" /></p>
+						<ul>
+							<li><p><strong> Title </strong>: Title of this content</p></li>
+							<li><p><strong> Position </strong>: Select position for this content show</p></li>
+							<li><p><strong> Content </strong>: Click <strong> Edit with Creative Elements </strong> to create content</p></li>
+							<li><p><strong> Displayed </strong>: Choose <strong> Enabled </strong> if you want to display this content</p></li>
+						</ul>
+					</li>
+					<li><p>Click<strong> Save and stay </strong> or <strong> Save </strong> button to save your content.</p></li>
+				</ul>
+		<p>* <strong> Edit content anywhere</strong>: </p>
+		<ul>
+					<li> Click <strong> Edit </strong> button at content you want to edit:
+						<p><img src="assets/images/content_anywhere3.jpg"  alt="content_anywhere2" /></p>
+					</li>
+					<li><p> We got: </p>
+						<p><img src="assets/images/content_anywhere4.jpg"  alt="content_anywhere2" /></p>
+						<ul>
+							<li><p><strong> Title </strong>: Title of this content</p></li>
+							<li><p><strong> Position </strong>: Select position for this content show</p></li>
+							<li><p><strong> Content </strong>: Click <strong> Edit with Creative Elements </strong> to edit content</p></li>
+							<li><p><strong> Displayed </strong>: Choose <strong> Enabled </strong> if you want to display this content</p></li>
+						</ul>
+					</li>
+					<li><p>Click<strong> Save and stay </strong> or <strong> Save </strong> button to save your changes.</p></li>
+				</ul>		
+		</section>
+		
+		<section id="pages_elememt">
+		<div class="page-header"><h3> Pages </h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>IMPROVE > Design</strong> > <strong>Pages</strong></p>
+				<p><img src="assets/images/creative_elements2.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>We got: </p>
+				<p><img src="assets/images/pages_anywhere1.jpg"  alt="pages_anywhere1" /></p>
+				<ul>
+					<li><p>In <strong> Pages in category "Home" </strong>: Click <strong> Edit </strong> button at each page to edit content, title, friend url, define whether display that page or not,...</p>
+					</li>
+					<li><p>At <strong> Page content </strong> of each page: Click <strong> Edit with Creative Elements </strong> to edit content of each page.</p>
+					</li>
+					<li>Click <strong>Save and preview </strong>or <strong>Save</strong> button when you finish changes.</li>
+				</ul>
+			</li>
+			
+		</ol>
+		</section>
+		<section id="products_element">
+		<div class="page-header"><h3> Products </h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>SELL > Catalog > Products</strong></p>
+				<p><img src="assets/images/creative_elements3.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>We got: </p>
+				<p><img src="assets/images/products_element.jpg"  alt="products_element" /></p>
+				<ul>
+					<li><p> At <strong> Actions</strong>: Click <strong> Edit </strong> button at the categories you want to edit .</p>
+					</li>
+					<li><p>Choose <strong> Basic settings </strong> : At <strong> Description </strong> and <strong>DisplayFooterProduct</strong>: Click <strong> Edit with Creative Elements </strong> to edit description.</p>
+					
+						<p><img src="assets/images/products_element2.jpg"  alt="products_element" /></p>
+					</li>
+					<li>Click <strong>Save</strong> button when you finish changes.</li>
+				</ul>
+			</li>
+			
+		</ol>
+		</section>
+		
+		<section id="categories_element">
+		<div class="page-header"><h3> Categories </h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>SELL > Catalog > Categories</strong></p>
+				<p><img src="assets/images/creative_elements4.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>We got:</p>
+				<p><img src="assets/images/categories_element.jpg"  alt="categories_element" /></p>
+				<ul>
+					<li><p> At <strong> Actions</strong>: Click <strong> Edit </strong> button at the categories you want to edit .</p>
+					</li>
+					<li><p>At <strong> Description </strong> :  Click <strong> Edit with Creative Elements </strong> to edit description.</p>
+						<p><img src="assets/images/categories_element2.jpg"  alt="categories_element" /></p>
+					</li>
+					<li>Click <strong>Save</strong> button when you finish changes.</li>
+				</ul>
+			</li>
+			
+		</ol>
+		</section>
+		
+		<section id="brands_element">
+		<div class="page-header"><h3> Brands </h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>SELL > Catalog > Brand & Suppliers</strong></p>
+				<p><img src="assets/images/creative_elements5.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>Brands</strong> tab</p>
+				<p><img src="assets/images/brands_element.jpg"  alt="brands_element" /></p>
+				<p>We got:</p>
+				<ul>
+					<li><p> At <strong> Actions</strong>: Click <strong> Edit </strong> button at the brand you want to edit .</p>
+					</li>
+					<li><p>At <strong> Description </strong> :  Click <strong> Edit with Creative Elements </strong> to edit description.</p>
+						<p><img src="assets/images/brands_element2.jpg"  alt="brands_element2" /></p>
+					</li>
+					<li>Click <strong>Save</strong> button when you finish changes.</li>
+				</ul>
+			</li>
+		</ol>
+		</section>
+		
+		<section id="suppliers_element">
+		<div class="page-header"><h3> Suppliers </h3></div>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>SELL > Catalog > Brand & Suppliers</strong></p>
+				<p><img src="assets/images/creative_elements5.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>In <strong>Suppliers</strong> tab</p>
+				<p><img src="assets/images/suppliers_element.jpg"  alt="suppliers_element" /></p>
+				<p>We got:</p>
+				<ul>
+					<li><p> At <strong> Actions</strong>: Click <strong> Edit </strong> button at the brand you want to edit .</p>
+					</li>
+					<li><p>At <strong> Description </strong> :  Click <strong> Edit with Creative Elements </strong> to edit description.</p>
+						<p><img src="assets/images/suppliers_element2.jpg"  alt="suppliers_element2" /></p>
+					</li>
+					<li>Click <strong>Save</strong> button when you finish changes.</li>
+				</ul>
+			</li>
+		</ol>
+		</section>
+		
+		<section id="settings_element">
+		<div class="page-header"><h2>Creative Elements Settings</h2></div>
+		<p><i>This allows you to config Creative Elements.</i></p>
+		<ol>
+			<li>Login your Prestashop admin</li>
+			<li>
+				<p>Go to <strong>IMPROVE</strong> > <strong>Creative Elements</strong> > <strong>Settings</strong></p>
+				<p><img src="assets/images/settings_element1.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p>We got </p>
+				<p><img src="assets/images/settings_element2.jpg" alt="" /></p>
+			</li>
+			<li>Click <strong>Save</strong> button when you finish your changes.</li>
+		</ol>
+		</section>
+	
+	<section id="menu_panel_element">
+		<div class="page-header"><h2>Menu Panel of Creative Elements</h2></div>
+		<p><i>From here, users can navigate to the other panels.</i></p>
+		<p>- Click the hamburger menu in the upper left corner of the Widget Panel to back Menu Panel</p> 
+		<p><img src="assets/images/menu_panel_element.jpg" alt="" /></p>
+		<ol>
+			<li><p><strong>Global Colors</strong> : Set predefined global colors (Primary, Secondary, Text, and Accent colors).</p></li>
+				<p><img src="assets/images/global_colors_element.jpg" alt="" /></p>
+			<li>
+				<p><strong>Global Fonts</strong>: Set and edit 4 predefined global typography styles (Primary, Secondary, Body, and Accent).</p>
+				<p><img src="assets/images/global_fonts_element.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p><strong>Color Picker</strong>: Choose which colors appear in the editor's color picker. This makes accessing the colors you chose for the site much easier. </p>
+				<p><img src="assets/images/color_picker_element.jpg" alt="" /></p>
+			</li>
+			<li>
+				<p><strong>Page Settings</strong>: </p>
+				<p><img src="assets/images/page_settings_element.jpg" alt="" /></p>
+			</li>
+			<li>Click <strong>Save</strong> button when you finish your changes.</li>
+		</ol>
+		</section>
+	
+		<section id="widgets_element">
+		<div class="page-header"><h2>Creative Elements Widgets</h2></div>
+		<p><i>List of widgets of Creative Elements. </i></p>
+		<p>***List basic wigets/elementors : </p>
+		<p> - Please read <a href ="http://docs.webshopworks.com/creative-elements/78-widgets/" rel="nofollow" target="_blank"> Widgets </a></strong> to understand basic widgets of Creative Elements. </p>
+		<ul>
+			<li><p>Columns Widget</p></li>
+			<li><p>Heading Widget</p></li>
+			<li><p>Image Widget</p></li>
+			<li><p>Text Editor Widget</p></li>
+			<li><p>Video Widget</p></li>
+			<li><p>Button Widget</p></li>
+			<li><p>Divider Widget</p></li>
+			<li><p>Spacer Widget</p></li>
+			<li><p>Google Maps Widget</p></li>
+			<li><p>Icon Widget</p></li>
+			<li><p>Image Box Widget</p></li>
+			<li><p>Icon Box Widget</p></li>
+			<li><p>Image Carousel Widget</p></li>
+			<li><p>Icon List Widget</p></li>
+			<li><p>Counter Widget</p></li>
+			<li><p>Progress Bar Widget</p></li>
+			<li><p>Testimonial Widget</p></li>
+			<li><p>Tabs Widget</p></li>
+			<li><p>Accordion Widget</p></li>
+			<li><p>Toggle Widget</p></li>
+			<li><p>Social Icons Widget</p></li>
+			<li><p>Alert Widget</p></li>
+			<li><p>Shortcode Widget</p></li>
+			<li><p>HTML Widget</p></li>
+			<li><p>Menu Anchor Widget</p></li>
+		</ul>
+		
+		</section>
+		<!-- End Widgets Elements -->
+		
+		
+		
+		<!-- Posthemes Support-->
+		<section id="support">
+		<div class="page-header"><h2>Posthemes Support</h2></div>
+		<p>Support Working time: Monday - Friday</p>
+		<p>Estimated ticket and answers review time: 1-3 business days.</p>
+		<p>We have hundreds of questions and provide answers asap, but this can take up to 3 days after your submitted request. Please be patient and wait for answer.</p>
+		<p><i>Send us email to <a href="mailto:posthemes@gmail.com">posthemes@gmail.com</a>.</i></p>
+		</section>
+		</div>
+	</div>
+	<span id="back-top"><a href="javascript(0)"><span class="icon fa fa-arrow-up"></span></a></span>
+</body>
+</html>

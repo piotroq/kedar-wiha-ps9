@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="f009c890e9f3c8dbbfee9282a2c235de">
+        <source>Przelewy24 logo</source>
+        <target>Logo Przelewy24</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1e267dded52399fde13bcad442b799d5">
+        <source>Witamy w Przelewy24</source>
+        <target>Witamy w Przelewy24</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a05d58af2b848a36180613034d628ee8">
+        <source>Zacznij akceptować płatności za pomocą przelewów online, BLIK, kart płatniczych lub innych metod dostosowanych do Twojego biznesu.</source>
+        <target>Zacznij akceptować płatności za pomocą przelewów online, BLIK, kart płatniczych lub innych metod dostosowanych do Twojego biznesu.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f20727a2099e7cbcc55153aa928d840b">
+        <source>Przelewy24 banner</source>
+        <target>Baner Przelewy24</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="19f59b74448f6a27519db281a44e4b12">
+        <source>Migration</source>
+        <target>Migracja</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6b75c8aac105dad2cab3d9cd5c6e3c93">
+        <source>You have an old Przelewy24 module installed. Would you like to migrate your data?</source>
+        <target>Masz zainstalowany stary moduł Przelewy24. Czy chcesz przenieść swoje dane?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="cfeb970b6f17746ecb54f10580ac505f">
+        <source>Please note that this will overwrite your current configuration!</source>
+        <target>Uwaga: to zastąpi Twoją aktualną konfigurację!</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2bb9e1f337c11937487064d0a4aadcd7">
+        <source>Are you sure you want to migrate?</source>
+        <target>Czy na pewno chcesz wykonać migrację?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="10b5b21ed1ee90eca305b558caf7d03b">
+        <source>Migrate</source>
+        <target>Migruj</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="030c4a8d505b2c1286ea0ea2cc7166b3">
+        <source>Note: Test mode (sandbox) is enabled. </source>
+        <target>Uwaga: tryb testowy (sandbox) jest włączony.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="cbb376e3d1b3062ab3bbd588edab6c03">
+        <source>The module is currently operating in test mode – all transactions are simulated and no real charges will be made.</source>
+        <target>Moduł działa obecnie w trybie testowym – wszystkie transakcje są symulowane i nie zostaną pobrane żadne rzeczywiste opłaty.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5768d6e343edb5c11ee8af0a101a5879">
+        <source>Before going live, make sure to disable the test mode in the settings.</source>
+        <target>Przed uruchomieniem modułu upewnij się, że tryb testowy jest wyłączony w ustawieniach.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="08bd40c7543007ad06e4fce31618f6ec">
+        <source>Account</source>
+        <target>Konto</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="77fee57a24371aecc22ce7ff273bd8ac">
+        <source>Select the currency for which you want to configure the merchant settings.</source>
+        <target>Wybierz walutę, dla której chcesz skonfigurować ustawienia sprzedawcy.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="94c617748ca6d5ab287d7d9e7283e639">
+        <source>You need to configure the settings separately for each selected currency.</source>
+        <target>Musisz skonfigurować ustawienia osobno dla każdej wybranej waluty.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fa535ffb25e1fd20341652f9be21e06e">
+        <source>Config</source>
+        <target>Konfiguracja</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5b225a635e8ad9c640fa30592a8db09f">
+        <source>Check how to enable or disable Przelewy24 Installments.</source>
+        <target>Sprawdź, jak włączyć lub wyłączyć raty Przelewy24.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="39db7bb9a60de632f56b0ba019345c24">
+        <source>Enabling this option allows customers to pay using Apple Pay directly on the shop website, on devices supported by Apple.</source>
+        <target>Włączenie tej opcji pozwala klientom płacić za pomocą Apple Pay bezpośrednio na stronie sklepu, na urządzeniach obsługiwanych przez Apple.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d9b1621f3e64675eed1f1d16dcc3a10d">
+        <source>Change the default order status based on the payment status.</source>
+        <target>Zmień domyślny status zamówienia w zależności od statusu płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f01704a152f8d13201e3220ef207c04c">
+        <source>Enabling this option allows customers to pay using Google Pay directly on the shop website.</source>
+        <target>Włączenie tej opcji pozwala klientom płacić za pomocą Google Pay bezpośrednio na stronie sklepu.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="419e08f4568d0f0f3a315045d3d79362">
+        <source>Settings for additional fees on Przelewy24 payments. </source>
+        <target>Ustawienia dodatkowych opłat za płatności Przelewy24.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2ef869e5777db6c2387ffc579c40cfcb">
+        <source>You can charge a fixed or percentage fee on orders paid via Przelewy24. If both are set, only the higher fee will be applied. The customer will be informed about this on the payment page. Enter 0 to disable the additional fee.</source>
+        <target>Możesz naliczyć stałą lub procentową opłatę za zamówienia opłacane przez Przelewy24. Jeśli obie są ustawione, zastosowana zostanie wyższa z nich. Klient zostanie o tym poinformowany na stronie płatności. Wpisz 0, aby wyłączyć dodatkową opłatę.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6febe3f4268d6058eb87e1b4e1b75509">
+        <source>Before configuring the P24 payment gateway, please ensure that you have added the server's IP address in the P24 transaction panel .</source>
+        <target>Przed skonfigurowaniem bramki płatności P24 upewnij się, że dodałeś adres IP serwera w panelu transakcyjnym P24.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b652c22aa25d96767f670d276e9932f9">
+        <source>Enabling this option allows customers to pay using Blik directly on the shop website.</source>
+        <target>Włączenie tej opcji umożliwia klientom dokonywanie płatności za pomocą BLIK bezpośrednio na stronie sklepu.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ce352208a21239016053a50e46650280">
+        <source>Selected payment methods</source>
+        <target>Wybrane metody płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9e34bc4958a04cf3cebc6d58a0d0da72">
+        <source>Drag and drop the payment methods to change their order</source>
+        <target>Przeciągnij i upuść metody płatności, aby zmienić ich kolejność</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9d447e39017df7e3b94a98967527bc35">
+        <source>All payment methods</source>
+        <target>Wszystkie metody płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

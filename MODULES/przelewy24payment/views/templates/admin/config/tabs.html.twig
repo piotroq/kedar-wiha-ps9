@@ -1,0 +1,49 @@
+{#**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    Przelewy24 powered by Waynet
+ * @copyright Przelewy24
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ *#}
+{% block tabs %}
+        <div class="tabs">
+        <ul class="nav nav-tabs" id="przelewy24-tab-nav" role="tablist">
+            {% for tab in tabs_core %}
+                <li class="nav-item" id="tab_{{ tabs_core_name }}_{{ tab.getId() }}">
+                    <a
+                        class="nav-link{% if tab.isActive() == true %} active{% endif %}"
+                        href="#tab_content_{{ tabs_core_name }}_{{ tab.getId() }}"
+                        data-toggle="tab"
+                        role="tab"
+                    >
+                        {{ tab.getName() }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+{% block tabContent %}
+    <div class="tab-content px-0 pb-0" id="przelewy24-tab-content">
+        {% for tab in tabs_core %}
+            <div
+                class="form-contenttab tab-pane fade {% if tab.isActive() == true %}active show{% endif %}"
+                id="tab_content_{{ tabs_core_name }}_{{ tab.getId() }}"
+                role="tabpanel"
+            >
+                {{ tab.render() | raw }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

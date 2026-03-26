@@ -1,0 +1,16 @@
+Stwórz pełną kolorystykę i typografie dla zaplanowanych do przyszłej realizacji stron internetowych typu landing page i zrób plik "custom-style.css" ze znacznikami :root w globalnych zmiennych dla firmy KEDAR-WIHA.pl https://kedar-wiha.pl/ . Stosuj wiedzę przestrzeni tego projektu. Pamiętaj o kontrastach UI - UX o dobrych praktykach designerskich.
+Kolorystyka podstawowa sklepu KEDAR-WIHA.pl (do rozszerzenia do pełnej palety barw takie jak na strony internetowe):
+:root {
+ --color-theme-primary: #8B0000;
+ --color-theme-secondary: [dodaj jakiś spójny kolor];
+ --color-theme-three: #ca0000;
+ --color-heading-primary: [dodaj jakiś spójny kolor];
+ --swiper-theme-color: #8B0000;
+ --background-theme-color: #f1f1f1;
+ --background-theme-color-top-bar: #606060;
+ --primary-all-text-for-all-color-fonts: #151515;
+ --button-theme-color: #8B0000;
+ --button-theme-color-hover: #ca0000;
+}
+Fonty dobierz odpowiednie z Google Fonts - https://fonts.google.com/ .
+Stosuj założenia brandu firmy. Nowy wygląd ma być nowoczesny-premium.

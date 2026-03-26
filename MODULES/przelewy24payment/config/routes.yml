@@ -1,0 +1,49 @@
+przelewy24.index:
+    path: przelewy24/config/{type}
+    methods:
+        - GET
+        - POST
+    defaults:
+        _controller: 'Przelewy24\Controller\Admin\ConfigController::indexAction'
+        type: credentials
+
+przelewy24.migrateOldConfiguration:
+    path: przelewy24/migrateOldConfiguration
+    methods:
+        - GET
+        - POST
+    defaults:
+        _controller: 'Przelewy24\Controller\Admin\ConfigController::migrateOldConfigurationAction'
+
+
+
+przelewy24.changeAccount:
+    path: przelewy24/changeAccount
+    methods:
+        - POST
+    defaults:
+        _controller: 'Przelewy24\Controller\Admin\ConfigController::changeAccountAction'
+
+
+przelewy24.saveForm:
+    path: przelewy24/saveForm/{type}
+    methods:
+        - POST
+    defaults:
+        _controller: 'Przelewy24\Controller\Admin\ConfigController::saveFormAction'
+
+przelewy24.changeTestMode:
+    path: przelewy24/changeTestMode
+    methods:
+        - POST
+    defaults:
+        _controller: 'Przelewy24\Controller\Admin\ConfigController::changeTestModeAction'
+
+przelewy24.refundOrder:
+    path: przelewy24/refundOrder/{id_order}
+    methods:
+        - POST
+    defaults:
+        _controller: 'Przelewy24\Controller\Admin\RefundController::refundOrderAction'
+
+

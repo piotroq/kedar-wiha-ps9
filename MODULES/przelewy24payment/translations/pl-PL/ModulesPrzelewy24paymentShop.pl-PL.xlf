@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="2d0e8d6f368f073ac1eb1fb0365788c7">
+        <source>Link to repay order:</source>
+        <target>Link do ponownej płatności za zamówienie:</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="761406bee0ac9c478969b80eedd1caeb">
+        <source>Repay</source>
+        <target>Zapłać ponownie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="db85a7fb64e7f63547a5bfe8fd7bb930">
+        <source>Payment cards</source>
+        <target>Karty płatnicze</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="881b46e9179c900801f6269e176568dd">
+        <source>I declare that I have read the [1]regulations[/1] and [2]information obligation[/2] of the Przelewy24 service</source>
+        <target>Oświadczam, że zapoznałem się z [1]regulaminem[/1] oraz [2]obowiązkiem informacyjnym[/2] serwisu Przelewy24</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c8ed360cbe1ba919f8c40f07a31125d7">
+        <source>Pay with Przelewy24</source>
+        <target>Zapłać z Przelewy24</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2d6da6f6bd60360c3565fc464fa46cf8">
+        <source>Przelewy24 repayment page</source>
+        <target>Strona ponownej płatności Przelewy24</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="30415d9dc7054f69902011d9cf814388">
+        <source>Please choose the payment method you want to use to repay your order.</source>
+        <target>Proszę wybrać metodę płatności, której chcesz użyć do ponownego opłacenia zamówienia.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="97b72d419a22e2d1144b2fb05ee26901">
+        <source>Unfortunately, there are no payment method available.</source>
+        <target>Niestety, żadna metoda płatności nie jest dostępna.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="991173b6e7c9970060180a05a9432477">
+        <source>Repay order</source>
+        <target>Opłać ponownie zamówienie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ea37f7c5bc6b5b74ea529c3d21a468d1">
+        <source>Enter the BLIK code</source>
+        <target>Wprowadź kod BLIK</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4b89bd7b8edef4835a789b7b5eed68f6">
+        <source>Confirm the payment in your banking app</source>
+        <target>Potwierdź płatność w swojej aplikacji bankowej</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c979b399b9d0d982ed262cb78ab5fad3">
+        <source>Add new card</source>
+        <target>Dodaj nową kartę</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fc7775bdfa339217149389b7392af83b">
+        <source>Save card</source>
+        <target>Zapisz kartę</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d8fa6e7f6451981d9ed85c4fcab97489">
+        <source>Back to saved cards</source>
+        <target>Wróć do zapisanych kart</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4187e9ec43464351bb532320cf2fa7c5">
+        <source>Choose saved card</source>
+        <target>Wybierz zapisaną kartę</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6bfa46d4c99b563fbbc6573a24b7ab06">
+        <source>Pay with saved card</source>
+        <target>Zapłać zapisaną kartą</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4b9cc34dda833213d08cdf9649f19e38">
+        <source>+ Add new card</source>
+        <target>+ Dodaj nową kartę</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="046b3135526447f70a16bf23660bfd78">
+        <source>Save card and pay</source>
+        <target>Zapisz kartę i zapłać</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="45a156839f7baf57d8a1650e17e53783">
+        <source>Pay (temporary)</source>
+        <target>Zapłać (bez zapisywania karty)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7922a036b4fff065a38667715c16e7e9">
+        <source>Processing payment in progress...</source>
+        <target>Trwa przetwarzanie płatności...</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="daae3845b6f9c931bf05e7648b1ca05a">
+        <source>This may take a moment. Please wait.</source>
+        <target>To może potrwać chwilę. Proszę czekać.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8c670f8c37b95e1ed14a0ce414b049c7">
+        <source>EXP</source>
+        <target>Data ważności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="458d1315d14c41459a4973c4f8ad1ebf">
+        <source>Default card</source>
+        <target>Domyślna karta</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ffee71a61dfb978efbca62128a312bc1">
+        <source>Set as default</source>
+        <target>Ustaw jako domyślną</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1063e38cb53d94d386f21227fcd84717">
+        <source>Remove</source>
+        <target>Usuń</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ddb5db558348bf04add20b00cb036584">
+        <source>No saved cards</source>
+        <target>Brak zapisanych kart</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fa8c3b2f930507b223cf481b6cd39fe9">
+        <source>Long term payment requires longer processing time. We are still waiting for the payment confirmation.</source>
+        <target>Płatności długoterminowe wymagają dłuższego czasu przetwarzania. Wciąż czekamy na potwierdzenie płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1b9c5341d68a46f1b0f0a8e698eba043">
+        <source>If you have any questions, please contact the store owner:</source>
+        <target>W razie jakichkolwiek pytań prosimy o kontakt z właścicielem sklepu:</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="57e2d1d7edfdf7abc375f2087c542bab">
+        <source>Your order has been cancelled.</source>
+        <target>Twoje zamówienie zostało anulowane.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4d0d52b5e042b881c39c975eec1bcb02">
+        <source>Please contact the store owner:</source>
+        <target>Prosimy o kontakt z właścicielem sklepu:</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ca013cf228414a6839954e9668750ffb">
+        <source>We were unable to confirm your payment.</source>
+        <target>Nie mogliśmy potwierdzić płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="44221d492d096ad1e81a068d902c4c3d">
+        <source>Repay your order</source>
+        <target>Opłać ponownie swoje zamówienie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c85d312e8791f728c28105b1f9417bd8">
+        <source>Your payment has been accepted.</source>
+        <target>Twoja płatność została zaakceptowana.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3f386245ff8753f9aedad8520227444e">
+        <source>Your order is confirmed!</source>
+        <target>Twoje zamówienie zostało potwierdzone!</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b8627ccd34529880156129d02a9ca37d">
+        <source>An email has been sent to your mail address %email%.</source>
+        <target>E-mail z potwierdzeniem został wysłany na adres %email%.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f5d74ea75357b5e139854c14f8e24fe3">
+        <source>Order details</source>
+        <target>Szczegóły zamówienia</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="00cd7d0890cd975da95799c32764c9ce">
+        <source>Order reference: %reference%</source>
+        <target>Numer zamówienia: %reference%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e120387480bc284c5347ae1baa480670">
+        <source>Payment method: %method%</source>
+        <target>Metoda płatności: %method%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="080753487a8bc0bb9a5275bcb9951516">
+        <source>Shipping method: %method%</source>
+        <target>Metoda dostawy: %method%</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e80f2003247d194f70688ec981ff2d54">
+        <source>There was a problem with your payment.</source>
+        <target>Wystąpił problem z Twoją płatnością.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d20657d512c83cead9851482b9659a59">
+        <source>Your order has already been paid by previous payment.</source>
+        <target>Twoje zamówienie zostało już opłacone wcześniejszą płatnością.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="39148885a6b5dedee0d9d53fbd437522">
+        <source>Thank you for your order, please wait for the payment confirmation.</source>
+        <target>Dziękujemy za zamówienie, prosimy czekać na potwierdzenie płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d2a29e54e6ed111e8f1ec7382d147c4c">
+        <source>Przelewy24 payment transaction</source>
+        <target>Transakcja płatnicza Przelewy24</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="892947015706730391c6733a4dc7779c">
+        <source>Please wait for the payment confirmation.</source>
+        <target>Proszę czekać na potwierdzenie płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6f7d362e8ce694feb02e12036ab49f7e">
+        <source>After ordering you will be redirected to the service Przelewy24 to finish payments</source>
+        <target>Po złożeniu zamówienia zostaniesz przekierowany do serwisu Przelewy24 w celu dokończenia płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="42024d08eeeeb0c865c0c36aa1f54066">
+        <source>Extracharge Przelewy24</source>
+        <target>Dopłata Przelewy24</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b2f40690858b404ed10e62bdf422c704">
+        <source>Amount</source>
+        <target>Kwota</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5950a70a3ccf0d0cd27b69fd21b19872">
+        <source>Saved cards</source>
+        <target>Zapisane karty</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5486191906ec27c1c4bb5bd3e46b3442">
+        <source>Order with an obligation to pay</source>
+        <target>Zamówienie z obowiązkiem zapłaty</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="334201bf38f35903c34658d41c8f8d65">
+        <source>Choose payment method</source>
+        <target>Wybierz metodę płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9849a54ee9d448c70672486dc2e0cd21">
+        <source>Przelewy24 payment method image</source>
+        <target>Grafika metody płatności Przelewy24</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

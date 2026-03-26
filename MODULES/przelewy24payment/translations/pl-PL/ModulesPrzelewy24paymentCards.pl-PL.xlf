@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="89b19dfc551c8da3e3b9d7728e346e66">
+        <source>The request to add a card has been sent. Your card will appear after correct verification.</source>
+        <target>Żądanie dodania karty zostało wysłane. Twoja karta pojawi się po poprawnej weryfikacji.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="361d9d6366c07d646761212a06b07245">
+        <source>You cant remove this card</source>
+        <target>Nie możesz usunąć tej karty</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fbc3d6fc57126bdd28014c3fb03e04c2">
+        <source>You removed card</source>
+        <target>Usunięto kartę</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8e683ac9a42491a43ff64da8c93c25a4">
+        <source>Error during removing card</source>
+        <target>Błąd podczas usuwania karty</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="884e876ec351742ffb51773146b99222">
+        <source>You cant set default this card</source>
+        <target>Nie możesz ustawić tej karty jako domyślnej</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7a90150d67f83da76504376d4f8be296">
+        <source>You set default card</source>
+        <target>Ustawiono kartę jako domyślną</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="aea78db7e8f82367e9481cc684810753">
+        <source>Error during setting default card</source>
+        <target>Błąd podczas ustawiania karty jako domyślnej</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin-dev" source-language="pl-PL" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="5ae14b91cae9293af3f05b3a5e299f12">
+        <source>Update stock quantity after selecting products for refund</source>
+        <target>Zaktualizuj stan magazynowy po wybraniu produktów do zwrotu</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ed6f75c3cae08de812e47f8caea81df4">
+        <source>P24 terms acceptance in the shop</source>
+        <target>Akceptacja warunków P24 w sklepie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7df12efffba931c90bc9d0b13fdc2dc5">
+        <source>Display the Przelewy24 terms acceptance option below the highlighted payment method.</source>
+        <target>Wyświetl opcję akceptacji warunków Przelewy24 poniżej wyróżnionej metody płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d4b45714f48f3f1f98cd4b827c1d04b3">
+        <source>Display intro text </source>
+        <target>Wyświetl tekst wprowadzający</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3a558713d4e2a2d0fd8c66454923a3f8">
+        <source>Displays the Przelewy24 logo with information about redirecting to the payment operator and a summary of the order amount.</source>
+        <target>Wyświetla logo Przelewy24 wraz z informacją o przekierowaniu do operatora płatności oraz podsumowaniem kwoty zamówienia.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0d5da6df289ded2b68004b1427d5732f">
+        <source>Order id in title </source>
+        <target>ID zamówienia w tytule</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6e342f66474bfe37d326d272b6a20b46">
+        <source>Card payment inside the store</source>
+        <target>Płatność kartą w sklepie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="95495a5996937a0ffafb171a09d096a3">
+        <source>Enables fast and secure card payments via Przelewy24 without leaving the store</source>
+        <target>Umożliwia szybkie i bezpieczne płatności kartą przez Przelewy24 bez opuszczania sklepu</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2988ac1d502fa7ef2f816748c6215140">
+        <source>One Click Card Payment</source>
+        <target>Płatność kartą jednym kliknięciem</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7b77be75a2c04dbec6c9eefa2513759f">
+        <source>Enables quick payments with a previously saved card via Przelewy24 - no need to re-enter details. Requires the "Card payment inside the store" option to be active</source>
+        <target>Umożliwia szybkie płatności wcześniej zapisaną kartą przez Przelewy24 - nie ma potrzeby ponownego wprowadzania danych. Wymaga aktywnej opcji "Płatność kartą w sklepie"</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e0905fb680e384488b76b26ec904855f">
+        <source>Click to Pay enabled</source>
+        <target>Click to Pay włączone</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9f19fba4e7f9b96508bf317bbff7ac1e">
+        <source>Allows registered users to pay through Click to Pay, if the "One Click Card Payment" option is not enabled. Requires the "Card payment inside the store" option to be active</source>
+        <target>Umożliwia zarejestrowanym użytkownikom płacenie przez Click to Pay, jeśli opcja "Płatność kartą jednym kliknięciem" nie jest włączona. Wymaga aktywnej opcji "Płatność kartą w sklepie"</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1faf6c3adb337fead9227b113079c2a7">
+        <source>Click to Pay active for guests</source>
+        <target>Click to Pay aktywne dla gości</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="959fbd87066f464e19d62c7d2ac0376b">
+        <source>Allows unregistered users to make quick card payments through Click to Pay without having to create an account. Requires the "Click to Pay enabled" option to be active</source>
+        <target>Umożliwia niezarejestrowanym użytkownikom dokonywanie szybkich płatności kartą przez Click to Pay bez konieczności tworzenia konta. Wymaga aktywnej opcji 'Click to Pay włączone'</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="924aa4f44d27caa1cd4f882d6bea224b">
+        <source>Status before completing payment</source>
+        <target>Status przed zakończeniem płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="38fb057ed3ffa3e5abe09eb75be3f07f">
+        <source>Status after completing payment</source>
+        <target>Status po zakończeniu płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9bf74e255c483cbb2a8329b2a4f5c123">
+        <source>Wait for a result of the transaction </source>
+        <target>Poczekaj na wynik transakcji</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7377b2cbe58f8412b00ec1407a6a511d">
+        <source>Enabling this option makes the customer wait on the Przelewy24 page for payment confirmation after leaving the bank’s site. Choosing "No" redirects the customer immediately back to the store.</source>
+        <target>Włączenie tej opcji powoduje, że klient czeka na stronie Przelewy24 na potwierdzenie płatności po opuszczeniu strony banku. Wybranie opcji "Nie" natychmiast przekierowuje klienta z powrotem do sklepu.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0397bf3ab66fb15708366223d9b78e7e">
+        <source>Time limit</source>
+        <target>Limit czasu</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f3dbad1952afa87777bab1855fea64b3">
+        <source>Time limit in minutes after order placement during which the payment can be completed via the Przelewy24 payment form. Enter 0 for no limit - The order will not be cancelled</source>
+        <target>Limit czasu w minutach od złożenia zamówienia, w którym można dokończyć płatność za pomocą formularza płatności Przelewy24. Wprowadź 0, aby brak było limitu – zamówienie nie zostanie anulowane.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="042ea823fdb42a84e7a68d4a4558bc13">
+        <source>The time limit to complete the payment after it is initiated is 15 minutes. You can extend or disable it by entering 0.</source>
+        <target>Czas na dokończenie płatności po jej rozpoczęciu wynosi 15 minut. Można go wydłużyć lub wyłączyć, wpisując 0.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="59c95f0cf7045ab75a7666c1ea84c7da">
+        <source>Time limit fast transfer</source>
+        <target>Limit czasu dla szybkiego przelewu</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="cf4be9eab3d4c5a68ea61007c9df799e">
+        <source>Time has to be in hours</source>
+        <target>Czas musi być podany w godzinach</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5e84a63fb29996914c7c09572df81cc5">
+        <source>Time limit for payment confirmation for fast payment methods (in hours)</source>
+        <target>Limit czasu na potwierdzenie płatności dla szybkich metod płatności (w godzinach)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f5cc1dcc489980318485dd2dbca97c47">
+        <source>Time limit long term</source>
+        <target>Limit czasu dla płatności długoterminowych</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="da9c2d3b1fe73056b4cdb3e8d0931099">
+        <source>Time limit for payment confirmation for methods with longer processing time (in hours)</source>
+        <target>Limit czasu na potwierdzenie płatności dla metod z dłuższym czasem przetwarzania (w godzinach)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7a75c8570c4f78700f139eb5dfea2019">
+        <source>Enable Google Pay in store</source>
+        <target>Włącz Google Pay w sklepie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="224719f994de1247647d35dd64ad8475">
+        <source>Google merchant ID</source>
+        <target>Identyfikator sprzedawcy Google</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6af9f2f68b11e2893f62f3a6ffc2fb8d">
+        <source>Google Merchant ID is your unique store ID used for Google Pay. You can find it in the top right corner of your Google Merchant Center account.</source>
+        <target>Identyfikator sprzedawcy Google to unikalny identyfikator Twojego sklepu używany w Google Pay. Można go znaleźć w prawym górnym rogu konta Google Merchant Center.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="002fd2d56c62c9316017d7957055ce33">
+        <source>Google merchant name</source>
+        <target>Nazwa sprzedawcy Google</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6fcdcee87b9d4a81a781d997a4e8f434">
+        <source>Google Merchant Name is the name of your store shown during Google Pay checkout. You can find it in your Google Merchant Center account settings.</source>
+        <target>Nazwa sprzedawcy Google to nazwa Twojego sklepu wyświetlana podczas płatności Google Pay. Można ją znaleźć w ustawieniach konta Google Merchant Center.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d1b7342f001dfa06da3e5f3d57159e3d">
+        <source>Enable Apple Pay in store</source>
+        <target>Włącz Apple Pay w sklepie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6b6e3cfa08a2b414c9934defd158ee7d">
+        <source>Apple merchant ID</source>
+        <target>Identyfikator sprzedawcy Apple</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2c5cd9765a8c62842495c2f42d08ffe1">
+        <source>Apple Merchant ID is a unique identifier for your store required to set up Apple Pay. You can create and manage it in your Apple Developer Account under Identifiers → Merchant IDs.</source>
+        <target>Identyfikator sprzedawcy Apple to unikalny identyfikator Twojego sklepu wymagany do skonfigurowania Apple Pay. Można go utworzyć i zarządzać nim w koncie Apple Developer w sekcji Identifiers → Merchant IDs.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="848ce100c5ccd35a70d3908a0eae2950">
+        <source>Apple merchant name</source>
+        <target>Nazwa sprzedawcy Apple</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6dc3cfeb25f3b9828c20e0ee587636af">
+        <source>Apple Merchant Name is the name of your store shown to customers during Apple Pay checkout. It should be recognizable and match your brand name.</source>
+        <target>Nazwa sprzedawcy Apple to nazwa Twojego sklepu wyświetlana klientom podczas płatności Apple Pay. Powinna być rozpoznawalna i zgodna z nazwą Twojej marki.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5d6d00de4f1672824f4dcc5011faa000">
+        <source>Apple certificate cert</source>
+        <target>Certyfikat Apple Pay</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b5a6b2269a85c4824d9b8843a262e717">
+        <source>Apple Pay Certificate (.pem file) is a certificate required for secure communication with Apple Pay. It is generated in your Apple Developer Account and exported in .pem format for payment integration.</source>
+        <target>Certyfikat Apple Pay (plik .pem) to certyfikat wymagany do bezpiecznej komunikacji z Apple Pay. Jest generowany na Twoim koncie Apple Developer i eksportowany w formacie .pem do integracji płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a49fa30378d3daad9f6b6d9bde8caf46">
+        <source>Apple certificate key</source>
+        <target>Klucz certyfikatu Apple</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0cbbb05953a32ccdd656708196ed61c1">
+        <source>Apple Certificate Key is the private key needed for Apple Pay. Created together with the certificate in Apple Developer.</source>
+        <target>Klucz certyfikatu Apple to klucz prywatny wymagany do korzystania z Apple Pay. Tworzony jest razem z certyfikatem w Apple Developer.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="773b878f12ca7d59278cf8481d15e28d">
+        <source>Blik in store</source>
+        <target>BLIK w sklepie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bb4a86fd4130dbd071d6430762b0d179">
+        <source>Show installment calculator on product page</source>
+        <target>Pokaż kalkulator rat na stronie produktu</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7e4ed5efc0f056eb2b36609af35177d3">
+        <source>Sandbox mode</source>
+        <target>Tryb testowy (sandbox)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="755620b2e917aca6f997042dc2c217b0">
+        <source>After disabling sandbox mode, enter the correct credentials for your production account.</source>
+        <target>Po wyłączeniu trybu testowego należy wprowadzić poprawne dane dostępowe do konta produkcyjnego.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="229a7ec501323b94db7ff3157a7623c9">
+        <source>Merchant ID</source>
+        <target>Identyfikator sprzedawcy</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5ca98e1c103b5f291f83a2c2117e7a1c">
+        <source><![CDATA[You can find the Merchant ID in the Przelewy24 admin panel, under the "My account" => "Account Verification" => My stores." tab.]]></source>
+        <target><![CDATA[Identyfikator sprzedawcy znajdziesz w panelu sprzedawcy Przelewy24, w zakładce "Moje konto" => "Weryfikacja konta" => "Moje sklepy".]]></target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="70084d753dc9789335b7c26a98ba9f0d">
+        <source>CRC Key</source>
+        <target>Klucz CRC</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ea98ad0020cfa99685e835b81a95b9c6">
+        <source><![CDATA[You can find the CRC key in the Przelewy24 admin panel, under the "My account" => "API Configuration" tab.]]></source>
+        <target><![CDATA[Klucz CRC znajdziesz w panelu sprzedawcy Przelewy24, w zakładce "Moje konto" => "Konfiguracja API".]]></target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8876f9013ac207ff0edd2da416133018">
+        <source>API key*</source>
+        <target>Klucz API*</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="abeb4b9e0f558a9648a2b95d2d70e30f">
+        <source><![CDATA[You can find the API key in the Przelewy24 admin panel, under the "My account" => "API Configuration" tab.]]></source>
+        <target><![CDATA[Klucz API znajdziesz w panelu sprzedawcy Przelewy24, w zakładce "Moje konto" => "Konfiguracja API".]]></target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="386c339d37e737a436499d423a77df0c">
+        <source>Currency</source>
+        <target>Waluta</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="75cf4e2df7d4f031fc3a7ba046845854">
+        <source>Increase payment (amount)</source>
+        <target>Zwiększ płatność (kwota)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="80a0790016840f1b6c476de875397b40">
+        <source>Increase payment (percent)</source>
+        <target>Zwiększ płatność (procent)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9e9ec684fe95185fdf1357a2b2b640f5">
+        <source>Show payment methods in main payment method</source>
+        <target>Pokaż metody płatności w głównej metodzie płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b56b90e24db256f70e07ed291da4453e">
+        <source>Move the methods you want to highlight from the window below and set their order within the main P24 payment method.</source>
+        <target>Przenieś metody, które chcesz wyróżnić, z poniższego okna i ustaw ich kolejność w głównej metodzie płatności P24.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2922587368ff92000f29cef1da02b4ac">
+        <source>Payment method in main list</source>
+        <target>Metody płatności w głównej metodzie</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fd6b243b738419c8ec838638de10790b">
+        <source>Show payment methods separated</source>
+        <target>Pokaż metody płatności osobno</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4cc4a9e280c1479e6b022c4c93f6aa7a">
+        <source>Move the methods you want to highlight from the window below and arrange them as separate payment methods.</source>
+        <target>Przenieś metody, które chcesz wyróżnić, z poniższego okna i ułóż je jako osobne metody płatności.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c48c9dd0f437f6f8f6c366c4b46907df">
+        <source>Payment method in separate list</source>
+        <target>Metody płatności osobno</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4eacb99dd8ad69098b9077eb170c5079">
+        <source>Custom payment method description</source>
+        <target>Niestandardowy opis metody płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7f4831424181200b72f16dcec7e1be15">
+        <source>Not configured credentials</source>
+        <target>Dane uwierzytelniające nie są skonfigurowane</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="660fe18d634c402f160d8fca679c2f7b">
+        <source>Credentials incorrect</source>
+        <target>Nieprawidłowe dane uwierzytelniające</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9a2c9f25737534cdd6927a09a65525f9">
+        <source>Configuration migration failed</source>
+        <target>Migracja konfiguracji nie powiodła się</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="da231eb84370ef10c496f346c39a56ff">
+        <source>Noting to migrate</source>
+        <target>Brak danych do migracji</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c592fba65fdfee5ed4d4b812bf6d9a7e">
+        <source>Error saving configuration</source>
+        <target>Błąd podczas zapisywania konfiguracji</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e60263ac381ae4a9ad460a5c706b9b5a">
+        <source>Configuration saved</source>
+        <target>Konfiguracja została zapisana</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1824ceb835128550b303b027375a9a01">
+        <source>After confirm</source>
+        <target>Po potwierdzeniu</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9597caa115ed09d1438534a98a40a852">
+        <source>After choose</source>
+        <target>Po wyborze</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ae256211c22121e25c5ee4da5234fb11">
+        <source>After payment</source>
+        <target>Po płatności</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4b5408f2c4651eb4dd85292ce8114669">
+        <source>Order id in database (e.g. 1, 2, 3)</source>
+        <target>ID zamówienia w bazie danych (np. 1, 2, 3)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="09703148bea8691c4b968afe8c553b2b">
+        <source>Masked order id (e.g. QYTUVLHOW)</source>
+        <target>Maskowane ID zamówienia (np. QYTUVLHOW)</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
