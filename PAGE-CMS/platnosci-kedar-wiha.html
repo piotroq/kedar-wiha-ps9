@@ -1,0 +1,1379 @@
+<!-- ==========================================================================
+   KEDAR-WIHA.pl — Strona "Płatności" (Payments)
+   PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 4.x
+   Wersja: 1.0.0 | 2025
+   Gotowe do wklejenia: Wygląd > Strony > Płatności > Zawartość strony
+   Namespace: .kw-pay- (unikanie kolizji z Optima / Bootstrap / .kw-about-)
+   ========================================================================== -->
+
+<style>
+/* ==========================================================================
+   KEDAR-WIHA.pl — PŁATNOŚCI — Custom Page Styles
+   Namespace: .kw-pay (unikanie kolizji)
+   Mobile-first | BEM | CSS Variables z custom-style.css
+   ========================================================================== */
+
+/* ── SCOPE / VARIABLES ────────────────────────────────────────────────── */
+.kw-pay {
+  --kw-primary: #8B0000;
+  --kw-primary-dark: #6b0000;
+  --kw-secondary: #0056A3;
+  --kw-secondary-dark: #003d7a;
+  --kw-three: #ca0000;
+  --kw-accent: #FFD700;
+  --kw-green: #1A7A3C;
+  --kw-green-bg: #e8f5ee;
+  --kw-heading: #2D2D2D;
+  --kw-text: #151515;
+  --kw-text-muted: #555555;
+  --kw-text-tertiary: #888888;
+  --kw-bg-light: #f5f5f5;
+  --kw-bg-alt: #f1f1f1;
+  --kw-bg-dark: #1a1a1a;
+  --kw-bg-card: #ffffff;
+  --kw-white: #ffffff;
+  --kw-border: #e8e8e8;
+  --kw-border-medium: #cccccc;
+  --kw-font-heading: 'Montserrat', 'Manrope', Arial, sans-serif;
+  --kw-font-body: 'Inter', 'Manrope', Arial, sans-serif;
+  --kw-radius-xs: 2px;
+  --kw-radius-sm: 3px;
+  --kw-radius-md: 4px;
+  --kw-radius-lg: 8px;
+  --kw-shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --kw-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --kw-shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --kw-shadow-lg: 0 8px 28px rgba(0,0,0,0.13);
+  --kw-shadow-cta: 0 4px 20px rgba(139,0,0,0.30);
+  --kw-transition: 300ms cubic-bezier(0.25,0.46,0.45,0.94);
+  --kw-transition-slow: 500ms ease;
+
+  font-family: var(--kw-font-body);
+  color: var(--kw-text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+.kw-pay *, .kw-pay *::before, .kw-pay *::after { box-sizing: border-box; }
+.kw-pay img { max-width: 100%; height: auto; }
+
+/* ── KEYFRAMES ────────────────────────────────────────────────────────── */
+@keyframes kwPayFadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes kwPaySlideLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwPayPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,86,163,0.2); }
+  50%      { box-shadow: 0 0 0 10px rgba(0,86,163,0); }
+}
+@keyframes kwPayShieldPulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+@keyframes kwPayCheckmark {
+  0%   { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* Scroll-reveal */
+.kw-pay-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--kw-transition-slow), transform var(--kw-transition-slow);
+}
+.kw-pay-reveal.kw-pay-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.kw-pay-stagger-1 { transition-delay: 0ms; }
+.kw-pay-stagger-2 { transition-delay: 80ms; }
+.kw-pay-stagger-3 { transition-delay: 160ms; }
+.kw-pay-stagger-4 { transition-delay: 240ms; }
+.kw-pay-stagger-5 { transition-delay: 320ms; }
+.kw-pay-stagger-6 { transition-delay: 400ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kw-pay-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── SECTION BASE ─────────────────────────────────────────────────────── */
+.kw-pay__section {
+  padding: 48px 0;
+  position: relative;
+}
+.kw-pay__section--alt {
+  background: var(--kw-bg-light);
+}
+.kw-pay__section--dark {
+  background: linear-gradient(160deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: var(--kw-white);
+}
+.kw-pay__section--dark p,
+.kw-pay__section--dark li {
+  color: rgba(255,255,255,0.82);
+}
+.kw-pay__section--pattern {
+  position: relative;
+}
+.kw-pay__section--pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 24px,
+    rgba(0,86,163,0.018) 24px,
+    rgba(0,86,163,0.018) 25px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+.kw-pay__section--pattern > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── REUSABLE: SECTION HEADER ─────────────────────────────────────────── */
+.kw-pay__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.kw-pay__label {
+  display: inline-block;
+  font-family: var(--kw-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--kw-secondary);
+  background: rgba(0,86,163,0.07);
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+.kw-pay__section--dark .kw-pay__label {
+  color: var(--kw-accent);
+  background: rgba(255,215,0,0.1);
+}
+.kw-pay__title {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3.5vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--kw-heading);
+  margin: 0 0 12px;
+}
+.kw-pay__section--dark .kw-pay__title { color: var(--kw-white); }
+.kw-pay__divider {
+  width: 48px;
+  height: 3px;
+  background: var(--kw-secondary);
+  border: none;
+  border-radius: 2px;
+  margin: 14px auto;
+}
+.kw-pay__subtitle {
+  font-family: var(--kw-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--kw-text-muted);
+  max-width: 660px;
+  margin: 0 auto;
+}
+.kw-pay__section--dark .kw-pay__subtitle { color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 1 — HERO
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-pay__hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(145deg, rgba(0,42,80,0.93) 0%, rgba(0,86,163,0.88) 55%, rgba(139,0,0,0.75) 100%),
+    url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80') center/cover no-repeat;
+  padding: 52px 16px;
+  text-align: center;
+  overflow: hidden;
+}
+@supports (background-attachment: fixed) {
+  @media (min-width: 768px) {
+    .kw-pay__hero { background-attachment: scroll, fixed; }
+  }
+}
+/* Diagonal pattern overlay */
+.kw-pay__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    30deg,
+    transparent,
+    transparent 40px,
+    rgba(255,255,255,0.02) 40px,
+    rgba(255,255,255,0.02) 41px
+  );
+  pointer-events: none;
+}
+/* Bottom gradient edge */
+.kw-pay__hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(to top, rgba(0,42,80,0.25), transparent);
+  pointer-events: none;
+}
+.kw-pay__hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  animation: kwPayFadeUp 0.75s ease both;
+}
+.kw-pay__hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--kw-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--kw-accent);
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.22);
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+}
+.kw-pay__hero-badge i { font-size: 11px; }
+.kw-pay__hero-title {
+  font-family: var(--kw-font-heading);
+  font-weight: 800;
+  font-size: clamp(24px, 5vw, 48px);
+  line-height: 1.12;
+  color: var(--kw-white);
+  margin: 0 0 14px;
+  letter-spacing: 0.01em;
+}
+.kw-pay__hero-title em {
+  font-style: normal;
+  color: var(--kw-accent);
+}
+.kw-pay__hero-sub {
+  font-family: var(--kw-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.82);
+  max-width: 580px;
+  margin: 0 auto 24px;
+}
+/* Hero trust strip */
+.kw-pay__hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-pay__hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--kw-font-heading);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3px;
+  background: rgba(255,255,255,0.04);
+}
+.kw-pay__hero-chip i { color: var(--kw-accent); font-size: 10px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 2 — METODY PŁATNOŚCI (6 kart)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-pay__methods-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.kw-pay__method-card {
+  background: var(--kw-bg-card);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  padding: 24px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+.kw-pay__method-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--kw-shadow-lg);
+  border-color: var(--kw-secondary);
+}
+/* Left accent bar */
+.kw-pay__method-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 4px;
+  background: var(--kw-secondary);
+  border-radius: 4px 0 0 4px;
+  opacity: 0;
+  transition: opacity var(--kw-transition);
+}
+.kw-pay__method-card:hover::before { opacity: 1; }
+
+.kw-pay__method-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--kw-radius-md);
+  background: rgba(0,86,163,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--kw-secondary);
+  transition: all var(--kw-transition);
+}
+.kw-pay__method-card:hover .kw-pay__method-icon {
+  background: var(--kw-secondary);
+  color: var(--kw-white);
+}
+.kw-pay__method-body { flex: 1; min-width: 0; }
+.kw-pay__method-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.kw-pay__method-name {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--kw-heading);
+  margin: 0;
+}
+.kw-pay__method-badge {
+  font-family: var(--kw-font-heading);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: var(--kw-green-bg);
+  color: var(--kw-green);
+}
+.kw-pay__method-badge--instant { background: var(--kw-green-bg); color: var(--kw-green); }
+.kw-pay__method-badge--days { background: #fff5ed; color: #E07B00; }
+
+.kw-pay__method-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--kw-text-muted);
+  margin: 0 0 8px;
+}
+.kw-pay__method-meta {
+  font-family: var(--kw-font-body);
+  font-size: 12px;
+  color: var(--kw-text-tertiary);
+  margin: 0;
+}
+.kw-pay__method-meta strong {
+  color: var(--kw-text-muted);
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 3 — BEZPIECZEŃSTWO PŁATNOŚCI
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-pay__security-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.kw-pay__security-card {
+  text-align: center;
+  padding: 28px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--kw-radius-lg);
+  transition: all var(--kw-transition);
+}
+.kw-pay__security-card:hover {
+  background: rgba(255,255,255,0.09);
+  transform: translateY(-3px);
+  border-color: rgba(0,86,163,0.3);
+}
+.kw-pay__security-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(0,86,163,0.15);
+  border: 2px solid var(--kw-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 22px;
+  color: var(--kw-accent);
+  transition: all var(--kw-transition);
+}
+.kw-pay__security-card:hover .kw-pay__security-icon {
+  background: var(--kw-secondary);
+  animation: kwPayPulse 1.6s infinite;
+}
+.kw-pay__security-card h3 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--kw-white);
+  margin: 0 0 8px;
+}
+.kw-pay__security-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+}
+
+/* Security info-bar */
+.kw-pay__security-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0,86,163,0.08);
+  border: 1px solid rgba(0,86,163,0.15);
+  border-radius: var(--kw-radius-lg);
+}
+.kw-pay__security-bar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--kw-font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+.kw-pay__security-bar-item i {
+  color: var(--kw-green);
+  font-size: 12px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 4 — FAKTUROWANIE I PARAGONY
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-pay__invoice-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: start;
+}
+.kw-pay__invoice-text h2 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(20px, 2.8vw, 30px);
+  line-height: 1.2;
+  color: var(--kw-heading);
+  margin-bottom: 14px;
+}
+.kw-pay__invoice-text p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--kw-text);
+  margin-bottom: 14px;
+}
+.kw-pay__invoice-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step;
+}
+.kw-pay__invoice-steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 16px 16px 16px 56px;
+  background: var(--kw-bg-card);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  margin-bottom: 12px;
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-xs);
+}
+.kw-pay__invoice-steps li:hover {
+  box-shadow: var(--kw-shadow-md);
+  border-color: var(--kw-secondary);
+}
+.kw-pay__invoice-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--kw-secondary);
+  color: var(--kw-white);
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.kw-pay__invoice-steps li strong {
+  display: block;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--kw-heading);
+  margin-bottom: 2px;
+}
+.kw-pay__invoice-steps li span {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--kw-text-muted);
+}
+
+/* Info highlight box */
+.kw-pay__info-box {
+  background: rgba(0,86,163,0.05);
+  border-left: 4px solid var(--kw-secondary);
+  padding: 18px 20px;
+  border-radius: 0 var(--kw-radius-md) var(--kw-radius-md) 0;
+  margin-top: 16px;
+}
+.kw-pay__info-box p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--kw-heading);
+  line-height: 1.6;
+}
+.kw-pay__info-box i {
+  color: var(--kw-secondary);
+  margin-right: 6px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 5 — CERTYFIKACJE I INFORMACJE PRAWNE
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-pay__certs-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.kw-pay__cert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--kw-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: var(--kw-radius-sm);
+  transition: all var(--kw-transition);
+}
+.kw-pay__cert-badge--blue {
+  background: var(--kw-secondary);
+  color: var(--kw-white);
+}
+.kw-pay__cert-badge--dark {
+  background: var(--kw-heading);
+  color: var(--kw-white);
+}
+.kw-pay__cert-badge--green {
+  background: var(--kw-green);
+  color: var(--kw-white);
+}
+.kw-pay__cert-badge--red {
+  background: var(--kw-primary);
+  color: var(--kw-white);
+}
+.kw-pay__cert-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--kw-shadow-md);
+}
+
+.kw-pay__legal-text {
+  max-width: 740px;
+  margin: 0 auto;
+  text-align: center;
+}
+.kw-pay__legal-text p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--kw-text);
+  margin-bottom: 14px;
+}
+.kw-pay__legal-text strong {
+  color: var(--kw-heading);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 6 — FAQ / WSPARCIE
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-pay__faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.kw-pay__faq-item {
+  background: var(--kw-bg-card);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-xs);
+}
+.kw-pay__faq-item:hover {
+  box-shadow: var(--kw-shadow-md);
+  border-color: var(--kw-secondary);
+}
+.kw-pay__faq-q {
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--kw-heading);
+  padding: 16px 20px;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.kw-pay__faq-q i {
+  color: var(--kw-secondary);
+  font-size: 14px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.kw-pay__faq-a {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--kw-text-muted);
+  padding: 0 20px 16px 46px;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 7 — CTA
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-pay__cta {
+  background: linear-gradient(140deg, #8B0000 0%, #5a0000 55%, #1a1a1a 100%);
+  text-align: center;
+  padding: 52px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.kw-pay__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    55deg,
+    transparent,
+    transparent 44px,
+    rgba(255,255,255,0.015) 44px,
+    rgba(255,255,255,0.015) 45px
+  );
+  pointer-events: none;
+}
+.kw-pay__cta-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  margin: 0 auto;
+}
+.kw-pay__cta-inner h2 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(20px, 3.2vw, 34px);
+  line-height: 1.2;
+  color: var(--kw-white);
+  margin: 0 0 14px;
+}
+.kw-pay__cta-inner p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 24px;
+}
+.kw-pay__cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Buttons */
+.kw-pay__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 13px 26px;
+  border-radius: var(--kw-radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  min-height: 48px;
+  transition: all var(--kw-transition);
+  border: 2px solid transparent;
+}
+.kw-pay__btn--white {
+  background: var(--kw-white);
+  color: var(--kw-primary);
+  border-color: var(--kw-white);
+  box-shadow: 0 4px 18px rgba(255,255,255,0.18);
+}
+.kw-pay__btn--white:hover {
+  background: transparent;
+  color: var(--kw-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,255,255,0.25);
+  text-decoration: none;
+}
+.kw-pay__btn--outline {
+  background: transparent;
+  color: var(--kw-white);
+  border-color: rgba(255,255,255,0.35);
+}
+.kw-pay__btn--outline:hover {
+  background: var(--kw-white);
+  color: var(--kw-primary);
+  border-color: var(--kw-white);
+  text-decoration: none;
+}
+.kw-pay__btn--primary {
+  background: var(--kw-primary);
+  color: var(--kw-white);
+  border-color: var(--kw-primary);
+  box-shadow: var(--kw-shadow-cta);
+}
+.kw-pay__btn--primary:hover {
+  background: var(--kw-three);
+  border-color: var(--kw-three);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(202,0,0,0.4);
+  color: var(--kw-white);
+  text-decoration: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 8 — FOOTER/CONTACT ROW
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-pay__footer-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 28px;
+}
+.kw-pay__footer-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255,255,255,0.72);
+  font-size: 13px;
+  text-decoration: none;
+  transition: color var(--kw-transition);
+}
+.kw-pay__footer-link:hover {
+  color: var(--kw-white);
+  text-decoration: none;
+}
+.kw-pay__footer-link i {
+  color: var(--kw-accent);
+  font-size: 14px;
+  width: 18px;
+  text-align: center;
+}
+.kw-pay__footer-legal {
+  text-align: center;
+  padding-top: 16px;
+}
+.kw-pay__footer-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.kw-pay__footer-legal-links a {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color var(--kw-transition);
+}
+.kw-pay__footer-legal-links a:hover {
+  color: var(--kw-white);
+  text-decoration: underline;
+}
+.kw-pay__footer-legal p {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin: 10px 0 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MEDIA QUERIES — MOBILE-FIRST
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 480px) {
+  .kw-pay__cta-buttons { flex-direction: row; justify-content: center; }
+  .kw-pay__footer-row { flex-direction: row; justify-content: center; flex-wrap: wrap; }
+}
+@media (min-width: 576px) {
+  .kw-pay__methods-grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-pay__security-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 768px) {
+  .kw-pay__section { padding: 64px 0; }
+  .kw-pay__hero { min-height: 420px; padding: 72px 24px; }
+  .kw-pay__header { margin-bottom: 40px; }
+  .kw-pay__methods-grid { grid-template-columns: repeat(3, 1fr); }
+  .kw-pay__invoice-layout { grid-template-columns: 7fr 5fr; gap: 40px; align-items: center; }
+  .kw-pay__cta { padding: 72px 24px; }
+}
+@media (min-width: 1024px) {
+  .kw-pay__section { padding: 80px 0; }
+  .kw-pay__hero { min-height: 480px; padding: 88px 32px; }
+  .kw-pay__security-grid { grid-template-columns: repeat(4, 1fr); }
+  .kw-pay__header { margin-bottom: 48px; }
+}
+@media (min-width: 1200px) {
+  .kw-pay__methods-grid { gap: 24px; }
+}
+@media (min-width: 1440px) {
+  .kw-pay__section { padding: 96px 0; }
+}
+</style>
+
+<!-- ======================================================================
+     SCHEMA.ORG — PaymentService Structured Data
+     ====================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Metody Płatności — KEDAR-WIHA.pl",
+  "description": "Bezpieczne metody płatności w sklepie KEDAR-WIHA.pl: PayU, Przelewy24, BLIK, karty Visa/Mastercard, przelew tradycyjny. Szyfrowanie SSL/TLS, licencja KNF, 3D Secure.",
+  "url": "https://kedar-wiha.pl/platnosci",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "KEDAR-WIHA.pl",
+    "url": "https://kedar-wiha.pl",
+    "telephone": "+48575838766",
+    "email": "info@kedar-wiha.pl",
+    "paymentAccepted": ["PayU", "Przelewy24", "BLIK", "Visa", "Mastercard", "Przelew tradycyjny", "Za pobraniem"]
+  }
+}
+</script>
+
+<!-- ======================================================================
+     HTML — STRONA PŁATNOŚCI KEDAR-WIHA.pl
+     ====================================================================== -->
+<div class="kw-pay">
+
+  <!-- ================================================================
+       SEKCJA 1 — HERO
+       ================================================================ -->
+  <section class="kw-pay__hero" aria-label="Metody płatności w sklepie KEDAR-WIHA.pl">
+    <div class="kw-pay__hero-inner">
+      <span class="kw-pay__hero-badge">
+        <i class="fas fa-lock"></i> Bezpieczne płatności online
+      </span>
+
+      <h1 class="kw-pay__hero-title">
+        Metody Płatności w&nbsp;Sklepie <em>KEDAR&#8209;WIHA.pl</em>
+      </h1>
+
+      <p class="kw-pay__hero-sub">
+        Zamawiaj profesjonalne narzędzia WIHA z&nbsp;certyfikatami VDE&#8209;GS i&nbsp;IEC&nbsp;60900 z&nbsp;pełną gwarancją bezpieczeństwa transakcji. Obsługujemy szybkie płatności elektroniczne, karty, BLIK oraz przelewy tradycyjne — wszystko zabezpieczone szyfrowaniem SSL/TLS i&nbsp;silnym uwierzytelnieniem 3D&nbsp;Secure.
+      </p>
+
+      <div class="kw-pay__hero-trust">
+        <span class="kw-pay__hero-chip"><i class="fas fa-shield-alt"></i> SSL/TLS</span>
+        <span class="kw-pay__hero-chip"><i class="fas fa-university"></i> Licencja KNF</span>
+        <span class="kw-pay__hero-chip"><i class="fas fa-credit-card"></i> 3D Secure</span>
+        <span class="kw-pay__hero-chip"><i class="fas fa-check-circle"></i> PSD2/SCA</span>
+        <span class="kw-pay__hero-chip"><i class="fas fa-file-invoice"></i> Faktura VAT</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 2 — METODY PŁATNOŚCI
+       ================================================================ -->
+  <section class="kw-pay__section kw-pay__section--pattern" aria-label="Dostępne metody płatności">
+    <div class="container">
+
+      <div class="kw-pay__header kw-pay-reveal">
+        <span class="kw-pay__label">Formy płatności</span>
+        <h2 class="kw-pay__title">Wygodne i&nbsp;Bezpieczne Metody Płatności dla Profesjonalistów</h2>
+        <hr class="kw-pay__divider" />
+        <p class="kw-pay__subtitle">
+          Oferujemy sześć metod płatności — od natychmiastowych przelewów elektronicznych po tradycyjne przelewy bankowe. Każda transakcja w&nbsp;sklepie KEDAR-WIHA.pl z&nbsp;narzędziami WIHA jest zabezpieczona szyfrowanym połączeniem i&nbsp;licencjonowanymi operatorami.
+        </p>
+      </div>
+
+      <div class="kw-pay__methods-grid">
+
+        <!-- 1. PayU -->
+        <article class="kw-pay__method-card kw-pay-reveal kw-pay-stagger-1">
+          <div class="kw-pay__method-icon"><i class="fas fa-bolt"></i></div>
+          <div class="kw-pay__method-body">
+            <div class="kw-pay__method-head">
+              <h3 class="kw-pay__method-name">PayU — Szybki Przelew Online</h3>
+              <span class="kw-pay__method-badge kw-pay__method-badge--instant">Natychmiast</span>
+            </div>
+            <p class="kw-pay__method-desc">
+              Szybki przelew online obsługiwany przez <strong>PayU&nbsp;S.A.</strong> — jednego z&nbsp;największych operatorów płatności elektronicznych w&nbsp;Polsce i&nbsp;Europie Środkowo-Wschodniej. Płatność realizowana jest natychmiast po&nbsp;autoryzacji w&nbsp;Twoim banku, co&nbsp;oznacza błyskawiczne potwierdzenie zamówienia na&nbsp;narzędzia izolowane VDE i&nbsp;klucze dynamometryczne WIHA. PayU obsługuje przelewy z&nbsp;większości polskich banków — w&nbsp;tym mBank, PKO&nbsp;BP, ING, Santander, Pekao&nbsp;S.A. i&nbsp;wielu innych.
+            </p>
+            <p class="kw-pay__method-meta">
+              <strong>Operator:</strong> PayU S.A. · <strong>KRS:</strong> 0000274399 · <strong>Czas:</strong> natychmiastowy
+            </p>
+          </div>
+        </article>
+
+        <!-- 2. Przelewy24 -->
+        <article class="kw-pay__method-card kw-pay-reveal kw-pay-stagger-2">
+          <div class="kw-pay__method-icon"><i class="fas fa-exchange-alt"></i></div>
+          <div class="kw-pay__method-body">
+            <div class="kw-pay__method-head">
+              <h3 class="kw-pay__method-name">Przelewy24</h3>
+              <span class="kw-pay__method-badge kw-pay__method-badge--instant">Natychmiast</span>
+            </div>
+            <p class="kw-pay__method-desc">
+              Płatność elektroniczna obsługiwana przez <strong>DialCom24 Sp.&nbsp;z&nbsp;o.o. / PayPro&nbsp;S.A.</strong> — zaufanego polskiego operatora płatności z&nbsp;licencją Komisji Nadzoru Finansowego. Przelewy24 obsługuje szybkie przelewy z&nbsp;większości polskich banków oraz płatności mobilne, umożliwiając natychmiastowe opłacenie zamówienia na&nbsp;profesjonalne narzędzia WIHA VDE. System automatycznie potwierdza wpłatę, dzięki czemu Twoje zamówienie przechodzi do realizacji w&nbsp;ciągu kilku sekund.
+            </p>
+            <p class="kw-pay__method-meta">
+              <strong>Operator:</strong> DialCom24 / PayPro S.A. · <strong>KRS:</strong> 0000347935 · <strong>Czas:</strong> natychmiastowy
+            </p>
+          </div>
+        </article>
+
+        <!-- 3. Karta płatnicza -->
+        <article class="kw-pay__method-card kw-pay-reveal kw-pay-stagger-3">
+          <div class="kw-pay__method-icon"><i class="fas fa-credit-card"></i></div>
+          <div class="kw-pay__method-body">
+            <div class="kw-pay__method-head">
+              <h3 class="kw-pay__method-name">Karta Płatnicza — Visa / Mastercard</h3>
+              <span class="kw-pay__method-badge kw-pay__method-badge--instant">Natychmiast</span>
+            </div>
+            <p class="kw-pay__method-desc">
+              Akceptujemy karty debetowe i&nbsp;kredytowe <strong>Visa</strong> oraz <strong>Mastercard</strong>. Płatność kartą realizowana jest za pośrednictwem licencjonowanego operatora (PayU lub Przelewy24) z&nbsp;zastosowaniem <strong>silnego uwierzytelnienia SCA</strong> zgodnego z&nbsp;europejską dyrektywą PSD2. Oznacza to dodatkową weryfikację tożsamości przez Twój bank — np.&nbsp;kodem SMS lub autoryzacją biometryczną w&nbsp;aplikacji mobilnej. KEDAR-WIHA.pl <strong>nie przechowuje</strong> danych Twojej karty płatniczej.
+            </p>
+            <p class="kw-pay__method-meta">
+              <strong>Karty:</strong> Visa, Mastercard · <strong>Zabezpieczenie:</strong> 3D Secure / SCA / PSD2
+            </p>
+          </div>
+        </article>
+
+        <!-- 4. BLIK -->
+        <article class="kw-pay__method-card kw-pay-reveal kw-pay-stagger-4">
+          <div class="kw-pay__method-icon"><i class="fas fa-mobile-alt"></i></div>
+          <div class="kw-pay__method-body">
+            <div class="kw-pay__method-head">
+              <h3 class="kw-pay__method-name">BLIK — Płatność Mobilna</h3>
+              <span class="kw-pay__method-badge kw-pay__method-badge--instant">Natychmiast</span>
+            </div>
+            <p class="kw-pay__method-desc">
+              Szybka płatność mobilna za pośrednictwem 6-cyfrowego kodu <strong>BLIK</strong> generowanego w&nbsp;aplikacji mobilnej Twojego banku — dostępna przez PayU lub Przelewy24. BLIK to najchętniej wybierana metoda płatności elektronicznej w&nbsp;Polsce, oferująca natychmiastowe potwierdzenie transakcji. Idealne dla elektryków i&nbsp;instalatorów PV zamawiających wkrętaki izolowane VDE i&nbsp;zestawy narzędzi WIHA bezpośrednio z&nbsp;budowy za pomocą smartfona.
+            </p>
+            <p class="kw-pay__method-meta">
+              <strong>Metoda:</strong> Kod 6-cyfrowy z&nbsp;aplikacji bankowej · <strong>Czas:</strong> natychmiastowy
+            </p>
+          </div>
+        </article>
+
+        <!-- 5. Przelew tradycyjny -->
+        <article class="kw-pay__method-card kw-pay-reveal kw-pay-stagger-5">
+          <div class="kw-pay__method-icon"><i class="fas fa-university"></i></div>
+          <div class="kw-pay__method-body">
+            <div class="kw-pay__method-head">
+              <h3 class="kw-pay__method-name">Przelew Tradycyjny</h3>
+              <span class="kw-pay__method-badge kw-pay__method-badge--days">Do 7 dni</span>
+            </div>
+            <p class="kw-pay__method-desc">
+              Klasyczny przelew na&nbsp;rachunek bankowy KEDAR-WIHA.pl. Dane do przelewu (numer konta, tytuł wpłaty z&nbsp;numerem zamówienia) podawane są automatycznie po&nbsp;złożeniu zamówienia oraz w&nbsp;wiadomości e-mail z&nbsp;potwierdzeniem. Termin na&nbsp;dokonanie przelewu wynosi <strong>7&nbsp;dni roboczych</strong> od&nbsp;daty złożenia zamówienia — po&nbsp;upływie tego terminu niezapłacone zamówienie może zostać anulowane. Realizacja zamówienia rozpoczyna się po&nbsp;zaksięgowaniu wpłaty na&nbsp;naszym koncie.
+            </p>
+            <p class="kw-pay__method-meta">
+              <strong>Termin:</strong> 7 dni roboczych · <strong>Start realizacji:</strong> po zaksięgowaniu wpłaty
+            </p>
+          </div>
+        </article>
+
+        <!-- 6. Za pobraniem -->
+        <article class="kw-pay__method-card kw-pay-reveal kw-pay-stagger-6">
+          <div class="kw-pay__method-icon"><i class="fas fa-hand-holding-usd"></i></div>
+          <div class="kw-pay__method-body">
+            <div class="kw-pay__method-head">
+              <h3 class="kw-pay__method-name">Płatność za Pobraniem</h3>
+              <span class="kw-pay__method-badge kw-pay__method-badge--instant">Przy odbiorze</span>
+            </div>
+            <p class="kw-pay__method-desc">
+              Płatność gotówką lub kartą bezpośrednio przy odbiorze przesyłki od&nbsp;kuriera. Ta metoda jest dostępna dla wybranych form dostawy i&nbsp;może wiązać się z&nbsp;dodatkową opłatą za pobranie, która jest wliczona w&nbsp;łączny koszt dostawy widoczny w&nbsp;koszyku. Płatność za pobraniem jest szczególnie wygodna dla profesjonalistów zamawiających narzędzia WIHA do&nbsp;odbioru na&nbsp;wskazany adres firmy elektroinstalacyjnej lub magazynu.
+            </p>
+            <p class="kw-pay__method-meta">
+              <strong>Metoda:</strong> Gotówka / karta u&nbsp;kuriera · <strong>Dostępność:</strong> wybrane formy dostawy
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 3 — BEZPIECZEŃSTWO PŁATNOŚCI
+       ================================================================ -->
+  <section class="kw-pay__section kw-pay__section--dark" aria-label="Bezpieczeństwo płatności w KEDAR-WIHA.pl">
+    <div class="container">
+
+      <div class="kw-pay__header kw-pay-reveal">
+        <span class="kw-pay__label">Bezpieczeństwo</span>
+        <h2 class="kw-pay__title">Twoje Płatności Są Chronione na&nbsp;Najwyższym Poziomie</h2>
+        <hr class="kw-pay__divider" />
+        <p class="kw-pay__subtitle">
+          Tak jak narzędzia izolowane VDE WIHA chronią elektryka przed porażeniem prądem, tak nasze zabezpieczenia płatności chronią Twoje pieniądze i&nbsp;dane osobowe podczas każdej transakcji w&nbsp;sklepie KEDAR-WIHA.pl.
+        </p>
+      </div>
+
+      <div class="kw-pay__security-grid kw-pay-reveal">
+
+        <!-- SSL/TLS -->
+        <div class="kw-pay__security-card kw-pay-stagger-1">
+          <div class="kw-pay__security-icon"><i class="fas fa-lock"></i></div>
+          <h3>Szyfrowanie SSL/TLS</h3>
+          <p>
+            Wszystkie płatności elektroniczne w&nbsp;sklepie KEDAR-WIHA.pl są szyfrowane protokołem <strong>SSL/TLS</strong> (Secure Sockets Layer / Transport Layer Security). Dane przesyłane między Twoją przeglądarką a&nbsp;serwerami operatorów płatności są chronione 256-bitowym kluczem kryptograficznym — standard stosowany przez banki i&nbsp;instytucje finansowe na&nbsp;całym świecie.
+          </p>
+        </div>
+
+        <!-- KNF -->
+        <div class="kw-pay__security-card kw-pay-stagger-2">
+          <div class="kw-pay__security-icon"><i class="fas fa-university"></i></div>
+          <h3>Licencja KNF</h3>
+          <p>
+            Operatorzy płatności obsługujący transakcje w&nbsp;naszym sklepie — <strong>PayU&nbsp;S.A.</strong> i&nbsp;<strong>PayPro&nbsp;S.A.</strong> — posiadają licencje na&nbsp;świadczenie usług płatniczych wydane przez <strong>Komisję Nadzoru Finansowego</strong> (KNF). Oznacza to nadzór regulatora finansowego, zgodność z&nbsp;polskim prawem bankowym i&nbsp;ochronę depozytów klientów.
+          </p>
+        </div>
+
+        <!-- 3D Secure -->
+        <div class="kw-pay__security-card kw-pay-stagger-3">
+          <div class="kw-pay__security-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>3D Secure / SCA / PSD2</h3>
+          <p>
+            Transakcje kartą płatniczą w&nbsp;KEDAR-WIHA.pl są chronione technologią <strong>3D Secure</strong> — silnym uwierzytelnieniem klienta (Strong Customer Authentication) zgodnym z&nbsp;europejską dyrektywą <strong>PSD2</strong>. Dwuetapowa weryfikacja tożsamości przez Twój bank (kod SMS, biometria, token aplikacji) gwarantuje, że&nbsp;nikt nieupoważniony nie użyje Twojej karty.
+          </p>
+        </div>
+
+        <!-- No data storage -->
+        <div class="kw-pay__security-card kw-pay-stagger-4">
+          <div class="kw-pay__security-icon"><i class="fas fa-user-shield"></i></div>
+          <h3>Dane Kart Nie Są Przechowywane</h3>
+          <p>
+            KEDAR-WIHA.pl <strong>nie przechowuje danych kart płatniczych</strong> klientów. Numery kart, daty ważności i&nbsp;kody CVV/CVC nigdy nie są zapisywane w&nbsp;naszych systemach. Przetwarzanie danych karty odbywa się wyłącznie na&nbsp;certyfikowanych serwerach operatorów płatności (PayU, Przelewy24) zgodnych ze&nbsp;standardem <strong>PCI&nbsp;DSS</strong>.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Security bar -->
+      <div class="kw-pay__security-bar kw-pay-reveal">
+        <span class="kw-pay__security-bar-item"><i class="fas fa-check-circle"></i> Szyfrowanie 256-bit SSL</span>
+        <span class="kw-pay__security-bar-item"><i class="fas fa-check-circle"></i> Licencja KNF</span>
+        <span class="kw-pay__security-bar-item"><i class="fas fa-check-circle"></i> PCI DSS Compliance</span>
+        <span class="kw-pay__security-bar-item"><i class="fas fa-check-circle"></i> Dyrektywa PSD2</span>
+        <span class="kw-pay__security-bar-item"><i class="fas fa-check-circle"></i> 3D Secure 2.0</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 4 — FAKTUROWANIE I PARAGONY
+       ================================================================ -->
+  <section class="kw-pay__section" aria-label="Fakturowanie VAT i paragony w KEDAR-WIHA.pl">
+    <div class="container">
+
+      <div class="kw-pay__invoice-layout">
+
+        <!-- Treść -->
+        <div class="kw-pay-reveal">
+          <span class="kw-pay__label">Dokumenty sprzedaży</span>
+          <h2 class="kw-pay__invoice-text" style="font-family:var(--kw-font-heading);font-weight:700;font-size:clamp(20px,2.8vw,30px);line-height:1.2;color:var(--kw-heading);margin:0 0 14px;">Faktury VAT, E-Faktury i&nbsp;Paragony Fiskalne</h2>
+
+          <div class="kw-pay__invoice-text">
+            <p>
+              Jako profesjonalny autoryzowany dystrybutor narzędzi WIHA w&nbsp;Polsce, <strong>KEDAR-WIHA.pl</strong> wystawia pełną dokumentację sprzedaży do każdego zamówienia. Każdy zakup profesjonalnych wkrętaków izolowanych VDE, kluczy dynamometrycznych czy zestawów narzędzi WIHA jest udokumentowany zgodnie z&nbsp;polskimi przepisami podatkowymi — paragonem fiskalnym lub fakturą VAT.
+            </p>
+
+            <p>
+              Dla firm elektroinstalacyjnych, instalatorów fotowoltaiki i&nbsp;działów zakupów ważne jest posiadanie prawidłowej faktury VAT z&nbsp;numerem NIP — niezbędnej do odliczenia podatku naliczonego oraz dokumentacji kosztów narzędzi VDE w&nbsp;projektach budowlanych. Faktury VAT wystawiane są w&nbsp;formie elektronicznej (<strong>e-faktura</strong>) i&nbsp;wysyłane automatycznie na&nbsp;adres e-mail podany przy składaniu zamówienia. Dodatkowo każdy klient może pobrać fakturę z&nbsp;panelu <strong>Konta Klienta</strong> w&nbsp;dowolnym momencie.
+            </p>
+
+            <div class="kw-pay__info-box">
+              <p>
+                <i class="fas fa-info-circle"></i>
+                <strong>Ważne:</strong> Aby otrzymać fakturę VAT, należy podać dane do faktury — w&nbsp;tym <strong>NIP firmy</strong> — w&nbsp;trakcie składania zamówienia w&nbsp;sekcji danych rozliczeniowych. Jeśli NIP nie zostanie podany, do zamówienia zostanie wystawiony paragon fiskalny.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kroki -->
+        <div class="kw-pay-reveal">
+          <ol class="kw-pay__invoice-steps">
+            <li>
+              <strong>Zaznacz „Chcę fakturę VAT"</strong>
+              <span>Podczas składania zamówienia zaznacz opcję wystawienia faktury VAT w&nbsp;formularzu danych rozliczeniowych.</span>
+            </li>
+            <li>
+              <strong>Podaj NIP i&nbsp;dane firmy</strong>
+              <span>Wpisz NIP, nazwę firmy, adres siedziby. System automatycznie pobierze dane z&nbsp;bazy GUS.</span>
+            </li>
+            <li>
+              <strong>Złóż zamówienie i&nbsp;opłać</strong>
+              <span>Wybierz preferowaną metodę płatności i&nbsp;dokończ zamówienie na&nbsp;narzędzia WIHA VDE.</span>
+            </li>
+            <li>
+              <strong>Pobierz e-fakturę</strong>
+              <span>Faktura VAT zostanie wysłana na e-mail i&nbsp;będzie dostępna w&nbsp;panelu Konta Klienta do pobrania w&nbsp;formacie PDF.</span>
+            </li>
+          </ol>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 5 — CERTYFIKACJE I INFORMACJE PRAWNE
+       ================================================================ -->
+  <section class="kw-pay__section kw-pay__section--alt kw-pay__section--pattern" aria-label="Certyfikacje i informacje prawne KEDAR-WIHA.pl">
+    <div class="container">
+
+      <div class="kw-pay__header kw-pay-reveal">
+        <span class="kw-pay__label">Certyfikacje i&nbsp;zaufanie</span>
+        <h2 class="kw-pay__title">Autoryzowany Dystrybutor WIHA — Gwarancja Oryginalności i&nbsp;Bezpieczeństwa</h2>
+        <hr class="kw-pay__divider" />
+      </div>
+
+      <!-- Cert badges -->
+      <div class="kw-pay__certs-row kw-pay-reveal">
+        <span class="kw-pay__cert-badge kw-pay__cert-badge--blue"><i class="fas fa-check"></i> VDE-GS</span>
+        <span class="kw-pay__cert-badge kw-pay__cert-badge--blue"><i class="fas fa-bolt"></i> IEC 60900</span>
+        <span class="kw-pay__cert-badge kw-pay__cert-badge--blue"><i class="fas fa-check"></i> ASTM F1505</span>
+        <span class="kw-pay__cert-badge kw-pay__cert-badge--green"><i class="fas fa-heart"></i> Certyfikat AGR</span>
+        <span class="kw-pay__cert-badge kw-pay__cert-badge--dark"><i class="fas fa-flag"></i> Made in Germany</span>
+        <span class="kw-pay__cert-badge kw-pay__cert-badge--red"><i class="fas fa-award"></i> Autoryzowany Dystrybutor</span>
+        <span class="kw-pay__cert-badge kw-pay__cert-badge--blue"><i class="fas fa-bolt"></i> Test 10 000 V</span>
+      </div>
+
+      <div class="kw-pay__legal-text kw-pay-reveal">
+        <p>
+          <strong>KEDAR-WIHA.pl</strong> jest autoryzowanym dystrybutorem profesjonalnych narzędzi WIHA w&nbsp;Polsce. Każdy produkt sprzedawany w&nbsp;naszym sklepie — od wkrętaków izolowanych VDE po kompletne zestawy narzędziowe — jest oryginalnym wyrobem marki WIHA, objętym pełną gwarancją producenta. Narzędzia izolowane VDE posiadają certyfikaty <strong>VDE-GS</strong> i&nbsp;<strong>IEC&nbsp;60900</strong> potwierdzające izolację do&nbsp;1&nbsp;000&nbsp;V&nbsp;AC, a&nbsp;każde narzędzie przechodzi indywidualny test dielektryczny napięciem <strong>10&nbsp;000&nbsp;V</strong> — dziesięciokrotna rezerwa bezpieczeństwa.
+        </p>
+        <p>
+          Status autoryzowanego dystrybutora oznacza, że&nbsp;narzędzia WIHA kupione w&nbsp;KEDAR-WIHA.pl pochodzą z&nbsp;oficjalnego kanału dystrybucji — bez pośredników, bez ryzyka podróbek, z&nbsp;kompletną dokumentacją certyfikatową dostępną na&nbsp;życzenie. Ponad <strong>90% produkcji WIHA</strong> pochodzi z&nbsp;zakładów w&nbsp;Schwarzwaldzie w&nbsp;Niemczech — <strong>Made in Germany od 1939 roku</strong>.
+        </p>
+        <p>
+          W przypadku pytań dotyczących płatności, faktur lub certyfikatów produktów zapraszamy do kontaktu: telefon <strong><a href="tel:+48575838766" style="color:var(--kw-primary);text-decoration:none;">+48&nbsp;575&nbsp;838&nbsp;766</a></strong>, e-mail <strong><a href="mailto:info@kedar-wiha.pl" style="color:var(--kw-secondary);text-decoration:none;">info@kedar-wiha.pl</a></strong>, strona <strong><a href="https://kedar-wiha.pl" style="color:var(--kw-secondary);text-decoration:none;" target="_blank" rel="noopener">kedar-wiha.pl</a></strong>.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 6 — FAQ / WSPARCIE
+       ================================================================ -->
+  <section class="kw-pay__section" aria-label="Najczęściej zadawane pytania o płatności">
+    <div class="container">
+
+      <div class="kw-pay__header kw-pay-reveal">
+        <span class="kw-pay__label">FAQ</span>
+        <h2 class="kw-pay__title">Najczęściej Zadawane Pytania o&nbsp;Płatności i&nbsp;Faktury</h2>
+        <hr class="kw-pay__divider" />
+        <p class="kw-pay__subtitle">
+          Poniżej znajdziesz odpowiedzi na&nbsp;pytania, które najczęściej otrzymujemy od&nbsp;elektryków, firm instalacyjnych i&nbsp;specjalistów zamawiających narzędzia WIHA w&nbsp;naszym sklepie.
+        </p>
+      </div>
+
+      <div class="kw-pay__faq-list">
+
+        <article class="kw-pay__faq-item kw-pay-reveal kw-pay-stagger-1">
+          <h3 class="kw-pay__faq-q"><i class="fas fa-question-circle"></i> Jakie metody płatności akceptuje KEDAR-WIHA.pl?</h3>
+          <p class="kw-pay__faq-a">
+            Akceptujemy sześć metod płatności: szybkie przelewy online przez PayU i&nbsp;Przelewy24, płatności kartami Visa i&nbsp;Mastercard, BLIK, tradycyjny przelew bankowy (termin 7&nbsp;dni roboczych) oraz płatność za pobraniem przy odbiorze od&nbsp;kuriera. Wszystkie metody elektroniczne są zabezpieczone szyfrowaniem SSL/TLS i&nbsp;silnym uwierzytelnieniem 3D&nbsp;Secure zgodnym z&nbsp;dyrektywą PSD2.
+          </p>
+        </article>
+
+        <article class="kw-pay__faq-item kw-pay-reveal kw-pay-stagger-2">
+          <h3 class="kw-pay__faq-q"><i class="fas fa-question-circle"></i> Jak otrzymać fakturę VAT za zakup narzędzi WIHA?</h3>
+          <p class="kw-pay__faq-a">
+            Aby otrzymać fakturę VAT, zaznacz opcję „Chcę fakturę VAT" podczas składania zamówienia i&nbsp;podaj numer NIP firmy oraz dane rozliczeniowe. Faktura VAT zostanie wystawiona w&nbsp;formie elektronicznej (e-faktura) i&nbsp;wysłana na&nbsp;podany adres e-mail. Fakturę można również pobrać w&nbsp;formacie PDF z&nbsp;panelu Konta Klienta w&nbsp;dowolnym momencie po&nbsp;realizacji zamówienia.
+          </p>
+        </article>
+
+        <article class="kw-pay__faq-item kw-pay-reveal kw-pay-stagger-3">
+          <h3 class="kw-pay__faq-q"><i class="fas fa-question-circle"></i> Czy moje dane karty są bezpieczne?</h3>
+          <p class="kw-pay__faq-a">
+            Tak — KEDAR-WIHA.pl nie przechowuje danych kart płatniczych klientów. Numery kart, daty ważności i&nbsp;kody CVV/CVC nigdy nie są zapisywane w&nbsp;naszych systemach. Cały proces przetwarzania danych karty odbywa się na&nbsp;certyfikowanych serwerach operatorów płatności (PayU, Przelewy24) zgodnych ze&nbsp;standardem PCI&nbsp;DSS. Transakcje są dodatkowo chronione technologią 3D&nbsp;Secure.
+          </p>
+        </article>
+
+        <article class="kw-pay__faq-item kw-pay-reveal kw-pay-stagger-4">
+          <h3 class="kw-pay__faq-q"><i class="fas fa-question-circle"></i> Ile mam czasu na zapłacenie przelewem tradycyjnym?</h3>
+          <p class="kw-pay__faq-a">
+            Przy wyborze przelewu tradycyjnego termin na&nbsp;dokonanie wpłaty wynosi <strong>7&nbsp;dni roboczych</strong> od&nbsp;daty złożenia zamówienia. Dane do przelewu (numer konta, tytuł wpłaty z&nbsp;numerem zamówienia) wyświetlane są po&nbsp;złożeniu zamówienia oraz w&nbsp;wiadomości e-mail z&nbsp;potwierdzeniem. Realizacja zamówienia rozpoczyna się po&nbsp;zaksięgowaniu wpłaty. Po&nbsp;upływie terminu niezapłacone zamówienie może zostać automatycznie anulowane.
+          </p>
+        </article>
+
+        <article class="kw-pay__faq-item kw-pay-reveal kw-pay-stagger-5">
+          <h3 class="kw-pay__faq-q"><i class="fas fa-question-circle"></i> Potrzebuję dokumentacji certyfikatowej do audytu BHP — jak ją uzyskać?</h3>
+          <p class="kw-pay__faq-a">
+            Jako autoryzowany dystrybutor WIHA dostarczamy kompletną dokumentację certyfikatową na&nbsp;życzenie — deklaracje zgodności, certyfikaty VDE-GS, IEC&nbsp;60900 i&nbsp;ASTM&nbsp;F1505, wyniki testów dielektrycznych (10&nbsp;000&nbsp;V). Skontaktuj się z&nbsp;nami pod numerem <strong>+48&nbsp;575&nbsp;838&nbsp;766</strong> lub na&nbsp;<strong>info@kedar-wiha.pl</strong>, a&nbsp;przygotujemy pakiet dokumentacji potrzebny do&nbsp;audytu BHP lub przetargu publicznego.
+          </p>
+        </article>
+
+        <article class="kw-pay__faq-item kw-pay-reveal kw-pay-stagger-6">
+          <h3 class="kw-pay__faq-q"><i class="fas fa-question-circle"></i> Czy oferujecie warunki B2B dla firm?</h3>
+          <p class="kw-pay__faq-a">
+            Tak — oferujemy dedykowane warunki współpracy dla firm elektroinstalacyjnych, hurtowni i&nbsp;działów zakupów. Obejmują one faktury VAT z&nbsp;terminem płatności, indywidualne wyceny dla zamówień hurtowych, priorytetową realizację oraz wsparcie techniczne w&nbsp;doborze narzędzi WIHA VDE. Aby omówić warunki B2B, skontaktuj się z&nbsp;nami telefonicznie lub e-mailowo.
+          </p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 7 — CTA + SEKCJA 8 — FOOTER
+       ================================================================ -->
+  <section class="kw-pay__cta" aria-label="Kontakt i realizacja zamówienia KEDAR-WIHA.pl">
+    <div class="kw-pay__cta-inner kw-pay-reveal">
+
+      <span class="kw-pay__label" style="color:#FFD700;background:rgba(255,215,0,0.1);">Zamów teraz</span>
+
+      <h2>Zamów Profesjonalne Narzędzia WIHA z&nbsp;Bezpieczną Płatnością Online</h2>
+
+      <p>
+        Wkrętaki izolowane VDE, klucze dynamometryczne, zestawy narzędziowe — wszystko z&nbsp;certyfikatami VDE-GS i&nbsp;IEC&nbsp;60900, gwarancją producenta i&nbsp;fakturą VAT. Wybierz wygodną metodę płatności i&nbsp;otrzymaj narzędzia WIHA Made&nbsp;in&nbsp;Germany z&nbsp;dostawą na&nbsp;terenie całej Polski.
+      </p>
+
+      <div class="kw-pay__cta-buttons">
+        <a href="/2-glowna" class="kw-pay__btn kw-pay__btn--white" aria-label="Przejdź do sklepu KEDAR-WIHA.pl">
+          <i class="fas fa-shopping-bag"></i> Przejdź do sklepu
+        </a>
+        <a href="/kontakt" class="kw-pay__btn kw-pay__btn--outline" aria-label="Skontaktuj się z KEDAR-WIHA.pl">
+          <i class="fas fa-headset"></i> Skontaktuj się
+        </a>
+      </div>
+
+      <!-- Footer contact row -->
+      <div class="kw-pay__footer-row">
+        <a href="tel:+48575838766" class="kw-pay__footer-link">
+          <i class="fas fa-phone-alt"></i> +48 575 838 766
+        </a>
+        <a href="mailto:info@kedar-wiha.pl" class="kw-pay__footer-link">
+          <i class="fas fa-envelope"></i> info@kedar-wiha.pl
+        </a>
+        <a href="https://kedar-wiha.pl" class="kw-pay__footer-link" target="_blank" rel="noopener">
+          <i class="fas fa-globe"></i> kedar-wiha.pl
+        </a>
+      </div>
+
+      <!-- Footer legal links -->
+      <div class="kw-pay__footer-legal">
+        <div class="kw-pay__footer-legal-links">
+          <a href="/regulamin">Regulamin sklepu</a>
+          <a href="/polityka-prywatnosci">Polityka prywatności</a>
+          <a href="/platnosci">Płatności</a>
+          <a href="/dostawy">Dostawa</a>
+          <a href="/zwroty">Zwroty i reklamacje</a>
+          <a href="/content/4-o-firmie">O firmie</a>
+          <a href="/kontakt">Kontakt</a>
+        </div>
+        <p>&copy; 2025 KEDAR-WIHA.pl — Autoryzowany Dystrybutor Narzędzi WIHA w&nbsp;Polsce. Wszelkie prawa zastrzeżone.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+<!-- END .kw-pay -->
+
+<!-- ======================================================================
+     SCROLL REVEAL — IntersectionObserver (CSS-only animations triggered)
+     ====================================================================== -->
+<script>
+(function(){
+  'use strict';
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.kw-pay-reveal')
+      .forEach(function(el){ el.classList.add('kw-pay-visible'); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.classList.add('kw-pay-visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.kw-pay-reveal').forEach(function(el){ obs.observe(el); });
+})();
+</script>

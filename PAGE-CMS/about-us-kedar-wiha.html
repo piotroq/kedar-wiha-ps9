@@ -1,0 +1,1611 @@
+<!-- ==========================================================================
+   KEDAR-WIHA.pl — Strona "O firmie" (About Us)
+   PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 4.x
+   Wersja: 1.0.0 | 2025
+   Gotowe do wklejenia: Wygląd > Strony > O firmie > Zawartość strony
+   ========================================================================== -->
+
+<style>
+/* ==========================================================================
+   KEDAR-WIHA.pl — O FIRMIE — Custom Page Styles
+   Namespace: .kw-about- (unikanie kolizji z Optima / Bootstrap)
+   Mobile-first | BEM | CSS Variables z custom-style.css
+   ========================================================================== */
+
+/* ── RESET / SCOPE ────────────────────────────────────────────────────── */
+.kw-about {
+  --kw-primary: #8B0000;
+  --kw-secondary: #0056A3;
+  --kw-three: #ca0000;
+  --kw-accent: #FFD700;
+  --kw-heading: #2D2D2D;
+  --kw-text: #151515;
+  --kw-text-muted: #555555;
+  --kw-bg-light: #f5f5f5;
+  --kw-bg-dark: #1a1a1a;
+  --kw-white: #ffffff;
+  --kw-border: #e8e8e8;
+  --kw-green: #1A7A3C;
+  --kw-font-heading: 'Montserrat', 'Arial', sans-serif;
+  --kw-font-body: 'Inter', 'Arial', sans-serif;
+  --kw-radius-sm: 3px;
+  --kw-radius-md: 4px;
+  --kw-radius-lg: 8px;
+  --kw-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --kw-shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --kw-shadow-lg: 0 8px 28px rgba(0,0,0,0.13);
+  --kw-shadow-cta: 0 4px 20px rgba(139,0,0,0.30);
+  --kw-transition: 300ms cubic-bezier(0.25,0.46,0.45,0.94);
+  --kw-transition-slow: 500ms ease;
+
+  font-family: var(--kw-font-body);
+  color: var(--kw-text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+.kw-about *,
+.kw-about *::before,
+.kw-about *::after {
+  box-sizing: border-box;
+}
+
+.kw-about img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── ANIMATIONS / KEYFRAMES ───────────────────────────────────────────── */
+@keyframes kwFadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes kwFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes kwSlideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes kwSlideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes kwPulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139,0,0,0.25); }
+  50%      { box-shadow: 0 0 0 12px rgba(139,0,0,0); }
+}
+
+@keyframes kwCountUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes kwDiagonalMove {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+/* Scroll reveal klasy */
+.kw-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--kw-transition-slow), transform var(--kw-transition-slow);
+}
+.kw-reveal.kw-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.kw-reveal-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity var(--kw-transition-slow), transform var(--kw-transition-slow);
+}
+.kw-reveal-left.kw-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.kw-reveal-right {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity var(--kw-transition-slow), transform var(--kw-transition-slow);
+}
+.kw-reveal-right.kw-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger delays */
+.kw-stagger-1 { transition-delay: 0ms; }
+.kw-stagger-2 { transition-delay: 100ms; }
+.kw-stagger-3 { transition-delay: 200ms; }
+.kw-stagger-4 { transition-delay: 300ms; }
+.kw-stagger-5 { transition-delay: 400ms; }
+.kw-stagger-6 { transition-delay: 500ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kw-reveal, .kw-reveal-left, .kw-reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── SECTION BASE ─────────────────────────────────────────────────────── */
+.kw-about__section {
+  padding: 48px 0;
+  position: relative;
+}
+
+.kw-about__section--alt {
+  background: var(--kw-bg-light);
+}
+
+.kw-about__section--dark {
+  background: var(--kw-bg-dark);
+  color: var(--kw-white);
+}
+
+.kw-about__section--dark p,
+.kw-about__section--dark li {
+  color: rgba(255,255,255,0.85);
+}
+
+.kw-about__section--pattern {
+  position: relative;
+}
+.kw-about__section--pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(139,0,0,0.02) 20px,
+      rgba(139,0,0,0.02) 21px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+.kw-about__section--pattern > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── SECTION HEADER (reusable) ────────────────────────────────────────── */
+.kw-about__section-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.kw-about__label {
+  display: inline-block;
+  font-family: var(--kw-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--kw-primary);
+  background: rgba(139,0,0,0.06);
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+
+.kw-about__section--dark .kw-about__label {
+  color: var(--kw-accent);
+  background: rgba(255,215,0,0.12);
+}
+
+.kw-about__title {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3.5vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--kw-heading);
+  margin: 0 0 12px;
+}
+
+.kw-about__section--dark .kw-about__title {
+  color: var(--kw-white);
+}
+
+.kw-about__title-accent {
+  position: relative;
+  display: inline;
+}
+.kw-about__title-accent::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--kw-primary);
+  border-radius: 2px;
+}
+
+.kw-about__subtitle {
+  font-family: var(--kw-font-body);
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--kw-text-muted);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.kw-about__section--dark .kw-about__subtitle {
+  color: rgba(255,255,255,0.7);
+}
+
+.kw-about__divider {
+  width: 48px;
+  height: 3px;
+  background: var(--kw-primary);
+  border: none;
+  border-radius: 2px;
+  margin: 16px auto;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 1 — HERO BANNER
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-about__hero {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(26,26,26,0.92) 0%, rgba(61,0,0,0.88) 50%, rgba(139,0,0,0.82) 100%),
+    url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1600&q=80') center/cover no-repeat;
+  padding: 56px 16px;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Parallax fallback mobile */
+@supports (background-attachment: fixed) {
+  @media (min-width: 768px) {
+    .kw-about__hero {
+      background-attachment: fixed, fixed;
+    }
+  }
+}
+
+/* Pattern overlay */
+.kw-about__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 30px,
+      rgba(255,255,255,0.015) 30px,
+      rgba(255,255,255,0.015) 31px
+    );
+  pointer-events: none;
+}
+
+/* Bottom fade edge */
+.kw-about__hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to top, rgba(26,26,26,0.3), transparent);
+  pointer-events: none;
+}
+
+.kw-about__hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  animation: kwFadeUp 0.8s ease both;
+}
+
+.kw-about__hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kw-accent);
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.25);
+  padding: 6px 18px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.kw-about__hero-badge i {
+  font-size: 12px;
+}
+
+.kw-about__hero-title {
+  font-family: var(--kw-font-heading);
+  font-weight: 800;
+  font-size: clamp(26px, 5vw, 52px);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--kw-white);
+  margin: 0 0 16px;
+}
+
+.kw-about__hero-title span {
+  color: var(--kw-three);
+  position: relative;
+}
+
+.kw-about__hero-sub {
+  font-family: var(--kw-font-body);
+  font-size: clamp(14px, 2vw, 18px);
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.8);
+  margin: 0 0 28px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.kw-about__hero-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.kw-about__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--kw-white);
+  background: var(--kw-primary);
+  border: 2px solid var(--kw-primary);
+  padding: 14px 28px;
+  border-radius: var(--kw-radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  min-height: 48px;
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-cta);
+}
+.kw-about__btn-primary:hover {
+  background: var(--kw-three);
+  border-color: var(--kw-three);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(202,0,0,0.4);
+  color: var(--kw-white);
+  text-decoration: none;
+}
+
+.kw-about__btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--kw-white);
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.4);
+  padding: 12px 26px;
+  border-radius: var(--kw-radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  min-height: 48px;
+  transition: all var(--kw-transition);
+}
+.kw-about__btn-secondary:hover {
+  background: var(--kw-white);
+  border-color: var(--kw-white);
+  color: var(--kw-primary);
+  text-decoration: none;
+}
+
+/* Trust badges row in hero */
+.kw-about__trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.kw-about__trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--kw-font-heading);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 3px;
+  background: rgba(255,255,255,0.04);
+}
+
+.kw-about__trust-badge i {
+  color: var(--kw-accent);
+  font-size: 11px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 2 — HISTORIA I DOŚWIADCZENIE
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-about__story-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.kw-about__story-image {
+  position: relative;
+  border-radius: var(--kw-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--kw-shadow-lg);
+}
+
+.kw-about__story-image img {
+  width: 100%;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.kw-about__story-image:hover img {
+  transform: scale(1.03);
+}
+
+/* Decorative corner accent */
+.kw-about__story-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 64px;
+  height: 64px;
+  background: var(--kw-primary);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.kw-about__story-text h2 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.2;
+  color: var(--kw-heading);
+  margin-bottom: 16px;
+}
+
+.kw-about__story-text p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--kw-text);
+  margin-bottom: 16px;
+}
+
+.kw-about__story-text strong {
+  color: var(--kw-heading);
+}
+
+/* Cert badges inline */
+.kw-about__cert-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.kw-about__cert-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--kw-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 3px;
+  background: var(--kw-secondary);
+  color: var(--kw-white);
+}
+
+.kw-about__cert-tag--germany {
+  background: var(--kw-heading);
+}
+
+.kw-about__cert-tag--agr {
+  background: var(--kw-green);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 3 — OFERTA PRODUKTÓW (3 kategorie)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-about__products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.kw-about__product-card {
+  background: var(--kw-white);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  overflow: hidden;
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.kw-about__product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--kw-shadow-lg);
+  border-color: var(--kw-primary);
+}
+
+.kw-about__product-card-img {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #f8f8f8;
+  position: relative;
+}
+
+.kw-about__product-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.kw-about__product-card:hover .kw-about__product-card-img img {
+  transform: scale(1.05);
+}
+
+/* Category overlay label */
+.kw-about__product-cat-label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-family: var(--kw-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--kw-white);
+  background: var(--kw-primary);
+  padding: 4px 12px;
+  border-radius: 3px;
+}
+
+.kw-about__product-card-body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.kw-about__product-card-body h3 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(17px, 2.2vw, 22px);
+  line-height: 1.3;
+  color: var(--kw-heading);
+  margin: 0 0 10px;
+}
+
+.kw-about__product-card-body p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--kw-text-muted);
+  margin: 0 0 16px;
+  flex: 1;
+}
+
+.kw-about__product-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.kw-about__product-features li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--kw-text);
+  margin-bottom: 6px;
+}
+
+.kw-about__product-features li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 10px;
+  color: var(--kw-green);
+  position: absolute;
+  left: 0;
+  top: 4px;
+}
+
+.kw-about__product-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--kw-font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--kw-primary);
+  text-decoration: none;
+  margin-top: auto;
+  transition: all var(--kw-transition);
+}
+
+.kw-about__product-link:hover {
+  color: var(--kw-three);
+  gap: 10px;
+  text-decoration: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 4 — WARTOŚCI FIRMY (4 kolumny ikony)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-about__values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.kw-about__value-card {
+  text-align: center;
+  padding: 28px 20px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--kw-radius-lg);
+  transition: all var(--kw-transition);
+}
+
+.kw-about__value-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+  border-color: rgba(255,215,0,0.2);
+}
+
+.kw-about__value-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(139,0,0,0.2);
+  border: 2px solid var(--kw-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 24px;
+  color: var(--kw-accent);
+  transition: all var(--kw-transition);
+}
+
+.kw-about__value-card:hover .kw-about__value-icon {
+  background: var(--kw-primary);
+  animation: kwPulseGlow 1.5s infinite;
+}
+
+.kw-about__value-card h3 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--kw-white);
+  margin: 0 0 10px;
+}
+
+.kw-about__value-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.75);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 5 — RYNEK I SZANSE (statystyki + treść)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-about__stats-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.kw-about__stat-card {
+  text-align: center;
+  padding: 24px 12px;
+  background: var(--kw-white);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  box-shadow: var(--kw-shadow-sm);
+  transition: all var(--kw-transition);
+}
+
+.kw-about__stat-card:hover {
+  box-shadow: var(--kw-shadow-md);
+  border-color: var(--kw-primary);
+}
+
+.kw-about__stat-number {
+  font-family: var(--kw-font-heading);
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1;
+  color: var(--kw-primary);
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.kw-about__stat-unit {
+  font-family: var(--kw-font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--kw-text-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.kw-about__stat-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--kw-text-muted);
+  line-height: 1.4;
+  margin-top: 8px;
+}
+
+.kw-about__market-text {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.kw-about__market-text p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* Highlight box */
+.kw-about__highlight-box {
+  background: rgba(139,0,0,0.04);
+  border-left: 4px solid var(--kw-primary);
+  padding: 20px 24px;
+  border-radius: 0 var(--kw-radius-md) var(--kw-radius-md) 0;
+  margin: 24px 0;
+}
+
+.kw-about__highlight-box p {
+  margin: 0;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--kw-heading);
+  line-height: 1.65;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 6 — WSPARCIE I SERWIS
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-about__support-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.kw-about__support-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--kw-white);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-sm);
+}
+
+.kw-about__support-item:hover {
+  box-shadow: var(--kw-shadow-md);
+  border-color: var(--kw-secondary);
+}
+
+.kw-about__support-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--kw-radius-md);
+  background: rgba(0,86,163,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--kw-secondary);
+  transition: all var(--kw-transition);
+}
+
+.kw-about__support-item:hover .kw-about__support-icon {
+  background: var(--kw-secondary);
+  color: var(--kw-white);
+}
+
+.kw-about__support-text h4 {
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--kw-heading);
+  margin: 0 0 6px;
+}
+
+.kw-about__support-text p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--kw-text-muted);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SEKCJA 7 — CTA / ZAKOŃCZENIE
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-about__cta-section {
+  background:
+    linear-gradient(135deg, #8B0000 0%, #5a0000 60%, #1a1a1a 100%);
+  text-align: center;
+  padding: 56px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.kw-about__cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.02) 40px,
+      rgba(255,255,255,0.02) 41px
+    );
+  pointer-events: none;
+}
+
+.kw-about__cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.kw-about__cta-content h2 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3.5vw, 36px);
+  line-height: 1.2;
+  color: var(--kw-white);
+  margin: 0 0 16px;
+}
+
+.kw-about__cta-content p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.8);
+  margin: 0 0 28px;
+}
+
+.kw-about__cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.kw-about__btn-cta-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--kw-primary);
+  background: var(--kw-white);
+  border: 2px solid var(--kw-white);
+  padding: 14px 32px;
+  border-radius: var(--kw-radius-md);
+  text-decoration: none;
+  min-height: 48px;
+  transition: all var(--kw-transition);
+  box-shadow: 0 4px 20px rgba(255,255,255,0.2);
+}
+.kw-about__btn-cta-white:hover {
+  background: transparent;
+  color: var(--kw-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255,255,255,0.3);
+  text-decoration: none;
+}
+
+/* Contact info row */
+.kw-about__contact-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.kw-about__contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.75);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color var(--kw-transition);
+}
+
+.kw-about__contact-item:hover {
+  color: var(--kw-white);
+  text-decoration: none;
+}
+
+.kw-about__contact-item i {
+  color: var(--kw-accent);
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MEDIA QUERIES — MOBILE-FIRST PROGRESSION
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 480px: Larger mobiles ── */
+@media (min-width: 480px) {
+  .kw-about__hero-ctas {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .kw-about__cta-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .kw-about__contact-row {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* ── 576px: SM ── */
+@media (min-width: 576px) {
+  .kw-about__stats-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .kw-about__values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kw-about__support-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── 768px: Tablet ── */
+@media (min-width: 768px) {
+  .kw-about__section {
+    padding: 64px 0;
+  }
+
+  .kw-about__hero {
+    min-height: 520px;
+    padding: 80px 24px;
+  }
+
+  .kw-about__section-header {
+    margin-bottom: 40px;
+  }
+
+  .kw-about__story-grid {
+    grid-template-columns: 5fr 7fr;
+    gap: 40px;
+  }
+
+  .kw-about__products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .kw-about__cta-section {
+    padding: 80px 24px;
+  }
+}
+
+/* ── 1024px: Desktop ── */
+@media (min-width: 1024px) {
+  .kw-about__section {
+    padding: 80px 0;
+  }
+
+  .kw-about__hero {
+    min-height: 580px;
+    padding: 96px 32px;
+  }
+
+  .kw-about__story-grid {
+    gap: 56px;
+  }
+
+  .kw-about__values-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .kw-about__support-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .kw-about__section-header {
+    margin-bottom: 48px;
+  }
+}
+
+/* ── 1200px: Large desktop ── */
+@media (min-width: 1200px) {
+  .kw-about__hero {
+    min-height: 640px;
+  }
+
+  .kw-about__products-grid {
+    gap: 32px;
+  }
+}
+
+/* ── 1440px: XL ── */
+@media (min-width: 1440px) {
+  .kw-about__section {
+    padding: 96px 0;
+  }
+}
+</style>
+
+<!-- ======================================================================
+     SCHEMA.ORG — Organization Structured Data
+     ====================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "KEDAR-WIHA.pl",
+  "alternateName": "KEDAR-WIHA Narzędzia Specjalistyczne",
+  "url": "https://kedar-wiha.pl",
+  "logo": "https://kedar-wiha.pl/img/logo-kedar-wiha.svg",
+  "description": "Autoryzowany dystrybutor profesjonalnych narzędzi WIHA w Polsce. Narzędzia izolowane VDE, klucze dynamometryczne, zestawy narzędzi z certyfikatami VDE-GS, IEC 60900. Made in Germany.",
+  "telephone": "+48575838766",
+  "email": "info@kedar-wiha.pl",
+  "sameAs": [],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+48-575-838-766",
+    "contactType": "customer service",
+    "availableLanguage": "Polish"
+  },
+  "brand": {
+    "@type": "Brand",
+    "name": "WIHA"
+  },
+  "knowsAbout": [
+    "Narzędzia izolowane VDE",
+    "Klucze dynamometryczne",
+    "Bezpieczeństwo elektryczne",
+    "Norma IEC 60900",
+    "Certyfikat VDE-GS"
+  ]
+}
+</script>
+
+<!-- ======================================================================
+     HTML — STRONA O FIRMIE KEDAR-WIHA.pl
+     ====================================================================== -->
+<div class="kw-about" itemscope itemtype="https://schema.org/Organization">
+  <meta itemprop="name" content="KEDAR-WIHA.pl" />
+  <meta itemprop="url" content="https://kedar-wiha.pl" />
+  <meta itemprop="telephone" content="+48575838766" />
+  <meta itemprop="email" content="info@kedar-wiha.pl" />
+
+  <!-- ================================================================
+       SEKCJA 1 — HERO BANNER
+       ================================================================ -->
+  <section class="kw-about__hero" aria-label="O firmie KEDAR-WIHA.pl — Autoryzowany Dystrybutor WIHA">
+    <div class="kw-about__hero-content">
+
+      <span class="kw-about__hero-badge">
+        <i class="fas fa-certificate"></i> Autoryzowany Dystrybutor WIHA w Polsce
+      </span>
+
+      <h1 class="kw-about__hero-title" itemprop="description">
+        Profesjonalne Narzędzia <span>WIHA</span> dla Elektryków
+      </h1>
+
+      <p class="kw-about__hero-sub">
+        Narzędzia izolowane VDE z&nbsp;certyfikatami VDE&#8209;GS i&nbsp;IEC&nbsp;60900, testowane indywidualnie napięciem 10&nbsp;000&nbsp;V. Niemiecka precyzja od 1939 roku — w&nbsp;zasięgu polskiego elektryka.
+      </p>
+
+      <div class="kw-about__hero-ctas">
+        <a href="/2-glowna" class="kw-about__btn-primary" aria-label="Przejdź do sklepu KEDAR-WIHA.pl">
+          <i class="fas fa-shopping-bag"></i> Poznaj naszą ofertę
+        </a>
+        <a href="/kontakt" class="kw-about__btn-secondary" aria-label="Skontaktuj się z KEDAR-WIHA.pl">
+          <i class="fas fa-headset"></i> Skontaktuj się
+        </a>
+      </div>
+
+      <div class="kw-about__trust-row">
+        <span class="kw-about__trust-badge"><i class="fas fa-shield-alt"></i> VDE-GS</span>
+        <span class="kw-about__trust-badge"><i class="fas fa-bolt"></i> IEC 60900</span>
+        <span class="kw-about__trust-badge"><i class="fas fa-flag"></i> Made in Germany</span>
+        <span class="kw-about__trust-badge"><i class="fas fa-award"></i> Test 10 000 V</span>
+        <span class="kw-about__trust-badge"><i class="fas fa-user-check"></i> Autoryzowany Dystrybutor</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 2 — HISTORIA I DOŚWIADCZENIE
+       ================================================================ -->
+  <section class="kw-about__section" aria-label="Historia i doświadczenie KEDAR-WIHA.pl">
+    <div class="container">
+      <div class="kw-about__story-grid">
+
+        <!-- Obraz -->
+        <div class="kw-about__story-image kw-reveal-left">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=640&q=80"
+               alt="Profesjonalne narzędzia WIHA VDE dla elektryków — autoryzowany dystrybutor KEDAR-WIHA.pl"
+               loading="lazy"
+               width="640" height="480" />
+        </div>
+
+        <!-- Tekst -->
+        <div class="kw-about__story-text kw-reveal-right">
+          <span class="kw-about__label">Kim jesteśmy</span>
+          <h2>Autoryzowany Dystrybutor Narzędzi WIHA w&nbsp;Polsce</h2>
+
+          <p>
+            <strong>KEDAR-WIHA.pl</strong> to specjalistyczny sklep internetowy dedykowany profesjonalnym elektrykom, instalatorom fotowoltaiki oraz technikom elektromobilności. Jako autoryzowany dystrybutor narzędzi WIHA w&nbsp;Polsce dostarczamy wyłącznie oryginalne produkty objęte pełną gwarancją producenta — od wkrętaków izolowanych VDE, przez klucze dynamometryczne, po kompletne zestawy narzędzi w&nbsp;walizkach i&nbsp;plecakach serwisowych.
+          </p>
+
+          <p>
+            Marka <strong>WIHA</strong> to ponad <strong>85 lat doświadczenia</strong> w&nbsp;produkcji narzędzi ręcznych w&nbsp;niemieckim Schwarzwaldzie. Od 1939 roku firma nieprzerwanie wyznacza standardy jakości w&nbsp;branży narzędziowej, produkując ponad <strong>90% swojego asortymentu w&nbsp;Niemczech</strong>. WIHA została wielokrotnie wyróżniona tytułem <strong>TOP 100 najbardziej innowacyjnych średnich przedsiębiorstw w&nbsp;Niemczech</strong> — za przełomowe technologie takie jak slimTechnology, speedE, DynamicJoint czy BitCut, które na stałe zmieniły sposób pracy elektryków na&nbsp;całym świecie.
+          </p>
+
+          <p>
+            Każde narzędzie izolowane VDE marki WIHA przechodzi <strong>indywidualny test dielektryczny napięciem 10&nbsp;000&nbsp;V</strong> — to dziesięciokrotna rezerwa bezpieczeństwa ponad wymaganą normę 1&nbsp;000&nbsp;V AC. Certyfikaty <strong>VDE-GS</strong>, <strong>IEC&nbsp;60900</strong> oraz <strong>ASTM&nbsp;F1505</strong> potwierdzają, że narzędzia WIHA spełniają najsurowsze globalne standardy bezpieczeństwa elektrycznego. Dodatkowo wiele produktów posiada certyfikat ergonomii <strong>AGR</strong> (Aktion Gesunder Rücken) — rekomendację lekarzy ortopedów potwierdzającą, że&nbsp;narzędzia chronią kręgosłup i&nbsp;stawy podczas wielogodzinnej pracy.
+          </p>
+
+          <div class="kw-about__cert-inline">
+            <span class="kw-about__cert-tag"><i class="fas fa-check"></i> VDE-GS</span>
+            <span class="kw-about__cert-tag"><i class="fas fa-bolt"></i> IEC 60900</span>
+            <span class="kw-about__cert-tag"><i class="fas fa-check"></i> ASTM F1505</span>
+            <span class="kw-about__cert-tag--agr kw-about__cert-tag"><i class="fas fa-heart"></i> AGR Ergonomia</span>
+            <span class="kw-about__cert-tag--germany kw-about__cert-tag"><i class="fas fa-flag"></i> Made in Germany</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 3 — OFERTA PRODUKTÓW (3 główne kategorie)
+       ================================================================ -->
+  <section class="kw-about__section kw-about__section--alt kw-about__section--pattern" aria-label="Oferta produktów KEDAR-WIHA.pl">
+    <div class="container">
+
+      <div class="kw-about__section-header kw-reveal">
+        <span class="kw-about__label">Nasza oferta</span>
+        <h2 class="kw-about__title">Profesjonalne Narzędzia WIHA — Trzy Filary Bezpieczeństwa Elektrycznego</h2>
+        <hr class="kw-about__divider" />
+        <p class="kw-about__subtitle">
+          Oferujemy starannie wyselekcjonowany asortyment narzędzi izolowanych VDE, kluczy dynamometrycznych oraz kompletnych zestawów — wszystko z&nbsp;certyfikatami bezpieczeństwa i&nbsp;gwarancją producenta.
+        </p>
+      </div>
+
+      <div class="kw-about__products-grid">
+
+        <!-- Karta 1: Wkrętaki VDE -->
+        <article class="kw-about__product-card kw-reveal kw-stagger-1">
+          <div class="kw-about__product-card-img">
+            <img src="https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=640&q=80"
+                 alt="Wkrętaki izolowane VDE WIHA — profesjonalne narzędzia do prac elektrycznych"
+                 loading="lazy" width="640" height="400" />
+            <span class="kw-about__product-cat-label">Bestseller</span>
+          </div>
+          <div class="kw-about__product-card-body">
+            <h3>Wkrętaki Izolowane VDE</h3>
+            <p>
+              Profesjonalne wkrętaki izolowane VDE marki WIHA to fundament bezpiecznej pracy elektryka. Każdy wkrętak przechodzi indywidualny test napięciem 10&nbsp;000&nbsp;V i&nbsp;posiada certyfikaty VDE-GS oraz IEC&nbsp;60900 potwierdzające izolację do 1&nbsp;000&nbsp;V&nbsp;AC. Innowacyjna technologia <strong>slimTechnology</strong> zapewnia najsmuklejszy profil ostrza na rynku — umożliwia dostęp do zacisków w&nbsp;ciasnych rozdzielnicach, gdzie standardowe wkrętaki nie mieszczą się. Rękojeści SoftFinish z&nbsp;certyfikatem ergonomii AGR gwarantują pewny chwyt i&nbsp;komfort nawet podczas wielogodzinnych prac przy tablicach rozdzielczych i&nbsp;instalacjach fotowoltaicznych.
+            </p>
+            <ul class="kw-about__product-features">
+              <li>Test indywidualny 10&nbsp;000&nbsp;V — dziesięciokrotna rezerwa</li>
+              <li>Certyfikaty VDE-GS, IEC&nbsp;60900, ASTM&nbsp;F1505</li>
+              <li>Technologia slimTechnology — najwęższe ostrze na rynku</li>
+              <li>Rękojeść SoftFinish z&nbsp;certyfikatem AGR</li>
+            </ul>
+            <a href="/3-wkretaki-vde" class="kw-about__product-link">
+              Zobacz wkrętaki VDE <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Karta 2: Klucze Dynamometryczne -->
+        <article class="kw-about__product-card kw-reveal kw-stagger-2">
+          <div class="kw-about__product-card-img">
+            <img src="https://images.unsplash.com/photo-1530124566582-a45a7e3a6791?w=640&q=80"
+                 alt="Klucze dynamometryczne WIHA — precyzyjne dokręcanie z kontrolą momentu"
+                 loading="lazy" width="640" height="400" />
+            <span class="kw-about__product-cat-label">Precyzja</span>
+          </div>
+          <div class="kw-about__product-card-body">
+            <h3>Klucze Dynamometryczne WIHA</h3>
+            <p>
+              Precyzyjne klucze dynamometryczne WIHA gwarantują dokładne dokręcanie połączeń śrubowych z&nbsp;kontrolą momentu obrotowego — kluczowy wymóg bezpieczeństwa przy instalacjach elektrycznych, fotowoltaicznych i&nbsp;stacjach ładowania pojazdów elektrycznych. Klucze dynamometryczne TorqueVario-S i&nbsp;TorqueFixKey oferują zakres momentu od <strong>0,4&nbsp;Nm do 20&nbsp;Nm</strong> z&nbsp;dokładnością ±6% — spełniając wymogi najostrzejszych norm montażowych. System TorqueVario-S umożliwia płynną regulację momentu z&nbsp;wyraźnym sygnałem akustycznym i&nbsp;wyczuwalnym „kliknięciem" informującym o&nbsp;osiągnięciu zadanego momentu. W&nbsp;instalacjach fotowoltaicznych i&nbsp;elektromobilności nieprawidłowy moment dokręcenia złączki może doprowadzić do przegrzania, pożaru lub utraty wydajności — klucze dynamometryczne WIHA eliminują to ryzyko.
+            </p>
+            <ul class="kw-about__product-features">
+              <li>Zakres momentu 0,4 – 20 Nm z&nbsp;dokładnością ±6%</li>
+              <li>Sygnał akustyczny i&nbsp;mechaniczny przy osiągnięciu momentu</li>
+              <li>Izolacja VDE do 1&nbsp;000&nbsp;V&nbsp;AC</li>
+              <li>Kalibracja zgodna z&nbsp;ISO 6789</li>
+            </ul>
+            <a href="/4-klucze-dynamometryczne" class="kw-about__product-link">
+              Zobacz klucze dynamometryczne <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Karta 3: Zestawy Narzędzi -->
+        <article class="kw-about__product-card kw-reveal kw-stagger-3">
+          <div class="kw-about__product-card-img">
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=640&q=80"
+                 alt="Zestawy narzędzi WIHA VDE — kompletne walizki narzędziowe dla elektryków"
+                 loading="lazy" width="640" height="400" />
+            <span class="kw-about__product-cat-label">Komplet</span>
+          </div>
+          <div class="kw-about__product-card-body">
+            <h3>Zestawy Narzędzi dla Profesjonalistów</h3>
+            <p>
+              Kompletne zestawy narzędzi WIHA to gotowe rozwiązania dla profesjonalistów ceniących organizację i&nbsp;efektywność pracy. Walizki narzędziowe, plecaki serwisowe i&nbsp;trolleye WIHA zawierają starannie dobrane kombinacje wkrętaków VDE, szczypiec, kluczy dynamometrycznych i&nbsp;bitów — wszystko w&nbsp;ergonomicznych wkładkach piankowych zapewniających szybki dostęp do każdego narzędzia. Zestawy WIHA Electric, WIHA eMobility oraz WIHA Electrician's Competence XXL to referencyjne konfiguracje stosowane przez czołowe firmy elektroinstalacyjne w&nbsp;Europie. Każdy element zestawu posiada indywidualne certyfikaty bezpieczeństwa VDE, a&nbsp;modularna budowa pozwala na&nbsp;uzupełnianie i&nbsp;personalizację wyposażenia.
+            </p>
+            <ul class="kw-about__product-features">
+              <li>Walizki, plecaki i&nbsp;trolleye z&nbsp;wkładkami piankowym</li>
+              <li>Kompletne zestawy VDE od 6 do 80+ narzędzi</li>
+              <li>Linie Electric, eMobility, Competence</li>
+              <li>Modularność — możliwość rozbudowy i&nbsp;personalizacji</li>
+            </ul>
+            <a href="/5-zestawy-narzedzi" class="kw-about__product-link">
+              Zobacz zestawy narzędzi <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 4 — WARTOŚCI FIRMY
+       ================================================================ -->
+  <section class="kw-about__section kw-about__section--dark" aria-label="Wartości firmy KEDAR-WIHA.pl">
+    <div class="container">
+
+      <div class="kw-about__section-header kw-reveal">
+        <span class="kw-about__label">Nasze wartości</span>
+        <h2 class="kw-about__title">Dlaczego Profesjonaliści Wybierają KEDAR‑WIHA.pl</h2>
+        <hr class="kw-about__divider" />
+        <p class="kw-about__subtitle">
+          Łączymy niemiecką precyzję produkcji WIHA z&nbsp;lokalnymi kompetencjami — szybką dostawą na&nbsp;terenie całej Polski, wsparciem technicznym i&nbsp;ekspercką wiedzą o&nbsp;normach bezpieczeństwa elektrycznego.
+        </p>
+      </div>
+
+      <div class="kw-about__values-grid">
+
+        <!-- Wartość 1: Jakość -->
+        <div class="kw-about__value-card kw-reveal kw-stagger-1">
+          <div class="kw-about__value-icon">
+            <i class="fas fa-gem"></i>
+          </div>
+          <h3>Gwarancja Jakości</h3>
+          <p>
+            Jako autoryzowany dystrybutor oferujemy wyłącznie oryginalne produkty WIHA z&nbsp;pełną gwarancją producenta. Każde narzędzie posiada indywidualny numer seryjny i&nbsp;certyfikat jakości. Polityka zero tolerancji dla podróbek gwarantuje, że&nbsp;otrzymujesz produkt prosto z&nbsp;niemieckich zakładów WIHA w&nbsp;Schwarzwaldzie — z&nbsp;pełnym rodowodem i&nbsp;dokumentacją.
+          </p>
+        </div>
+
+        <!-- Wartość 2: Bezpieczeństwo -->
+        <div class="kw-about__value-card kw-reveal kw-stagger-2">
+          <div class="kw-about__value-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Bezpieczeństwo VDE</h3>
+          <p>
+            Bezpieczeństwo elektryczne to nasza najwyższa wartość. Narzędzia izolowane VDE WIHA z&nbsp;certyfikatami VDE-GS i&nbsp;IEC&nbsp;60900 zapewniają ochronę do 1&nbsp;000&nbsp;V&nbsp;AC / 1&nbsp;500&nbsp;V&nbsp;DC. Indywidualny test każdego narzędzia napięciem 10&nbsp;000&nbsp;V&nbsp;daje dziesięciokrotną rezerwę bezpieczeństwa — bo życie elektryka jest bezcenne.
+          </p>
+        </div>
+
+        <!-- Wartość 3: Wsparcie -->
+        <div class="kw-about__value-card kw-reveal kw-stagger-3">
+          <div class="kw-about__value-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3>Wsparcie Techniczne</h3>
+          <p>
+            Nie jesteśmy zwykłym sklepem — jesteśmy partnerem technicznym. Doradzamy w&nbsp;doborze narzędzi do konkretnych zastosowań, wyjaśniamy różnice między liniami produktowymi (slimTechnology vs. Classic, speedE vs. TorqueVario), pomagamy kompletować zestawy na&nbsp;wymogi audytów BHP. Nasz zespół zna normy VDE i&nbsp;mówi językiem elektryka.
+          </p>
+        </div>
+
+        <!-- Wartość 4: Dostawa -->
+        <div class="kw-about__value-card kw-reveal kw-stagger-4">
+          <div class="kw-about__value-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <h3>Szybka Dostawa</h3>
+          <p>
+            Rozumiemy, że&nbsp;brak narzędzia na&nbsp;budowie oznacza przestój i&nbsp;straty. Realizujemy zamówienia z&nbsp;magazynu z&nbsp;wysyłką w&nbsp;ciągu 24 godzin. Wysyłamy na&nbsp;terenie całej Polski kurierem lub do paczkomatów — profesjonalnie zapakowane i&nbsp;zabezpieczone, z&nbsp;fakturą VAT i&nbsp;kompletną dokumentacją produktową.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 5 — RYNEK I SZANSE (dane rynkowe + B2B context)
+       ================================================================ -->
+  <section class="kw-about__section kw-about__section--pattern" aria-label="Rynek narzędzi VDE w Polsce — szanse dla profesjonalistów">
+    <div class="container">
+
+      <div class="kw-about__section-header kw-reveal">
+        <span class="kw-about__label">Rynek i szanse</span>
+        <h2 class="kw-about__title">Narzędzia VDE w&nbsp;Erze Fotowoltaiki i&nbsp;Elektromobilności</h2>
+        <hr class="kw-about__divider" />
+        <p class="kw-about__subtitle">
+          Polski rynek odnawialnych źródeł energii rośnie w&nbsp;rekordowym tempie — a&nbsp;razem z&nbsp;nim zapotrzebowanie na&nbsp;profesjonalne, certyfikowane narzędzia elektryczne.
+        </p>
+      </div>
+
+      <!-- Statystyki -->
+      <div class="kw-about__stats-row kw-reveal">
+        <div class="kw-about__stat-card kw-stagger-1">
+          <div class="kw-about__stat-number">24,8</div>
+          <span class="kw-about__stat-unit">GW</span>
+          <div class="kw-about__stat-label">Moc zainstalowana PV w&nbsp;Polsce</div>
+        </div>
+        <div class="kw-about__stat-card kw-stagger-2">
+          <div class="kw-about__stat-number">60</div>
+          <span class="kw-about__stat-unit">GW do 2035</span>
+          <div class="kw-about__stat-label">Prognoza mocy fotowoltaicznej</div>
+        </div>
+        <div class="kw-about__stat-card kw-stagger-3">
+          <div class="kw-about__stat-number">3 136</div>
+          <span class="kw-about__stat-unit">Instalatorów</span>
+          <div class="kw-about__stat-label">Certyfikowani instalatorzy PV</div>
+        </div>
+        <div class="kw-about__stat-card kw-stagger-4">
+          <div class="kw-about__stat-number">6,2%</div>
+          <span class="kw-about__stat-unit">CAGR</span>
+          <div class="kw-about__stat-label">Wzrost rynku narzędzi VDE</div>
+        </div>
+      </div>
+
+      <!-- Treść -->
+      <div class="kw-about__market-text kw-reveal">
+        <p>
+          Polska przechodzi <strong>fundamentalną transformację energetyczną</strong>. Z&nbsp;zainstalowaną mocą fotowoltaiczną sięgającą 24,8&nbsp;GW i&nbsp;ambitną prognozą osiągnięcia 60&nbsp;GW do 2035 roku, nasz kraj stał się jednym z&nbsp;najdynamiczniejszych rynków OZE w&nbsp;Europie. Ten bezprecedensowy wzrost napędza zapotrzebowanie na&nbsp;profesjonalne narzędzia izolowane VDE do 1&nbsp;000&nbsp;V&nbsp;AC / 1&nbsp;500&nbsp;V&nbsp;DC — niezbędne przy montażu, serwisowaniu i&nbsp;konserwacji instalacji fotowoltaicznych.
+        </p>
+
+        <p>
+          Równocześnie <strong>elektromobilność rewolucjonizuje polski rynek motoryzacyjny</strong>. Sieć stacji ładowania pojazdów elektrycznych rozbudowuje się w&nbsp;tempie kilkudziesięciu procent rocznie, a&nbsp;serwisy pojazdów EV potrzebują specjalistycznych narzędzi do pracy przy akumulatorach wysokiego napięcia. Linia <strong>WIHA eMobility</strong> — obejmująca wkrętaki VDE, klucze dynamometryczne, szczypce i&nbsp;kompletne zestawy w&nbsp;dedykowanych walizkach — to odpowiedź na&nbsp;te wymagania. W&nbsp;Polsce 3&nbsp;136 certyfikowanych instalatorów PV oraz rosnąca liczba techników EV potrzebuje narzędzi, które nie tylko spełniają normy, ale zapewniają bezpieczeństwo i&nbsp;efektywność na&nbsp;co dzień.
+        </p>
+
+        <div class="kw-about__highlight-box">
+          <p>
+            <strong>KEDAR-WIHA.pl</strong> odpowiada na&nbsp;to zapotrzebowanie jako specjalistyczny dystrybutor — oferujemy nie tylko narzędzia, ale ekspercką wiedzę o&nbsp;normach, certyfikatach i&nbsp;najlepszych praktykach bezpieczeństwa. Wspieramy profesjonalistów w&nbsp;wyborze narzędzi zgodnych z&nbsp;aktualnymi regulacjami BHP, pomagamy kompletować zestawy na&nbsp;potrzeby audytów i&nbsp;dostarczamy dokumentację certyfikatową dla klientów końcowych.
+          </p>
+        </div>
+
+        <p>
+          Rynek narzędzi izolowanych VDE rośnie globalnie w&nbsp;tempie <strong>6,2% CAGR</strong> — napędzany regulacjami bezpieczeństwa i&nbsp;rosnącą świadomością ryzyka porażenia prądem. W&nbsp;Polsce widzimy dodatkowy akcelerator: branżowe wymogi certyfikacji instalatorów OZE, które obligują do stosowania narzędzi zgodnych z&nbsp;normą IEC&nbsp;60900. Dla firm elektroinstalacyjnych i&nbsp;instalatorów fotowoltaiki inwestycja w&nbsp;certyfikowane narzędzia WIHA VDE to nie koszt — to fundament legalnej, bezpiecznej i&nbsp;efektywnej działalności.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 6 — WSPARCIE I SERWIS
+       ================================================================ -->
+  <section class="kw-about__section kw-about__section--alt" aria-label="Wsparcie techniczne i serwis KEDAR-WIHA.pl">
+    <div class="container">
+
+      <div class="kw-about__section-header kw-reveal">
+        <span class="kw-about__label">Wsparcie i serwis</span>
+        <h2 class="kw-about__title">Eksperckie Wsparcie na&nbsp;Każdym Etapie Współpracy</h2>
+        <hr class="kw-about__divider" />
+        <p class="kw-about__subtitle">
+          Od doradztwa w&nbsp;doborze narzędzi, przez realizację zamówienia, po&nbsp;obsługę gwarancyjną — jesteśmy z&nbsp;Tobą na&nbsp;każdym kroku.
+        </p>
+      </div>
+
+      <div class="kw-about__support-grid">
+
+        <div class="kw-about__support-item kw-reveal kw-stagger-1">
+          <div class="kw-about__support-icon"><i class="fas fa-comments"></i></div>
+          <div class="kw-about__support-text">
+            <h4>Konsultacje Techniczne</h4>
+            <p>Pomagamy dobrać narzędzia do konkretnego zastosowania — instalacje PV, rozdzielnice, elektromobilność. Znamy specyfikację każdego produktu WIHA i&nbsp;doradzamy sprawdzone rozwiązania na&nbsp;podstawie doświadczenia branżowego.</p>
+          </div>
+        </div>
+
+        <div class="kw-about__support-item kw-reveal kw-stagger-2">
+          <div class="kw-about__support-icon"><i class="fas fa-file-certificate"></i></div>
+          <div class="kw-about__support-text">
+            <h4>Dokumentacja i&nbsp;Certyfikaty</h4>
+            <p>Dostarczamy kompletną dokumentację certyfikatową — deklaracje zgodności, certyfikaty VDE-GS, wyniki testów dielektrycznych. Idealne na&nbsp;potrzeby audytów BHP, przetargów publicznych i&nbsp;dokumentacji projektowej.</p>
+          </div>
+        </div>
+
+        <div class="kw-about__support-item kw-reveal kw-stagger-3">
+          <div class="kw-about__support-icon"><i class="fas fa-sync-alt"></i></div>
+          <div class="kw-about__support-text">
+            <h4>Gwarancja Producenta</h4>
+            <p>Oryginalne narzędzia WIHA z&nbsp;autoryzowanego kanału dystrybucji objęte są pełną gwarancją producenta. W&nbsp;przypadku reklamacji zapewniamy szybką wymianę lub naprawę — bez zbędnych formalności i&nbsp;przestojów na&nbsp;budowie.</p>
+          </div>
+        </div>
+
+        <div class="kw-about__support-item kw-reveal kw-stagger-4">
+          <div class="kw-about__support-icon"><i class="fas fa-file-invoice"></i></div>
+          <div class="kw-about__support-text">
+            <h4>Obsługa B2B</h4>
+            <p>Oferujemy dedykowane warunki dla firm — faktury VAT, możliwość zamówień hurtowych, indywidualne wyceny dla stałych kontrahentów. Współpracujemy z&nbsp;firmami elektroinstalacyjnymi, hurtowniami i&nbsp;działami zakupów.</p>
+          </div>
+        </div>
+
+        <div class="kw-about__support-item kw-reveal kw-stagger-5">
+          <div class="kw-about__support-icon"><i class="fas fa-shipping-fast"></i></div>
+          <div class="kw-about__support-text">
+            <h4>Szybka Realizacja</h4>
+            <p>Zamówienia złożone do godz. 14:00 wysyłamy tego samego dnia roboczego. Wysyłka kurierem na&nbsp;terenie całej Polski oraz do paczkomatów InPost. Śledzenie przesyłki online i&nbsp;powiadomienia SMS.</p>
+          </div>
+        </div>
+
+        <div class="kw-about__support-item kw-reveal kw-stagger-6">
+          <div class="kw-about__support-icon"><i class="fas fa-phone-alt"></i></div>
+          <div class="kw-about__support-text">
+            <h4>Kontakt Bezpośredni</h4>
+            <p>Preferujesz rozmowę? Zadzwoń pod <strong>+48&nbsp;575&nbsp;838&nbsp;766</strong> lub napisz na&nbsp;<strong>info@kedar-wiha.pl</strong>. Odpowiadamy na&nbsp;zapytania w&nbsp;ciągu jednego dnia roboczego. Jesteśmy dostępni również przez WhatsApp.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SEKCJA 7 — CTA / ZAKOŃCZENIE
+       ================================================================ -->
+  <section class="kw-about__cta-section" aria-label="Skontaktuj się z KEDAR-WIHA.pl">
+    <div class="kw-about__cta-content kw-reveal">
+
+      <span class="kw-about__label" style="color:#FFD700; background:rgba(255,215,0,0.12);">Współpraca</span>
+
+      <h2>Zostań Naszym Partnerem — Zamów Narzędzia WIHA Już Dziś</h2>
+
+      <p>
+        Niezależnie czy jesteś elektrykiem prowadzącym jednoosobową działalność, instalatorem fotowoltaiki poszukującym kompletnego zestawu VDE, czy kierownikiem zakupów w&nbsp;firmie elektroinstalacyjnej — <strong>KEDAR-WIHA.pl</strong> jest Twoim autoryzowanym źródłem oryginalnych narzędzi WIHA w&nbsp;Polsce. Skontaktuj się, a&nbsp;pomożemy dobrać narzędzia do Twoich potrzeb.
+      </p>
+
+      <div class="kw-about__cta-buttons">
+        <a href="/2-glowna" class="kw-about__btn-cta-white" aria-label="Przejdź do sklepu KEDAR-WIHA.pl">
+          <i class="fas fa-shopping-bag"></i> Przejdź do sklepu
+        </a>
+        <a href="/kontakt" class="kw-about__btn-secondary" aria-label="Skontaktuj się z nami">
+          <i class="fas fa-envelope"></i> Zapytaj o ofertę B2B
+        </a>
+      </div>
+
+      <div class="kw-about__contact-row">
+        <a href="tel:+48575838766" class="kw-about__contact-item" itemprop="telephone">
+          <i class="fas fa-phone-alt"></i> +48 575 838 766
+        </a>
+        <a href="mailto:info@kedar-wiha.pl" class="kw-about__contact-item" itemprop="email">
+          <i class="fas fa-envelope"></i> info@kedar-wiha.pl
+        </a>
+        <a href="https://kedar-wiha.pl" class="kw-about__contact-item" target="_blank" rel="noopener">
+          <i class="fas fa-globe"></i> kedar-wiha.pl
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+<!-- END .kw-about -->
+
+<!-- ======================================================================
+     SCROLL REVEAL — Minimal JS (IntersectionObserver)
+     Obserwuje elementy .kw-reveal i dodaje .kw-visible przy scroll
+     ====================================================================== -->
+<script>
+(function(){
+  'use strict';
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: pokaż wszystko od razu
+    document.querySelectorAll('.kw-reveal,.kw-reveal-left,.kw-reveal-right')
+      .forEach(function(el){ el.classList.add('kw-visible'); });
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('kw-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.kw-reveal,.kw-reveal-left,.kw-reveal-right')
+    .forEach(function(el){ observer.observe(el); });
+})();
+</script>

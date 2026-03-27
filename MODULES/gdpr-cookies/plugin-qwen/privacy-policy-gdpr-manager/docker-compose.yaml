@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile.wordpress
+    container_name: ppgm-wordpress
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', false);
+        define('SCRIPT_DEBUG', true);
+    volumes:
+      - wordpress_/var/www/html
+      - ./:/var/www/html/wp-content/plugins/privacy-policy-gdpr-manager
+    ports:
+      - "8080:80"
+    networks:
+      - ppgm_network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: ppgm-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - db_/var/lib/mysql
+    networks:
+      - ppgm_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: ppgm-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_USER: wordpress
+      PMA_PASSWORD: wordpress
+    ports:
+      - "8081:80"
+    networks:
+      - ppgm_network
+    depends_on:
+      - db
+
+volumes:
+  wordpress_
+    driver: local
+  db_data:
+    driver: local
+
+networks:
+  ppgm_network:
+    driver: bridge
