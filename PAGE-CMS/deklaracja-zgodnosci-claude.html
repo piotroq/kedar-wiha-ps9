@@ -1,0 +1,1219 @@
+<!-- ==========================================================================
+   KEDAR-WIHA.pl — Strona "Deklaracja Zgodności" (Compliance)
+   PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 4.x
+   Wersja: 1.0.0 | 2025
+   Gotowe do wklejenia: Wygląd > Strony > Deklaracja zgodności > Zawartość
+   Namespace: .kw-comp- (unikanie kolizji z .kw-about- / .kw-pay- / Optima)
+   ZERO JAVASCRIPT — wyłącznie HTML + CSS
+   ========================================================================== -->
+
+<style>
+/* ==========================================================================
+   KEDAR-WIHA.pl — DEKLARACJA ZGODNOŚCI — Custom Page Styles
+   Namespace: .kw-comp (unikanie kolizji)
+   Mobile-first | BEM | CSS Variables z custom-style.css
+   ZERO JS — CSS-only animations, details/summary accordion
+   ========================================================================== */
+
+/* ── SCOPE / VARIABLES ────────────────────────────────────────────────── */
+.kw-comp {
+  --kw-primary: #8B0000;
+  --kw-primary-dark: #6b0000;
+  --kw-secondary: #0056A3;
+  --kw-secondary-dark: #003d7a;
+  --kw-three: #ca0000;
+  --kw-accent: #FFD700;
+  --kw-green: #1A7A3C;
+  --kw-heading: #2D2D2D;
+  --kw-text: #151515;
+  --kw-text-muted: #555555;
+  --kw-text-tertiary: #888888;
+  --kw-bg-light: #f5f5f5;
+  --kw-bg-alt: #f1f1f1;
+  --kw-bg-dark: #1a1a1a;
+  --kw-white: #ffffff;
+  --kw-border: #e8e8e8;
+  --kw-font-heading: 'Montserrat', 'Manrope', Arial, sans-serif;
+  --kw-font-body: 'Inter', 'Manrope', Arial, sans-serif;
+  --kw-radius-sm: 3px;
+  --kw-radius-md: 4px;
+  --kw-radius-lg: 8px;
+  --kw-shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --kw-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --kw-shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --kw-shadow-lg: 0 8px 28px rgba(0,0,0,0.13);
+  --kw-shadow-cta: 0 4px 20px rgba(139,0,0,0.30);
+  --kw-transition: 300ms cubic-bezier(0.25,0.46,0.45,0.94);
+  --kw-transition-slow: 500ms ease;
+
+  font-family: var(--kw-font-body);
+  color: var(--kw-text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+.kw-comp *, .kw-comp *::before, .kw-comp *::after { box-sizing: border-box; }
+.kw-comp img { max-width: 100%; height: auto; }
+
+/* ── KEYFRAMES (CSS-only reveal) ──────────────────────────────────────── */
+@keyframes kwCompFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes kwCompFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes kwCompSlideRight {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kw-comp * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* CSS-only staggered reveal — applied via nth-child on grid items */
+.kw-comp__anim {
+  animation: kwCompFadeUp 0.6s ease both;
+}
+.kw-comp__anim--d1 { animation-delay: 0s; }
+.kw-comp__anim--d2 { animation-delay: 0.08s; }
+.kw-comp__anim--d3 { animation-delay: 0.16s; }
+.kw-comp__anim--d4 { animation-delay: 0.24s; }
+.kw-comp__anim--d5 { animation-delay: 0.32s; }
+.kw-comp__anim--d6 { animation-delay: 0.40s; }
+
+/* ── SECTION BASE ─────────────────────────────────────────────────────── */
+.kw-comp__section {
+  padding: 48px 0;
+  position: relative;
+}
+.kw-comp__section--alt {
+  background: var(--kw-bg-light);
+}
+.kw-comp__section--dark {
+  background: linear-gradient(155deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: var(--kw-white);
+}
+.kw-comp__section--dark p,
+.kw-comp__section--dark li {
+  color: rgba(255,255,255,0.82);
+}
+.kw-comp__section--pattern { position: relative; }
+.kw-comp__section--pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(139,0,0,0.02) 22px, rgba(139,0,0,0.02) 23px);
+  pointer-events: none;
+  z-index: 0;
+}
+.kw-comp__section--pattern > .container { position: relative; z-index: 1; }
+
+/* ── REUSABLE HEADER ──────────────────────────────────────────────────── */
+.kw-comp__header { text-align: center; margin-bottom: 32px; }
+.kw-comp__label {
+  display: inline-block;
+  font-family: var(--kw-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--kw-primary);
+  background: rgba(139,0,0,0.06);
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+.kw-comp__section--dark .kw-comp__label {
+  color: var(--kw-accent);
+  background: rgba(255,215,0,0.1);
+}
+.kw-comp__title {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3.5vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--kw-heading);
+  margin: 0 0 12px;
+}
+.kw-comp__section--dark .kw-comp__title { color: var(--kw-white); }
+.kw-comp__divider {
+  width: 48px;
+  height: 3px;
+  background: var(--kw-primary);
+  border: none;
+  border-radius: 2px;
+  margin: 14px auto;
+}
+.kw-comp__subtitle {
+  font-family: var(--kw-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.65;
+  color: var(--kw-text-muted);
+  max-width: 680px;
+  margin: 0 auto;
+}
+.kw-comp__section--dark .kw-comp__subtitle { color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   1. HERO
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-comp__hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(26,26,26,0.94) 0%, rgba(61,0,0,0.90) 55%, rgba(139,0,0,0.84) 100%),
+    url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1600&q=80') center/cover no-repeat;
+  padding: 52px 16px;
+  text-align: center;
+  overflow: hidden;
+}
+@supports (background-attachment: fixed) {
+  @media (min-width: 768px) {
+    .kw-comp__hero { background-attachment: scroll, fixed; }
+  }
+}
+.kw-comp__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(35deg, transparent, transparent 36px, rgba(255,255,255,0.018) 36px, rgba(255,255,255,0.018) 37px);
+  pointer-events: none;
+}
+.kw-comp__hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(to top, rgba(26,26,26,0.3), transparent);
+  pointer-events: none;
+}
+.kw-comp__hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  animation: kwCompFadeUp 0.75s ease both;
+}
+.kw-comp__hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--kw-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--kw-accent);
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.22);
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+}
+.kw-comp__hero-badge i { font-size: 11px; }
+.kw-comp__hero-title {
+  font-family: var(--kw-font-heading);
+  font-weight: 800;
+  font-size: clamp(24px, 5vw, 48px);
+  line-height: 1.12;
+  color: var(--kw-white);
+  margin: 0 0 14px;
+}
+.kw-comp__hero-title em { font-style: normal; color: var(--kw-three); }
+.kw-comp__hero-sub {
+  font-family: var(--kw-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.7;
+  color: rgba(255,255,255,0.82);
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+.kw-comp__hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--kw-white);
+  background: var(--kw-primary);
+  border: 2px solid var(--kw-primary);
+  padding: 13px 28px;
+  border-radius: var(--kw-radius-md);
+  text-decoration: none;
+  min-height: 48px;
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-cta);
+}
+.kw-comp__hero-cta:hover {
+  background: var(--kw-three);
+  border-color: var(--kw-three);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(202,0,0,0.4);
+  color: var(--kw-white);
+  text-decoration: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   2. PREAMBUŁA — Law cards grid
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-comp__law-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-comp__law-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--kw-white);
+  border: 1px solid var(--kw-border);
+  border-left: 4px solid var(--kw-primary);
+  border-radius: 0 var(--kw-radius-lg) var(--kw-radius-lg) 0;
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-xs);
+}
+.kw-comp__law-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--kw-shadow-lg);
+  border-left-color: var(--kw-three);
+}
+.kw-comp__law-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(139,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--kw-primary);
+  transition: all var(--kw-transition);
+}
+.kw-comp__law-card:hover .kw-comp__law-icon {
+  background: var(--kw-primary);
+  color: var(--kw-white);
+}
+.kw-comp__law-body h3 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: var(--kw-heading);
+  margin: 0 0 6px;
+}
+.kw-comp__law-body p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--kw-text-muted);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   3-6. PROSE BLOCKS — reusable article style
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-comp__prose {
+  max-width: 780px;
+  margin: 0 auto;
+}
+.kw-comp__prose h2 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(20px, 2.8vw, 30px);
+  line-height: 1.2;
+  color: var(--kw-heading);
+  margin: 0 0 14px;
+}
+.kw-comp__prose p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--kw-text);
+  margin-bottom: 14px;
+}
+.kw-comp__prose strong { color: var(--kw-heading); }
+.kw-comp__prose ul {
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 16px;
+}
+.kw-comp__prose ul li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--kw-text);
+  margin-bottom: 8px;
+}
+.kw-comp__prose ul li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 10px;
+  color: var(--kw-green);
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+
+/* Info callout */
+.kw-comp__callout {
+  background: rgba(0,86,163,0.05);
+  border-left: 4px solid var(--kw-secondary);
+  padding: 18px 20px;
+  border-radius: 0 var(--kw-radius-md) var(--kw-radius-md) 0;
+  margin: 20px 0;
+}
+.kw-comp__callout p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--kw-heading);
+  line-height: 1.6;
+}
+.kw-comp__callout i { color: var(--kw-secondary); margin-right: 6px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   7-8. CERTIFICATIONS — cards + badges
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-comp__cert-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.kw-comp__cert-card {
+  text-align: center;
+  padding: 28px 20px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--kw-radius-lg);
+  transition: all var(--kw-transition);
+}
+.kw-comp__cert-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+  border-color: rgba(255,215,0,0.2);
+}
+.kw-comp__cert-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(139,0,0,0.15);
+  border: 2px solid var(--kw-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 22px;
+  color: var(--kw-accent);
+  transition: all var(--kw-transition);
+}
+.kw-comp__cert-card:hover .kw-comp__cert-icon {
+  background: var(--kw-primary);
+  color: var(--kw-white);
+}
+.kw-comp__cert-card h3 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--kw-white);
+  margin: 0 0 8px;
+}
+.kw-comp__cert-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.72);
+  margin: 0;
+}
+
+/* Badge row */
+.kw-comp__badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.kw-comp__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--kw-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--kw-radius-sm);
+  transition: all var(--kw-transition);
+}
+.kw-comp__badge:hover { transform: translateY(-2px); box-shadow: var(--kw-shadow-md); }
+.kw-comp__badge--blue { background: var(--kw-secondary); color: var(--kw-white); }
+.kw-comp__badge--dark { background: var(--kw-heading); color: var(--kw-white); }
+.kw-comp__badge--green { background: var(--kw-green); color: var(--kw-white); }
+.kw-comp__badge--red { background: var(--kw-primary); color: var(--kw-white); }
+.kw-comp__badge--yellow { background: var(--kw-accent); color: var(--kw-heading); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   9. CONTACT / REPORTING
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-comp__contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.kw-comp__contact-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px 20px;
+  background: var(--kw-white);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-xs);
+  text-decoration: none;
+  color: var(--kw-text);
+}
+.kw-comp__contact-card:hover {
+  box-shadow: var(--kw-shadow-md);
+  border-color: var(--kw-secondary);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--kw-text);
+}
+.kw-comp__contact-card-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--kw-radius-md);
+  background: rgba(0,86,163,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--kw-secondary);
+  transition: all var(--kw-transition);
+}
+.kw-comp__contact-card:hover .kw-comp__contact-card-icon {
+  background: var(--kw-secondary);
+  color: var(--kw-white);
+}
+.kw-comp__contact-card strong {
+  display: block;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--kw-heading);
+}
+.kw-comp__contact-card span {
+  font-size: 13px;
+  color: var(--kw-text-muted);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   10. FAQ — CSS-only accordion (details/summary)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-comp__faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.kw-comp__faq-item {
+  background: var(--kw-white);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-xs);
+}
+.kw-comp__faq-item:hover {
+  box-shadow: var(--kw-shadow-md);
+  border-color: var(--kw-primary);
+}
+.kw-comp__faq-item[open] {
+  border-color: var(--kw-primary);
+  box-shadow: var(--kw-shadow-md);
+}
+.kw-comp__faq-item summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--kw-heading);
+  cursor: pointer;
+  list-style: none;
+  min-height: 48px;
+  transition: color var(--kw-transition);
+}
+.kw-comp__faq-item summary::-webkit-details-marker { display: none; }
+.kw-comp__faq-item summary::before {
+  content: '\f105';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--kw-primary);
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  transition: transform var(--kw-transition);
+}
+.kw-comp__faq-item[open] summary::before {
+  transform: rotate(90deg);
+}
+.kw-comp__faq-item summary:hover { color: var(--kw-primary); }
+.kw-comp__faq-answer {
+  padding: 0 20px 16px 50px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--kw-text-muted);
+  animation: kwCompFadeIn 0.3s ease both;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   11. CTA
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-comp__cta {
+  background: linear-gradient(140deg, #8B0000 0%, #5a0000 55%, #1a1a1a 100%);
+  text-align: center;
+  padding: 52px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.kw-comp__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(55deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px);
+  pointer-events: none;
+}
+.kw-comp__cta-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.kw-comp__cta-inner h2 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(20px, 3.2vw, 34px);
+  line-height: 1.2;
+  color: var(--kw-white);
+  margin: 0 0 14px;
+}
+.kw-comp__cta-inner p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 24px;
+}
+.kw-comp__cta-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.kw-comp__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 13px 26px;
+  border-radius: var(--kw-radius-md);
+  text-decoration: none;
+  min-height: 48px;
+  transition: all var(--kw-transition);
+  border: 2px solid transparent;
+}
+.kw-comp__btn--white {
+  background: var(--kw-white); color: var(--kw-primary); border-color: var(--kw-white);
+  box-shadow: 0 4px 18px rgba(255,255,255,0.18);
+}
+.kw-comp__btn--white:hover {
+  background: transparent; color: var(--kw-white); transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,255,255,0.25); text-decoration: none;
+}
+.kw-comp__btn--outline {
+  background: transparent; color: var(--kw-white); border-color: rgba(255,255,255,0.35);
+}
+.kw-comp__btn--outline:hover {
+  background: var(--kw-white); color: var(--kw-primary); border-color: var(--kw-white); text-decoration: none;
+}
+
+/* Footer contact row in CTA */
+.kw-comp__cta-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 28px;
+}
+.kw-comp__cta-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255,255,255,0.72);
+  font-size: 13px;
+  text-decoration: none;
+  transition: color var(--kw-transition);
+}
+.kw-comp__cta-link:hover { color: var(--kw-white); text-decoration: none; }
+.kw-comp__cta-link i { color: var(--kw-accent); font-size: 14px; width: 18px; text-align: center; }
+.kw-comp__cta-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 8px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MEDIA QUERIES — MOBILE-FIRST
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 480px) {
+  .kw-comp__cta-btns { flex-direction: row; justify-content: center; }
+  .kw-comp__cta-footer { flex-direction: row; justify-content: center; flex-wrap: wrap; }
+}
+@media (min-width: 576px) {
+  .kw-comp__law-grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-comp__cert-grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-comp__contact-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
+}
+@media (min-width: 768px) {
+  .kw-comp__section { padding: 64px 0; }
+  .kw-comp__hero { min-height: 420px; padding: 72px 24px; }
+  .kw-comp__header { margin-bottom: 40px; }
+  .kw-comp__law-grid { grid-template-columns: repeat(3, 1fr); }
+  .kw-comp__cta { padding: 72px 24px; }
+}
+@media (min-width: 1024px) {
+  .kw-comp__section { padding: 80px 0; }
+  .kw-comp__hero { min-height: 480px; padding: 88px 32px; }
+  .kw-comp__cert-grid { grid-template-columns: repeat(4, 1fr); }
+  .kw-comp__header { margin-bottom: 48px; }
+}
+@media (min-width: 1440px) {
+  .kw-comp__section { padding: 96px 0; }
+}
+</style>
+
+<!-- ======================================================================
+     SCHEMA.ORG
+     ====================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Deklaracja Zgodności — KEDAR-WIHA.pl",
+  "description": "Deklaracja zgodności KEDAR-WIHA.pl z prawem polskim i unijnym. Certyfikaty VDE-GS, IEC 60900, ISO 6789. RODO, Dyrektywa Omnibus, EAA. Autoryzowany dystrybutor narzędzi WIHA.",
+  "url": "https://kedar-wiha.pl/deklaracja-zgodnosci",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "KEDAR-WIHA.pl",
+    "url": "https://kedar-wiha.pl",
+    "telephone": "+48575838766",
+    "email": "info@kedar-wiha.pl"
+  }
+}
+</script>
+
+<!-- ======================================================================
+     HTML — DEKLARACJA ZGODNOŚCI KEDAR-WIHA.pl
+     ====================================================================== -->
+<div class="kw-comp">
+
+  <!-- ================================================================
+       1. HERO
+       ================================================================ -->
+  <section class="kw-comp__hero" aria-label="Deklaracja zgodności KEDAR-WIHA.pl">
+    <div class="kw-comp__hero-inner">
+
+      <span class="kw-comp__hero-badge">
+        <i class="fas fa-balance-scale"></i> Compliance &amp; Certyfikaty
+      </span>
+
+      <h1 class="kw-comp__hero-title">
+        Deklaracja Zgodności <em>KEDAR&#8209;WIHA.pl</em>
+      </h1>
+
+      <p class="kw-comp__hero-sub">
+        Jako autoryzowany dystrybutor profesjonalnych narzędzi WIHA w&nbsp;Polsce prowadzimy działalność z&nbsp;pełnym poszanowaniem prawa polskiego i&nbsp;unijnego. Poniżej przedstawiamy szczegółową deklarację zgodności, informacje o&nbsp;certyfikatach produktów VDE oraz standardach bezpieczeństwa.
+      </p>
+
+      <a href="/kontakt" class="kw-comp__hero-cta" aria-label="Skontaktuj się z KEDAR-WIHA.pl">
+        <i class="fas fa-envelope"></i> Skontaktuj się z&nbsp;nami
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       2. PREAMBUŁA — ZGODNOŚĆ Z PRAWEM POLSKIM I UNIJNYM
+       ================================================================ -->
+  <section class="kw-comp__section kw-comp__section--pattern" aria-label="Zgodność z prawem polskim i unijnym">
+    <div class="container">
+
+      <div class="kw-comp__header">
+        <span class="kw-comp__label">Zgodność prawna</span>
+        <h2 class="kw-comp__title">Zgodność z&nbsp;Prawem Polskim i&nbsp;Unijnym</h2>
+        <hr class="kw-comp__divider" />
+        <p class="kw-comp__subtitle">
+          Sklep internetowy KEDAR-WIHA.pl prowadzony jest z&nbsp;pełnym poszanowaniem obowiązujących przepisów prawa Rzeczypospolitej Polskiej oraz Unii Europejskiej, w&nbsp;szczególności w&nbsp;zakresie poniższych regulacji.
+        </p>
+      </div>
+
+      <div class="kw-comp__law-grid">
+
+        <!-- Prawo konsumenckie -->
+        <article class="kw-comp__law-card kw-comp__anim kw-comp__anim--d1">
+          <div class="kw-comp__law-icon"><i class="fas fa-gavel"></i></div>
+          <div class="kw-comp__law-body">
+            <h3>Prawo Konsumenckie</h3>
+            <p>
+              Działalność KEDAR-WIHA.pl jest w&nbsp;pełni zgodna z&nbsp;<strong>Ustawą z&nbsp;dnia 30 maja 2014&nbsp;r. o&nbsp;prawach konsumenta</strong> (t.j. Dz.U. z&nbsp;2024&nbsp;r. poz.&nbsp;1796), <strong>Ustawą z&nbsp;dnia 16 lutego 2007&nbsp;r. o&nbsp;ochronie konkurencji i&nbsp;konsumentów</strong> oraz <strong>Dyrektywą 2011/83/UE</strong> w&nbsp;sprawie praw konsumentów. Gwarantujemy prawo do&nbsp;odstąpienia od&nbsp;umowy w&nbsp;terminie 14&nbsp;dni, pełną transparentność cenową i&nbsp;rzetelną informację o&nbsp;właściwościach produktów WIHA VDE.
+            </p>
+          </div>
+        </article>
+
+        <!-- RODO -->
+        <article class="kw-comp__law-card kw-comp__anim kw-comp__anim--d2">
+          <div class="kw-comp__law-icon"><i class="fas fa-user-shield"></i></div>
+          <div class="kw-comp__law-body">
+            <h3>Ochrona Danych Osobowych</h3>
+            <p>
+              Przetwarzanie danych osobowych odbywa się zgodnie z&nbsp;<strong>Rozporządzeniem (UE) 2016/679 (RODO)</strong> oraz <strong>Ustawą z&nbsp;dnia 10 maja 2018&nbsp;r. o&nbsp;ochronie danych osobowych</strong>. Klientom przysługują prawa dostępu, sprostowania, usunięcia, ograniczenia przetwarzania i&nbsp;przenoszenia danych. Szczegóły w&nbsp;naszej <a href="/polityka-prywatnosci" style="color:var(--kw-secondary);">Polityce Prywatności</a>.
+            </p>
+          </div>
+        </article>
+
+        <!-- E-commerce -->
+        <article class="kw-comp__law-card kw-comp__anim kw-comp__anim--d3">
+          <div class="kw-comp__law-icon"><i class="fas fa-laptop"></i></div>
+          <div class="kw-comp__law-body">
+            <h3>Handel Elektroniczny</h3>
+            <p>
+              Sklep działa zgodnie z&nbsp;<strong>Ustawą z&nbsp;dnia 18 lipca 2002&nbsp;r. o&nbsp;świadczeniu usług drogą elektroniczną</strong> oraz <strong>Ustawą z&nbsp;dnia 12 lipca 2024&nbsp;r. — Prawo komunikacji elektronicznej</strong>. Zapewniamy bezpieczeństwo transakcji elektronicznych, szyfrowanie SSL/TLS oraz zgodność z&nbsp;wymogami informacyjnymi dla sklepów internetowych.
+            </p>
+          </div>
+        </article>
+
+        <!-- Dostępność -->
+        <article class="kw-comp__law-card kw-comp__anim kw-comp__anim--d4">
+          <div class="kw-comp__law-icon"><i class="fas fa-universal-access"></i></div>
+          <div class="kw-comp__law-body">
+            <h3>Dostępność Cyfrowa</h3>
+            <p>
+              Zobowiązujemy się do&nbsp;zgodności z&nbsp;<strong>Dyrektywą (UE) 2019/882 — Europejskim Aktem o&nbsp;Dostępności (EAA)</strong> oraz <strong>Ustawą z&nbsp;dnia 4 kwietnia 2019&nbsp;r. o&nbsp;dostępności cyfrowej</strong>. Dążymy do&nbsp;spełnienia standardu WCAG&nbsp;2.1 Level&nbsp;AA, zapewniając inkluzywny dostęp do&nbsp;oferty narzędzi WIHA dla wszystkich użytkowników.
+            </p>
+          </div>
+        </article>
+
+        <!-- Bezpieczeństwo produktów -->
+        <article class="kw-comp__law-card kw-comp__anim kw-comp__anim--d5">
+          <div class="kw-comp__law-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="kw-comp__law-body">
+            <h3>Bezpieczeństwo Produktów</h3>
+            <p>
+              Produkty w&nbsp;ofercie KEDAR-WIHA.pl spełniają wymagania <strong>Ustawy z&nbsp;dnia 12 grudnia 2003&nbsp;r. o&nbsp;ogólnym bezpieczeństwie produktów</strong> oraz <strong>Rozporządzenia (UE) 2023/988 (GPSR)</strong> w&nbsp;sprawie ogólnego bezpieczeństwa produktów. Narzędzia izolowane VDE WIHA posiadają certyfikaty VDE-GS i&nbsp;IEC&nbsp;60900 potwierdzające bezpieczeństwo do&nbsp;1&nbsp;000&nbsp;V&nbsp;AC.
+            </p>
+          </div>
+        </article>
+
+        <!-- VAT -->
+        <article class="kw-comp__law-card kw-comp__anim kw-comp__anim--d6">
+          <div class="kw-comp__law-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+          <div class="kw-comp__law-body">
+            <h3>Prawo Podatkowe</h3>
+            <p>
+              Sprzedaż produktów podlega przepisom <strong>Ustawy z&nbsp;dnia 11 marca 2004&nbsp;r. o&nbsp;podatku od&nbsp;towarów i&nbsp;usług (VAT)</strong>. Do&nbsp;każdego zamówienia wystawiamy paragon fiskalny lub fakturę VAT zgodnie z&nbsp;obowiązującymi przepisami. Ceny w&nbsp;sklepie podawane są w&nbsp;kwotach brutto (z&nbsp;VAT).
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       3. DYREKTYWA OMNIBUS
+       ================================================================ -->
+  <section class="kw-comp__section" aria-label="Dyrektywa Omnibus — transparentność cen">
+    <div class="container">
+      <div class="kw-comp__prose kw-comp__anim">
+        <span class="kw-comp__label">Dyrektywa Omnibus</span>
+        <h2>Transparentność Cen zgodnie z&nbsp;Dyrektywą Omnibus (2019/2161)</h2>
+
+        <p>
+          Sklep KEDAR-WIHA.pl w&nbsp;pełni realizuje wymogi <strong>Dyrektywy Omnibus (Dyrektywa&nbsp;2019/2161)</strong>, która weszła w&nbsp;życie w&nbsp;Polsce 1&nbsp;stycznia 2023&nbsp;r. jako implementacja unijnych regulacji dotyczących transparentności cenowej i&nbsp;ochrony konsumentów w&nbsp;handlu elektronicznym. Dyrektywa ta ma kluczowe znaczenie dla profesjonalistów zamawiających narzędzia izolowane VDE i&nbsp;klucze dynamometryczne WIHA, ponieważ gwarantuje rzetelność informacji cenowej.
+        </p>
+
+        <p>
+          Przy każdym produkcie objętym obniżką cenową — wkrętakach VDE, zestawach narzędzi, kluczach dynamometrycznych — wyświetlamy <strong>najniższą cenę z&nbsp;ostatnich 30&nbsp;dni</strong> poprzedzających obniżkę. Oznacza to, że&nbsp;elektryk lub instalator fotowoltaiki zamawiający narzędzia w&nbsp;promocji zawsze widzi realną skalę obniżki w&nbsp;odniesieniu do&nbsp;faktycznie stosowanej ceny, nie do&nbsp;sztucznie zawyżonej ceny katalogowej.
+        </p>
+
+        <p>
+          Ponadto zapewniamy <strong>pełną transparentność</strong> informacji o&nbsp;cenach i&nbsp;kosztach dodatkowych (koszty dostawy, opłaty za pobranie), tak aby łączny koszt zamówienia był jasny przed finalizacją transakcji. Jeśli w&nbsp;przyszłości KEDAR-WIHA.pl będzie publikować opinie konsumenckie, zobowiązujemy się do&nbsp;<strong>weryfikacji autentyczności</strong> każdej opinii, uniemożliwiając publikację fałszywych recenzji zgodnie z&nbsp;wymogami Dyrektywy Omnibus.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       4. RODO & OCHRONA DANYCH OSOBOWYCH
+       ================================================================ -->
+  <section class="kw-comp__section kw-comp__section--alt" aria-label="RODO i ochrona danych osobowych">
+    <div class="container">
+      <div class="kw-comp__prose kw-comp__anim">
+        <span class="kw-comp__label">RODO</span>
+        <h2>Ochrona Danych Osobowych — RODO (Rozporządzenie&nbsp;2016/679)</h2>
+
+        <p>
+          KEDAR-WIHA.pl jako administrator danych osobowych przetwarza dane klientów wyłącznie w&nbsp;zakresie niezbędnym do&nbsp;realizacji zamówień na&nbsp;profesjonalne narzędzia WIHA, obsługi konta klienta, wystawiania faktur VAT oraz komunikacji dotyczącej zamówienia. Przetwarzanie odbywa się na&nbsp;podstawie <strong>Rozporządzenia Parlamentu Europejskiego i&nbsp;Rady (UE) 2016/679 z&nbsp;dnia 27 kwietnia 2016&nbsp;r.</strong> (ogólne rozporządzenie o&nbsp;ochronie danych — RODO) oraz <strong>Ustawy z&nbsp;dnia 10 maja 2018&nbsp;r. o&nbsp;ochronie danych osobowych</strong>.
+        </p>
+
+        <p>
+          Każdy klient sklepu KEDAR-WIHA.pl ma prawo do:
+        </p>
+
+        <ul>
+          <li><strong>Dostępu</strong> do swoich danych osobowych przetwarzanych przez administratora</li>
+          <li><strong>Sprostowania</strong> danych nieprawidłowych lub niekompletnych</li>
+          <li><strong>Usunięcia</strong> danych (prawo do bycia zapomnianym) — w&nbsp;zakresie dozwolonym przez prawo</li>
+          <li><strong>Ograniczenia przetwarzania</strong> w&nbsp;przypadkach wskazanych w&nbsp;RODO</li>
+          <li><strong>Przenoszenia</strong> danych do innego administratora w&nbsp;ustrukturyzowanym formacie</li>
+          <li><strong>Sprzeciwu</strong> wobec przetwarzania danych w&nbsp;celach marketingu bezpośredniego</li>
+          <li><strong>Wycofania zgody</strong> w&nbsp;dowolnym momencie bez wpływu na zgodność przetwarzania dokonanego przed wycofaniem</li>
+        </ul>
+
+        <div class="kw-comp__callout">
+          <p>
+            <i class="fas fa-info-circle"></i>
+            Szczegółowe informacje o&nbsp;przetwarzaniu danych, celach, podstawach prawnych, odbiorcach i&nbsp;okresach przechowywania zawiera nasza <strong><a href="/polityka-prywatnosci" style="color:var(--kw-secondary);">Polityka Prywatności</a></strong>. W&nbsp;sprawach dotyczących ochrony danych prosimy o&nbsp;kontakt: <strong>info@kedar-wiha.pl</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       5. PRAWO E-COMMERCE — ZAKAZ PRAKTYK NIEUCZCIWYCH
+       ================================================================ -->
+  <section class="kw-comp__section" aria-label="Zakaz praktyk nieuczciwych">
+    <div class="container">
+      <div class="kw-comp__prose kw-comp__anim">
+        <span class="kw-comp__label">Fair commerce</span>
+        <h2>Przeciwdziałanie Nieuczciwym Praktykom Handlowym</h2>
+
+        <p>
+          KEDAR-WIHA.pl zobowiązuje się do&nbsp;prowadzenia działalności handlowej w&nbsp;sposób uczciwy, transparentny i&nbsp;zgodny z&nbsp;dobrymi obyczajami, w&nbsp;pełnej zgodności z&nbsp;<strong>Ustawą z&nbsp;dnia 16 lutego 2007&nbsp;r. o&nbsp;ochronie konkurencji i&nbsp;konsumentów</strong> oraz <strong>Ustawą z&nbsp;dnia 23 sierpnia 2007&nbsp;r. o&nbsp;przeciwdziałaniu nieuczciwym praktykom rynkowym</strong>. Jako autoryzowany dystrybutor narzędzi WIHA w&nbsp;Polsce szczególną wagę przywiązujemy do&nbsp;rzetelności informacji produktowej.
+        </p>
+
+        <p>
+          Nasze zobowiązania obejmują:
+        </p>
+
+        <ul>
+          <li><strong>Nieprowadzenie sprzedaży wprowadzającej w&nbsp;błąd</strong> — opisy wkrętaków izolowanych VDE, kluczy dynamometrycznych i&nbsp;zestawów narzędzi WIHA zawierają wyłącznie zweryfikowane parametry techniczne, numery norm (IEC&nbsp;60900, ISO&nbsp;6789) i&nbsp;potwierdzone certyfikaty</li>
+          <li><strong>Brak klauzul niedozwolonych (abuzywnych)</strong> w&nbsp;regulaminie sklepu — wszystkie postanowienia zostały zweryfikowane pod kątem zgodności z&nbsp;rejestrem klauzul UOKiK</li>
+          <li><strong>Pełna transparentność cenowa</strong> — ceny brutto, wyraźnie oznaczone koszty dostawy, brak ukrytych opłat</li>
+          <li><strong>Prawo do&nbsp;odstąpienia od&nbsp;umowy</strong> w&nbsp;terminie 14&nbsp;dni od&nbsp;otrzymania towaru bez podania przyczyny, zgodnie z&nbsp;Ustawą o&nbsp;prawach konsumenta</li>
+          <li><strong>Rzetelne informowanie</strong> o&nbsp;właściwościach towarów, warunkach gwarancji producenta WIHA oraz procedurach reklamacyjnych</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       6. DOSTĘPNOŚĆ CYFROWA (EAA)
+       ================================================================ -->
+  <section class="kw-comp__section kw-comp__section--alt kw-comp__section--pattern" aria-label="Dostępność cyfrowa EAA i WCAG">
+    <div class="container">
+      <div class="kw-comp__prose kw-comp__anim">
+        <span class="kw-comp__label">Dostępność cyfrowa</span>
+        <h2>Dostępność Cyfrowa — WCAG&nbsp;2.1 Level&nbsp;AA i&nbsp;Europejski Akt o&nbsp;Dostępności</h2>
+
+        <p>
+          KEDAR-WIHA.pl dąży do&nbsp;zapewnienia pełnej dostępności cyfrowej zgodnie z&nbsp;<strong>Dyrektywą (UE) 2019/882 — Europejskim Aktem o&nbsp;Dostępności (EAA)</strong> oraz <strong>Ustawą z&nbsp;dnia 4 kwietnia 2019&nbsp;r. o&nbsp;dostępności cyfrowej stron internetowych i&nbsp;aplikacji mobilnych podmiotów publicznych</strong>. Naszym celem jest zapewnienie, aby sklep z&nbsp;profesjonalnymi narzędziami WIHA VDE dla elektryków był dostępny dla jak najszerszej grupy użytkowników, w&nbsp;tym osób z&nbsp;niepełnosprawnościami.
+        </p>
+
+        <p>
+          Nasze działania w&nbsp;zakresie dostępności obejmują:
+        </p>
+
+        <ul>
+          <li>Stosowanie standardu <strong>WCAG&nbsp;2.1 Level&nbsp;AA</strong> w&nbsp;projektowaniu i&nbsp;rozwoju interfejsu sklepu</li>
+          <li>Zapewnienie minimalnego współczynnika kontrastu <strong>4.5:1</strong> dla tekstu i&nbsp;elementów interakcji</li>
+          <li>Elementy interaktywne (przyciski, linki) o&nbsp;minimalnych wymiarach dotykowych <strong>44×44&nbsp;px</strong></li>
+          <li>Semantyczna struktura HTML z&nbsp;prawidłową hierarchią nagłówków i&nbsp;atrybutami ARIA</li>
+          <li>Obsługa nawigacji klawiaturowej i&nbsp;czytników ekranu</li>
+          <li>Teksty alternatywne (<code>alt</code>) dla wszystkich obrazów produktowych</li>
+        </ul>
+
+        <div class="kw-comp__callout">
+          <p>
+            <i class="fas fa-universal-access"></i>
+            <strong>Zgłaszanie barier dostępu:</strong> Jeśli napotkasz barierę w&nbsp;dostępności naszego sklepu, prosimy o&nbsp;kontakt pod adresem <strong>info@kedar-wiha.pl</strong> lub telefonicznie <strong>+48&nbsp;575&nbsp;838&nbsp;766</strong>. Zobowiązujemy się do&nbsp;rozpatrzenia każdego zgłoszenia i&nbsp;podjęcia działań naprawczych.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       7-8. BEZPIECZEŃSTWO PRODUKTÓW & CERTYFIKACJE
+       ================================================================ -->
+  <section class="kw-comp__section kw-comp__section--dark" aria-label="Bezpieczeństwo produktów i certyfikacje WIHA">
+    <div class="container">
+
+      <div class="kw-comp__header">
+        <span class="kw-comp__label">Certyfikacje WIHA</span>
+        <h2 class="kw-comp__title">Bezpieczeństwo Produktów i&nbsp;Certyfikacje — Narzędzia WIHA VDE</h2>
+        <hr class="kw-comp__divider" />
+        <p class="kw-comp__subtitle">
+          Wszystkie produkty w&nbsp;sklepie KEDAR-WIHA.pl są fabrycznie nowe i&nbsp;pochodzą z&nbsp;oficjalnej dystrybucji WIHA Polska. Każde narzędzie izolowane VDE przechodzi indywidualny test dielektryczny napięciem 10&nbsp;000&nbsp;V.
+        </p>
+      </div>
+
+      <div class="kw-comp__cert-grid">
+
+        <!-- VDE-GS / IEC 60900 -->
+        <div class="kw-comp__cert-card kw-comp__anim kw-comp__anim--d1">
+          <div class="kw-comp__cert-icon"><i class="fas fa-bolt"></i></div>
+          <h3>VDE-GS &amp; IEC&nbsp;60900</h3>
+          <p>
+            Narzędzia izolowane WIHA VDE posiadają certyfikat <strong>VDE-GS</strong> wydany przez niemiecki VDE Prüf- und Zertifizierungsinstitut oraz spełniają wymogi normy <strong>IEC&nbsp;60900</strong>, potwierdzającej bezpieczeństwo do&nbsp;pracy pod napięciem do <strong>1&nbsp;000&nbsp;V&nbsp;AC / 1&nbsp;500&nbsp;V&nbsp;DC</strong>. Każde narzędzie jest testowane indywidualnie napięciem <strong>10&nbsp;000&nbsp;V</strong> — dziesięciokrotna rezerwa bezpieczeństwa chroniąca życie elektryka.
+          </p>
+        </div>
+
+        <!-- ISO 6789 -->
+        <div class="kw-comp__cert-card kw-comp__anim kw-comp__anim--d2">
+          <div class="kw-comp__cert-icon"><i class="fas fa-cog"></i></div>
+          <h3>ISO&nbsp;6789 — Kalibracja</h3>
+          <p>
+            Klucze dynamometryczne WIHA TorqueVario-S i&nbsp;TorqueFixKey posiadają certyfikaty kalibracji zgodne z&nbsp;normą <strong>ISO&nbsp;6789</strong>. Norma ta określa wymagania dotyczące dokładności momentu obrotowego dla kluczy dynamometrycznych — kluczowego parametru bezpieczeństwa przy montażu instalacji fotowoltaicznych, rozdzielnic i&nbsp;złączy wysokonapięciowych.
+          </p>
+        </div>
+
+        <!-- ASTM F1505 -->
+        <div class="kw-comp__cert-card kw-comp__anim kw-comp__anim--d3">
+          <div class="kw-comp__cert-icon"><i class="fas fa-certificate"></i></div>
+          <h3>ASTM F1505</h3>
+          <p>
+            Narzędzia WIHA VDE dodatkowo spełniają amerykańską normę <strong>ASTM&nbsp;F1505</strong> (Standard Specification for Insulated and Insulating Hand Tools), potwierdzając zgodność z&nbsp;międzynarodowymi standardami bezpieczeństwa. Podwójna certyfikacja IEC&nbsp;60900 + ASTM&nbsp;F1505 czyni narzędzia WIHA jednymi z&nbsp;najbezpieczniejszych na&nbsp;rynku globalnym.
+          </p>
+        </div>
+
+        <!-- Made in Germany -->
+        <div class="kw-comp__cert-card kw-comp__anim kw-comp__anim--d4">
+          <div class="kw-comp__cert-icon"><i class="fas fa-flag"></i></div>
+          <h3>Made in Germany od&nbsp;1939</h3>
+          <p>
+            Ponad <strong>90% produkcji WIHA</strong> pochodzi z&nbsp;zakładów w&nbsp;Schwarzwaldzie w&nbsp;Niemczech. Od&nbsp;1939&nbsp;roku firma nieprzerwanie wyznacza standardy jakości narzędzi ręcznych. WIHA posiada certyfikaty <strong>ISO&nbsp;9001:2015</strong> (zarządzanie jakością), <strong>ISO&nbsp;14001</strong> (zarządzanie środowiskowe) i&nbsp;<strong>ISO&nbsp;50001</strong> (zarządzanie energią). Tytuł <strong>TOP&nbsp;100 najbardziej innowacyjnych firm</strong> w&nbsp;Niemczech potwierdza zaangażowanie w&nbsp;rozwój technologiczny.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Badges row -->
+      <div class="kw-comp__badges-row">
+        <span class="kw-comp__badge kw-comp__badge--blue"><i class="fas fa-check"></i> VDE-GS</span>
+        <span class="kw-comp__badge kw-comp__badge--blue"><i class="fas fa-bolt"></i> IEC 60900</span>
+        <span class="kw-comp__badge kw-comp__badge--blue"><i class="fas fa-check"></i> ASTM F1505</span>
+        <span class="kw-comp__badge kw-comp__badge--dark"><i class="fas fa-cog"></i> ISO 6789</span>
+        <span class="kw-comp__badge kw-comp__badge--green"><i class="fas fa-heart"></i> Certyfikat AGR</span>
+        <span class="kw-comp__badge kw-comp__badge--dark"><i class="fas fa-flag"></i> Made in Germany</span>
+        <span class="kw-comp__badge kw-comp__badge--red"><i class="fas fa-bolt"></i> Test 10 000 V</span>
+        <span class="kw-comp__badge kw-comp__badge--yellow"><i class="fas fa-award"></i> Autoryzowany Dystrybutor</span>
+        <span class="kw-comp__badge kw-comp__badge--blue"><i class="fas fa-universal-access"></i> WCAG 2.1 AA</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       9. KANAŁ ZGŁOSZEŃ — KONTAKT
+       ================================================================ -->
+  <section class="kw-comp__section" aria-label="Kanał zgłoszeń naruszeń — kontakt">
+    <div class="container">
+
+      <div class="kw-comp__header">
+        <span class="kw-comp__label">Kanał zgłoszeń</span>
+        <h2 class="kw-comp__title">Zgłaszanie Naruszeń i&nbsp;Kontakt</h2>
+        <hr class="kw-comp__divider" />
+        <p class="kw-comp__subtitle">
+          W&nbsp;przypadku podejrzenia naruszenia przepisów prawa, standardów etycznych lub norm bezpieczeństwa produktów prosimy o&nbsp;niezwłoczny kontakt. Zobowiązujemy się do&nbsp;rozpatrzenia każdego zgłoszenia z&nbsp;najwyższą starannością i&nbsp;udzielenia odpowiedzi w&nbsp;najkrótszym możliwym terminie.
+        </p>
+      </div>
+
+      <div class="kw-comp__contact-grid">
+
+        <a href="tel:+48575838766" class="kw-comp__contact-card kw-comp__anim kw-comp__anim--d1">
+          <div class="kw-comp__contact-card-icon"><i class="fas fa-phone-alt"></i></div>
+          <div>
+            <strong>Telefon</strong>
+            <span>+48 575 838 766</span>
+          </div>
+        </a>
+
+        <a href="mailto:info@kedar-wiha.pl" class="kw-comp__contact-card kw-comp__anim kw-comp__anim--d2">
+          <div class="kw-comp__contact-card-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <strong>E-mail</strong>
+            <span>info@kedar-wiha.pl</span>
+          </div>
+        </a>
+
+        <a href="https://kedar-wiha.pl" class="kw-comp__contact-card kw-comp__anim kw-comp__anim--d3" target="_blank" rel="noopener">
+          <div class="kw-comp__contact-card-icon"><i class="fas fa-globe"></i></div>
+          <div>
+            <strong>Strona WWW</strong>
+            <span>kedar-wiha.pl</span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="kw-comp__prose" style="margin-top:28px;">
+        <p style="text-align:center;font-size:14px;color:var(--kw-text-muted);">
+          KEDAR-WIHA.pl dokłada wszelkich starań, aby prowadzić działalność zgodnie z&nbsp;najwyższymi standardami etycznymi i&nbsp;prawnymi. Wszelkie zgłoszenia dotyczące potencjalnych naruszeń traktowane są poufnie. Zobowiązujemy się do&nbsp;udzielenia odpowiedzi na&nbsp;każde zgłoszenie w&nbsp;terminie <strong>14&nbsp;dni roboczych</strong> od&nbsp;jego otrzymania.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       10. FAQ — CSS-ONLY ACCORDION (details/summary)
+       ================================================================ -->
+  <section class="kw-comp__section kw-comp__section--alt" aria-label="Najczęściej zadawane pytania o zgodność i certyfikaty">
+    <div class="container">
+
+      <div class="kw-comp__header">
+        <span class="kw-comp__label">FAQ</span>
+        <h2 class="kw-comp__title">Najczęściej Zadawane Pytania — Zgodność i&nbsp;Certyfikaty</h2>
+        <hr class="kw-comp__divider" />
+      </div>
+
+      <div class="kw-comp__faq-list">
+
+        <details class="kw-comp__faq-item">
+          <summary>Jakie certyfikaty posiadają narzędzia WIHA VDE w&nbsp;ofercie KEDAR-WIHA.pl?</summary>
+          <div class="kw-comp__faq-answer">
+            Wszystkie narzędzia izolowane VDE marki WIHA w&nbsp;naszej ofercie posiadają certyfikaty <strong>VDE-GS</strong> (wydane przez niemiecki VDE Prüf- und Zertifizierungsinstitut), spełniają wymagania normy <strong>IEC&nbsp;60900</strong> (bezpieczeństwo do 1&nbsp;000&nbsp;V&nbsp;AC / 1&nbsp;500&nbsp;V&nbsp;DC) oraz normy <strong>ASTM&nbsp;F1505</strong>. Każde narzędzie przechodzi indywidualny test dielektryczny napięciem 10&nbsp;000&nbsp;V, co&nbsp;daje dziesięciokrotną rezerwę bezpieczeństwa. Wiele produktów posiada również certyfikat ergonomii <strong>AGR</strong>.
+          </div>
+        </details>
+
+        <details class="kw-comp__faq-item">
+          <summary>Czy produkty KEDAR-WIHA.pl pochodzą z&nbsp;oficjalnej dystrybucji?</summary>
+          <div class="kw-comp__faq-answer">
+            Tak — KEDAR-WIHA.pl jest <strong>autoryzowanym dystrybutorem narzędzi WIHA w&nbsp;Polsce</strong>. Wszystkie produkty w&nbsp;naszym sklepie są fabrycznie nowe i&nbsp;pochodzą z&nbsp;oficjalnego kanału dystrybucji WIHA. Każdy produkt objęty jest pełną gwarancją producenta. Status autoryzowanego dystrybutora oznacza brak pośredników, brak ryzyka podróbek i&nbsp;kompletną dokumentację certyfikatową.
+          </div>
+        </details>
+
+        <details class="kw-comp__faq-item">
+          <summary>Jak KEDAR-WIHA.pl realizuje wymogi Dyrektywy Omnibus?</summary>
+          <div class="kw-comp__faq-answer">
+            Przy każdym produkcie objętym obniżką cenową wyświetlamy <strong>najniższą cenę z&nbsp;ostatnich 30&nbsp;dni</strong> poprzedzających obniżkę. Zapewniamy pełną transparentność kosztów (cena produktu, koszt dostawy, opłaty dodatkowe) oraz zobowiązujemy się do&nbsp;weryfikacji autentyczności publikowanych opinii konsumenckich. Ceny podawane są w&nbsp;kwotach brutto (z&nbsp;VAT) z&nbsp;wyraźnym oznaczeniem ewentualnych kosztów dodatkowych.
+          </div>
+        </details>
+
+        <details class="kw-comp__faq-item">
+          <summary>Jakie mam prawa jako konsument zamawiający w&nbsp;KEDAR-WIHA.pl?</summary>
+          <div class="kw-comp__faq-answer">
+            Jako konsument masz prawo do&nbsp;<strong>odstąpienia od&nbsp;umowy w&nbsp;terminie 14&nbsp;dni</strong> od&nbsp;otrzymania towaru bez podania przyczyny (Ustawa o&nbsp;prawach konsumenta). Przysługuje Ci prawo do&nbsp;reklamacji wadliwego produktu na&nbsp;podstawie rękojmi (2 lata) oraz gwarancji producenta WIHA. Masz prawo do&nbsp;rzetelnej informacji o&nbsp;produkcie, transparentnych cen i&nbsp;bezpiecznej transakcji. Szczegóły procedury zwrotów i&nbsp;reklamacji znajdują się w&nbsp;naszym <a href="/regulamin" style="color:var(--kw-secondary);">Regulaminie</a>.
+          </div>
+        </details>
+
+        <details class="kw-comp__faq-item">
+          <summary>Jak KEDAR-WIHA.pl chroni moje dane osobowe?</summary>
+          <div class="kw-comp__faq-answer">
+            Przetwarzamy dane osobowe zgodnie z&nbsp;<strong>RODO (Rozporządzenie&nbsp;2016/679)</strong>. Dane są chronione szyfrowaniem SSL/TLS, przetwarzane wyłącznie w&nbsp;zakresie niezbędnym do&nbsp;realizacji zamówienia i&nbsp;nie są udostępniane podmiotom trzecim bez podstawy prawnej. Masz prawo do&nbsp;dostępu, sprostowania, usunięcia i&nbsp;przenoszenia swoich danych. Szczegóły w&nbsp;naszej <a href="/polityka-prywatnosci" style="color:var(--kw-secondary);">Polityce Prywatności</a>.
+          </div>
+        </details>
+
+        <details class="kw-comp__faq-item">
+          <summary>Co&nbsp;oznacza norma IEC&nbsp;60900 i&nbsp;dlaczego jest ważna?</summary>
+          <div class="kw-comp__faq-answer">
+            Norma <strong>IEC&nbsp;60900</strong> (International Electrotechnical Commission) definiuje wymagania bezpieczeństwa dla narzędzi ręcznych przeznaczonych do&nbsp;pracy w&nbsp;pobliżu lub bezpośrednio pod napięciem do&nbsp;<strong>1&nbsp;000&nbsp;V&nbsp;AC i&nbsp;1&nbsp;500&nbsp;V&nbsp;DC</strong>. Jest to&nbsp;złoty standard w&nbsp;branży narzędzi dla elektryków. Narzędzia certyfikowane zgodnie z&nbsp;IEC&nbsp;60900 muszą przejść rygorystyczne testy izolacji, wytrzymałości mechanicznej i&nbsp;odporności na&nbsp;starzenie. WIHA idzie krok dalej — testuje każde narzędzie indywidualnie napięciem 10&nbsp;000&nbsp;V, zapewniając dziesięciokrotną rezerwę bezpieczeństwa.
+          </div>
+        </details>
+
+        <details class="kw-comp__faq-item">
+          <summary>Jak mogę zgłosić barierę dostępności na&nbsp;stronie KEDAR-WIHA.pl?</summary>
+          <div class="kw-comp__faq-answer">
+            Jeśli napotkasz barierę w&nbsp;dostępności naszego sklepu internetowego, prosimy o&nbsp;kontakt na&nbsp;adres <strong>info@kedar-wiha.pl</strong> lub telefonicznie pod numer <strong>+48&nbsp;575&nbsp;838&nbsp;766</strong>. W&nbsp;zgłoszeniu prosimy o&nbsp;opisanie napotkanego problemu — lokalizację na&nbsp;stronie, typ urządzenia/przeglądarki i&nbsp;technologię asystującą (jeśli stosowana). Zobowiązujemy się do&nbsp;rozpatrzenia zgłoszenia i&nbsp;podjęcia działań naprawczych w&nbsp;najkrótszym możliwym terminie.
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       11. CTA — ZACHĘTA DO KONTAKTU
+       ================================================================ -->
+  <section class="kw-comp__cta" aria-label="Kontakt z KEDAR-WIHA.pl">
+    <div class="kw-comp__cta-inner kw-comp__anim">
+
+      <span class="kw-comp__label" style="color:#FFD700;background:rgba(255,215,0,0.1);">Kontakt</span>
+
+      <h2>Masz Pytania dotyczące Zgodności, Certyfikatów lub&nbsp;Bezpieczeństwa Produktów?</h2>
+
+      <p>
+        Jako autoryzowany dystrybutor narzędzi WIHA w&nbsp;Polsce jesteśmy do&nbsp;Twojej dyspozycji. Skontaktuj się z&nbsp;nami w&nbsp;sprawie certyfikatów VDE-GS, dokumentacji IEC&nbsp;60900, procedur reklamacyjnych lub&nbsp;jakichkolwiek kwestii prawnych związanych z&nbsp;funkcjonowaniem sklepu KEDAR-WIHA.pl.
+      </p>
+
+      <div class="kw-comp__cta-btns">
+        <a href="/kontakt" class="kw-comp__btn kw-comp__btn--white" aria-label="Skontaktuj się z KEDAR-WIHA.pl">
+          <i class="fas fa-envelope"></i> Skontaktuj się
+        </a>
+        <a href="/2-glowna" class="kw-comp__btn kw-comp__btn--outline" aria-label="Przejdź do sklepu">
+          <i class="fas fa-shopping-bag"></i> Przejdź do sklepu
+        </a>
+      </div>
+
+      <div class="kw-comp__cta-footer">
+        <a href="tel:+48575838766" class="kw-comp__cta-link">
+          <i class="fas fa-phone-alt"></i> +48 575 838 766
+        </a>
+        <a href="mailto:info@kedar-wiha.pl" class="kw-comp__cta-link">
+          <i class="fas fa-envelope"></i> info@kedar-wiha.pl
+        </a>
+        <a href="https://kedar-wiha.pl" class="kw-comp__cta-link" target="_blank" rel="noopener">
+          <i class="fas fa-globe"></i> kedar-wiha.pl
+        </a>
+      </div>
+
+      <p class="kw-comp__cta-copy">&copy; 2025 KEDAR-WIHA.pl — Autoryzowany Dystrybutor Narzędzi WIHA w&nbsp;Polsce. Wszelkie prawa zastrzeżone.</p>
+
+    </div>
+  </section>
+
+</div>
+<!-- END .kw-comp -->

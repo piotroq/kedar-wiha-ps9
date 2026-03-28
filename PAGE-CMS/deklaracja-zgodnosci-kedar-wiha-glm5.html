@@ -1,0 +1,2547 @@
+<!-- ==========================================================================
+     DEKLARACJA ZGODNOŚCI — KEDAR-WIHA.pl
+     PrestaShop CMS Page | Motyw Optima 3.3.0 | Bootstrap 4.x
+     Wersja: 1.0.0 | 2025
+     Autoryzowany Dystrybutor Narzędzi WIHA — Narzędzia VDE dla Profesjonalistów
+     Production-Ready | Copy-Paste do PrestaShop CMS
+     ========================================================================== -->
+
+<style>
+/* ==========================================================================
+   DEKLARACJA ZGODNOŚCI — Custom Inline Styles
+   Kompatybilne z PrestaShop Optima 3.3.0 | Bootstrap 4.x
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. IMPORT — Google Fonts (Montserrat + Inter)
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:ital,wght@0,600;0,700;0,800;1,600&display=swap');
+
+/* --------------------------------------------------------------------------
+   2. CSS CUSTOM PROPERTIES — Brand Variables
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci {
+  --kedar-primary: #8B0000;
+  --kedar-primary-dark: #6b0000;
+  --kedar-primary-light: #bf2020;
+  --kedar-secondary: #0056A3;
+  --kedar-secondary-dark: #003d7a;
+  --kedar-action: #ca0000;
+  --kedar-yellow: #FFD700;
+  --kedar-yellow-dark: #e6c200;
+  
+  --text-primary: #151515;
+  --text-heading: #2D2D2D;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --text-light: #aaaaaa;
+  --text-white: #ffffff;
+  
+  --bg-white: #ffffff;
+  --bg-light: #f6f6f6;
+  --bg-alt: #ebebeb;
+  --bg-dark: #2a2a2a;
+  --bg-darker: #1a1a1a;
+  
+  --border-light: #e8e8e8;
+  --border-medium: #cccccc;
+  --border-dark: #999999;
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.15);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.07);
+  --shadow-card-hover: 0 8px 28px rgba(0, 0, 0, 0.13);
+  --shadow-cta: 0 4px 20px rgba(139, 0, 0, 0.35);
+  
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms linear;
+  --transition-medium: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow: 500ms ease;
+  
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  
+  --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   3. KEYFRAME ANIMATIONS
+   -------------------------------------------------------------------------- */
+@keyframes dz-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dz-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dz-fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dz-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dz-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes dz-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes dz-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* --------------------------------------------------------------------------
+   4. TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci h1,
+.deklaracja-zgodnosci .dz-h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4.5vw, 2.875rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  color: var(--text-heading);
+  margin-top: 0;
+  margin-bottom: var(--space-6);
+}
+
+.deklaracja-zgodnosci h2,
+.deklaracja-zgodnosci .dz-h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--text-heading);
+  margin-top: 0;
+  margin-bottom: var(--space-5);
+}
+
+.deklaracja-zgodnosci h3,
+.deklaracja-zgodnosci .dz-h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-heading);
+  margin-top: 0;
+  margin-bottom: var(--space-4);
+}
+
+.deklaracja-zgodnosci h4,
+.deklaracja-zgodnosci .dz-h4 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2vw, 1.375rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+}
+
+.deklaracja-zgodnosci h5,
+.deklaracja-zgodnosci .dz-h5 {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+}
+
+.deklaracja-zgodnosci h6,
+.deklaracja-zgodnosci .dz-h6 {
+  font-family: var(--font-heading);
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+}
+
+.deklaracja-zgodnosci p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: var(--space-4);
+}
+
+.deklaracja-zgodnosci p.lead {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.deklaracja-zgodnosci strong,
+.deklaracja-zgodnosci b {
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.deklaracja-zgodnosci em,
+.deklaracja-zgodnosci i {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.deklaracja-zgodnosci small,
+.deklaracja-zgodnosci .small {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.deklaracja-zgodnosci a:not(.dz-btn) {
+  color: var(--kedar-secondary);
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 86, 163, 0.35);
+  text-underline-offset: 3px;
+  transition: color var(--transition-base), text-decoration-color var(--transition-base);
+}
+
+.deklaracja-zgodnosci a:not(.dz-btn):hover {
+  color: var(--kedar-action);
+  text-decoration-color: var(--kedar-action);
+}
+
+.deklaracja-zgodnosci a:not(.dz-btn):focus {
+  outline: 2px solid var(--kedar-secondary);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+/* Section Title with Underline */
+.deklaracja-zgodnosci .dz-section-title {
+  position: relative;
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.deklaracja-zgodnosci .dz-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--kedar-primary);
+  border-radius: var(--radius-xs);
+  transition: width var(--transition-base);
+}
+
+.deklaracja-zgodnosci .dz-section-title.text-center::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.deklaracja-zgodnosci .dz-section-title:hover::after {
+  width: 100px;
+}
+
+/* --------------------------------------------------------------------------
+   5. LISTS
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci ul,
+.deklaracja-zgodnosci ol {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-6);
+}
+
+.deklaracja-zgodnosci ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.deklaracja-zgodnosci ul li {
+  position: relative;
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.deklaracja-zgodnosci ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  background: var(--kedar-primary);
+  border-radius: 50%;
+  transition: transform var(--transition-fast);
+}
+
+.deklaracja-zgodnosci ul li:hover::before {
+  transform: scale(1.3);
+}
+
+.deklaracja-zgodnosci ol {
+  list-style: none;
+  counter-reset: dz-counter;
+  padding-left: 0;
+}
+
+.deklaracja-zgodnosci ol li {
+  position: relative;
+  padding-left: var(--space-10);
+  margin-bottom: var(--space-4);
+  counter-increment: dz-counter;
+}
+
+.deklaracja-zgodnosci ol li::before {
+  content: counter(dz-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  background: var(--kedar-primary);
+  color: var(--text-white);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.deklaracja-zgodnosci ol li:hover::before {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   6. BUTTONS
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-none);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+              color var(--transition-base),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base),
+              transform var(--transition-fast);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.deklaracja-zgodnosci .dz-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background var(--transition-fast);
+}
+
+.deklaracja-zgodnosci .dz-btn:active::after {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.deklaracja-zgodnosci .dz-btn-primary {
+  background-color: var(--kedar-primary);
+  color: var(--text-white);
+  border-color: var(--kedar-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.deklaracja-zgodnosci .dz-btn-primary:hover {
+  background-color: var(--kedar-action);
+  border-color: var(--kedar-action);
+  box-shadow: var(--shadow-cta);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-btn-primary:focus {
+  outline: 2px solid var(--kedar-action);
+  outline-offset: 3px;
+}
+
+.deklaracja-zgodnosci .dz-btn-secondary {
+  background-color: transparent;
+  color: var(--kedar-primary);
+  border-color: var(--kedar-primary);
+}
+
+.deklaracja-zgodnosci .dz-btn-secondary:hover {
+  background-color: var(--kedar-primary);
+  color: var(--text-white);
+  box-shadow: 0 4px 16px rgba(139, 0, 0, 0.20);
+  text-decoration: none;
+}
+
+.deklaracja-zgodnosci .dz-btn-dark {
+  background-color: transparent;
+  color: var(--text-white);
+  border-color: rgba(255, 255, 255, 0.60);
+}
+
+.deklaracja-zgodnosci .dz-btn-dark:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--text-white);
+  color: var(--text-white);
+  text-decoration: none;
+}
+
+.deklaracja-zgodnosci .dz-btn-lg {
+  min-height: 56px;
+  padding: var(--space-4) var(--space-8);
+  font-size: 1rem;
+}
+
+.deklaracja-zgodnosci .dz-btn-sm {
+  min-height: 40px;
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.75rem;
+}
+
+.deklaracja-zgodnosci .dz-btn i,
+.deklaracja-zgodnosci .dz-btn .fa {
+  font-size: 1em;
+  transition: transform var(--transition-fast);
+}
+
+.deklaracja-zgodnosci .dz-btn:hover i,
+.deklaracja-zgodnosci .dz-btn:hover .fa {
+  transform: translateX(3px);
+}
+
+/* --------------------------------------------------------------------------
+   7. HERO SECTION
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-hero {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a1a 0%, #3d0000 60%, #8B0000 100%);
+  color: var(--text-white);
+  padding: var(--space-16) 0;
+  overflow: hidden;
+}
+
+.deklaracja-zgodnosci .dz-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,0.02) 10px,
+    rgba(255,255,255,0.02) 20px
+  );
+  pointer-events: none;
+}
+
+.deklaracja-zgodnosci .dz-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--kedar-yellow), transparent);
+  opacity: 0.6;
+}
+
+.deklaracja-zgodnosci .dz-hero-content {
+  position: relative;
+  z-index: 2;
+  animation: dz-fade-up 0.8s ease-out;
+}
+
+.deklaracja-zgodnosci .dz-hero h1 {
+  color: var(--text-white);
+  margin-bottom: var(--space-4);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.deklaracja-zgodnosci .dz-hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: var(--space-8);
+  max-width: 700px;
+}
+
+.deklaracja-zgodnosci .dz-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid var(--kedar-yellow);
+  color: var(--kedar-yellow);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-6);
+  animation: dz-fade-down 0.6s ease-out 0.2s both;
+}
+
+.deklaracja-zgodnosci .dz-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+.deklaracja-zgodnosci .dz-hero-stat {
+  text-align: center;
+  padding: var(--space-4);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  min-width: 120px;
+  transition: background var(--transition-base), transform var(--transition-medium);
+}
+
+.deklaracja-zgodnosci .dz-hero-stat:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-3px);
+}
+
+.deklaracja-zgodnosci .dz-hero-stat-number {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--kedar-yellow);
+  line-height: 1;
+  margin-bottom: var(--space-1);
+}
+
+.deklaracja-zgodnosci .dz-hero-stat-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --------------------------------------------------------------------------
+   8. SECTIONS
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-section {
+  padding: var(--space-12) 0;
+  position: relative;
+}
+
+.deklaracja-zgodnosci .dz-section-lg {
+  padding: var(--space-20) 0;
+}
+
+.deklaracja-zgodnosci .dz-section-white {
+  background: var(--bg-white);
+}
+
+.deklaracja-zgodnosci .dz-section-light {
+  background: var(--bg-light);
+}
+
+.deklaracja-zgodnosci .dz-section-alt {
+  background: linear-gradient(180deg, #f6f6f6 0%, #f1f1f1 100%);
+}
+
+.deklaracja-zgodnosci .dz-section-dark {
+  background: var(--bg-dark);
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-section-dark h2,
+.deklaracja-zgodnosci .dz-section-dark h3,
+.deklaracja-zgodnosci .dz-section-dark h4 {
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-section-dark p {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.deklaracja-zgodnosci .dz-section-dark .dz-section-title::after {
+  background: var(--kedar-yellow);
+}
+
+.deklaracja-zgodnosci .dz-section-primary {
+  background: linear-gradient(135deg, var(--kedar-primary) 0%, var(--kedar-primary-dark) 100%);
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-section-primary h2,
+.deklaracja-zgodnosci .dz-section-primary h3,
+.deklaracja-zgodnosci .dz-section-primary h4 {
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-section-primary .dz-section-title::after {
+  background: var(--kedar-yellow);
+}
+
+/* Animation on scroll */
+.deklaracja-zgodnosci .dz-animate {
+  opacity: 0;
+  animation: dz-fade-up 0.6s ease-out forwards;
+}
+
+.deklaracja-zgodnosci .dz-animate-delay-1 { animation-delay: 0.1s; }
+.deklaracja-zgodnosci .dz-animate-delay-2 { animation-delay: 0.2s; }
+.deklaracja-zgodnosci .dz-animate-delay-3 { animation-delay: 0.3s; }
+.deklaracja-zgodnosci .dz-animate-delay-4 { animation-delay: 0.4s; }
+.deklaracja-zgodnosci .dz-animate-delay-5 { animation-delay: 0.5s; }
+
+/* --------------------------------------------------------------------------
+   9. CARDS
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-none);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--transition-base),
+              transform var(--transition-medium),
+              border-color var(--transition-base);
+  height: 100%;
+}
+
+.deklaracja-zgodnosci .dz-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+  border-color: var(--border-medium);
+}
+
+.deklaracja-zgodnosci .dz-card-accent {
+  border-left: 4px solid var(--kedar-primary);
+}
+
+.deklaracja-zgodnosci .dz-card-accent-blue {
+  border-left-color: var(--kedar-secondary);
+}
+
+.deklaracja-zgodnosci .dz-card-accent-yellow {
+  border-left-color: var(--kedar-yellow);
+}
+
+.deklaracja-zgodnosci .dz-card-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 0, 0, 0.06);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+  transition: background var(--transition-base), transform var(--transition-medium);
+}
+
+.deklaracja-zgodnosci .dz-card-icon i {
+  font-size: 1.5rem;
+  color: var(--kedar-primary);
+  transition: color var(--transition-base), transform var(--transition-medium);
+}
+
+.deklaracja-zgodnosci .dz-card:hover .dz-card-icon {
+  background: var(--kedar-primary);
+}
+
+.deklaracja-zgodnosci .dz-card:hover .dz-card-icon i {
+  color: var(--text-white);
+  transform: scale(1.1);
+}
+
+.deklaracja-zgodnosci .dz-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: var(--space-3);
+  transition: color var(--transition-base);
+}
+
+.deklaracja-zgodnosci .dz-card:hover .dz-card-title {
+  color: var(--kedar-primary);
+}
+
+.deklaracja-zgodnosci .dz-card-text {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Dark Card */
+.deklaracja-zgodnosci .dz-card-dark {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-card-dark:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.deklaracja-zgodnosci .dz-card-dark .dz-card-title {
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-card-dark .dz-card-text {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.deklaracja-zgodnosci .dz-card-dark .dz-card-icon {
+  background: rgba(255, 215, 0, 0.15);
+}
+
+.deklaracja-zgodnosci .dz-card-dark .dz-card-icon i {
+  color: var(--kedar-yellow);
+}
+
+.deklaracja-zgodnosci .dz-card-dark:hover .dz-card-icon {
+  background: var(--kedar-yellow);
+}
+
+.deklaracja-zgodnosci .dz-card-dark:hover .dz-card-icon i {
+  color: var(--text-heading);
+}
+
+/* --------------------------------------------------------------------------
+   10. BADGES
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-xs);
+  line-height: 1.2;
+}
+
+.deklaracja-zgodnosci .dz-badge-vde {
+  background: var(--kedar-primary);
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-badge-iec {
+  background: var(--kedar-secondary);
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-badge-iso {
+  background: var(--kedar-yellow);
+  color: var(--text-heading);
+}
+
+.deklaracja-zgodnosci .dz-badge-germany {
+  background: var(--text-heading);
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-badge-authorized {
+  background: #1A7A3C;
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-badge-wcag {
+  background: var(--kedar-yellow);
+  color: var(--text-heading);
+}
+
+.deklaracja-zgodnosci .dz-badge-10kv {
+  background: linear-gradient(135deg, var(--kedar-primary), var(--kedar-action));
+  color: var(--text-white);
+  font-weight: 800;
+}
+
+/* --------------------------------------------------------------------------
+   11. CALLOUTS / ALERTS
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-callout {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--kedar-primary);
+  border-radius: var(--radius-none);
+  padding: var(--space-5) var(--space-6);
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base), border-left-color var(--transition-base);
+}
+
+.deklaracja-zgodnosci .dz-callout:hover {
+  box-shadow: var(--shadow-md);
+  border-left-color: var(--kedar-action);
+}
+
+.deklaracja-zgodnosci .dz-callout-info {
+  border-left-color: var(--kedar-secondary);
+}
+
+.deklaracja-zgodnosci .dz-callout-info:hover {
+  border-left-color: var(--kedar-secondary-dark);
+}
+
+.deklaracja-zgodnosci .dz-callout-success {
+  border-left-color: #1A7A3C;
+}
+
+.deklaracja-zgodnosci .dz-callout-warning {
+  border-left-color: #E07B00;
+}
+
+.deklaracja-zgodnosci .dz-callout-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.deklaracja-zgodnosci .dz-callout-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 0, 0, 0.08);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.deklaracja-zgodnosci .dz-callout-icon i {
+  font-size: 1rem;
+  color: var(--kedar-primary);
+}
+
+.deklaracja-zgodnosci .dz-callout-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin: 0;
+}
+
+.deklaracja-zgodnosci .dz-callout-content {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.deklaracja-zgodnosci .dz-callout-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   12. ACCORDION / FAQ
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-accordion {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-none);
+  overflow: hidden;
+  background: var(--bg-white);
+}
+
+.deklaracja-zgodnosci .dz-accordion-item {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.deklaracja-zgodnosci .dz-accordion-item:last-child {
+  border-bottom: none;
+}
+
+.deklaracja-zgodnosci .dz-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  background: var(--bg-white);
+  cursor: pointer;
+  transition: background var(--transition-base), color var(--transition-base);
+  min-height: 56px;
+}
+
+.deklaracja-zgodnosci .dz-accordion-header:hover {
+  background: var(--bg-light);
+}
+
+.deklaracja-zgodnosci .dz-accordion-header.active {
+  background: rgba(139, 0, 0, 0.04);
+}
+
+.deklaracja-zgodnosci .dz-accordion-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  transition: color var(--transition-base);
+}
+
+.deklaracja-zgodnosci .dz-accordion-header:hover .dz-accordion-title {
+  color: var(--kedar-primary);
+}
+
+.deklaracja-zgodnosci .dz-accordion-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 0, 0, 0.06);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background var(--transition-base), transform var(--transition-medium);
+}
+
+.deklaracja-zgodnosci .dz-accordion-icon i {
+  font-size: 0.75rem;
+  color: var(--kedar-primary);
+  transition: transform var(--transition-medium);
+}
+
+.deklaracja-zgodnosci .dz-accordion-header.active .dz-accordion-icon i {
+  transform: rotate(180deg);
+}
+
+.deklaracja-zgodnosci .dz-accordion-header:hover .dz-accordion-icon {
+  background: var(--kedar-primary);
+}
+
+.deklaracja-zgodnosci .dz-accordion-header:hover .dz-accordion-icon i {
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-accordion-content {
+  display: none;
+  padding: 0 var(--space-6) var(--space-6);
+  background: var(--bg-white);
+  border-top: 1px solid var(--border-light);
+  animation: dz-fade-in 0.3s ease-out;
+}
+
+.deklaracja-zgodnosci .dz-accordion-content.active {
+  display: block;
+}
+
+.deklaracja-zgodnosci .dz-accordion-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   13. CONTACT BOX
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-contact-box {
+  background: var(--bg-white);
+  border: 2px solid var(--kedar-primary);
+  border-radius: var(--radius-none);
+  padding: var(--space-8);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-base), transform var(--transition-medium);
+}
+
+.deklaracja-zgodnosci .dz-contact-box:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-4px);
+}
+
+.deklaracja-zgodnosci .dz-contact-icon {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--kedar-primary);
+  border-radius: 50%;
+  margin: 0 auto var(--space-5);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.deklaracja-zgodnosci .dz-contact-icon i {
+  font-size: 2rem;
+  color: var(--text-white);
+}
+
+.deklaracja-zgodnosci .dz-contact-box:hover .dz-contact-icon {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-cta);
+}
+
+.deklaracja-zgodnosci .dz-contact-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: var(--space-4);
+}
+
+.deklaracja-zgodnosci .dz-contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.deklaracja-zgodnosci .dz-contact-item i {
+  color: var(--kedar-primary);
+  font-size: 1.125rem;
+}
+
+.deklaracja-zgodnosci .dz-contact-item a {
+  color: var(--kedar-secondary);
+  font-weight: 500;
+}
+
+.deklaracja-zgodnosci .dz-contact-item a:hover {
+  color: var(--kedar-action);
+}
+
+/* --------------------------------------------------------------------------
+   14. CERTIFICATES GRID
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-cert-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .deklaracja-zgodnosci .dz-cert-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .deklaracja-zgodnosci .dz-cert-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.deklaracja-zgodnosci .dz-cert-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-top: 4px solid var(--kedar-primary);
+  border-radius: var(--radius-none);
+  padding: var(--space-6);
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-medium);
+}
+
+.deklaracja-zgodnosci .dz-cert-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-6px);
+  border-top-color: var(--kedar-yellow);
+}
+
+.deklaracja-zgodnosci .dz-cert-badge {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--kedar-yellow);
+  border-radius: 50%;
+  margin: 0 auto var(--space-5);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.deklaracja-zgodnosci .dz-cert-badge i {
+  font-size: 2rem;
+  color: var(--text-heading);
+}
+
+.deklaracja-zgodnosci .dz-cert-card:hover .dz-cert-badge {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+}
+
+.deklaracja-zgodnosci .dz-cert-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: var(--space-2);
+}
+
+.deklaracja-zgodnosci .dz-cert-norm {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--kedar-primary);
+  margin-bottom: var(--space-3);
+  letter-spacing: 0.02em;
+}
+
+.deklaracja-zgodnosci .dz-cert-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   15. CTA SECTION
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-cta-section {
+  background: linear-gradient(135deg, var(--kedar-primary) 0%, var(--kedar-primary-dark) 100%);
+  padding: var(--space-16) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.deklaracja-zgodnosci .dz-cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(255,255,255,0.03) 20px,
+    rgba(255,255,255,0.03) 40px
+  );
+  pointer-events: none;
+}
+
+.deklaracja-zgodnosci .dz-cta-section h2 {
+  color: var(--text-white);
+  margin-bottom: var(--space-4);
+}
+
+.deklaracja-zgodnosci .dz-cta-section p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.125rem;
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+}
+
+.deklaracja-zgodnosci .dz-cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   16. TABLE STYLES
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-white);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-none);
+  overflow: hidden;
+  margin-bottom: var(--space-6);
+}
+
+.deklaracja-zgodnosci .dz-table th,
+.deklaracja-zgodnosci .dz-table td {
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+  transition: background var(--transition-base);
+}
+
+.deklaracja-zgodnosci .dz-table th {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  background: var(--bg-light);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.deklaracja-zgodnosci .dz-table td {
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  vertical-align: top;
+}
+
+.deklaracja-zgodnosci .dz-table tbody tr:hover {
+  background: rgba(139, 0, 0, 0.03);
+}
+
+.deklaracja-zgodnosci .dz-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* --------------------------------------------------------------------------
+   17. UTILITIES
+   -------------------------------------------------------------------------- */
+.deklaracja-zgodnosci .dz-mb-0 { margin-bottom: 0 !important; }
+.deklaracja-zgodnosci .dz-mb-2 { margin-bottom: var(--space-2) !important; }
+.deklaracja-zgodnosci .dz-mb-4 { margin-bottom: var(--space-4) !important; }
+.deklaracja-zgodnosci .dz-mb-6 { margin-bottom: var(--space-6) !important; }
+.deklaracja-zgodnosci .dz-mb-8 { margin-bottom: var(--space-8) !important; }
+
+.deklaracja-zgodnosci .dz-mt-0 { margin-top: 0 !important; }
+.deklaracja-zgodnosci .dz-mt-4 { margin-top: var(--space-4) !important; }
+.deklaracja-zgodnosci .dz-mt-6 { margin-top: var(--space-6) !important; }
+.deklaracja-zgodnosci .dz-mt-8 { margin-top: var(--space-8) !important; }
+
+.deklaracja-zgodnosci .dz-text-center { text-align: center; }
+.deklaracja-zgodnosci .dz-text-left { text-align: left; }
+.deklaracja-zgodnosci .dz-text-right { text-align: right; }
+
+.deklaracja-zgodnosci .dz-text-primary { color: var(--kedar-primary); }
+.deklaracja-zgodnosci .dz-text-secondary { color: var(--kedar-secondary); }
+.deklaracja-zgodnosci .dz-text-muted { color: var(--text-muted); }
+
+.deklaracja-zgodnosci .dz-font-weight-bold { font-weight: 700; }
+.deklaracja-zgodnosci .dz-font-weight-semibold { font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   18. RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .deklaracja-zgodnosci .dz-section {
+    padding: var(--space-10) 0;
+  }
+  
+  .deklaracja-zgodnosci .dz-section-lg {
+    padding: var(--space-12) 0;
+  }
+  
+  .deklaracja-zgodnosci .dz-hero {
+    padding: var(--space-12) 0;
+  }
+  
+  .deklaracja-zgodnosci .dz-hero-stats {
+    justify-content: center;
+  }
+  
+  .deklaracja-zgodnosci .dz-hero-stat {
+    min-width: 100px;
+  }
+  
+  .deklaracja-zgodnosci .dz-card {
+    padding: var(--space-5);
+  }
+  
+  .deklaracja-zgodnosci .dz-contact-box {
+    padding: var(--space-6);
+  }
+  
+  .deklaracja-zgodnosci .dz-cta-section {
+    padding: var(--space-12) 0;
+  }
+  
+  .deklaracja-zgodnosci .dz-cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .deklaracja-zgodnosci .dz-cta-buttons .dz-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .deklaracja-zgodnosci .dz-section {
+    padding: var(--space-12) 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   19. ACCESSIBILITY — WCAG 2.1 AA
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .deklaracja-zgodnosci *,
+  .deklaracja-zgodnosci *::before,
+  .deklaracja-zgodnosci *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.deklaracja-zgodnosci .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus visible states */
+.deklaracja-zgodnosci *:focus-visible {
+  outline: 2px solid var(--kedar-secondary);
+  outline-offset: 3px;
+}
+
+.deklaracja-zgodnosci .dz-btn:focus-visible {
+  outline: 2px solid var(--kedar-yellow);
+  outline-offset: 3px;
+}
+</style>
+
+<!-- ==========================================================================
+     DEKLARACJA ZGODNOŚCI — HTML CONTENT
+     ========================================================================== -->
+
+<div class="deklaracja-zgodnosci">
+
+<!-- ========== HERO SECTION ========== -->
+<section class="dz-hero">
+  <div class="container">
+    <div class="dz-hero-content">
+      <div class="dz-hero-badge">
+        <i class="fa fa-shield-check" aria-hidden="true"></i>
+        <span>Autoryzowany Dystrybutor WIHA</span>
+      </div>
+      
+      <h1>Deklaracja Zgodności</h1>
+      
+      <p class="dz-hero-subtitle">
+        KEDAR-WIHA.pl zobowiązuje się do pełnej zgodności z przepisami prawa polskiego i unijnego. 
+        Jako autoryzowany dystrybutor narzędzi WIHA w Polsce, dbamy o transparentność, bezpieczeństwo 
+        produktów oraz ochronę praw konsumentów.
+      </p>
+      
+      <div class="dz-hero-btn-group">
+        <a href="#kontakt" class="dz-btn dz-btn-dark dz-btn-lg">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          Skontaktuj się z nami
+        </a>
+      </div>
+      
+      <div class="dz-hero-stats">
+        <div class="dz-hero-stat">
+          <div class="dz-hero-stat-number">100%</div>
+          <div class="dz-hero-stat-label">Zgodność prawna</div>
+        </div>
+        <div class="dz-hero-stat">
+          <div class="dz-hero-stat-number">VDE</div>
+          <div class="dz-hero-stat-label">Certyfikaty bezpieczeństwa</div>
+        </div>
+        <div class="dz-hero-stat">
+          <div class="dz-hero-stat-number">14 dni</div>
+          <div class="dz-hero-stat-label">Prawo odstąpienia</div>
+        </div>
+        <div class="dz-hero-stat">
+          <div class="dz-hero-stat-number">RODO</div>
+          <div class="dz-hero-stat-label">Ochrona danych</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PREAMBUŁA PRAWNA ========== -->
+<section class="dz-section dz-section-white" id="preambula">
+  <div class="container">
+    <h2 class="dz-section-title">Zgodność z Prawem Polskim i Unijnym</h2>
+    
+    <p class="lead">
+      Sklep internetowy <strong>KEDAR-WIHA.pl</strong> prowadzony jest z pełnym poszanowaniem 
+      obowiązujących przepisów prawa, co stanowi fundament naszej działalności jako autoryzowanego 
+      dystrybutora narzędzi profesjonalnych WIHA w Polsce.
+    </p>
+    
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+        <div class="dz-callout dz-callout-info">
+          <div class="dz-callout-header">
+            <div class="dz-callout-icon">
+              <i class="fa fa-gavel" aria-hidden="true"></i>
+            </div>
+            <h4 class="dz-callout-title">Prawo Konsumenckie</h4>
+          </div>
+          <div class="dz-callout-content">
+            <p>
+              Nasza działalność opiera się na <strong>Ustawie z dnia 30 maja 2014 r. o prawach konsumenta</strong> 
+              (t.j. Dz.U. z 2024 r. poz. 1796) oraz <strong>Dyrektywie 2011/83/UE</strong> w sprawie praw konsumentów. 
+              Gwarantujemy pełne prawo do odstąpienia od umowy w terminie 14 dni od otrzymania towaru, 
+              jasne i czytelne informacje o produktach oraz transparentne warunki transakcji.
+            </p>
+            <p class="dz-mb-0">
+              Respektujemy również przepisy <strong>Ustawy z dnia 16 lutego 2007 r. o ochronie konkurencji 
+              i konsumentów</strong>, zapewniając uczciwe praktyki handlowe i ochronę przed nieuczciwymi 
+              warunkami umownymi.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 mb-4">
+        <div class="dz-callout">
+          <div class="dz-callout-header">
+            <div class="dz-callout-icon">
+              <i class="fa fa-shield-halved" aria-hidden="true"></i>
+            </div>
+            <h4 class="dz-callout-title">Ochrona Danych Osobowych (RODO)</h4>
+          </div>
+          <div class="dz-callout-content">
+            <p>
+              W pełni przestrzegamy <strong>Rozporządzenia (UE) 2016/679</strong> (RODO/GDPR) oraz 
+              <strong>Ustawy z dnia 10 maja 2018 r. o ochronie danych osobowych</strong>. Dane osobowe 
+              klientów przetwarzamy wyłącznie w celach realizacji zamówień, komunikacji marketingowej 
+              (za zgodą) oraz spełnienia obowiązków prawnych.
+            </p>
+            <p class="dz-mb-0">
+              Każdy użytkownik posiada prawo dostępu do swoich danych, ich sprostowania, usunięcia, 
+              ograniczenia przetwarzania oraz wniesienia skargi do Prezesa UODO.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+        <div class="dz-callout dz-callout-success">
+          <div class="dz-callout-header">
+            <div class="dz-callout-icon">
+              <i class="fa fa-cart-shopping" aria-hidden="true"></i>
+            </div>
+            <h4 class="dz-callout-title">Handel Elektroniczny</h4>
+          </div>
+          <div class="dz-callout-content">
+            <p>
+              Działamy zgodnie z <strong>Ustawą z dnia 18 lipca 2002 r. o świadczeniu usług drogą 
+              elektroniczną</strong> oraz nową <strong>Ustawą z dnia 12 lipca 2024 r. — Prawo komunikacji 
+              elektronicznej</strong>. Zapewniamy bezpieczne połączenie szyfrowane (SSL), jasne regulaminy 
+              oraz potwierdzenia zawarcia umowy drogą elektroniczną.
+            </p>
+            <p class="dz-mb-0">
+              Nasze systemy spełniają wymogi bezpieczeństwa informatycznego, chroniąc dane transakcyjne 
+              i personalne klientów przed nieautoryzowanym dostępem.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 mb-4">
+        <div class="dz-callout dz-callout-warning">
+          <div class="dz-callout-header">
+            <div class="dz-callout-icon">
+              <i class="fa fa-universal-access" aria-hidden="true"></i>
+            </div>
+            <h4 class="dz-callout-title">Dostępność Cyfrowa (EAA)</h4>
+          </div>
+          <div class="dz-callout-content">
+            <p>
+              Realizujemy wymogi <strong>Dyrektywy (UE) 2019/882</strong> — Europejskiego Aktu o Dostępności 
+              (EAA) oraz <strong>Ustawy z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych</strong>. 
+              Nasz sklep dąży do spełnienia standardów <strong>WCAG 2.1 Level AA</strong>, zapewniając 
+              dostępność dla osób z niepełnosprawnościami.
+            </p>
+            <p class="dz-mb-0">
+              W przypadku napotkania barier dostępności, prosimy o kontakt — nieustannie pracujemy nad 
+              poprawą dostępności naszej platformy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12">
+        <div class="dz-callout">
+          <div class="dz-callout-header">
+            <div class="dz-callout-icon">
+              <i class="fa fa-safety" aria-hidden="true"></i>
+            </div>
+            <h4 class="dz-callout-title">Bezpieczeństwo Produktów</h4>
+          </div>
+          <div class="dz-callout-content">
+            <p>
+              Bezpieczeństwo oferowanych produktów reguluje <strong>Ustawa z dnia 12 grudnia 2003 r. 
+              o ogólnym bezpieczeństwie produktów</strong> oraz nowe <strong>Rozporządzenie (UE) 2023/988 
+              w sprawie ogólnego bezpieczeństwa produktów (GPSR)</strong>. Wszystkie narzędzia WIHA 
+              dostępne w naszym sklepie spełniają wymogi bezpieczeństwa określone w normach europejskich 
+              i posiadają wymagane certyfikaty.
+            </p>
+            <p class="dz-mb-0">
+              Prowadzimy również pełną zgodność z przepisami podatkowymi, w tym z <strong>Ustawą z dnia 
+              11 marca 2004 r. o podatku od towarów i usług (VAT)</strong>, wystawiając prawidłowe 
+              dokumenty sprzedażowe dla każdej transakcji.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DYREKTYWA OMNIBUS ========== -->
+<section class="dz-section dz-section-light" id="omnibus">
+  <div class="container">
+    <h2 class="dz-section-title text-center">Dyrektywa Omnibus (2019/2161)</h2>
+    <p class="lead dz-text-center dz-mb-8">
+      Sklep KEDAR-WIHA.pl w pełni spełnia wymogi Dyrektywy Omnibus, zapewniając maksymalną 
+      transparentność cenową i rzetelność informacji prezentowanych klientom.
+    </p>
+    
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <div class="dz-card dz-card-accent h-100">
+          <div class="dz-card-icon">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+          </div>
+          <h4 class="dz-card-title">Najniższa cena z 30 dni</h4>
+          <p class="dz-card-text">
+            Zgodnie z art. 6a Dyrektywy 2019/2161, przy każdym produkcie objętym promocją wyświetlamy 
+            <strong>najniższą cenę z ostatnich 30 dni</strong> przed obniżką. Pozwala to konsumentom 
+            na rzetelną ocenę rzeczywistej wartości rabatu i podejmowanie świadomych decyzji zakupowych. 
+            Informacja ta jest widoczna bezpośrednio przy cenie promocyjnej produktu.
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 mb-4">
+        <div class="dz-card dz-card-accent-blue h-100">
+          <div class="dz-card-icon">
+            <i class="fa fa-coins" aria-hidden="true"></i>
+          </div>
+          <h4 class="dz-card-title">Transparentność cen</h4>
+          <p class="dz-card-text">
+            Prezentujemy pełną strukturę cenową: cena brutto, cena netto (dla podmiotów B2B), 
+            informacje o VAT oraz <strong>wszystkie koszty dodatkowe</strong> (dostawa, opłaty) 
+            przed finalizacją zamówienia. Zgodnie z wymogami dyrektywy, cena końcowa jest 
+            jednoznacznie komunikowana już na etapie przeglądania oferty, bez ukrytych opłat.
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 mb-4">
+        <div class="dz-card dz-card-accent-yellow h-100">
+          <div class="dz-card-icon">
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </div>
+          <h4 class="dz-card-title">Weryfikacja opinii</h4>
+          <p class="dz-card-text">
+            Jeżeli publikujemy opinie konsumenckie o produktach, podejmujemy rozsądne środki w celu 
+            weryfikacji ich autentyczności. Zgodnie z art. 6b Dyrektywy Omnibus, <strong>informujemy 
+            o sposobie weryfikacji</strong> i nie prezentujemy opinii sponsorowanych jako 
+            niezależnych recenzji konsumenckich.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dz-callout dz-mt-8">
+      <div class="dz-callout-header">
+        <div class="dz-callout-icon">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+        </div>
+        <h4 class="dz-callout-title">Zobowiązanie do transparentności</h4>
+      </div>
+      <div class="dz-callout-content">
+        <p class="dz-mb-0">
+          Dyrektywa Omnibus wprowadziła również wymogi dotyczące prezentowania ofert „najniższa cena 
+          gwarantowana" oraz informacji o rankingach produktów. KEDAR-WIHA.pl nie stosuje praktyk 
+          wprowadzających w błąd, a prezentowane informacje są zgodne ze stanem faktycznym. 
+          Wszelkie oznaczenia promocyjne są wyraźnie oddzielone od regularnych cen, a rankingi 
+          produktów oparte są na obiektywnych kryteriach (np. popularność sprzedażowa), nie na 
+          płatnym promowaniu.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== RODO ========== -->
+<section class="dz-section dz-section-white" id="rodo">
+  <div class="container">
+    <h2 class="dz-section-title">RODO — Ochrona Danych Osobowych</h2>
+    
+    <p class="lead">
+      Ochrona prywatności użytkowników jest dla nas priorytetem. Przestrzegamy wszystkich wymogów 
+      <strong>Rozporządzenia (UE) 2016/679</strong> (Ogólne Rozporządzenie o Ochronie Danych — RODO) 
+      oraz krajowych przepisów wykonawczych.
+    </p>
+    
+    <div class="row dz-mb-6">
+      <div class="col-lg-6 mb-4">
+        <div class="dz-card h-100">
+          <div class="dz-card-icon">
+            <i class="fa fa-database" aria-hidden="true"></i>
+          </div>
+          <h4 class="dz-card-title">Zasady przetwarzania danych</h4>
+          <p class="dz-card-text">
+            Dane osobowe przetwarzamy zgodnie z zasadami:<br>
+            <strong>1. Zgodność z prawem</strong> — każde przetwarzanie ma podstawę prawną (art. 6 RODO).<br>
+            <strong>2. Ograniczenie celu</strong> — dane zbieramy wyłącznie do określonych celów.<br>
+            <strong>3. Minimalizacja danych</strong> — przetwarzamy tylko niezbędne dane.<br>
+            <strong>4. Prawidłowość</strong> — dbamy o aktualność i poprawność danych.<br>
+            <strong>5. Ograniczenie przechowywania</strong> — dane przechowujemy tylko tak długo, jak to konieczne.<br>
+            <strong>6. Integralność i poufność</strong> — zapewniamy bezpieczeństwo danych.
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 mb-4">
+        <div class="dz-card h-100">
+          <div class="dz-card-icon">
+            <i class="fa fa-user-shield" aria-hidden="true"></i>
+          </div>
+          <h4 class="dz-card-title">Prawa użytkownika</h4>
+          <p class="dz-card-text">
+            Każda osoba, której dane przetwarzamy, posiada:<br>
+            <strong>Prawo dostępu</strong> — do swoich danych oraz informacji o przetwarzaniu.<br>
+            <strong>Prawo do sprostowania</strong> — nieprawidłowych lub niekompletnych danych.<br>
+            <strong>Prawo do usunięcia</strong> — „prawo do bycia zapomnianym" w określonych przypadkach.<br>
+            <strong>Prawo do ograniczenia przetwarzania</strong> — w sytuacjach przewidzianych prawem.<br>
+            <strong>Prawo do przenoszenia danych</strong> — w formacie strukturalnym.<br>
+            <strong>Prawo do sprzeciwu</strong> — w przypadku przetwarzania opartego na interesie prawnym.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dz-callout dz-callout-info">
+      <div class="dz-callout-header">
+        <div class="dz-callout-icon">
+          <i class="fa fa-file-shield" aria-hidden="true"></i>
+        </div>
+        <h4 class="dz-callout-title">Polityka Prywatności</h4>
+      </div>
+      <div class="dz-callout-content">
+        <p>
+          Pełna treść <strong>Polityki Prywatności</strong> dostępna jest pod adresem: 
+          <a href="https://kedar-wiha.pl/content/polityka-prywatnosci" target="_blank" rel="noopener">
+            kedar-wiha.pl/content/polityka-prywatnosci
+          </a>. 
+          Dokument zawiera szczegółowe informacje o administratorze danych, celach przetwarzania, 
+          odbiorcach danych, okresie przechowywania, prawach osób, których dane dotyczą, oraz 
+          prawie wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych (UODO).
+        </p>
+        <p class="dz-mb-0">
+          W kwestiach dotyczących ochrony danych osobowych można kontaktować się z nami drogą 
+          elektroniczną: <a href="mailto:rodo@kedar-wiha.pl">rodo@kedar-wiha.pl</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== E-COMMERCE / NIEUCZCIWE PRAKTYKI ========== -->
+<section class="dz-section dz-section-alt" id="e-commerce">
+  <div class="container">
+    <h2 class="dz-section-title text-center">Prawo e-Commerce — Zakaz Praktyk Nieuczciwych</h2>
+    
+    <p class="lead dz-text-center dz-mb-8">
+      KEDAR-WIHA.pl zobowiązuje się do prowadzenia uczciwej działalności handlowej, z pełnym 
+      poszanowaniem przepisów o ochronie konkurencji i konsumentów oraz zakazie stosowania 
+      nieuczciwych praktyk rynkowych.
+    </p>
+    
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="dz-card dz-card-accent h-100">
+          <h4 class="dz-card-title">
+            <i class="fa fa-ban dz-text-primary" aria-hidden="true"></i>
+            Zakaz sprzedaży wprowadzającej w błąd
+          </h4>
+          <p class="dz-card-text">
+            Nie stosujemy praktyk wprowadzających klientów w błąd co do:
+          </p>
+          <ul>
+            <li>Rzeczywistej dostępności produktów</li>
+            <li>Cech i parametrów technicznych towarów</li>
+            <li>Ceny i wartości rabatów</li>
+            <li>Pochodzenia produktów (wszystkie narzędzia WIHA to oryginały)</li>
+            <li>Warunków gwarancji i serwisu</li>
+          </ul>
+          <p class="dz-card-text dz-mb-0">
+            Każdy produkt opisany jest rzetelnie, z podaniem faktycznych parametrów technicznych 
+            i aktualnego stanu dostępności magazynowej.
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-md-6 mb-4">
+        <div class="dz-card dz-card-accent-blue h-100">
+          <h4 class="dz-card-title">
+            <i class="fa fa-file-contract dz-text-primary" aria-hidden="true"></i>
+            Klauzule niedozwolone
+          </h4>
+          <p class="dz-card-text">
+            Nasze regulaminy nie zawierają klauzul abuzywnych (niedozwolonych), takich jak:
+          </p>
+          <ul>
+            <li>Nieuzasadnione ograniczenie odpowiedzialności sprzedawcy</li>
+            <li>Uprawnienie do jednostronnej zmiany umowy bez ważnej przyczyny</li>
+            <li>Ustalanie terminów wykonania świadczenia bez wyraźnego powodu</li>
+            <li>Wyłączność sądu polubownego bez informacji o prawie do sądu powszechnego</li>
+            <li>Ograniczenie prawa do odstąpienia od umowy poza przypadkami ustawowymi</li>
+          </ul>
+          <p class="dz-card-text dz-mb-0">
+            Wszystkie postanowienia regulaminów zostały zweryfikowane pod kątem zgodności 
+            z prawem konsumenckim.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row dz-mt-4">
+      <div class="col-md-6 mb-4">
+        <div class="dz-card h-100">
+          <h4 class="dz-card-title">
+            <i class="fa fa-rotate-left dz-text-primary" aria-hidden="true"></i>
+            Prawo do odstąpienia od umowy
+          </h4>
+          <p class="dz-card-text">
+            Konsumentom przysługuje <strong>prawo do odstąpienia od umowy w ciągu 14 dni</strong> 
+            od daty objęcia towaru w posiadanie. Informacja o tym prawie jest komunikowana 
+            przed zawarciem umowy, a po zakupie dostarczamy formularz odstąpienia zgodny 
+            z wzorem ustawowym.
+          </p>
+          <p class="dz-card-text dz-mb-0">
+            Zwrot pieniędzy następuje w terminie 14 dni od otrzymania oświadczenia o odstąpieniu, 
+            przy użyciu tego samego sposobu płatności, jakiego użył konsument — chyba że konsument 
+            wyrazi zgodę na inny sposób.
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-md-6 mb-4">
+        <div class="dz-card h-100">
+          <h4 class="dz-card-title">
+            <i class="fa fa-eye dz-text-primary" aria-hidden="true"></i>
+            Transparentność cenowa
+          </h4>
+          <p class="dz-card-text">
+            Zgodnie z wymogami prawa konsumenckiego, prezentujemy:
+          </p>
+          <ul>
+            <li>Ceny brutto z wyraźnym wskazaniem zawartego VAT</li>
+            <li>Koszty dostawy przed złożeniem zamówienia</li>
+            <li>Całkowitą cenę końcową do zapłaty</li>
+            <li>Jednostkę ceny (za sztukę, kg, m² itp.)</li>
+          </ul>
+          <p class="dz-card-text dz-mb-0">
+            Żadne dodatkowe opłaty nie są naliczane bez wyraźnej zgody klienta. 
+            Ukryte koszty są surowo zabronione.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DOSTĘPNOŚĆ CYFROWA ========== -->
+<section class="dz-section dz-section-white" id="dostepnosc">
+  <div class="container">
+    <h2 class="dz-section-title">Dostępność Cyfrowa (EAA — Europejski Akt o Dostępności)</h2>
+    
+    <p class="lead">
+      Zgodnie z wymogami <strong>Dyrektywy (UE) 2019/882</strong> (Europejski Akt o Dostępności) 
+      oraz <strong>Ustawy z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych</strong>, 
+      dążymy do zapewnienia pełnej dostępności naszego sklepu dla osób o różnych potrzebach.
+    </p>
+    
+    <div class="row dz-mb-6">
+      <div class="col-lg-8">
+        <div class="dz-callout dz-callout-info dz-mb-6">
+          <div class="dz-callout-header">
+            <div class="dz-callout-icon">
+              <i class="fa fa-universal-access" aria-hidden="true"></i>
+            </div>
+            <h4 class="dz-callout-title">Standard WCAG 2.1 Level AA</h4>
+          </div>
+          <div class="dz-callout-content">
+            <p>
+              Nasz sklep dąży do spełnienia standardów <strong>Web Content Accessibility Guidelines 
+              (WCAG) 2.1 na poziomie AA</strong>. Obejmuje to między innymi:
+            </p>
+            <ul>
+              <li><strong>Postrzegalność</strong> — teksty alternatywne dla obrazów, odpowiedni kontrast kolorów (minimum 4.5:1 dla tekstu zwykłego), możliwość skalowania tekstu bez utraty funkcjonalności</li>
+              <li><strong>Funkcjonalność</strong> — pełna obsługa klawiaturą, widoczne elementy fokusu, wystarczający czas na interakcje, brak treści powodujących napady padaczki</li>
+              <li><strong>Zrozumiałość</strong> — czytelne teksty, przewidywalne działanie stron, pomoc w unikaniu i korygowaniu błędów</li>
+              <li><strong>Kompatybilność</strong> — zgodność z technologiami asystującymi (czytniki ekranu, powiększalniki)</li>
+            </ul>
+          </div>
+        </div>
+        
+        <h4>Zobowiązanie do inkluzywności</h4>
+        <p>
+          KEDAR-WIHA.pl traktuje dostępność cyfrową jako proces ciągłego doskonalenia. Regularnie 
+          przeprowadzamy audyty dostępności, monitorujemy zgodność z wymogami prawnymi i 
+          implementujemy ulepszenia na podstawie feedbacku użytkowników.
+        </p>
+        <p>
+          Nasze zobowiązanie wynika nie tylko z wymogów prawnych, ale także z przekonania, że 
+          profesjonalne narzędzia elektryczne powinny być dostępne dla wszystkich praktyków — 
+          niezależnie od ograniczeń funkcjonalnych.
+        </p>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="dz-card h-100" style="border-left: 4px solid var(--kedar-yellow);">
+          <div class="dz-text-center dz-mb-4">
+            <span class="dz-badge dz-badge-wcag">
+              <i class="fa fa-check" aria-hidden="true"></i>
+              WCAG 2.1 AA
+            </span>
+          </div>
+          <h5 class="dz-card-title dz-text-center">Zgłaszanie barier dostępności</h5>
+          <p class="dz-card-text">
+            W przypadku napotkania barier dostępności na naszej stronie, prosimy o kontakt:
+          </p>
+          <p class="dz-card-text">
+            <strong>E-mail:</strong><br>
+            <a href="mailto:dostepnosc@kedar-wiha.pl">dostepnosc@kedar-wiha.pl</a>
+          </p>
+          <p class="dz-card-text">
+            <strong>Telefon:</strong><br>
+            <a href="tel:+48575838766">+48 575 838 766</a>
+          </p>
+          <p class="dz-card-text dz-mb-0">
+            Zgłoszenia rozpatrujemy w trybie priorytetowym i informujemy o podjętych działaniach.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BEZPIECZEŃSTWO PRODUKTÓW ========== -->
+<section class="dz-section dz-section-dark" id="bezpieczenstwo">
+  <div class="container">
+    <h2 class="dz-section-title text-center">Bezpieczeństwo Produktów — Certyfikacje WIHA</h2>
+    
+    <p class="lead dz-text-center" style="color: rgba(255,255,255,0.85); max-width: 900px; margin-left: auto; margin-right: auto; margin-bottom: var(--space-10);">
+      Jako autoryzowany dystrybutor narzędzi WIHA w Polsce, oferujemy wyłącznie produkty 
+      najwyższej jakości, spełniające rygorystyczne normy bezpieczeństwa. Każde narzędzie VDE 
+      to gwarancja ochrony życia profesjonalisty.
+    </p>
+    
+    <div class="dz-cert-grid">
+      <div class="dz-cert-card">
+        <div class="dz-cert-badge">
+          <i class="fa fa-bolt" aria-hidden="true"></i>
+        </div>
+        <h4 class="dz-cert-title">Narzędzia VDE</h4>
+        <p class="dz-cert-norm">IEC 60900 | VDE-GS</p>
+        <p class="dz-cert-desc">
+          Testowane indywidualnie napięciem <strong>10 000 V</strong>, certyfikowane do pracy 
+          pod napięciem do <strong>1000V AC / 1500V DC</strong>. Dziesięciokrotna rezerwa 
+          bezpieczeństwa ponad wymaganą normę.
+        </p>
+      </div>
+      
+      <div class="dz-cert-card">
+        <div class="dz-cert-badge">
+          <i class="fa fa-gauge-high" aria-hidden="true"></i>
+        </div>
+        <h4 class="dz-cert-title">Klucze Dynamometryczne</h4>
+        <p class="dz-cert-norm">ISO 6789</p>
+        <p class="dz-cert-desc">
+          Precyzyjne narzędzia z certyfikatem kalibracji zgodnym z normą <strong>ISO 6789</strong>. 
+          Gwarancja dokładności momentu dokręcania dla zastosowań krytycznych w instalacjach 
+          elektrycznych i PV.
+        </p>
+      </div>
+      
+      <div class="dz-cert-card">
+        <div class="dz-cert-badge">
+          <i class="fa fa-industry" aria-hidden="true"></i>
+        </div>
+        <h4 class="dz-cert-title">Made in Germany</h4>
+        <p class="dz-cert-norm">WIHA — od 1939 r.</p>
+        <p class="dz-cert-desc">
+          <strong>90% produkcji</strong> pochodzi z zakładów w Schwarzwaldzie, Niemcy. 
+          Ponad 85 lat doświadczenia i tytuł <strong>TOP 100</strong> najbardziej innowacyjnych 
+          firm średnich w Niemczech.
+        </p>
+      </div>
+    </div>
+    
+    <div class="row dz-mt-8">
+      <div class="col-lg-6 mb-4">
+        <div class="dz-card-dark">
+          <h4 class="dz-card-title">
+            <i class="fa fa-certificate" style="color: var(--kedar-yellow);" aria-hidden="true"></i>
+            Gwarancja oryginalności
+          </h4>
+          <p class="dz-card-text">
+            Wszystkie produkty oferowane w sklepie KEDAR-WIHA.pl są <strong>fabrycznie nowe</strong> 
+            i pochodzą z <strong>oficjalnej dystrybucji WIHA Polska</strong>. Każdy produkt 
+            posiada ważną gwarancję producenta oraz pełną dokumentację certyfikatową.
+          </p>
+          <p class="dz-card-text dz-mb-0">
+            Jako jedyny autoryzowany dystrybutor online w Polsce, potwierdzamy autentyczność 
+            każdego narzędzia — chroniąc klientów przed podróbkami, które stanowią bezpośrednie 
+            zagrożenie dla życia elektryka.
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 mb-4">
+        <div class="dz-card-dark">
+          <h4 class="dz-card-title">
+            <i class="fa fa-clipboard-check" style="color: var(--kedar-yellow);" aria-hidden="true"></i>
+            Zgodność z GPSR
+          </h4>
+          <p class="dz-card-text">
+            Spełniamy wymogi <strong>Rozporządzenia (UE) 2023/988</strong> w sprawie ogólnego 
+            bezpieczeństwa produktów (GPSR). Oznacza to:
+          </p>
+          <ul style="color: rgba(255,255,255,0.85);">
+            <li>Pełną identyfikowalność produktów i producenta</li>
+            <li>Dokumentację oceny bezpieczeństwa</li>
+            <li>Procedury wycofywania niebezpiecznych produktów</li>
+            <li>Jasne instrukcje użytkowania w języku polskim</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CERTYFIKATY I NORMALIZACJA ========== -->
+<section class="dz-section dz-section-light" id="certyfikaty">
+  <div class="container">
+    <h2 class="dz-section-title text-center">Certyfikaty i Normalizacja</h2>
+    
+    <p class="lead dz-text-center dz-mb-8">
+      Oferowane przez nas narzędzia WIHA spełniają najwyższe standardy jakości i bezpieczeństwa, 
+      potwierdzone międzynarodowymi certyfikatami i normami technicznymi.
+    </p>
+    
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <div class="dz-card h-100">
+          <div class="dz-text-center dz-mb-4">
+            <span class="dz-badge dz-badge-vde">
+              <i class="fa fa-check" aria-hidden="true"></i>
+              VDE-GS
+            </span>
+          </div>
+          <h4 class="dz-card-title dz-text-center">Certyfikat VDE-GS</h4>
+          <p class="dz-card-text">
+            Znak <strong>VDE-GS</strong> (Verband der Elektrotechnik) potwierdza, że narzędzie 
+            przeszło rygorystyczne testy bezpieczeństwa przeprowadzone przez niezależny instytut 
+            VDE. Obejmuje testy:
+          </p>
+          <ul>
+            <li>Wytrzymałości elektrycznej izolacji</li>
+            <li>Odporności mechanicznej</li>
+            <li>Odporności termicznej</li>
+            <li>Ognioodporności materiałów</li>
+          </ul>
+          <p class="dz-card-text dz-mb-0">
+            Certyfikat VDE jest uznawany na całym świecie jako gwarancja najwyższego poziomu 
+            bezpieczeństwa narzędzi elektrycznych.
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 mb-4">
+        <div class="dz-card h-100">
+          <div class="dz-text-center dz-mb-4">
+            <span class="dz-badge dz-badge-iec">
+              <i class="fa fa-check" aria-hidden="true"></i>
+              IEC 60900
+            </span>
+          </div>
+          <h4 class="dz-card-title dz-text-center">Norma IEC 60900</h4>
+          <p class="dz-card-text">
+            <strong>IEC 60900:2012</strong> to międzynarodowa norma określająca wymagania dla 
+            narzędzi ręcznych izolowanych do pracy pod napięciem do 1000V AC i 1500V DC. 
+            Kluczowe wymagania:
+          </p>
+          <ul>
+            <li>Indywidualny test napięciowy każdego egzemplarza</li>
+            <li>Minimalna grubość izolacji (2 warstwy)</li>
+            <li>Odporność na starzenie i warunki środowiskowe</li>
+            <li>Czerwony/wskaźnikowy kolor identyfikacyjny</li>
+          </ul>
+          <p class="dz-card-text dz-mb-0">
+            Narzędzia WIHA VDE spełniają wszystkie wymogi tej normy, a testy obejmują napięcie 
+            próbne 10 000 V — dziesięciokrotność napięcia pracy.
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 mb-4">
+        <div class="dz-card h-100">
+          <div class="dz-text-center dz-mb-4">
+            <span class="dz-badge dz-badge-iso">
+              <i class="fa fa-check" aria-hidden="true"></i>
+              ISO 6789
+            </span>
+          </div>
+          <h4 class="dz-card-title dz-text-center">Norma ISO 6789</h4>
+          <p class="dz-card-text">
+            <strong>ISO 6789</strong> określa wymagania dla kluczy dynamometrycznych, w tym:
+          </p>
+          <ul>
+            <li>Dokładność momentu obrotowego (±4% lub ±6% w zależności od klasy)</li>
+            <li>Metody kalibracji i weryfikacji</li>
+            <li>Wymagania konstrukcyjne</li>
+            <li>Procedury badań typu</li>
+          </ul>
+          <p class="dz-card-text dz-mb-0">
+            Klucze dynamometryczne WIHA (TorqueVario-S, TorqueDriver) dostarczane są z 
+            certyfikatem kalibracji zgodnym z ISO 6789, co jest kluczowe dla audytów 
+            BHP w instalacjach PV i EV.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row dz-mt-4">
+      <div class="col-lg-6 mb-4">
+        <div class="dz-callout">
+          <div class="dz-callout-header">
+            <div class="dz-callout-icon">
+              <i class="fa fa-user-doctor" aria-hidden="true"></i>
+            </div>
+            <h4 class="dz-callout-title">Certyfikat ergonomii AGR</h4>
+          </div>
+          <div class="dz-callout-content">
+            <p>
+              Wybrane serie narzędzi WIHA (SoftFinish, MultiCover) posiadają certyfikat 
+              <strong>AGR</strong> (Aktion Gesunder Rücken) — potwierdzenie ergonomii 
+              chroniącej kręgosłup. Jest to szczególnie istotne dla profesjonalistów 
+              pracujących codziennie narzędziami ręcznymi.
+            </p>
+            <p class="dz-mb-0">
+              Ergonomiczne uchwyty redukują obciążenie mięśni i stawów, zwiększają 
+              efektywność pracy i zmniejszają ryzyko chorób zawodowych.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 mb-4">
+        <div class="dz-callout dz-callout-info">
+          <div class="dz-callout-header">
+            <div class="dz-callout-icon">
+              <i class="fa fa-award" aria-hidden="true"></i>
+            </div>
+            <h4 class="dz-callout-title">Gwarancja producenta</h4>
+          </div>
+          <div class="dz-callout-content">
+            <p>
+              Wszystkie narzędzia WIHA objęte są <strong>gwarancją producenta</strong>, 
+              realizowaną przez autoryzowanego dystrybutora — KEDAR-WIHA.pl. Gwarancja 
+              obejmuje wady materiałowe i wykonawcze, nie obejmuje natomiast zużycia 
+              eksploatacyjnego oraz uszkodzeń wynikających z niewłaściwego użytkowania.
+            </p>
+            <p class="dz-mb-0">
+              Szczegółowe warunki gwarancji dostępne są w karcie gwarancyjnej dołączonej 
+              do każdego produktu oraz na stronie: 
+              <a href="https://kedar-wiha.pl/gwarancja" target="_blank">kedar-wiha.pl/gwarancja</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== KANAŁ ZGŁOSZEŃ ========== -->
+<section class="dz-section dz-section-white" id="kontakt">
+  <div class="container">
+    <h2 class="dz-section-title text-center">Kanał Zgłoszeń — Kontakt i Naruszeń</h2>
+    
+    <p class="lead dz-text-center dz-mb-8">
+      W przypadku podejrzenia naruszenia przepisów prawa, standardów etycznych lub w sprawach 
+      związanych z bezpieczeństwem produktów, prosimy o bezpośredni kontakt. Każde zgłoszenie 
+      traktujemy poważnie i rozpatrujemy w trybie priorytetowym.
+    </p>
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-5 mb-4">
+        <div class="dz-contact-box">
+          <div class="dz-contact-icon">
+            <i class="fa fa-headset" aria-hidden="true"></i>
+          </div>
+          <h3 class="dz-contact-title">Kontakt Ogólny</h3>
+          
+          <div class="dz-contact-item">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            <span><a href="tel:+48575838766">+48 575 838 766</a></span>
+          </div>
+          
+          <div class="dz-contact-item">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <span><a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a></span>
+          </div>
+          
+          <div class="dz-contact-item">
+            <i class="fa fa-globe" aria-hidden="true"></i>
+            <span><a href="https://kedar-wiha.pl" target="_blank">kedar-wiha.pl</a></span>
+          </div>
+          
+          <hr style="margin: var(--space-6) 0; border-color: var(--border-light);">
+          
+          <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0;">
+            Godziny pracy:<br>
+            Poniedziałek – Piątek: 8:00 – 16:00
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-lg-5 mb-4">
+        <div class="dz-contact-box" style="border-color: var(--kedar-secondary);">
+          <div class="dz-contact-icon" style="background: var(--kedar-secondary);">
+            <i class="fa fa-shield-halved" aria-hidden="true"></i>
+          </div>
+          <h3 class="dz-contact-title">Zgłoszenia Compliance</h3>
+          
+          <div class="dz-contact-item">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <span><a href="mailto:compliance@kedar-wiha.pl">compliance@kedar-wiha.pl</a></span>
+          </div>
+          
+          <hr style="margin: var(--space-6) 0; border-color: var(--border-light);">
+          
+          <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--space-4);">
+            Do zgłoszeń przyjmujemy:
+          </p>
+          <ul style="text-align: left; font-size: 0.875rem;">
+            <li>Naruszenia przepisów prawa</li>
+            <li>Problemy z bezpieczeństwem produktów</li>
+            <li>Praktyki nieuczciwe lub wprowadzające w błąd</li>
+            <li>Barier dostępności cyfrowej</li>
+            <li>Naruszenia ochrony danych osobowych</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dz-callout dz-callout-info dz-mt-6">
+      <div class="dz-callout-header">
+        <div class="dz-callout-icon">
+          <i class="fa fa-clock" aria-hidden="true"></i>
+        </div>
+        <h4 class="dz-callout-title">Zobowiązanie do odpowiedzi</h4>
+      </div>
+      <div class="dz-callout-content">
+        <p class="dz-mb-0">
+          Zadeklarujemy odpowiedź na zgłoszenia w ciągu <strong>7 dni roboczych</strong> od 
+          otrzymania. W sprawach dotyczących bezpieczeństwa produktów lub naruszeń praw 
+          konsumentów, przeprowadzamy wewnętrzną weryfikację i informujemy zgłaszającego 
+          o podjętych działaniach. W sprawach wymagających interwencji organów państwowych, 
+          kierujemy zgłoszenia do odpowiednich instytucji zgodnie z obowiązującymi procedurami.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="dz-section dz-section-alt" id="faq">
+  <div class="container">
+    <h2 class="dz-section-title text-center">Najczęściej Zadawane Pytania</h2>
+    <p class="lead dz-text-center dz-mb-8">
+      Odpowiedzi na najczęstsze pytania dotyczące zgodności prawnej, certyfikatów 
+      oraz praw konsumenta w sklepie KEDAR-WIHA.pl.
+    </p>
+    
+    <div class="dz-accordion">
+      <!-- FAQ Item 1 -->
+      <div class="dz-accordion-item">
+        <div class="dz-accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+          <h5 class="dz-accordion-title">
+            <i class="fa fa-check-circle dz-text-primary" aria-hidden="true"></i>
+            Co oznacza certyfikat VDE na narzędziach WIHA?
+          </h5>
+          <div class="dz-accordion-icon">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="dz-accordion-content">
+          <p>
+            Certyfikat <strong>VDE-GS</strong> (Verband der Elektrotechnik — Geprüfte Sicherheit) 
+            oznacza, że narzędzie przeszło rygorystyczne testy bezpieczeństwa przeprowadzone przez 
+            niezależny instytut VDE w Niemczech. Każdy egzemplarz narzędzia VDE jest 
+            <strong>indywidualnie testowany napięciem 10 000 V</strong> — dziesięciokrotność 
+            napięcia pracy (1000V AC).
+          </p>
+          <p>
+            Testy obejmują wytrzymałość elektryczną izolacji, odporność mechaniczną, termiczną 
+            oraz ognioodporność materiałów. Znak VDE jest międzynarodowo uznanym świadectwem 
+            najwyższego poziomu bezpieczeństwa narzędzi do prac elektrycznych. Narzędzia VDE 
+            WIHA spełniają wymogi normy <strong>IEC 60900:2012</strong> i są certyfikowane 
+            do pracy pod napięciem do <strong>1000V AC / 1500V DC</strong>.
+          </p>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 2 -->
+      <div class="dz-accordion-item">
+        <div class="dz-accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+          <h5 class="dz-accordion-title">
+            <i class="fa fa-rotate-left dz-text-primary" aria-hidden="true"></i>
+            Jak mogę zwrócić zakupiony produkt?
+          </h5>
+          <div class="dz-accordion-icon">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="dz-accordion-content">
+          <p>
+            Jako konsument masz <strong>prawo do odstąpienia od umowy w ciągu 14 dni</strong> 
+            od daty objęcia towaru w posiadanie. Aby dokonać zwrotu:
+          </p>
+          <ol>
+            <li>Wypełnij formularz odstąpienia od umowy (do pobrania na stronie sklepu)</li>
+            <li>Odeślij towar na adres wskazany w formularzu, w stanie niezmienionym, w oryginalnym opakowaniu</li>
+            <li>Poinformuj nas o odstąpieniu drogą mailową: <a href="mailto:zwroty@kedar-wiha.pl">zwroty@kedar-wiha.pl</a></li>
+          </ol>
+          <p>
+            Zwrot pieniędzy następuje w terminie 14 dni od otrzymania oświadczenia o odstąpieniu, 
+            przy użyciu tego samego sposobu płatności, jakiego użyłeś przy zakupie. Szczegółowe 
+            informacje znajdują się w Regulaminie Sklepu.
+          </p>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 3 -->
+      <div class="dz-accordion-item">
+        <div class="dz-accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+          <h5 class="dz-accordion-title">
+            <i class="fa fa-file-contract dz-text-primary" aria-hidden="true"></i>
+            Czy oferujecie faktury VAT dla firm?
+          </h5>
+          <div class="dz-accordion-icon">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="dz-accordion-content">
+          <p>
+            Tak, wystawiamy <strong>faktury VAT</strong> dla podmiotów gospodarczych. Podczas 
+            składania zamówienia należy wybrać opcję „Faktura dla firmy" i podać dane firmy: 
+            nazwę, NIP oraz adres siedziby. Faktura VAT jest przesyłana drogą elektroniczną 
+            na adres e-mail wskazany w zamówieniu.
+          </p>
+          <p>
+            Dla klientów B2B oferujemy również indywidualne warunki współpracy, w tym rabaty 
+            dla stałych klientów oraz możliwość zamówień hurtowych. Zapraszamy do kontaktu: 
+            <a href="mailto:b2b@kedar-wiha.pl">b2b@kedar-wiha.pl</a>
+          </p>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 4 -->
+      <div class="dz-accordion-item">
+        <div class="dz-accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+          <h5 class="dz-accordion-title">
+            <i class="fa fa-shield-halved dz-text-primary" aria-hidden="true"></i>
+            Jakie są warunki gwarancji na narzędzia WIHA?
+          </h5>
+          <div class="dz-accordion-icon">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="dz-accordion-content">
+          <p>
+            Wszystkie narzędzia WIHA objęte są <strong>gwarancją producenta</strong>, realizowaną 
+            przez KEDAR-WIHA.pl jako autoryzowanego dystrybutora. Gwarancja obejmuje wady 
+            materiałowe i wykonawcze ujawnione w trakcie normalnego użytkowania zgodnie 
+            z przeznaczeniem produktu.
+          </p>
+          <p>
+            <strong>Okres gwarancji:</strong>
+          </p>
+          <ul>
+            <li>Narzędzia ręczne VDE: dożywotnia gwarancja na wady materiałowe</li>
+            <li>Klucze dynamometryczne: 24 miesiące (w tym kalibracja)</li>
+            <li>Akcesoria i bity: 12 miesięcy</li>
+          </ul>
+          <p>
+            Gwarancja nie obejmuje zużycia eksploatacyjnego, uszkodzeń mechanicznych 
+            wynikających z niewłaściwego użytkowania ani modyfikacji produktu. 
+            Reklamacje można zgłaszać mailowo: <a href="mailto:reklamacje@kedar-wiha.pl">reklamacje@kedar-wiha.pl</a>
+          </p>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 5 -->
+      <div class="dz-accordion-item">
+        <div class="dz-accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+          <h5 class="dz-accordion-title">
+            <i class="fa fa-database dz-text-primary" aria-hidden="true"></i>
+            Jak chronicie moje dane osobowe?
+          </h5>
+          <div class="dz-accordion-icon">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="dz-accordion-content">
+          <p>
+            Dane osobowe przetwarzamy zgodnie z <strong>Rozporządzeniem (UE) 2016/679 (RODO)</strong>. 
+            Zbieramy tylko niezbędne dane do realizacji zamówienia, komunikacji z klientem 
+            oraz spełnienia obowiązków prawnych (np. wystawienie faktury VAT).
+          </p>
+          <p>
+            <strong>Twoje prawa:</strong>
+          </p>
+          <ul>
+            <li>Prawo dostępu do swoich danych</li>
+            <li>Prawo do sprostowania nieprawidłowych danych</li>
+            <li>Prawo do usunięcia danych („prawo do bycia zapomnianym")</li>
+            <li>Prawo do przenoszenia danych</li>
+            <li>Prawo do sprzeciwu wobec przetwarzania</li>
+          </ul>
+          <p>
+            Szczegółowe informacje znajdują się w 
+            <a href="https://kedar-wiha.pl/content/polityka-prywatnosci" target="_blank">Polityce Prywatności</a>. 
+            W sprawach RODO kontakt: <a href="mailto:rodo@kedar-wiha.pl">rodo@kedar-wiha.pl</a>
+          </p>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 6 -->
+      <div class="dz-accordion-item">
+        <div class="dz-accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+          <h5 class="dz-accordion-title">
+            <i class="fa fa-tag dz-text-primary" aria-hidden="true"></i>
+            Co oznacza informacja „najniższa cena z 30 dni"?
+          </h5>
+          <div class="dz-accordion-icon">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="dz-accordion-content">
+          <p>
+            Zgodnie z <strong>Dyrektywą Omnibus (2019/2161)</strong>, przy produktach objętych 
+            promocją wyświetlamy <strong>najniższą cenę z ostatnich 30 dni</strong> przed obniżką. 
+            Pozwala to na rzetelną ocenę rzeczywistej wartości rabatu.
+          </p>
+          <p>
+            <strong>Przykład:</strong> Jeśli wkrętak VDE kosztował regularnie 45 zł, a w ciągu 
+            ostatnich 30 dni cena była raz obniżona do 39 zł, to przy nowej promocji do 35 zł 
+            wyświetlimy informację: „Najniższa cena z 30 dni: 39 zł".
+          </p>
+          <p>
+            Jest to wymóg prawny mający na celu ochronę konsumentów przed wprowadzającymi w błąd 
+            informacjami o rzekomo dużych obniżkach, gdy produkt w rzeczywistości nigdy nie był 
+            sprzedawany po wyższej cenie „regularnej".
+          </p>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 7 -->
+      <div class="dz-accordion-item">
+        <div class="dz-accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+          <h5 class="dz-accordion-title">
+            <i class="fa fa-truck dz-text-primary" aria-hidden="true"></i>
+            Jakie są koszty i czas dostawy?
+          </h5>
+          <div class="dz-accordion-icon">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="dz-accordion-content">
+          <p>
+            Oferujemy różne opcje dostawy, a koszty są transparentnie prezentowane przed 
+            finalizacją zamówienia:
+          </p>
+          <ul>
+            <li><strong>Kurier (InPost, DPD):</strong> 1-2 dni robocze — od 15 zł</li>
+            <li><strong>Paczkomat InPost:</strong> 1-2 dni robocze — od 12 zł</li>
+            <li><strong>Odbiór osobisty:</strong> GRATIS (po wcześniejszym umówieniu)</li>
+          </ul>
+          <p>
+            <strong>Darmowa dostawa</strong> od 300 zł wartości zamówienia (dotyczy przesyłek 
+            kurierskich i Paczkomatów na terenie Polski). Czas realizacji zamówienia to 
+            zazwyczaj 1 dzień roboczy od zaksięgowania wpłaty.
+          </p>
+          <p>
+            Dokładne koszty dostawy są widoczne w koszyku przed płatnością — zgodnie z wymogami 
+            prawa konsumenckiego o transparentności cen.
+          </p>
+        </div>
+      </div>
+      
+      <!-- FAQ Item 8 -->
+      <div class="dz-accordion-item">
+        <div class="dz-accordion-header" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('active');">
+          <h5 class="dz-accordion-title">
+            <i class="fa fa-industry dz-text-primary" aria-hidden="true"></i>
+            Czy produkty są oryginalne?
+          </h5>
+          <div class="dz-accordion-icon">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="dz-accordion-content">
+          <p>
+            <strong>TAK.</strong> Jako <strong>autoryzowany dystrybutor WIHA w Polsce</strong>, 
+            oferujemy wyłącznie oryginalne produkty pochodzące z oficjalnej dystrybucji WIHA Polska. 
+            Każdy produkt posiada:
+          </p>
+          <ul>
+            <li>Oryginalne oznaczenia WIHA</li>
+            <li>Numery katalogowe zgodne z katalogiem producenta</li>
+            <li>Potwierdzone certyfikaty VDE, IEC 60900, ISO 6789</li>
+            <li>Ważną gwarancję producenta</li>
+            <li>Pełną dokumentację techniczną</li>
+          </ul>
+          <p>
+            Ostrzegamy przed podróbkami narzędzi VDE dostępnymi na rynku — nieautoryzowane 
+            produkty mogą stwarzać bezpośrednie zagrożenie dla życia elektryka. Kupując 
+            w KEDAR-WIHA.pl, masz pewność autentyczności i pełne wsparcie posprzedażowe.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA SECTION ========== -->
+<section class="dz-cta-section">
+  <div class="container">
+    <h2 class="dz-section-title text-center" style="color: var(--text-white);">Masz pytania? Jesteśmy do dyspozycji</h2>
+    <p>
+      Nasz zespół ekspertów chętnie odpowie na wszelkie pytania dotyczące zgodności prawnej, 
+      certyfikatów produktów oraz praw konsumenta. Skontaktuj się z nami — jesteśmy tu, 
+      aby pomóc.
+    </p>
+    
+    <div class="dz-cta-buttons">
+      <a href="tel:+48575838766" class="dz-btn dz-btn-dark dz-btn-lg">
+        <i class="fa fa-phone" aria-hidden="true"></i>
+        Zadzwoń: +48 575 838 766
+      </a>
+      <a href="mailto:info@kedar-wiha.pl" class="dz-btn dz-btn-dark dz-btn-lg">
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+        Napisz: info@kedar-wiha.pl
+      </a>
+      <a href="https://kedar-wiha.pl/kontakt" class="dz-btn dz-btn-primary dz-btn-lg" target="_blank">
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        Formularz kontaktowy
+      </a>
+    </div>
+    
+    <p style="margin-top: var(--space-8); margin-bottom: 0; font-size: 0.875rem; color: rgba(255,255,255,0.6);">
+      KEDAR-WIHA.pl — Autoryzowany Dystrybutor Narzędzi WIHA w Polsce<br>
+      <a href="https://kedar-wiha.pl" style="color: var(--kedar-yellow);" target="_blank">kedar-wiha.pl</a>
+    </p>
+  </div>
+</section>
+
+<!-- ========== FOOTER INFO ========== -->
+<section class="dz-section dz-section-white" style="padding: var(--space-8) 0;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <p style="margin-bottom: 0; font-size: 0.875rem; color: var(--text-muted);">
+          <strong>Data ostatniej aktualizacji:</strong> Styczeń 2025<br>
+          <strong>Wersja dokumentu:</strong> 1.0.0
+        </p>
+      </div>
+      <div class="col-lg-6 text-lg-right">
+        <p style="margin-bottom: 0; font-size: 0.875rem; color: var(--text-muted);">
+          Powiązane dokumenty:<br>
+          <a href="https://kedar-wiha.pl/content/regulamin" target="_blank">Regulamin Sklepu</a> | 
+          <a href="https://kedar-wiha.pl/content/polityka-prywatnosci" target="_blank">Polityka Prywatności</a> | 
+          <a href="https://kedar-wiha.pl/content/gwarancja" target="_blank">Gwarancja</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
