@@ -1,0 +1,2130 @@
+<!-- ==========================================================================
+   KEDAR-WIHA.pl — Strona CMS "Regulamin sklepu internetowego"
+   PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 4.x
+   Wersja: 1.0.0 | 2026
+   Gotowe do wklejenia: Wygląd → Strony → Deklaracja zgodności
+   Namespace: .kw-regulamin- (unikanie kolizji z Optima/PrestaShop)
+   Floating TOC | Font Awesome (fas) | IntersectionObserver JS
+   ========================================================================== -->
+
+<style>
+/* ==========================================================================
+   KEDAR-WIHA.pl — REGULAMIN SKLEPU v1.0
+   Namespace: .kw-regulamin-
+   Mobile-first | BEM | Zmienne CSS zgodne z brandbookiem
+   Font Awesome (fas) | IntersectionObserver scroll-reveal | Floating TOC
+   ========================================================================== */
+
+/* ── GLOBALNE ZMIENNE CSS (zgodne z wymaganiami) ───────────────────────── */
+:root {
+  --color-theme-primary:        #8B0000;
+  --color-theme-secondary:      #0056A3;
+  --color-theme-three:          #ca0000;
+  --color-theme-primary-dark:   #6b0000;
+  --color-theme-primary-light:  #bf2020;
+  --color-theme-secondary-dark: #003d7a;
+  --color-theme-secondary-light:#1a7bc4;
+  --color-accent-yellow:        #FFD700;
+  --color-accent-yellow-dark:   #e6c200;
+  --color-stock-green:          #1A7A3C;
+  --color-stock-green-bg:       #e8f5ee;
+  --color-status-success:       #4cbb6c;
+  --color-status-success-bg:    #e6f7ec;
+  --color-status-danger:        #ff4c4c;
+  --color-status-danger-bg:     #fff0f0;
+  --color-status-warning:       #ff9a52;
+  --color-status-warning-bg:    #fff5ed;
+  --color-status-info:          #0056A3;
+  --color-status-info-bg:       #e8f0f9;
+  --color-heading-primary:      #2D2D2D;
+  --primary-all-text-for-all-color-fonts: #151515;
+  --color-text-secondary:       #555555;
+  --color-text-tertiary:        #888888;
+  --color-text-light:           #aaaaaa;
+  --color-text-white:           #ffffff;
+  --color-text-inverse:         #f1f1f1;
+  --color-text-placeholder:     #999999;
+  --background-theme-color:         #f1f1f1;
+  --background-theme-color-top-bar: #606060;
+  --color-bg-white:                 #ffffff;
+  --color-bg-light:                 #f6f6f6;
+  --color-bg-alt:                   #ebebeb;
+  --color-bg-medium:                #e0e0e0;
+  --color-bg-dark:                  #2a2a2a;
+  --color-bg-darker:                #1a1a1a;
+  --color-bg-card:                  #ffffff;
+  --color-bg-overlay:               rgba(0, 0, 0, 0.50);
+  --color-bg-overlay-light:         rgba(0, 0, 0, 0.25);
+  --color-bg-hero:                  linear-gradient(135deg, #1a1a1a 0%, #3d0000 60%, #8B0000 100%);
+  --color-bg-section-alt:           linear-gradient(180deg, #f6f6f6 0%, #f1f1f1 100%);
+  --color-bg-primary-tint:          rgba(139, 0, 0, 0.06);
+  --color-bg-secondary-tint:        rgba(0, 86, 163, 0.06);
+  --border-color-light:   #e8e8e8;
+  --border-color-medium:  #cccccc;
+  --border-color-dark:    #999999;
+  --border-color-focus:   #8B0000;
+  --border-color-primary: #8B0000;
+  --border-color-secondary: #0056A3;
+  --swiper-theme-color: #8B0000;
+  --button-theme-color:       #8B0000;
+  --button-theme-color-hover: #ca0000;
+  --button-theme-color-text:  #ffffff;
+  --font-family-heading: 'Montserrat', 'Manrope', Arial, sans-serif;
+  --font-family-body:    'Inter', 'Manrope', Arial, sans-serif;
+  --font-family-mono:    'JetBrains Mono', 'Courier New', monospace;
+  --font-weight-light:      300;
+  --font-weight-regular:    400;
+  --font-weight-medium:     500;
+  --font-weight-semibold:   600;
+  --font-weight-bold:       700;
+  --font-weight-extrabold:  800;
+  --font-size-h1: clamp(1.75rem, 4.5vw, 2.875rem);
+  --font-size-h2: clamp(1.5rem,  3.5vw, 2.25rem);
+  --font-size-h3: clamp(1.25rem, 2.5vw, 1.75rem);
+  --font-size-h4: clamp(1.1rem,  2vw,   1.375rem);
+  --font-size-h5: clamp(1rem,    1.5vw, 1.125rem);
+  --font-size-h6: clamp(0.9rem,  1.2vw, 1rem);
+  --font-size-base:   1rem;
+  --font-size-lg:     1.125rem;
+  --font-size-xl:     1.25rem;
+  --font-size-sm:     0.875rem;
+  --font-size-xs:     0.75rem;
+  --font-size-caption: 0.8125rem;
+  --font-size-label:  0.6875rem;
+  --line-height-body:    1.65;
+  --line-height-heading: 1.15;
+  --line-height-ui:      1.4;
+  --line-height-loose:   1.85;
+  --letter-spacing-heading:  0.02em;
+  --letter-spacing-h1:       0.03em;
+  --letter-spacing-ui:       0.05em;
+  --letter-spacing-badge:    0.08em;
+  --letter-spacing-tight:   -0.01em;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --space-xs:      var(--space-1);
+  --space-sm:      var(--space-2);
+  --space-md:      var(--space-4);
+  --space-lg:      var(--space-6);
+  --space-xl:      var(--space-8);
+  --space-xxl:     var(--space-12);
+  --space-xxxl:    var(--space-16);
+  --space-section: var(--space-20);
+  --space-section-mobile: var(--space-12);
+  --border-radius-none: 0;
+  --border-radius-xs:   2px;
+  --border-radius-sm:   3px;
+  --border-radius-md:   4px;
+  --border-radius-lg:   8px;
+  --border-radius-xl:   12px;
+  --border-radius-pill: 50px;
+  --border-radius-circle: 50%;
+  --shadow-xs:         0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-sm:         0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md:         0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg:         0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl:         0 12px 32px rgba(0, 0, 0, 0.15);
+  --shadow-card:       0 2px 8px rgba(0, 0, 0, 0.07);
+  --shadow-card-hover: 0 8px 28px rgba(0, 0, 0, 0.13);
+  --shadow-cta:        0 4px 20px rgba(139, 0, 0, 0.35);
+  --shadow-cta-hover:  0 8px 28px rgba(139, 0, 0, 0.45);
+  --shadow-inset:      inset 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-primary:    0 4px 16px rgba(139, 0, 0, 0.20);
+  --shadow-secondary:  0 4px 16px rgba(0, 86, 163, 0.20);
+  --transition-fast:   150ms ease;
+  --transition-base:   300ms linear;
+  --transition-medium: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow:   500ms ease;
+  --transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --z-below:     -1;
+  --z-base:       0;
+  --z-raised:    10;
+  --z-dropdown:  1000;
+  --z-sticky:    1020;
+  --z-fixed:     1030;
+  --z-modal-bg:  1040;
+  --z-modal:     1050;
+  --z-popover:   1060;
+  --z-tooltip:   1070;
+  --z-toast:     1080;
+  --z-max:       9999;
+  --icon-xs:  12px;
+  --icon-sm:  16px;
+  --icon-md:  20px;
+  --icon-base: 24px;
+  --icon-lg:  32px;
+  --icon-xl:  48px;
+  --icon-xxl: 64px;
+}
+
+/* ── SCOPE + RESET ─────────────────────────────────────────────────────── */
+.kw-regulamin-page {
+  font-family: var(--font-family-body);
+  color: var(--primary-all-text-for-all-color-fonts);
+  line-height: var(--line-height-body);
+  overflow-x: hidden;
+}
+.kw-regulamin-page *, .kw-regulamin-page *::before, .kw-regulamin-page *::after { box-sizing: border-box; }
+.kw-regulamin-page img { max-width: 100%; height: auto; }
+
+/* ── KEYFRAMES ────────────────────────────────────────────────────────── */
+@keyframes kwRegFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes kwRegFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes kwRegSlideLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwRegSlideRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwRegPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+@keyframes kwRegFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kw-regulamin-page * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── SCROLL-REVEAL CLASSES ───────────────────────────────────────────── */
+.kw-regulamin-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+.kw-regulamin-reveal.kw-regulamin-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.kw-regulamin-stagger-1 { transition-delay: 0ms; }
+.kw-regulamin-stagger-2 { transition-delay: 100ms; }
+.kw-regulamin-stagger-3 { transition-delay: 200ms; }
+.kw-regulamin-stagger-4 { transition-delay: 300ms; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION BASE
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-regulamin-section {
+  padding: var(--space-12) 0;
+  position: relative;
+}
+.kw-regulamin-section--alt { background: var(--background-theme-color); }
+.kw-regulamin-section--gradient { background: var(--color-bg-section-alt); }
+.kw-regulamin-section--pattern { position: relative; }
+.kw-regulamin-section--pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(139,0,0,0.02) 22px, rgba(139,0,0,0.02) 23px);
+  pointer-events: none;
+  z-index: 0;
+}
+.kw-regulamin-section--pattern > .container { position: relative; z-index: 1; }
+
+/* ── SECTION HEADER ───────────────────────────────────────────────────── */
+.kw-regulamin-header { text-align: center; margin-bottom: var(--space-8); }
+.kw-regulamin-label {
+  display: inline-block;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-badge);
+  text-transform: uppercase;
+  color: var(--color-theme-primary);
+  background: var(--color-bg-primary-tint);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--border-radius-pill);
+  margin-bottom: var(--space-3);
+}
+.kw-regulamin-title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-heading);
+  color: var(--color-heading-primary);
+  margin: 0 0 var(--space-3);
+}
+.kw-regulamin-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--color-theme-primary);
+  border: none;
+  border-radius: 2px;
+  margin: var(--space-3) auto;
+}
+.kw-regulamin-subtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   1. HERO
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-regulamin-hero {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(26,26,26,0.94) 0%, rgba(61,0,0,0.90) 55%, rgba(139,0,0,0.84) 100%),
+    url('https://images.unsplash.com/photo-1581092921461-eab62e97a782?w=1600&q=80') center/cover no-repeat;
+  padding: var(--space-12) var(--space-4);
+  text-align: center;
+  overflow: hidden;
+}
+.kw-regulamin-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(30deg, transparent, transparent 38px, rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px);
+  pointer-events: none;
+}
+.kw-regulamin-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 56px;
+  background: linear-gradient(to top, rgba(26,26,26,0.25), transparent);
+  pointer-events: none;
+}
+.kw-regulamin-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  animation: kwRegFadeUp 0.7s ease both;
+}
+.kw-regulamin-hero__breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: rgba(255,255,255,0.5);
+  flex-wrap: wrap;
+}
+.kw-regulamin-hero__breadcrumbs a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+.kw-regulamin-hero__breadcrumbs a:hover { color: var(--color-text-white); }
+.kw-regulamin-hero__breadcrumbs i { font-size: 10px; }
+.kw-regulamin-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-family-heading);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-accent-yellow);
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.22);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--border-radius-pill);
+  margin-bottom: var(--space-4);
+}
+.kw-regulamin-hero__badge i { font-size: 11px; }
+.kw-regulamin-hero__title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-extrabold);
+  font-size: clamp(26px, 5vw, 48px);
+  line-height: 1.12;
+  color: var(--color-text-white);
+  margin: 0 0 var(--space-3);
+  letter-spacing: 0.01em;
+}
+.kw-regulamin-hero__title em { font-style: normal; color: var(--color-theme-three); }
+.kw-regulamin-hero__sub {
+  font-family: var(--font-family-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.7;
+  color: rgba(255,255,255,0.82);
+  max-width: 640px;
+  margin: 0 auto;
+}
+.kw-regulamin-hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-regulamin-hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-family-heading);
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--border-radius-sm);
+  background: rgba(255,255,255,0.04);
+}
+.kw-regulamin-hero__chip i { color: var(--color-accent-yellow); font-size: 10px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   2. FLOATING TOC BUTTON + DRAWER
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-regulamin-fab {
+  position: fixed;
+  bottom: var(--space-5);
+  right: var(--space-5);
+  z-index: var(--z-fixed);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+.kw-regulamin-fab__btn {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--border-radius-circle);
+  background: var(--color-theme-primary);
+  color: var(--color-text-white);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  box-shadow: var(--shadow-cta);
+  transition: all var(--transition-medium);
+  animation: kwRegFloat 3s ease-in-out infinite;
+}
+.kw-regulamin-fab__btn:hover {
+  background: var(--color-theme-three);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-cta-hover);
+}
+.kw-regulamin-fab__btn.active {
+  background: var(--color-theme-three);
+  transform: rotate(45deg);
+}
+.kw-regulamin-fab__label {
+  font-family: var(--font-family-heading);
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-white);
+  background: var(--color-bg-dark);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--border-radius-sm);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--transition-fast);
+  pointer-events: none;
+}
+.kw-regulamin-fab:hover .kw-regulamin-fab__label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Drawer */
+.kw-regulamin-drawer {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 100%;
+  max-width: 380px;
+  height: 100vh;
+  background: var(--color-bg-white);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-modal);
+  transition: right var(--transition-medium);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.kw-regulamin-drawer.open { right: 0; }
+.kw-regulamin-drawer__overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg-overlay);
+  z-index: var(--z-modal-bg);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-medium);
+}
+.kw-regulamin-drawer__overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.kw-regulamin-drawer__header {
+  padding: var(--space-5);
+  background: var(--color-bg-hero);
+  color: var(--color-text-white);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.kw-regulamin-drawer__header h3 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h5);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.kw-regulamin-drawer__header h3 i { color: var(--color-accent-yellow); }
+.kw-regulamin-drawer__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius-circle);
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: var(--color-text-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+.kw-regulamin-drawer__close:hover { background: rgba(255,255,255,0.2); }
+.kw-regulamin-drawer__content { padding: var(--space-4); flex: 1; }
+.kw-regulamin-drawer__section { margin-bottom: var(--space-5); }
+.kw-regulamin-drawer__section-title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-badge);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin: 0 0 var(--space-2);
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--border-color-light);
+}
+.kw-regulamin-drawer__nav { list-style: none; padding: 0; margin: 0; }
+.kw-regulamin-drawer__nav li { margin-bottom: var(--space-1); }
+.kw-regulamin-drawer__nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--border-radius-md);
+  color: var(--primary-all-text-for-all-color-fonts);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+}
+.kw-regulamin-drawer__nav a:hover,
+.kw-regulamin-drawer__nav a.active {
+  background: var(--color-bg-primary-tint);
+  color: var(--color-theme-primary);
+}
+.kw-regulamin-drawer__nav a i {
+  width: 20px;
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}
+.kw-regulamin-drawer__nav a:hover i,
+.kw-regulamin-drawer__nav a.active i { color: var(--color-theme-primary); }
+.kw-regulamin-drawer__footer {
+  padding: var(--space-4);
+  background: var(--color-bg-light);
+  border-top: 1px solid var(--border-color-light);
+}
+.kw-regulamin-drawer__footer p {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin: 0;
+  text-align: center;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   3. HIGHLIGHT CARDS (najwazniejsze informacje)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-regulamin-highlights {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+.kw-regulamin-highlight-card {
+  background: var(--color-bg-white);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+  transition: all var(--transition-medium);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+.kw-regulamin-highlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--color-theme-primary);
+  transform: scaleX(0);
+  transition: transform var(--transition-medium);
+}
+.kw-regulamin-highlight-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+.kw-regulamin-highlight-card:hover::before { transform: scaleX(1); }
+.kw-regulamin-highlight-card--green::before { background: var(--color-stock-green); }
+.kw-regulamin-highlight-card--blue::before { background: var(--color-theme-secondary); }
+.kw-regulamin-highlight-card--amber::before { background: var(--color-status-warning); }
+.kw-regulamin-highlight-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--border-radius-circle);
+  background: var(--color-bg-primary-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-4);
+  font-size: var(--font-size-xl);
+  color: var(--color-theme-primary);
+  transition: all var(--transition-medium);
+}
+.kw-regulamin-highlight-card:hover .kw-regulamin-highlight-icon {
+  background: var(--color-theme-primary);
+  color: var(--color-text-white);
+  transform: scale(1.1);
+}
+.kw-regulamin-highlight-card--green .kw-regulamin-highlight-icon { background: var(--color-stock-green-bg); color: var(--color-stock-green); }
+.kw-regulamin-highlight-card--green:hover .kw-regulamin-highlight-icon { background: var(--color-stock-green); }
+.kw-regulamin-highlight-card--blue .kw-regulamin-highlight-icon { background: var(--color-bg-secondary-tint); color: var(--color-theme-secondary); }
+.kw-regulamin-highlight-card--blue:hover .kw-regulamin-highlight-icon { background: var(--color-theme-secondary); }
+.kw-regulamin-highlight-card--amber .kw-regulamin-highlight-icon { background: var(--color-status-warning-bg); color: var(--color-status-warning); }
+.kw-regulamin-highlight-card--amber:hover .kw-regulamin-highlight-icon { background: var(--color-status-warning); }
+.kw-regulamin-highlight-card h3 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h5);
+  color: var(--color-heading-primary);
+  margin: 0 0 var(--space-2);
+}
+.kw-regulamin-highlight-card p {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+.kw-regulamin-highlight-badge {
+  display: inline-block;
+  font-family: var(--font-family-heading);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-badge);
+  text-transform: uppercase;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--border-radius-pill);
+  margin-top: var(--space-3);
+}
+.kw-regulamin-highlight-badge--green { background: var(--color-stock-green-bg); color: var(--color-stock-green); }
+.kw-regulamin-highlight-badge--blue { background: var(--color-bg-secondary-tint); color: var(--color-theme-secondary); }
+.kw-regulamin-highlight-badge--amber { background: var(--color-status-warning-bg); color: var(--color-status-warning); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   4. REGULAMIN CONTENT SECTIONS
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-regulamin-content { max-width: 900px; margin: 0 auto; }
+.kw-regulamin-chapter {
+  margin-bottom: var(--space-12);
+  scroll-margin-top: 100px;
+}
+.kw-regulamin-chapter:last-child { margin-bottom: 0; }
+.kw-regulamin-chapter__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid var(--border-color-light);
+}
+.kw-regulamin-chapter__icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--border-radius-lg);
+  background: var(--color-bg-primary-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  color: var(--color-theme-primary);
+}
+.kw-regulamin-chapter__title-group { flex: 1; }
+.kw-regulamin-chapter__number {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-badge);
+  text-transform: uppercase;
+  color: var(--color-theme-primary);
+  margin-bottom: var(--space-1);
+}
+.kw-regulamin-chapter__title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h3);
+  color: var(--color-heading-primary);
+  margin: 0;
+  line-height: var(--line-height-heading);
+}
+.kw-regulamin-chapter__content {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-loose);
+  color: var(--primary-all-text-for-all-color-fonts);
+}
+.kw-regulamin-chapter__content p { margin-bottom: var(--space-4); }
+.kw-regulamin-chapter__content ol,
+.kw-regulamin-chapter__content ul {
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-6);
+}
+.kw-regulamin-chapter__content li { margin-bottom: var(--space-2); }
+.kw-regulamin-chapter__content strong {
+  color: var(--color-heading-primary);
+  font-weight: var(--font-weight-semibold);
+}
+.kw-regulamin-chapter__content a {
+  color: var(--color-theme-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+.kw-regulamin-chapter__content a:hover { border-bottom-color: var(--color-theme-secondary); }
+
+/* CALLOUT BOXES */
+.kw-regulamin-callout {
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+  padding: var(--space-4) var(--space-5);
+  margin: var(--space-5) 0;
+}
+.kw-regulamin-callout p { margin: 0; font-size: var(--font-size-sm); line-height: var(--line-height-body); }
+.kw-regulamin-callout i { margin-right: var(--space-2); }
+.kw-regulamin-callout--info { background: var(--color-status-info-bg); border-left: 4px solid var(--color-status-info); }
+.kw-regulamin-callout--info p { color: var(--color-heading-primary); }
+.kw-regulamin-callout--info i { color: var(--color-status-info); }
+.kw-regulamin-callout--warning { background: var(--color-status-warning-bg); border-left: 4px solid var(--color-status-warning); }
+.kw-regulamin-callout--warning p { color: var(--color-heading-primary); }
+.kw-regulamin-callout--warning i { color: var(--color-status-warning); }
+.kw-regulamin-callout--success { background: var(--color-status-success-bg); border-left: 4px solid var(--color-status-success); }
+.kw-regulamin-callout--success p { color: var(--color-heading-primary); }
+.kw-regulamin-callout--success i { color: var(--color-status-success); }
+.kw-regulamin-callout--danger { background: var(--color-status-danger-bg); border-left: 4px solid var(--color-status-danger); }
+.kw-regulamin-callout--danger p { color: var(--color-heading-primary); }
+.kw-regulamin-callout--danger i { color: var(--color-status-danger); }
+
+/* DEFINITION LIST */
+.kw-regulamin-def-list {
+  background: var(--color-bg-light);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-5);
+  margin: var(--space-5) 0;
+}
+.kw-regulamin-def-list dt {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  color: var(--color-heading-primary);
+  margin-bottom: var(--space-1);
+}
+.kw-regulamin-def-list dd {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+  margin-left: 0;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--border-color-light);
+}
+.kw-regulamin-def-list dd:last-child { margin-bottom: 0; }
+
+/* SUBSECTIONS */
+.kw-regulamin-subsection {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-color-light);
+}
+.kw-regulamin-subsection__title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-h5);
+  color: var(--color-heading-primary);
+  margin: 0 0 var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.kw-regulamin-subsection__title i { color: var(--color-theme-primary); font-size: var(--font-size-sm); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   5. FORMULARZ ODSTAPIENIA (ZALACZNIK)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-regulamin-formularz {
+  background: var(--color-bg-white);
+  border: 2px solid var(--border-color-light);
+  border-radius: var(--border-radius-xl);
+  padding: var(--space-8);
+  margin-top: var(--space-8);
+  box-shadow: var(--shadow-md);
+}
+.kw-regulamin-formularz__header {
+  text-align: center;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 2px dashed var(--border-color-light);
+}
+.kw-regulamin-formularz__header h3 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h4);
+  color: var(--color-heading-primary);
+  margin: 0 0 var(--space-2);
+}
+.kw-regulamin-formularz__header p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  margin: 0;
+}
+.kw-regulamin-formularz__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+.kw-regulamin-formularz__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.kw-regulamin-formularz__field label {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-ui);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+.kw-regulamin-formularz__field input,
+.kw-regulamin-formularz__field textarea {
+  padding: var(--space-3);
+  border: 1px solid var(--border-color-medium);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  background: var(--color-bg-light);
+  min-height: 44px;
+}
+.kw-regulamin-formularz__field input::placeholder,
+.kw-regulamin-formularz__field textarea::placeholder { color: var(--color-text-light); }
+.kw-regulamin-formularz__note {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  font-style: italic;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-color-light);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   6. FAQ ACCORDION
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-regulamin-faq { max-width: 760px; margin: 0 auto; }
+.kw-regulamin-faq__item {
+  background: var(--color-bg-white);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--space-2);
+  overflow: hidden;
+  transition: all var(--transition-medium);
+  box-shadow: var(--shadow-xs);
+}
+.kw-regulamin-faq__item:hover { box-shadow: var(--shadow-md); border-color: var(--color-theme-primary); }
+.kw-regulamin-faq__item[open] { border-color: var(--color-theme-primary); box-shadow: var(--shadow-md); }
+.kw-regulamin-faq__item summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  color: var(--color-heading-primary);
+  cursor: pointer;
+  list-style: none;
+  min-height: 48px;
+  transition: color var(--transition-fast);
+}
+.kw-regulamin-faq__item summary::-webkit-details-marker { display: none; }
+.kw-regulamin-faq__item summary::before {
+  content: '\f105';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: var(--font-size-base);
+  color: var(--color-theme-primary);
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  transition: transform var(--transition-medium);
+}
+.kw-regulamin-faq__item[open] summary::before { transform: rotate(90deg); }
+.kw-regulamin-faq__item summary:hover { color: var(--color-theme-primary); }
+.kw-regulamin-faq__answer {
+  padding: 0 var(--space-5) var(--space-4) var(--space-5);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+  animation: kwRegFadeIn 0.3s ease both;
+}
+.kw-regulamin-faq__answer a { color: var(--color-theme-secondary); }
+.kw-regulamin-faq__answer strong { color: var(--color-heading-primary); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   7. CTA / KONTAKT
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-regulamin-cta {
+  background: var(--color-bg-hero);
+  text-align: center;
+  padding: var(--space-12) var(--space-4);
+  position: relative;
+  overflow: hidden;
+}
+.kw-regulamin-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(55deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px);
+  pointer-events: none;
+}
+.kw-regulamin-cta__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.kw-regulamin-cta__inner h2 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-heading);
+  color: var(--color-text-white);
+  margin: 0 0 var(--space-3);
+}
+.kw-regulamin-cta__inner p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 var(--space-6);
+}
+.kw-regulamin-cta__btns {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+}
+.kw-regulamin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--letter-spacing-ui);
+  text-transform: uppercase;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--border-radius-md);
+  text-decoration: none !important;
+  min-height: 48px;
+  transition: all var(--transition-medium);
+  border: 2px solid transparent;
+}
+.kw-regulamin-btn--white {
+  background: var(--color-text-white);
+  color: var(--color-theme-primary);
+  border-color: var(--color-text-white);
+  box-shadow: 0 4px 18px rgba(255,255,255,0.18);
+}
+.kw-regulamin-btn--white:hover {
+  background: transparent;
+  color: var(--color-text-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,255,255,0.25);
+}
+.kw-regulamin-btn--outline {
+  background: transparent;
+  color: var(--color-text-white);
+  border-color: rgba(255,255,255,0.35);
+}
+.kw-regulamin-btn--outline:hover {
+  background: var(--color-text-white);
+  color: var(--color-theme-primary);
+  border-color: var(--color-text-white);
+}
+.kw-regulamin-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  max-width: 640px;
+  margin: var(--space-8) auto 0;
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-regulamin-contact-card {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-medium);
+  text-decoration: none !important;
+  color: var(--color-text-white);
+}
+.kw-regulamin-contact-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+  border-color: rgba(255,215,0,0.2);
+}
+.kw-regulamin-contact-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius-sm);
+  background: rgba(139,0,0,0.2);
+  border: 1px solid var(--color-theme-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  color: var(--color-accent-yellow);
+  transition: all var(--transition-medium);
+}
+.kw-regulamin-contact-card:hover .kw-regulamin-contact-icon {
+  background: var(--color-theme-primary);
+  color: var(--color-text-white);
+}
+.kw-regulamin-contact-card strong {
+  display: block;
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-white);
+  margin-bottom: var(--space-1);
+}
+.kw-regulamin-contact-card span { font-size: var(--font-size-xs); color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   8. TRUST BADGES
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-regulamin-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+.kw-regulamin-trust__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-family-heading);
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+.kw-regulamin-trust__badge i { color: var(--color-accent-yellow); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 480px) {
+  .kw-regulamin-cta__btns { flex-direction: row; justify-content: center; }
+}
+@media (min-width: 576px) {
+  .kw-regulamin-highlights { grid-template-columns: repeat(2, 1fr); }
+  .kw-regulamin-formularz__grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-regulamin-formularz__grid .kw-regulamin-formularz__field--full { grid-column: 1 / -1; }
+  .kw-regulamin-contact-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 768px) {
+  .kw-regulamin-section { padding: var(--space-16) 0; }
+  .kw-regulamin-hero { min-height: 420px; padding: var(--space-16) var(--space-6); }
+  .kw-regulamin-header { margin-bottom: var(--space-10); }
+  .kw-regulamin-highlights { grid-template-columns: repeat(4, 1fr); }
+  .kw-regulamin-cta { padding: var(--space-16) var(--space-6); }
+  .kw-regulamin-contact-grid { max-width: 100%; }
+}
+@media (min-width: 992px) {
+  .kw-regulamin-section { padding: var(--space-20) 0; }
+  .kw-regulamin-hero { min-height: 480px; padding: var(--space-20) var(--space-8); }
+  .kw-regulamin-header { margin-bottom: var(--space-12); }
+}
+@media (min-width: 1440px) {
+  .kw-regulamin-section { padding: var(--space-24) 0; }
+}
+</style>
+
+<!-- SCHEMA.ORG -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Regulamin sklepu internetowego — KEDAR-WIHA.pl",
+  "description": "Regulamin sklepu internetowego KEDAR-WIHA.pl — autoryzowanego dystrybutora narzedzi WIHA. Prawa konsumenta, zwroty, reklamacje, dostawa narzedzi VDE.",
+  "url": "https://kedar-wiha.pl/regulamin",
+  "dateModified": "2026-04-01",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "P.P.H.U. KEDAR Radoslaw Bizub",
+    "url": "https://kedar-wiha.pl",
+    "telephone": "+48575838766",
+    "email": "info@kedar-wiha.pl",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ul. Kukulcza 24d",
+      "addressLocality": "Ksieginice",
+      "postalCode": "55-100",
+      "addressCountry": "PL"
+    },
+    "vatID": "PL5481127833"
+  }
+}
+</script>
+
+<!-- ====================================================================== -->
+<div class="kw-regulamin-page">
+
+  <!-- HERO -->
+  <section class="kw-regulamin-hero" aria-label="Regulamin sklepu KEDAR-WIHA.pl">
+    <div class="kw-regulamin-hero__inner">
+      <nav class="kw-regulamin-hero__breadcrumbs" aria-label="Sciezka nawigacji">
+        <a href="/">Strona glowna</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="/informacje-dla-klienta">Informacje dla klienta</a>
+        <i class="fas fa-chevron-right"></i>
+        <span style="color:var(--color-accent-yellow);">Regulamin</span>
+      </nav>
+      <span class="kw-regulamin-hero__badge"><i class="fas fa-file-contract"></i> Dokumenty prawne</span>
+      <h1 class="kw-regulamin-hero__title">Regulamin <em>Sklepu Internetowego</em></h1>
+      <p class="kw-regulamin-hero__sub">Kompletne zasady korzystania ze sklepu KEDAR-WIHA.pl — autoryzowanego dystrybutora narzedzi specjalistycznych WIHA. Przeczytaj o swoich prawach jako konsument, procedurach zwrotow, reklamacjach, dostawie narzedzi VDE i gwarancjach.</p>
+      <div class="kw-regulamin-hero__trust">
+        <span class="kw-regulamin-hero__chip"><i class="fas fa-shield-alt"></i> Bezpieczne zakupy</span>
+        <span class="kw-regulamin-hero__chip"><i class="fas fa-undo"></i> 14 dni na zwrot</span>
+        <span class="kw-regulamin-hero__chip"><i class="fas fa-truck"></i> Darmowa dostawa od 299 zl</span>
+        <span class="kw-regulamin-hero__chip"><i class="fas fa-certificate"></i> Gwarancja 2 lata</span>
+        <span class="kw-regulamin-hero__chip"><i class="fas fa-bolt"></i> Narzedzia VDE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="kw-regulamin-section kw-regulamin-section--pattern" aria-label="Najwazniejsze informacje">
+    <div class="container">
+      <div class="kw-regulamin-header kw-regulamin-reveal">
+        <span class="kw-regulamin-label">W skrocie</span>
+        <h2 class="kw-regulamin-title">Najwazniejsze Informacje o Zakupach</h2>
+        <hr class="kw-regulamin-divider" />
+        <p class="kw-regulamin-subtitle">Sklep KEDAR-WIHA.pl to autoryzowany dystrybutor profesjonalnych narzedzi WIHA dla elektrykow. Oferujemy oryginalne narzedzia izolowane VDE z certyfikatami bezpieczenstwa, szybka dostawe i pelne wsparcie techniczne.</p>
+      </div>
+      <div class="kw-regulamin-highlights">
+        <article class="kw-regulamin-highlight-card kw-regulamin-reveal kw-regulamin-stagger-1">
+          <div class="kw-regulamin-highlight-icon"><i class="fas fa-undo-alt"></i></div>
+          <h3>Prawo do zwrotu 14 dni</h3>
+          <p>Jako konsument masz prawo odstapic od umowy w ciagu 14 dni kalendarzowych od odbioru towaru. Bez podawania przyczyny.</p>
+          <span class="kw-regulamin-highlight-badge kw-regulamin-highlight-badge--green">Prawo konsumenta</span>
+        </article>
+        <article class="kw-regulamin-highlight-card kw-regulamin-highlight-card--green kw-regulamin-reveal kw-regulamin-stagger-2">
+          <div class="kw-regulamin-highlight-icon"><i class="fas fa-truck"></i></div>
+          <h3>Darmowa dostawa od 299 zl</h3>
+          <p>Przy zamowieniach powyzej 299,00 zl brutto oferujemy darmowa dostawe na terenie Polski. Dotyczy InPost, DPD i GLS.</p>
+          <span class="kw-regulamin-highlight-badge kw-regulamin-highlight-badge--green">Oszczednosc</span>
+        </article>
+        <article class="kw-regulamin-highlight-card kw-regulamin-highlight-card--blue kw-regulamin-reveal kw-regulamin-stagger-3">
+          <div class="kw-regulamin-highlight-icon"><i class="fas fa-credit-card"></i></div>
+          <h3>Bezpieczne platnosci</h3>
+          <p>Platnosci obslugiwane przez Przelewy24/PayU, BLIK oraz pobranie. Wszystkie transakcje sa szyfrowane.</p>
+          <span class="kw-regulamin-highlight-badge kw-regulamin-highlight-badge--blue">SSL 256-bit</span>
+        </article>
+        <article class="kw-regulamin-highlight-card kw-regulamin-highlight-card--amber kw-regulamin-reveal kw-regulamin-stagger-4">
+          <div class="kw-regulamin-highlight-icon"><i class="fas fa-certificate"></i></div>
+          <h3>Gwarancja 2 lata</h3>
+          <p>Wszystkie narzedzia WIHA objete sa 2-letnia gwarancja producenta. Dodatkowo przysluguje Ci rekojmia do 2 lat.</p>
+          <span class="kw-regulamin-highlight-badge kw-regulamin-highlight-badge--amber">WIHA Official</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TRESC REGULAMINU -->
+  <section class="kw-regulamin-section kw-regulamin-section--gradient" id="regulamin-tresc" aria-label="Tresc regulaminu">
+    <div class="container">
+      <div class="kw-regulamin-header kw-regulamin-reveal">
+        <span class="kw-regulamin-label">Regulamin</span>
+        <h2 class="kw-regulamin-title">Regulamin Sklepu Internetowego KEDAR-WIHA.pl</h2>
+        <hr class="kw-regulamin-divider" />
+        <p class="kw-regulamin-subtitle">Niniejszy Regulamin okresla zasady korzystania ze sklepu internetowego dostepnego pod adresem <strong>https://kedar-wiha.pl</strong>, w tym w szczegolnosci zasady skladania zamowien, zawierania umow sprzedazy, dokonywania platnosci, realizacji dostaw, skladania reklamacji oraz odstepowania od umowy.</p>
+      </div>
+
+      <div class="kw-regulamin-content">
+
+        <!-- §1 POSTANOWIENIA OGOLNE -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="postanowienia-ogolne">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-book-open"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 1</p>
+              <h2 class="kw-regulamin-chapter__title">Postanowienia Ogolne</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Niniejszy Regulamin okresla zasady korzystania ze sklepu internetowego dostepnego pod adresem <strong>https://kedar-wiha.pl/</strong> (dalej: "Sklep Internetowy" lub "Sklep"), w tym w szczegolnosci zasady skladania zamowien, zawierania umow sprzedazy, dokonywania platnosci, realizacji dostaw, skladania reklamacji oraz odstepowania od umowy.</p>
+            
+            <p>Sklep Internetowy <strong>KEDAR-WIHA.pl</strong> prowadzony jest przez:</p>
+            
+            <div class="kw-regulamin-callout kw-regulamin-callout--info">
+              <p><i class="fas fa-building"></i> <strong>Sprzedawca:</strong> P.P.H.U. "KEDAR" Radoslaw Bizub<br>
+              <strong>Adres siedziby:</strong> ul. Kukulcza 24d, 55-100 Ksieginice, Polska<br>
+              <strong>NIP:</strong> 5481127833 | <strong>REGON:</strong> 070817086<br>
+              <strong>E-mail:</strong> <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a> | <strong>Telefon:</strong> <a href="tel:+48575838766">+48 575 838 766</a></p>
+            </div>
+
+            <p>Regulamin jest udostepniany Klientom nieodplatnie, przed zawarciem umowy, za posrednictwem strony internetowej Sklepu w formie umozliwiajacej jego pobranie, utrwalenie i wydrukowanie. Regulamin stanowi integralna czesc umowy sprzedazy zawieranej pomiedzy Sprzedawca a Klientem.</p>
+
+            <p><strong>Warunkiem korzystania ze Sklepu Internetowego jest zapoznanie sie z trescia niniejszego Regulaminu i jego akceptacja.</strong> Korzystajac ze sklepu KEDAR-WIHA.pl, potwierdzasz, ze zapoznales sie z niniejszym Regulaminem, rozumiesz jego tresc i akceptujesz wszystkie zawarte w nim postanowienia.</p>
+
+            <p>Sklep KEDAR-WIHA.pl specjalizuje sie w dystrybucji profesjonalnych narzedzi specjalistycznych marki WIHA, w szczegolnosci narzedzi izolowanych VDE certyfikowanych zgodnie z norma IEC 60900, kluczy dynamometrycznych oraz kompletnych zestawow narzedziowych dla elektrykow, instalatorow fotowoltaiki i technikow elektromobilnosci.</p>
+          </div>
+        </article>
+
+        <!-- §2 DEFINICJE -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="definicje">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-language"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 2</p>
+              <h2 class="kw-regulamin-chapter__title">Definicje</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Uzyte w Regulaminie pojecia oznaczaja:</p>
+            
+            <dl class="kw-regulamin-def-list">
+              <dt><i class="fas fa-user"></i> Klient</dt>
+              <dd>Osoba fizyczna posiadajaca pelna zdolnosc do czynnosci prawnych, osoba prawna lub jednostka organizacyjna nieposiadajaca osobowosci prawnej, ktorej ustawa przyznaje zdolnosc prawna, dokonujaca zakupow w Sklepie Internetowym.</dd>
+              
+              <dt><i class="fas fa-user-shield"></i> Konsument</dt>
+              <dd>Klient bedacy osoba fizyczna, dokonujacy ze Sprzedawca czynnosci prawnej (zakupu) niezwiazanej bezposrednio z jego dzialalnoscia gospodarcza lub zawodowa (art. 221 Kodeksu cywilnego).</dd>
+              
+              <dt><i class="fas fa-briefcase"></i> Przedsiebiorca na prawach konsumenta</dt>
+              <dd>Osoba fizyczna zawierajaca umowe bezposrednio zwiazana z jej dzialalnoscia gospodarcza, gdy z tresci tej umowy wynika, ze nie posiada ona dla niej charakteru zawodowego, wynikajacego w szczegolnosci z przedmiotu wykonywanej przez nia dzialalnosci gospodarczej (art. 385 Kodeksu cywilnego).</dd>
+              
+              <dt><i class="fas fa-industry"></i> Przedsiebiorca</dt>
+              <dd>Klient niebedacy Konsumentem ani Przedsiebiorca na prawach konsumenta.</dd>
+              
+              <dt><i class="fas fa-handshake"></i> Umowa sprzedazy</dt>
+              <dd>Umowa sprzedazy Towaru zawierana na odleglosc za posrednictwem Sklepu Internetowego, pomiedzy Klientem a Sprzedawca.</dd>
+              
+              <dt><i class="fas fa-shopping-cart"></i> Zamowienie</dt>
+              <dd>Oswiadczenie woli Klienta skladane za pomoca Formularza Zamowienia, zmierzajace bezposrednio do zawarcia Umowy sprzedazy ze Sprzedawca.</dd>
+              
+              <dt><i class="fas fa-tools"></i> Towar</dt>
+              <dd>Produkt oferowany przez Sprzedawce w Sklepie Internetowym, w szczegolnosci narzedzia specjalistyczne, narzedzia VDE, klucze dynamometryczne, zestawy narzedziowe oraz akcesoria marki WIHA.</dd>
+              
+              <dt><i class="fas fa-list-alt"></i> Formularz Zamowienia</dt>
+              <dd>Interaktywny formularz dostepny w Sklepie Internetowym umozliwiajacy zlozenie Zamowienia.</dd>
+              
+              <dt><i class="fas fa-user-plus"></i> Formularz Rejestracji</dt>
+              <dd>Formularz dostepny w Sklepie Internetowym umozliwiajacy utworzenie Konta Klienta.</dd>
+              
+              <dt><i class="fas fa-id-card"></i> Konto Klienta</dt>
+              <dd>Indywidualny panel Klienta w Sklepie Internetowym, w ktorym gromadzone sa dane podane przez Klienta oraz informacje o zlozonych Zamowieniach.</dd>
+              
+              <dt><i class="fas fa-shopping-basket"></i> Koszyk</dt>
+              <dd>Element oprogramowania Sklepu Internetowego, w ktorym widoczne sa wybrane przez Klienta Towary do zakupu oraz umozliwiajacy ustalenie i modyfikacje danych Zamowienia.</dd>
+              
+              <dt><i class="fas fa-envelope-open-text"></i> Newsletter</dt>
+              <dd>Usluga swiadczona droga elektroniczna polegajaca na przesylaniu wiadomosci e-mail zawierajacych informacje o nowosciach, promocjach i wydarzeniach w Sklepie.</dd>
+              
+              <dt><i class="fas fa-calendar-week"></i> Dzien roboczy</dt>
+              <dd>Kazdy dzien od poniedzialku do piatku, z wylaczeniem dni ustawowo wolnych od pracy w Rzeczypospolitej Polskiej.</dd>
+            </dl>
+          </div>
+        </article>
+
+        <!-- §3 WYMAGANIA TECHNICZNE -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="wymagania-techniczne">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-laptop-code"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 3</p>
+              <h2 class="kw-regulamin-chapter__title">Wymagania Techniczne</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Do korzystania ze Sklepu Internetowego niezbedne jest:</p>
+            
+            <ul>
+              <li><strong>Urzadzenie z dostepem do sieci Internet</strong> — komputer, tablet, smartfon lub inne urzadzenie umozliwiajace przegladanie stron internetowych</li>
+              <li><strong>Przegladarka internetowa w aktualnej wersji</strong> — zalecamy: Google Chrome, Mozilla Firefox, Microsoft Edge, Safari lub Opera (najnowsze wersje)</li>
+              <li><strong>Aktywny adres poczty elektronicznej (e-mail)</strong> — niezbedny do komunikacji dotyczacej zamowien, dostaw i ewentualnych reklamacji</li>
+              <li><strong>Wlaczona obsluga plikow cookies i JavaScript w przegladarce</strong> — wymagana do prawidlowego funkcjonowania sklepu, koszyka i procesu skladania zamowien</li>
+            </ul>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--warning">
+              <p><i class="fas fa-exclamation-triangle"></i> <strong>Uwaga:</strong> Sprzedawca nie ponosi odpowiedzialnosci za problemy techniczne wynikajace z niespelnienia przez Klienta wymagan technicznych, o ktorych mowa powyzej. W przypadku problemow z wyswietlaniem strony lub skladaniem zamowienia, zalecamy aktualizacje przegladarki lub skorzystanie z innego urzadzenia.</p>
+            </div>
+
+            <p>Sklep KEDAR-WIHA.pl jest zoptymalizowany pod katem urzadzen mobilnych — mozesz skladac zamowienia na narzedzia WIHA zarowno z komputera, jak i ze smartfona czy tabletu. Strona responsywna automatycznie dostosowuje sie do rozmiaru ekranu Twojego urzadzenia.</p>
+          </div>
+        </article>
+
+        <!-- §4 USŁUGI ŚWIADCZONE DROGĄ ELEKTRONICZNĄ -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="uslugi-elektroniczne">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-wifi"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 4</p>
+              <h2 class="kw-regulamin-chapter__title">Uslugi Swiadczone Droga Elektroniczna</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Sprzedawca swiadczy za posrednictwem Sklepu Internetowego nastepujace uslugi elektroniczne:</p>
+            
+            <ol>
+              <li><strong>Prowadzenie Konta Klienta</strong> — umozliwia przegladanie historii zamowien, zapisywanie adresow dostawy, zarzadzanie danymi osobowymi i szybsze skladanie kolejnych zamowien</li>
+              <li><strong>Umozliwienie zlozenia Zamowienia poprzez Formularz Zamowienia</strong> — glowna funkcja sklepu umozliwiajaca zakup narzedzi WIHA</li>
+              <li><strong>Usluga Newsletter</strong> — informacje o nowosciach, promocjach i wydarzeniach w sklepie KEDAR-WIHA.pl</li>
+              <li><strong>Formularz kontaktowy</strong> — umozliwia bezposrednia komunikacje ze Sprzedawca</li>
+            </ol>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-user-circle"></i> Konto Klienta</h3>
+              <p>Usluga prowadzenia Konta Klienta jest swiadczona nieodplatnie przez czas nieoznaczony. Klient moze w kazdej chwili, bez podania przyczyny, zrezygnowac z Konta poprzez wyslanie stosownego zadania do Sprzedawcy na adres e-mail: <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a> lub pisemnie na adres siedziby Sprzedawcy.</p>
+            </div>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-shopping-bag"></i> Formularz Zamowienia</h3>
+              <p>Usluga Formularza Zamowienia ma charakter jednorazowy i ulega zakonczeniu z chwila zlozenia Zamowienia albo z chwila wczesniejszego zaprzestania skladania Zamowienia.</p>
+            </div>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-envelope"></i> Newsletter</h3>
+              <p>Usluga Newsletter jest swiadczona nieodplatnie przez czas nieoznaczony po wyrazeniu zgody przez Klienta. Klient moze w kazdej chwili zrezygnowac z Newslettera poprzez klikniecie linku rezygnacji w otrzymanej wiadomosci e-mail lub przeslanie zadania na adres <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a>.</p>
+            </div>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--info">
+              <p><i class="fas fa-info-circle"></i> <strong>Przerwy techniczne:</strong> Sprzedawca zastrzega sobie prawo do wprowadzenia przerw technicznych w celu aktualizacji i konserwacji Sklepu Internetowego. O planowanych przerwach Sprzedawca poinformuje z odpowiednim wyprzedzeniem na stronie Sklepu.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- §5 REJESTRACJA KONTA I LOGOWANIE -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="rejestracja-konta">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-user-lock"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 5</p>
+              <h2 class="kw-regulamin-chapter__title">Rejestracja Konta i Logowanie</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Rejestracja Konta Klienta jest <strong>dobrowolna i bezplatna</strong>. Zlozenie Zamowienia w Sklepie Internetowym jest mozliwe zarowno po zarejestrowaniu Konta, jak i bez rejestracji (jako gosc).</p>
+
+            <p>W celu utworzenia Konta Klienta nalezy wypelnic Formularz Rejestracji, podajac co najmniej:</p>
+            <ul>
+              <li>imie i nazwisko</li>
+              <li>adres e-mail</li>
+              <li>haslo</li>
+            </ul>
+            <p>Nastepnie nalezy zaakceptowac niniejszy Regulamin oraz Polityke Prywatnosci.</p>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--warning">
+              <p><i class="fas fa-exclamation-circle"></i> <strong>Obowiazki Klienta:</strong> Klient zobowiazuje sie do:</p>
+              <ul style="margin-top: var(--space-2);">
+                <li>podania prawdziwych i aktualnych danych osobowych</li>
+                <li>aktualizacji danych w przypadku ich zmiany</li>
+                <li>nieudostepniania danych logowania osobom trzecim</li>
+                <li>niezwlocznego poinformowania Sprzedawcy o nieautoryzowanym dostepie do Konta</li>
+              </ul>
+            </div>
+
+            <p>Sprzedawca moze wypowiedziec umowe o swiadczenie uslugi prowadzenia Konta Klienta z 14-dniowym terminem wypowiedzenia z waznych przyczyn, w szczegolnosci w przypadku naruszenia przez Klienta postanowien Regulaminu.</p>
+          </div>
+        </article>
+
+        <!-- §6 SKŁADANIE ZAMÓWIEŃ I ZAWARCIE UMOWY SPRZEDAŻY -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="skladanie-zamowien">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-cart-plus"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 6</p>
+              <h2 class="kw-regulamin-chapter__title">Skladanie Zamowien i Zawarcie Umowy Sprzedazy</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Informacje zamieszczone na stronach Sklepu Internetowego nie stanowia oferty w rozumieniu art. 66 Kodeksu cywilnego, lecz stanowia zaproszenie do zawarcia umowy w rozumieniu art. 71 Kodeksu cywilnego.</p>
+
+            <p>Zamowienia w Sklepie Internetowym mozna skladac <strong>24 godziny na dobe, 7 dni w tygodniu</strong>, przez caly rok, z zastrzezeniem przerw technicznych.</p>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-clipboard-list"></i> Proces skladania zamowienia</h3>
+              <p>W celu zlozenia Zamowienia nalezy:</p>
+              <ol>
+                <li><strong>Wybrac Towar lub Towary</strong> bedace przedmiotem Zamowienia i dodac je do Koszyka</li>
+                <li><strong>Wybrac sposob dostawy</strong> oraz metode platnosci</li>
+                <li><strong>Wypelnic Formularz Zamowienia</strong> — podac dane do wysylki, a w przypadku braku Konta — dane niezbedne do realizacji Zamowienia</li>
+                <li><strong>Zaakceptowac Regulamin</strong> (w przypadku Klientow niezarejestrowanych)</li>
+                <li><strong>Kliknac przycisk "Zamawiam z obowiazkiem zaplaty"</strong> (lub rownowazne)</li>
+              </ol>
+            </div>
+
+            <p>Klikniecie przycisku "Zamawiam z obowiazkiem zaplaty" stanowi zlozenie przez Klienta oferty zakupu Towarow umieszczonych w Koszyku.</p>
+
+            <p>Po zlozeniu Zamowienia Klient otrzymuje na podany adres e-mail <strong>automatyczne potwierdzenie wplywu Zamowienia</strong>. Potwierdzenie to nie oznacza jeszcze przyjecia Zamowienia do realizacji.</p>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--success">
+              <p><i class="fas fa-check-circle"></i> <strong>Zawarcie umowy sprzedazy:</strong> Umowa sprzedazy zostaje zawarta z chwila przeslania przez Sprzedawca na adres e-mail Klienta potwierdzenia przyjecia Zamowienia do realizacji.</p>
+            </div>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-ban"></i> Odmowa realizacji zamowienia</h3>
+              <p>Sprzedawca zastrzega sobie prawo do odmowy realizacji Zamowienia w przypadku:</p>
+              <ul>
+                <li>podania przez Klienta nieprawdziwych lub niekompletnych danych</li>
+                <li>niedokonania platnosci w wymaganym terminie (w przypadku przedplaty)</li>
+                <li>braku dostepnosci Towaru — w takim przypadku Sprzedawca niezwlocznie poinformuje Klienta i zwroci dokonane platnosci</li>
+              </ul>
+            </div>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-file-invoice"></i> Dokumenty sprzedazy</h3>
+              <p>Sprzedawca wystawia do kazdego Zamowienia paragon fiskalny lub, na zyczenie Klienta, fakture VAT. Fakture VAT mozna otrzymac pod warunkiem podania danych do faktury w trakcie skladania Zamowienia.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- §7 CENY I PŁATNOŚCI -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="ceny-platnosci">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-money-bill-wave"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 7</p>
+              <h2 class="kw-regulamin-chapter__title">Ceny i Platnosci</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Ceny Towarow podane na stronach Sklepu Internetowego wyrazone sa w <strong>zlotych polskich (PLN)</strong> i zawieraja podatek VAT (ceny brutto).</p>
+
+            <p>Cena Towaru podana w chwili skladania Zamowienia jest <strong>wiazaca dla obu stron</strong>. Ceny nie zawieraja kosztow dostawy, ktore sa podawane odrebnie w trakcie skladania Zamowienia i przed jego potwierdzeniem przez Klienta.</p>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--info">
+              <p><i class="fas fa-tag"></i> <strong>Dyrektywa Omnibus:</strong> W przypadku obnizki ceny Towaru, obok informacji o obnizonej cenie Sprzedawca uwidacznia rowniez najnizsza cene tego Towaru, ktora obowiazywala w okresie 30 dni przed wprowadzeniem obnizki, zgodnie z wymogami Dyrektywy Omnibus (Dyrektywa 2019/2161).</p>
+            </div>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-credit-card"></i> Dostepne metody platnosci</h3>
+              <p>Sprzedawca umozliwia nastepujace metody platnosci:</p>
+              <ul>
+                <li><strong><i class="fas fa-exchange-alt" style="color:var(--color-theme-secondary);"></i> Przelewy24 / PayU</strong> — szybki przelew online z ponad 30 bankow w Polsce. Platnosc ksiegowana natychmiast.</li>
+                <li><strong><i class="fas fa-mobile-alt" style="color:var(--color-theme-primary);"></i> BLIK</strong> — platnosc mobilna za pomoca 6-cyfrowego kodu z aplikacji bankowej. Szybka i bezpieczna metoda platnosci.</li>
+                <li><strong><i class="fas fa-money-bill-alt" style="color:var(--color-stock-green);"></i> Pobranie</strong> — platnosc gotowka lub karta przy odbiorze przesylki od kuriera. Dodatkowa oplata za usluge pobraniowa.</li>
+              </ul>
+            </div>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--warning">
+              <p><i class="fas fa-clock"></i> <strong>Termin platnosci:</strong> W przypadku platnosci przelewem bankowym, Klient zobowiazany jest dokonac zaplaty w terminie <strong>7 dni roboczych</strong> od dnia zlozenia Zamowienia. Po bezskutecznym uplywie tego terminu Sprzedawca ma prawo anulowac Zamowienie, o czym poinformuje Klienta droga elektroniczna.</p>
+            </div>
+
+            <p>Realizacja Zamowienia z platnoscia elektroniczna lub karta rozpoczyna sie po zaksiegowaniu wplaty na rachunku Sprzedawcy lub po otrzymaniu pozytywnej autoryzacji od operatora platnosci.</p>
+          </div>
+        </article>
+
+        <!-- §8 REALIZACJA ZAMÓWIEŃ I DOSTAWA -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="realizacja-dostawa">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-shipping-fast"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 8</p>
+              <h2 class="kw-regulamin-chapter__title">Realizacja Zamowien i Dostawa</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Zamowienia realizowane sa w dni robocze. <strong>Czas realizacji Zamowienia</strong> (czas kompletowania i pakowania) wynosi od <strong>1 do 3 dni roboczych</strong>, liczac od dnia:</p>
+            <ul>
+              <li>zaksiegowania wplaty na rachunku Sprzedawcy — w przypadku platnosci z gory</li>
+              <li>potwierdzenia przyjecia Zamowienia — w przypadku platnosci za pobraniem</li>
+            </ul>
+
+            <p>Do czasu realizacji Zamowienia nalezy doliczyc czas dostawy realizowanej przez wybranego przewoznika, ktory wynosi zazwyczaj od <strong>1 do 3 dni roboczych</strong> na terenie Polski.</p>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-truck"></i> Dostepne metody dostawy</h3>
+              <p>Sprzedawca oferuje nastepujace formy dostawy:</p>
+              <ul>
+                <li><strong><i class="fas fa-box" style="color:#FF6600;"></i> InPost Paczkomat</strong> — doręczenie do wybranego Paczkomatu. Ponad 20 000 punktow odbioru w calej Polsce. Czas dostawy: 1–2 dni robocze.</li>
+                <li><strong><i class="fas fa-shipping-fast" style="color:#DC0032;"></i> DPD (kurier)</strong> — doręczenie pod wskazany adres. Profesjonalna siec kurierska z pelnym ubezpieczeniem przesylki. Czas dostawy: 1–3 dni robocze.</li>
+                <li><strong><i class="fas fa-shipping-fast" style="color:#007AC2;"></i> GLS (kurier)</strong> — doręczenie pod wskazany adres. Niezawodna dostawa kurierska z mozliwoscia sledzenia przesylki. Czas dostawy: 1–3 dni robocze.</li>
+                <li><strong><i class="fas fa-shipping-fast" style="color:#FFCC00;"></i> DHL (kurier)</strong> — doręczenie pod wskazany adres. Miedzynarodowa siec kurierska z gwarancja terminowosci. Czas dostawy: 1–3 dni robocze.</li>
+              </ul>
+            </div>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--success">
+              <p><i class="fas fa-gift"></i> <strong>Darmowa dostawa od 299,00 zl:</strong> Sprzedawca oferuje darmowa dostawe przy zamowieniach o wartosci rownej lub wyzszej niz <strong>299,00 zl brutto</strong> (dotyczy wybranych form dostawy na terenie Polski). Szczegolowe informacje o kosztach dostawy znajdziesz na stronie <a href="/koszty-wysylki">Koszty wysylki</a>.</p>
+            </div>
+
+            <p>Towar dostarczany jest na terenie <strong>Rzeczypospolitej Polskiej</strong>. Mozliwosc dostawy zagranicznej wymaga indywidualnego uzgodnienia ze Sprzedawca — prosimy o kontakt pod numerem <a href="tel:+48575838766">+48 575 838 766</a> lub e-mailem <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a>.</p>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--warning">
+              <p><i class="fas fa-exclamation-triangle"></i> <strong>Odbior przesylki:</strong> Klient zobowiazany jest do sprawdzenia stanu przesylki w obecnosci kuriera. W przypadku stwierdzenia uszkodzenia mechanicznego opakowania lub Towaru, Klient powinien sporzadzic protokol szkody w obecnosci kuriera i niezwlocznie skontaktowac sie ze Sprzedawca pod numerem <strong>+48 575 838 766</strong>.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- §9 PRAWO ODSTĄPIENIA OD UMOWY -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="prawo-odstapienia">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-undo-alt"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 9</p>
+              <h2 class="kw-regulamin-chapter__title">Prawo Odstapienia od Umowy</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <div class="kw-regulamin-callout kw-regulamin-callout--success">
+              <p><i class="fas fa-check-circle"></i> <strong>14 dni na zwrot bez podania przyczyny!</strong> Konsument oraz Przedsiebiorca na prawach konsumenta, ktory zawarl Umowe sprzedazy na odleglosc, moze od niej odstapic bez podania przyczyny, skladajac stosowne oswiadczenie w terminie <strong>14 dni kalendarzowych</strong> od dnia objecia Towaru w posiadanie (art. 27 ustawy o prawach konsumenta).</p>
+            </div>
+
+            <p>Do zachowania terminu wystarczy wyslanie oswiadczenia przed jego uplywem.</p>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-file-signature"></i> Jak zlozyc oswiadczenie o odstapieniu?</h3>
+              <p>Oswiadczenie o odstapieniu od umowy Konsument moze zlozyc:</p>
+              <ul>
+                <li><strong>Na formularzu</strong> — wzor stanowi Zalacznik nr 1 do niniejszego Regulaminu (zgodny z Zalacznikiem nr 2 do ustawy o prawach konsumenta)</li>
+                <li><strong>W innej formie pisemnej</strong> — listem wyslanym na adres siedziby Sprzedawcy: P.P.H.U. "KEDAR" Radoslaw Bizub, ul. Kukulcza 24d, 55-100 Ksieginice</li>
+                <li><strong>Droga elektroniczna</strong> — na adres e-mail: <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a></li>
+              </ul>
+            </div>
+
+            <p>Sprzedawca niezwlocznie potwierdzi Konsumentowi na trwalym nosniku (np. poczta elektroniczna) otrzymanie oswiadczenia o odstapieniu od umowy. W przypadku skutecznego odstapienia od umowy, Umowa sprzedazy uwazana jest za niezawarta.</p>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-money-bill-wave"></i> Zwrot platnosci</h3>
+              <p>Sprzedawca niezwlocznie, nie pozniej niz w terminie <strong>14 dni kalendarzowych</strong> od dnia otrzymania oswiadczenia o odstapieniu od umowy, zwraca Konsumentowi wszystkie dokonane przez niego platnosci, w tym koszt dostawy Towaru (z wyjatkiem dodatkowych kosztow wynikajacych z wybranego przez Konsumenta sposobu dostawy innego niz najtanszy zwykly sposob dostawy oferowany przez Sprzedawce).</p>
+              <p>Sprzedawca dokonuje zwrotu platnosci przy uzyciu takiego samego sposobu zaplaty, jakiego uzyt Konsument, chyba ze Konsument wyraznie zgodzil sie na inny sposob zwrotu, ktory nie wiaze sie dla niego z zadnymi kosztami.</p>
+              <p>Sprzedawca moze wstrzymac sie ze zwrotem platnosci do czasu otrzymania zwracanego Towaru lub dostarczenia przez Konsumenta dowodu jego odeslania, w zaleznosci od tego, ktore zdarzenie nastapi wczesniej.</p>
+            </div>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-box-open"></i> Zwrot Towaru</h3>
+              <p>Konsument ma obowiazek zwrocic Towar Sprzedawcy niezwlocznie, nie pozniej niz w terminie <strong>14 dni kalendarzowych</strong> od dnia, w ktorym odstapil od umowy. Do zachowania terminu wystarczy odeslanie Towaru przed jego uplywem na adres siedziby Sprzedawcy.</p>
+              <p><strong>Konsument ponosi bezposrednie koszty zwrotu Towaru</strong> (koszt odeslania przesylki).</p>
+              <p>Konsument ponosi odpowiedzialnosc za zmniejszenie wartosci Towaru bedace wynikiem korzystania z niego w sposob wykraczajacy poza konieczny do stwierdzenia charakteru, cech i funkcjonowania Towaru.</p>
+            </div>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--danger">
+              <p><i class="fas fa-ban"></i> <strong>Wyjatki od prawa odstapienia:</strong> Prawo odstapienia od umowy nie przysluguje Konsumentowi w odniesieniu do umow wskazanych w art. 38 ustawy o prawach konsumenta, w szczegolnosci:</p>
+              <ul style="margin-top: var(--space-2);">
+                <li>w ktorych przedmiotem swiadczenia jest rzecz nieprefabrykowana, wyprodukowana wedlug specyfikacji Konsumenta lub sluzaca zaspokojeniu jego zindywidualizowanych potrzeb</li>
+                <li>w ktorych przedmiotem swiadczenia jest rzecz dostarczana w zapieczetowanym opakowaniu, ktorej po otwarciu opakowania nie mozna zwrocic ze wzgledu na ochrone zdrowia lub ze wzgledow higienicznych, jesli opakowanie zostalo otwarte po dostarczeniu</li>
+                <li>w ktorych przedmiotem swiadczenia sa rzeczy, ktore po dostarczeniu, ze wzgledu na swoj charakter, zostaja nierozlacznie polaczone z innymi rzeczami</li>
+              </ul>
+            </div>
+
+            <p>Prawo odstapienia od umowy <strong>nie przysluguje Przedsiebiorcy</strong> (niebedacemu Przedsiebiorca na prawach konsumenta).</p>
+          </div>
+        </article>
+
+        <!-- §10 RĘKOJMIA I REKLAMACJE -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="reklamacje">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-tools"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 10</p>
+              <h2 class="kw-regulamin-chapter__title">Rekojmia i Reklamacje</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Sprzedawca jest zobowiazany dostarczyc Klientowi Towar wolny od wad. Sprzedawca ponosi wobec Konsumenta oraz Przedsiebiorcy na prawach konsumenta odpowiedzialnosc za brak zgodnosci Towaru z umowa na zasadach okreslonych w ustawie z dnia 30 maja 2014 r. o prawach konsumenta (Rozdzial 5a, art. 43a–43e).</p>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--success">
+              <p><i class="fas fa-shield-alt"></i> <strong>2 lata rekojmi:</strong> Sprzedawca ponosi odpowiedzialnosc za brak zgodnosci Towaru z umowa istniejacy w chwili jego dostarczenia i ujawniony w ciagu <strong>2 lat</strong> od tej chwili. Domniemywa sie, ze brak zgodnosci Towaru z umowa, ktory ujawnil sie przed uplywem 2 lat od chwili dostarczenia Towaru, istnial w chwili jego dostarczenia.</p>
+            </div>
+
+            <p>Towar jest zgodny z umowa, jesli zgodne z umowa pozostaja w szczegolnosci jego:</p>
+            <ul>
+              <li>opis, rodzaj, ilosc, jakosc, kompletnosc i funkcjonalnosc</li>
+              <li>przydatnosc do szczegolnego celu, o ktorym Konsument powiadomil Sprzedawce najpozniej w chwili zawarcia umowy i ktory Sprzedawca zaakceptowal</li>
+            </ul>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-wrench"></i> Uprawnienia z tytulu rekojmi</h3>
+              <p>W przypadku braku zgodnosci Towaru z umowa Konsument moze zadac:</p>
+              <ul>
+                <li><strong>naprawy Towaru</strong> lub</li>
+                <li><strong>wymiany Towaru na nowy</strong></li>
+              </ul>
+              <p>Sprzedawca moze dokonac wymiany, gdy Konsument zada naprawy, lub Sprzedawca moze dokonac naprawy, gdy Konsument zada wymiany, jesli doprowadzenie do zgodnosci Towaru z umowa w sposob wybrany przez Konsumenta jest niemozliwe albo wymagaloby nadmiernych kosztow dla Sprzedawcy.</p>
+              <p>Konsument moze zlozyc oswiadczenie o <strong>obnizeniu ceny</strong> albo <strong>odstapieniu od umowy</strong>, gdy:</p>
+              <ul>
+                <li>Sprzedawca odmowil doprowadzenia Towaru do zgodnosci z umowa</li>
+                <li>Sprzedawca nie doprowadzil Towaru do zgodnosci z umowa</li>
+                <li>brak zgodnosci Towaru z umowa wystepuje nadal, mimo ze Sprzedawca probowal doprowadzic Towar do zgodnosci z umowa</li>
+                <li>brak zgodnosci Towaru z umowa jest na tyle istotny, ze uzasadnia obnizenie ceny albo odstapienie od umowy bez uprzedniego skorzystania ze srodkow ochrony</li>
+                <li>z oswiadczenia Sprzedawcy lub okolicznosci wyraznie wynika, ze nie doprowadzi on Towaru do zgodnosci z umowa w rozsadnym czasie lub bez nadmiernych niedogodnosci dla Konsumenta</li>
+              </ul>
+            </div>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-edit"></i> Jak zlozyc reklamacje?</h3>
+              <p>Reklamacje mozna zlozyc:</p>
+              <ul>
+                <li><strong>pisemnie</strong> — na adres siedziby Sprzedawcy: P.P.H.U. "KEDAR" Radoslaw Bizub, ul. Kukulcza 24d, 55-100 Ksieginice</li>
+                <li><strong>elektronicznie</strong> — na adres e-mail: <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a></li>
+                <li><strong>telefonicznie</strong> — pod numerem <a href="tel:+48575838766">+48 575 838 766</a></li>
+              </ul>
+
+              <p>W zgloszeniu reklamacyjnym nalezy podac:</p>
+              <ul>
+                <li>imie, nazwisko i dane kontaktowe Klienta</li>
+                <li>numer Zamowienia lub dowod zakupu</li>
+                <li>opis stwierdzonej wady lub niezgodnosci Towaru z umowa</li>
+                <li>zadanie Klienta (naprawa, wymiana, obnizenie ceny, odstapienie od umowy)</li>
+                <li>w miare mozliwosci — zdjecia dokumentujace wade</li>
+              </ul>
+            </div>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--info">
+              <p><i class="fas fa-clock"></i> <strong>Termin rozpatrzenia reklamacji:</strong> Sprzedawca ustosunkuje sie do reklamacji Konsumenta w terminie <strong>14 dni kalendarzowych</strong> od dnia jej otrzymania. Brak odpowiedzi w tym terminie oznacza uznanie reklamacji.</p>
+            </div>
+
+            <div class="kw-regulamin-subsection">
+              <h3 class="kw-regulamin-subsection__title"><i class="fas fa-certificate"></i> Gwarancja producenta WIHA</h3>
+              <p>Niezaleznie od uprawnien z tytulu rekojmi, Towary moga byc objete gwarancja producenta (WIHA). Szczegolowe warunki gwarancji okreslone sa w karcie gwarancyjnej dolaczonej do Towaru. Jako autoryzowany dystrybutor WIHA zapewniamy pelne wsparcie gwarancyjne — wszystkie narzedzia WIHA sa objete gwarancja producenta, ktora potwierdza ich oryginalnosc i najwyzsza jakosc.</p>
+            </div>
+
+            <p>W przypadku Przedsiebiorcow (niebedacych Przedsiebiorcami na prawach konsumenta) odpowiedzialnosc Sprzedawcy z tytulu rekojmi regulowana jest przepisami Kodeksu cywilnego (art. 556–576).</p>
+          </div>
+        </article>
+
+
+        <!-- §11 POZASĄDOWE ROZSTRZYGANIE SPORÓW -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="pozasadowe-spory">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-balance-scale"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 11</p>
+              <h2 class="kw-regulamin-chapter__title">Pozasadowe Rozstrzyganie Sporow</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Konsument ma mozliwosc skorzystania z pozasadowych sposobow rozpatrywania reklamacji i dochodzenia roszczen, w szczegolnosci:</p>
+            
+            <ul>
+              <li>zwrocenia sie do <strong>stalego polubownego sadu konsumenckiego</strong> dzialajacego przy Inspekcji Handlowej z wnioskiem o rozstrzygniecie sporu</li>
+              <li>zwrocenia sie do <strong>wojewodzkiego inspektora Inspekcji Handlowej</strong> z wnioskiem o wszczecie postepowania mediacyjnego</li>
+              <li>skorzystania z bezplatnej pomocy <strong>powiatowego (miejskiego) rzecznika konsumentow</strong> lub organizacji spolecznej, do ktorych zadan statutowych nalezy ochrona konsumentow (np. Federacja Konsumentow, Stowarzyszenie Konsumentow Polskich)</li>
+            </ul>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--info">
+              <p><i class="fas fa-globe"></i> <strong>Platforma ODR:</strong> Konsument moze skorzystac z platformy internetowego rozstrzygania sporow (ODR) dostepnej pod adresem: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. Platforma ODR stanowi punkt dostepu dla konsumentow i przedsiebiorcow dazacych do pozasadowego rozstrzygniecia sporu dotyczacego zobowiazan umownych wynikajacych z internetowej umowy sprzedazy.</p>
+            </div>
+
+            <p>Szczegolowe informacje dotyczace mozliwosci skorzystania przez Konsumenta z pozasadowych sposobow rozpatrywania reklamacji dostepne sa na stronie internetowej Urzedu Ochrony Konkurencji i Konsumentow: <a href="https://www.uokik.gov.pl/pozasadowe-rozwiazywanie-sporow-konsumenckich" target="_blank" rel="noopener">uokik.gov.pl/pozasadowe-rozwiazywanie-sporow-konsumenckich</a>.</p>
+          </div>
+        </article>
+
+        <!-- §12 DANE OSOBOWE I PRYWATNOŚĆ -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="dane-osobowe">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-user-shield"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 12</p>
+              <h2 class="kw-regulamin-chapter__title">Dane Osobowe i Prywatnosc</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p><strong>Administratorem danych osobowych Klientow jest Sprzedawca:</strong> P.P.H.U. "KEDAR" Radoslaw Bizub, ul. Kukulcza 24d, 55-100 Ksieginice, NIP: 5481127833, REGON: 070817086.</p>
+
+            <p>Dane osobowe Klientow przetwarzane sa zgodnie z Rozporzadzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO), ustawa z dnia 10 maja 2018 r. o ochronie danych osobowych oraz innymi wlasciwymi przepisami prawa.</p>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--info">
+              <p><i class="fas fa-info-circle"></i> <strong>Polityka Prywatnosci:</strong> Szczegolowe zasady przetwarzania danych osobowych okresla <a href="/polityka-prywatnosci">Polityka Prywatnosci</a> dostepna na stronie Sklepu Internetowego. Zachęcamy do zapoznania sie z tym dokumentem przed dokonaniem zakupu.</p>
+            </div>
+
+            <p>Podanie danych osobowych jest dobrowolne, lecz <strong>niezbedne do zawarcia i realizacji Umowy sprzedazy</strong> oraz swiadczenia uslug droga elektroniczna. Bez podania wymaganych danych nie bedzie mozliwe zlozenie zamowienia i realizacja dostawy.</p>
+          </div>
+        </article>
+
+        <!-- §13 TREŚCI BEZPRAWNE -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="tresci-bezprawne">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-gavel"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 13</p>
+              <h2 class="kw-regulamin-chapter__title">Tresci Bezprawne</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Klient zobowiazany jest do korzystania ze Sklepu Internetowego w sposob zgodny z prawem i dobrymi obyczajami, z poszanowaniem dobr osobistych oraz praw autorskich i wlasnosci intelektualnej Sprzedawcy i osob trzecich.</p>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--danger">
+              <p><i class="fas fa-ban"></i> <strong>Zakaz dostarczania tresci bezprawnych:</strong> Zabrania sie dostarczania przez Klienta tresci o charakterze bezprawnym, w szczegolnosci tresci naruszajacych prawa osob trzecich, tresci obrazliwych, wulgarnych lub niezgodnych z obowiazujacym prawem.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- §14 WŁASNOŚĆ INTELEKTUALNA -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="wlasnosc-intelektualna">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-copyright"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 14</p>
+              <h2 class="kw-regulamin-chapter__title">Wlasnosc Intelektualna</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Wszelkie tresci zamieszczone w Sklepie Internetowym (w tym: zdjecia, opisy, grafiki, logotypy, znaki towarowe) stanowia wlasnosc Sprzedawcy lub podmiotow, z ktorymi Sprzedawca zawarl stosowne umowy (w szczegolnosci <strong>WIHA Werkzeuge GmbH</strong>), i sa chronione przepisami prawa autorskiego oraz prawa wlasnosci przemyslowej.</p>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--warning">
+              <p><i class="fas fa-exclamation-triangle"></i> <strong>Ochrona praw:</strong> Korzystanie z tresci zamieszczonych w Sklepie Internetowym bez pisemnej zgody Sprzedawcy jest zabronione. Wszelkie nieautoryzowane kopiowanie, rozpowszechnianie lub modyfikowanie tresci moze skutkowac odpowiedzialnoscia cywilna i karna.</p>
+            </div>
+
+            <p>WIHA, SoftFinish, slimFix, speedE, TorqueVario-S oraz inne znaki towarowe wystepujace na stronie sa zastrzezonymi znakami towarowymi WIHA Werkzeuge GmbH. KEDAR-WIHA.pl jest autoryzowanym dystrybutorem produktow WIHA w Polsce.</p>
+          </div>
+        </article>
+
+        <!-- §15 POSTANOWIENIA KOŃCOWE -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="postanowienia-koncowe">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-flag-checkered"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Rozdzial 15</p>
+              <h2 class="kw-regulamin-chapter__title">Postanowienia Koncowe</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p>Regulamin obowiazuje od dnia opublikowania na stronie Sklepu Internetowego.</p>
+
+            <p>Sprzedawca zastrzega sobie prawo do zmiany Regulaminu z waznych przyczyn (np. zmiana przepisow prawa, zmiana sposobow platnosci lub dostaw). O kazdej zmianie Sprzedawca poinformuje Klientow posiadajacych Konto z wyprzedzeniem co najmniej <strong>14 dni</strong> przed wejsciem w zycie zmian, za posrednictwem wiadomosci e-mail. Zamowienia zlozone przed wejsciem w zycie zmian realizowane sa na dotychczasowych warunkach.</p>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--info">
+              <p><i class="fas fa-balance-scale-right"></i> <strong>Prawo wlasciwe:</strong> W sprawach nieuregulowanych niniejszym Regulaminem zastosowanie maja przepisy prawa polskiego, w szczegolnosci: Kodeksu cywilnego, ustawy z dnia 30 maja 2014 r. o prawach konsumenta, ustawy z dnia 18 lipca 2002 r. o swiadczeniu uslug droga elektroniczna oraz Rozporzadzenia RODO.</p>
+            </div>
+
+            <p>Wszelkie spory miedzy Sprzedawca a Konsumentem beda rozstrzygane w sposob polubowny lub w obecnosci niezaleznego mediatora. W przypadku braku mozliwosci polubownego rozwiazania sporu, sadem wlasciwym bedzie sad powszechny wlasciwy wedlug przepisow ogolnych.</p>
+
+            <p>Wszelkie spory miedzy Sprzedawca a Przedsiebiorca (niebedacym Przedsiebiorca na prawach konsumenta) beda rozstrzygane przez sad wlasciwy dla siedziby Sprzedawcy.</p>
+
+            <div class="kw-regulamin-callout kw-regulamin-callout--success">
+              <p><i class="fas fa-calendar-check"></i> <strong>Data obowiazywania:</strong> Niniejszy Regulamin obowiazuje od dnia <strong>1 kwietnia 2026 roku</strong> i zastepuje wszystkie wczesniejsze wersje regulaminu sklepu internetowego KEDAR-WIHA.pl.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ZAŁĄCZNIK NR 1 — WZÓR FORMULARZA ODSTĄPIENIA OD UMOWY -->
+        <article class="kw-regulamin-chapter kw-regulamin-reveal" id="formularz-odstapienia">
+          <div class="kw-regulamin-chapter__header">
+            <div class="kw-regulamin-chapter__icon"><i class="fas fa-file-alt"></i></div>
+            <div class="kw-regulamin-chapter__title-group">
+              <p class="kw-regulamin-chapter__number">Zalacznik nr 1</p>
+              <h2 class="kw-regulamin-chapter__title">Wzor Formularza Odstapienia od Umowy</h2>
+            </div>
+          </div>
+          <div class="kw-regulamin-chapter__content">
+            <p style="font-style: italic; color: var(--color-text-tertiary);">(zgodny z Zalacznikiem nr 2 do ustawy z dnia 30 maja 2014 r. o prawach konsumenta)</p>
+
+            <div class="kw-regulamin-formularz">
+              <div class="kw-regulamin-formularz__header">
+                <h3>WZOR FORMULARZA ODSTAPIENIA OD UMOWY</h3>
+                <p>(formularz ten nalezy wypelnic i odeslac tylko w przypadku checi odstapienia od umowy)</p>
+              </div>
+              
+              <div class="kw-regulamin-formularz__grid">
+                <div class="kw-regulamin-formularz__field kw-regulamin-formularz__field--full">
+                  <label><i class="fas fa-building"></i> Adresat</label>
+                  <input type="text" value="P.P.H.U. KEDAR Radoslaw Bizub, ul. Kukulcza 24d, 55-100 Ksieginice" readonly>
+                </div>
+                <div class="kw-regulamin-formularz__field">
+                  <label><i class="fas fa-user"></i> Imie i nazwisko konsumenta(-ow)</label>
+                  <input type="text" placeholder="Wpisz imie i nazwisko...">
+                </div>
+                <div class="kw-regulamin-formularz__field">
+                  <label><i class="fas fa-home"></i> Adres konsumenta(-ow)</label>
+                  <input type="text" placeholder="Wpisz adres...">
+                </div>
+                <div class="kw-regulamin-formularz__field kw-regulamin-formularz__field--full">
+                  <label><i class="fas fa-envelope"></i> E-mail konsumenta</label>
+                  <input type="email" placeholder="Wpisz adres e-mail...">
+                </div>
+                <div class="kw-regulamin-formularz__field kw-regulamin-formularz__field--full">
+                  <label><i class="fas fa-phone"></i> Telefon kontaktowy</label>
+                  <input type="tel" placeholder="Wpisz numer telefonu...">
+                </div>
+                <div class="kw-regulamin-formularz__field kw-regulamin-formularz__field--full">
+                  <label><i class="fas fa-box"></i> Niniejszym informuje/informujemy o moim/naszym odstapieniu od umowy sprzedazy nastepujacych towarow:</label>
+                  <textarea rows="3" placeholder="Wpisz nazwe i opis towarow..."></textarea>
+                </div>
+                <div class="kw-regulamin-formularz__field">
+                  <label><i class="fas fa-hashtag"></i> Numer zamowienia</label>
+                  <input type="text" placeholder="Wpisz numer zamowienia...">
+                </div>
+                <div class="kw-regulamin-formularz__field">
+                  <label><i class="fas fa-calendar"></i> Data zawarcia umowy / odbioru towaru</label>
+                  <input type="text" placeholder="DD.MM.RRRR">
+                </div>
+                <div class="kw-regulamin-formularz__field kw-regulamin-formularz__field--full">
+                  <label><i class="fas fa-signature"></i> Podpis konsumenta(-ow) (tylko jesli formularz jest wysylany w wersji papierowej)</label>
+                  <input type="text" placeholder="_______________________________">
+                </div>
+                <div class="kw-regulamin-formularz__field kw-regulamin-formularz__field--full">
+                  <label><i class="fas fa-calendar-alt"></i> Data</label>
+                  <input type="text" placeholder="DD.MM.RRRR">
+                </div>
+              </div>
+
+              <p class="kw-regulamin-formularz__note">
+                <i class="fas fa-info-circle"></i> Formularz mozna wyslac droga elektroniczna na adres <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a> lub pisemnie na adres siedziby Sprzedawcy. Do zachowania terminu 14 dni wystarczy wyslanie formularza przed jego uplywem.
+              </p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="kw-regulamin-section kw-regulamin-section--alt" id="faq" aria-label="FAQ - najczesciej zadawane pytania">
+    <div class="container">
+      <div class="kw-regulamin-header kw-regulamin-reveal">
+        <span class="kw-regulamin-label">FAQ</span>
+        <h2 class="kw-regulamin-title">Najczesciej Zadawane Pytania o Regulamin</h2>
+        <hr class="kw-regulamin-divider" />
+        <p class="kw-regulamin-subtitle">Odpowiedzi na najpopularniejsze pytania dotyczace regulaminu sklepu KEDAR-WIHA.pl, praw konsumenta, zwrotow, reklamacji i dostawy narzedzi WIHA.</p>
+      </div>
+      <div class="kw-regulamin-faq">
+        <details class="kw-regulamin-faq__item kw-regulamin-reveal kw-regulamin-stagger-1">
+          <summary>Ile mam czasu na zwrot towaru bez podania przyczyny?</summary>
+          <div class="kw-regulamin-faq__answer">
+            <p>Jako konsument masz prawo odstapic od umowy w ciagu <strong>14 dni kalendarzowych</strong> od dnia odbioru towaru. Do zachowania terminu wystarczy wyslanie oswiadczenia o odstapieniu przed jego uplywem. Zwrot towaru powinien nastapic niezwlocznie, nie pozniej niz w ciagu 14 dni od odstapienia od umowy.</p>
+          </div>
+        </details>
+        <details class="kw-regulamin-faq__item kw-regulamin-reveal kw-regulamin-stagger-2">
+          <summary>Kto ponosi koszty zwrotu towaru?</summary>
+          <div class="kw-regulamin-faq__answer">
+            <p><strong>Konsument ponosi bezposrednie koszty zwrotu Towaru</strong> (koszt odeslania przesylki). Sprzedawca natomiast zwraca wszystkie dokonane przez Konsumenta platnosci, w tym koszt dostawy Towaru do Konsumenta (z wyjatkiem dodatkowych kosztow wynikajacych z wybranego przez Konsumenta sposobu dostawy innego niz najtanszy zwykly sposob dostawy).</p>
+          </div>
+        </details>
+        <details class="kw-regulamin-faq__item kw-regulamin-reveal kw-regulamin-stagger-3">
+          <summary>Jak dlugo trwa realizacja zamowienia?</summary>
+          <div class="kw-regulamin-faq__answer">
+            <p>Czas realizacji Zamowienia (kompletowanie i pakowanie) wynosi od <strong>1 do 3 dni roboczych</strong>, liczac od dnia zaksiegowania wplaty na rachunku Sprzedawcy (przy platnosci z gory) lub potwierdzenia przyjecia Zamowienia (przy platnosci za pobraniem). Do tego nalezy doliczyc czas dostawy realizowanej przez przewoznika: 1–3 dni robocze na terenie Polski.</p>
+          </div>
+        </details>
+        <details class="kw-regulamin-faq__item kw-regulamin-reveal kw-regulamin-stagger-4">
+          <summary>Jak zlozyc reklamacje?</summary>
+          <div class="kw-regulamin-faq__answer">
+            <p>Reklamacje mozna zlozyc pisemnie na adres siedziby Sprzedawcy, elektronicznie na adres <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a> lub telefonicznie pod numerem <a href="tel:+48575838766">+48 575 838 766</a>. W zgloszeniu nalezy podac: imie i nazwisko, numer zamowienia, opis wady oraz zadanie (naprawa, wymiana, obnizenie ceny, odstapienie od umowy). Sprzedawca ustosunkuje sie do reklamacji w terminie <strong>14 dni kalendarzowych</strong>.</p>
+          </div>
+        </details>
+        <details class="kw-regulamin-faq__item kw-regulamin-reveal kw-regulamin-stagger-1">
+          <summary>Czy wszystkie towary mozna zwrocic w ciagu 14 dni?</summary>
+          <div class="kw-regulamin-faq__answer">
+            <p>Nie. Prawo odstapienia od umowy <strong>nie przysluguje</strong> w odniesieniu do umow wskazanych w art. 38 ustawy o prawach konsumenta, w szczegolnosci: rzeczy nieprefabrykowanych wyprodukowanych wedlug specyfikacji konsumenta, rzeczy w zapieczetowanym opakowaniu, ktorych po otwarciu nie mozna zwrocic ze wzgledow higienicznych (jesli opakowanie zostalo otwarte), oraz rzeczy nierozlacznie polaczonych z innymi rzeczami po dostarczeniu.</p>
+          </div>
+        </details>
+        <details class="kw-regulamin-faq__item kw-regulamin-reveal kw-regulamin-stagger-2">
+          <summary>Od jakiej kwoty jest darmowa dostawa?</summary>
+          <div class="kw-regulamin-faq__answer">
+            <p>Sprzedawca oferuje darmowa dostawe przy zamowieniach o wartosci rownej lub wyzszej niz <strong>299,00 zl brutto</strong>. Promocja dotyczy wybranych form dostawy na terenie Polski (InPost Paczkomat, DPD Kurier, GLS Kurier). Szczegolowe informacje o kosztach dostawy znajdziesz na stronie <a href="/koszty-wysylki">Koszty wysylki</a>.</p>
+          </div>
+        </details>
+        <details class="kw-regulamin-faq__item kw-regulamin-reveal kw-regulamin-stagger-3">
+          <summary>Jakie metody platnosci sa dostepne?</summary>
+          <div class="kw-regulamin-faq__answer">
+            <p>Sprzedawca umozliwia nastepujace metody platnosci: <strong>Przelewy24 / PayU</strong> (szybki przelew online), <strong>BLIK</strong> (platnosc mobilna 6-cyfrowym kodem) oraz <strong>pobranie</strong> (platnosc gotowka lub karta przy odbiorze przesylki od kuriera). Wszystkie transakcje online sa szyfrowane i bezpieczne.</p>
+          </div>
+        </details>
+        <details class="kw-regulamin-faq__item kw-regulamin-reveal kw-regulamin-stagger-4">
+          <summary>Czy narzedzia WIHA sa objete gwarancja?</summary>
+          <div class="kw-regulamin-faq__answer">
+            <p>Tak, wszystkie narzedzia WIHA sa objete <strong>2-letnia gwarancja producenta</strong>. Dodatkowo przysluguje Ci rekojmia do 2 lat od zakupu. Jako autoryzowany dystrybutor WIHA zapewniamy pelne wsparcie gwarancyjne — wszystkie narzedzia WIHA sa oryginalne i certyfikowane zgodnie z normami VDE i IEC 60900.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA KONTAKT -->
+  <section class="kw-regulamin-cta" aria-label="Kontakt KEDAR-WIHA.pl">
+    <div class="kw-regulamin-cta__inner">
+      <h2>Masz Pytania o Regulamin lub Zakupy?</h2>
+      <p>Nasz zespol jest gotowy, aby odpowiedziec na kazde pytanie dotyczace regulaminu sklepu, praw konsumenta, zwrotow, reklamacji lub zamowien narzedzi WIHA. Skontaktuj sie z nami — chetnie doradzimy i pomożemy.</p>
+      <div class="kw-regulamin-cta__btns">
+        <a href="https://kedar-wiha.pl" class="kw-regulamin-btn kw-regulamin-btn--white"><i class="fas fa-shopping-cart"></i> Przejdz do sklepu</a>
+        <a href="mailto:info@kedar-wiha.pl" class="kw-regulamin-btn kw-regulamin-btn--outline"><i class="fas fa-envelope"></i> Napisz e-mail</a>
+      </div>
+      <div class="kw-regulamin-contact-grid">
+        <a href="tel:+48575838766" class="kw-regulamin-contact-card">
+          <div class="kw-regulamin-contact-icon"><i class="fas fa-phone-alt"></i></div>
+          <div>
+            <strong>Telefon</strong>
+            <span>+48 575 838 766</span>
+          </div>
+        </a>
+        <a href="mailto:info@kedar-wiha.pl" class="kw-regulamin-contact-card">
+          <div class="kw-regulamin-contact-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <strong>E-mail</strong>
+            <span>info@kedar-wiha.pl</span>
+          </div>
+        </a>
+        <a href="https://kedar-wiha.pl" class="kw-regulamin-contact-card">
+          <div class="kw-regulamin-contact-icon"><i class="fas fa-globe"></i></div>
+          <div>
+            <strong>Sklep online</strong>
+            <span>kedar-wiha.pl</span>
+          </div>
+        </a>
+      </div>
+      <div class="kw-regulamin-trust">
+        <span class="kw-regulamin-trust__badge"><i class="fas fa-shield-alt"></i> Bezpieczne zakupy</span>
+        <span class="kw-regulamin-trust__badge"><i class="fas fa-certificate"></i> Autoryzowany dystrybutor WIHA</span>
+        <span class="kw-regulamin-trust__badge"><i class="fas fa-bolt"></i> Narzedzia VDE</span>
+        <span class="kw-regulamin-trust__badge"><i class="fas fa-undo"></i> 14 dni na zwrot</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FLOATING TOC BUTTON + DRAWER -->
+<div class="kw-regulamin-fab">
+  <button class="kw-regulamin-fab__btn" id="kwRegulaminFabBtn" aria-label="Otworz spis tresci">
+    <i class="fas fa-list-ul"></i>
+  </button>
+  <span class="kw-regulamin-fab__label">Spis tresci</span>
+</div>
+
+<div class="kw-regulamin-drawer__overlay" id="kwRegulaminDrawerOverlay"></div>
+
+<div class="kw-regulamin-drawer" id="kwRegulaminDrawer" role="dialog" aria-label="Spis tresci regulaminu">
+  <div class="kw-regulamin-drawer__header">
+    <h3><i class="fas fa-list-ul"></i> Spis tresci</h3>
+    <button class="kw-regulamin-drawer__close" id="kwRegulaminDrawerClose" aria-label="Zamknij">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="kw-regulamin-drawer__content">
+    <div class="kw-regulamin-drawer__section">
+      <p class="kw-regulamin-drawer__section-title">Rozdzialy regulaminu</p>
+      <ul class="kw-regulamin-drawer__nav">
+        <li><a href="#postanowienia-ogolne" class="kw-regulamin-drawer-link"><i class="fas fa-book-open"></i> 1. Postanowienia ogolne</a></li>
+        <li><a href="#definicje" class="kw-regulamin-drawer-link"><i class="fas fa-language"></i> 2. Definicje</a></li>
+        <li><a href="#wymagania-techniczne" class="kw-regulamin-drawer-link"><i class="fas fa-laptop-code"></i> 3. Wymagania techniczne</a></li>
+        <li><a href="#uslugi-elektroniczne" class="kw-regulamin-drawer-link"><i class="fas fa-wifi"></i> 4. Uslugi elektroniczne</a></li>
+        <li><a href="#rejestracja-konta" class="kw-regulamin-drawer-link"><i class="fas fa-user-lock"></i> 5. Rejestracja konta</a></li>
+        <li><a href="#skladanie-zamowien" class="kw-regulamin-drawer-link"><i class="fas fa-cart-plus"></i> 6. Skladanie zamowien</a></li>
+        <li><a href="#ceny-platnosci" class="kw-regulamin-drawer-link"><i class="fas fa-money-bill-wave"></i> 7. Ceny i platnosci</a></li>
+        <li><a href="#realizacja-dostawa" class="kw-regulamin-drawer-link"><i class="fas fa-shipping-fast"></i> 8. Realizacja i dostawa</a></li>
+        <li><a href="#prawo-odstapienia" class="kw-regulamin-drawer-link"><i class="fas fa-undo-alt"></i> 9. Prawo odstapienia</a></li>
+        <li><a href="#reklamacje" class="kw-regulamin-drawer-link"><i class="fas fa-tools"></i> 10. Rekojmia i reklamacje</a></li>
+        <li><a href="#pozasadowe-spory" class="kw-regulamin-drawer-link"><i class="fas fa-balance-scale"></i> 11. Pozasadowe spory</a></li>
+        <li><a href="#dane-osobowe" class="kw-regulamin-drawer-link"><i class="fas fa-user-shield"></i> 12. Dane osobowe</a></li>
+        <li><a href="#tresci-bezprawne" class="kw-regulamin-drawer-link"><i class="fas fa-gavel"></i> 13. Tresci bezprawne</a></li>
+        <li><a href="#wlasnosc-intelektualna" class="kw-regulamin-drawer-link"><i class="fas fa-copyright"></i> 14. Wlasnosc intelektualna</a></li>
+        <li><a href="#postanowienia-koncowe" class="kw-regulamin-drawer-link"><i class="fas fa-flag-checkered"></i> 15. Postanowienia koncowe</a></li>
+        <li><a href="#formularz-odstapienia" class="kw-regulamin-drawer-link"><i class="fas fa-file-alt"></i> Zalacznik: Formularz</a></li>
+      </ul>
+    </div>
+    <div class="kw-regulamin-drawer__section">
+      <p class="kw-regulamin-drawer__section-title">Dodatkowo</p>
+      <ul class="kw-regulamin-drawer__nav">
+        <li><a href="#faq" class="kw-regulamin-drawer-link"><i class="fas fa-question-circle"></i> Najczesciej zadawane pytania</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="kw-regulamin-drawer__footer">
+    <p>KEDAR-WIHA.pl — Autoryzowany dystrybutor WIHA</p>
+  </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+(function() {
+  'use strict';
+
+  /* ── 1. INTERSECTION OBSERVER — SCROLL REVEAL ────────────────────────── */
+  var revealSelectors = '.kw-regulamin-reveal';
+
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('kw-regulamin-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll(revealSelectors).forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    document.querySelectorAll(revealSelectors).forEach(function(el) {
+      el.classList.add('kw-regulamin-visible');
+    });
+  }
+
+  /* ── 2. FLOATING TOC BUTTON + DRAWER ─────────────────────────────────── */
+  var fabBtn = document.getElementById('kwRegulaminFabBtn');
+  var drawer = document.getElementById('kwRegulaminDrawer');
+  var overlay = document.getElementById('kwRegulaminDrawerOverlay');
+  var closeBtn = document.getElementById('kwRegulaminDrawerClose');
+  var drawerLinks = document.querySelectorAll('.kw-regulamin-drawer-link');
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    fabBtn.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    fabBtn.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (fabBtn) fabBtn.addEventListener('click', openDrawer);
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (overlay) overlay.addEventListener('click', closeDrawer);
+
+  drawerLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      closeDrawer();
+    });
+  });
+
+  /* ── 3. SMOOTH SCROLL FOR ANCHOR LINKS ───────────────────────────────── */
+  document.querySelectorAll('.kw-regulamin-page a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href && href.length > 1) {
+        var target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          var headerOffset = 80;
+          var elementPosition = target.getBoundingClientRect().top;
+          var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+
+          if (history.pushState) {
+            history.pushState(null, null, href);
+          }
+        }
+      }
+    });
+  });
+
+  /* ── 4. HIGHLIGHT ACTIVE SECTION IN TOC ──────────────────────────────── */
+  var sections = document.querySelectorAll('.kw-regulamin-chapter[id], #faq');
+  var tocLinks = document.querySelectorAll('.kw-regulamin-drawer__nav a[href^="#"]');
+
+  if ('IntersectionObserver' in window && sections.length > 0) {
+    var sectionObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.getAttribute('id');
+          tocLinks.forEach(function(link) {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '-80px 0px -50% 0px'
+    });
+
+    sections.forEach(function(section) {
+      sectionObserver.observe(section);
+    });
+  }
+
+  /* ── 5. FAQ ACCORDION — CLOSE OTHERS ON OPEN ────────────────────────── */
+  document.querySelectorAll('.kw-regulamin-faq__item summary').forEach(function(summary) {
+    summary.addEventListener('click', function() {
+      var currentItem = this.parentElement;
+      document.querySelectorAll('.kw-regulamin-faq__item[open]').forEach(function(openItem) {
+        if (openItem !== currentItem) {
+          openItem.removeAttribute('open');
+        }
+      });
+    });
+  });
+
+})();
+</script>

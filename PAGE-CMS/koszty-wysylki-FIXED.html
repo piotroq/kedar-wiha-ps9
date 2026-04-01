@@ -1,0 +1,1999 @@
+<!-- ==========================================================================
+   KEDAR-WIHA.pl — Strona CMS "Koszty Wysyłki"
+   PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 4.x
+   Wersja: 1.0.0 | 2026
+   Gotowe do wklejenia: Wygląd → Strony → Koszty wysyłki
+   Namespace: .kw-shipping- (unikanie kolizji z Optima/PrestaShop)
+   Lokalne zmienne CSS | Font Awesome (fas) | IntersectionObserver JS | Counter JS
+   ========================================================================== -->
+
+<style>
+/* ==========================================================================
+   KEDAR-WIHA.pl — KOSZTY WYSYŁKI v1.0
+   Namespace: .kw-shipping-
+   Mobile-first | BEM | LOKALNE zmienne CSS (self-contained)
+   Font Awesome (fas) | IntersectionObserver scroll-reveal | Animated Counter
+   ========================================================================== */
+
+/* ── SCOPE + LOKALNE ZMIENNE ──────────────────────────────────────────── */
+.kw-shipping-page {
+  --kw-sh-primary: #8B0000;
+  --kw-sh-primary-dark: #6b0000;
+  --kw-sh-secondary: #0056A3;
+  --kw-sh-secondary-dark: #003d7a;
+  --kw-sh-secondary-light: #1a7bc4;
+  --kw-sh-three: #ca0000;
+  --kw-sh-accent: #FFD700;
+  --kw-sh-green: #1A7A3C;
+  --kw-sh-green-bg: #e8f5ee;
+  --kw-sh-amber: #E07B00;
+  --kw-sh-amber-bg: #fff5ed;
+  --kw-sh-heading: #2D2D2D;
+  --kw-sh-text: #151515;
+  --kw-sh-text-muted: #555555;
+  --kw-sh-text-tertiary: #888888;
+  --kw-sh-bg-light: #f5f5f5;
+  --kw-sh-bg-dark: #1a1a1a;
+  --kw-sh-bg-darker: #2a2a2a;
+  --kw-sh-white: #ffffff;
+  --kw-sh-border: #e8e8e8;
+  --kw-sh-font-heading: 'Montserrat', 'Manrope', Arial, sans-serif;
+  --kw-sh-font-body: 'Inter', 'Manrope', Arial, sans-serif;
+  --kw-sh-radius-sm: 3px;
+  --kw-sh-radius-md: 4px;
+  --kw-sh-radius-lg: 8px;
+  --kw-sh-radius-xl: 12px;
+  --kw-sh-radius-pill: 50px;
+  --kw-sh-shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --kw-sh-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --kw-sh-shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --kw-sh-shadow-lg: 0 8px 28px rgba(0,0,0,0.13);
+  --kw-sh-shadow-xl: 0 12px 32px rgba(0,0,0,0.15);
+  --kw-sh-shadow-cta: 0 4px 20px rgba(139,0,0,0.30);
+  --kw-sh-transition: 300ms cubic-bezier(0.25,0.46,0.45,0.94);
+  --kw-sh-transition-slow: 500ms ease;
+  --kw-sh-transition-fast: 150ms ease;
+  --kw-sh-transition-bounce: 400ms cubic-bezier(0.34,1.56,0.64,1);
+
+  font-family: var(--kw-sh-font-body);
+  color: var(--kw-sh-text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+.kw-shipping-page *, .kw-shipping-page *::before, .kw-shipping-page *::after { box-sizing: border-box; }
+.kw-shipping-page img { max-width: 100%; height: auto; }
+
+/* ── KEYFRAMES ────────────────────────────────────────────────────────── */
+@keyframes kwShFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes kwShFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes kwShSlideLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwShSlideRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwShPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+@keyframes kwShProgressFill {
+  from { width: 0%; }
+  to { width: var(--kw-sh-progress, 66%); }
+}
+@keyframes kwShFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kw-shipping-page * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── SCROLL-REVEAL CLASSES ───────────────────────────────────────────── */
+.kw-shipping-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--kw-sh-transition-slow), transform var(--kw-sh-transition-slow);
+}
+.kw-shipping-reveal.kw-shipping-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.kw-shipping-slide-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity var(--kw-sh-transition-slow), transform var(--kw-sh-transition-slow);
+}
+.kw-shipping-slide-left.kw-shipping-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.kw-shipping-slide-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity var(--kw-sh-transition-slow), transform var(--kw-sh-transition-slow);
+}
+.kw-shipping-slide-right.kw-shipping-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.kw-shipping-stagger-1 { transition-delay: 0ms; }
+.kw-shipping-stagger-2 { transition-delay: 100ms; }
+.kw-shipping-stagger-3 { transition-delay: 200ms; }
+.kw-shipping-stagger-4 { transition-delay: 300ms; }
+.kw-shipping-stagger-5 { transition-delay: 400ms; }
+.kw-shipping-stagger-6 { transition-delay: 500ms; }
+
+.kw-shipping-anim { animation: kwShFadeUp 0.6s ease both; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION BASE
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-section {
+  padding: 48px 0;
+  position: relative;
+}
+.kw-shipping-section--alt {
+  background: var(--kw-sh-bg-light);
+}
+.kw-shipping-section--dark {
+  background: linear-gradient(155deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: var(--kw-sh-white);
+}
+.kw-shipping-section--dark p,
+.kw-shipping-section--dark li {
+  color: rgba(255,255,255,0.82);
+}
+.kw-shipping-section--gradient {
+  background: linear-gradient(180deg, var(--kw-sh-bg-light) 0%, var(--kw-sh-white) 100%);
+}
+.kw-shipping-section--pattern { position: relative; }
+.kw-shipping-section--pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(139,0,0,0.02) 22px, rgba(139,0,0,0.02) 23px);
+  pointer-events: none;
+  z-index: 0;
+}
+.kw-shipping-section--pattern > .container { position: relative; z-index: 1; }
+
+/* ── SECTION HEADER ───────────────────────────────────────────────────── */
+.kw-shipping-header { text-align: center; margin-bottom: 32px; }
+.kw-shipping-label {
+  display: inline-block;
+  font-family: var(--kw-sh-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--kw-sh-primary);
+  background: rgba(139,0,0,0.06);
+  padding: 5px 16px;
+  border-radius: var(--kw-sh-radius-pill);
+  margin-bottom: 12px;
+}
+.kw-shipping-section--dark .kw-shipping-label {
+  color: var(--kw-sh-accent);
+  background: rgba(255,215,0,0.1);
+}
+.kw-shipping-title {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3.5vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--kw-sh-heading);
+  margin: 0 0 12px;
+}
+.kw-shipping-section--dark .kw-shipping-title { color: var(--kw-sh-white); }
+.kw-shipping-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--kw-sh-primary);
+  border: none;
+  border-radius: 2px;
+  margin: 14px auto;
+}
+.kw-shipping-subtitle {
+  font-family: var(--kw-sh-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.65;
+  color: var(--kw-sh-text-muted);
+  max-width: 720px;
+  margin: 0 auto;
+}
+.kw-shipping-section--dark .kw-shipping-subtitle { color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   1. HERO
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-hero {
+  position: relative;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(26,26,26,0.94) 0%, rgba(61,0,0,0.90) 55%, rgba(139,0,0,0.84) 100%),
+    url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600&q=80') center/cover no-repeat;
+  padding: 56px 16px;
+  text-align: center;
+  overflow: hidden;
+}
+@supports (background-attachment: fixed) {
+  @media (min-width: 768px) {
+    .kw-shipping-hero { background-attachment: scroll, fixed; }
+  }
+}
+.kw-shipping-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(30deg, transparent, transparent 38px, rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px);
+  pointer-events: none;
+}
+.kw-shipping-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 56px;
+  background: linear-gradient(to top, rgba(26,26,26,0.25), transparent);
+  pointer-events: none;
+}
+.kw-shipping-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  animation: kwShFadeUp 0.7s ease both;
+}
+.kw-shipping-hero__breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-family: var(--kw-sh-font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+}
+.kw-shipping-hero__breadcrumbs a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color var(--kw-sh-transition-fast);
+}
+.kw-shipping-hero__breadcrumbs a:hover { color: var(--kw-sh-white); }
+.kw-shipping-hero__breadcrumbs i { font-size: 10px; }
+.kw-shipping-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--kw-sh-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--kw-sh-accent);
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.22);
+  padding: 5px 16px;
+  border-radius: var(--kw-sh-radius-pill);
+  margin-bottom: 18px;
+}
+.kw-shipping-hero__badge i { font-size: 11px; }
+.kw-shipping-hero__title {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 800;
+  font-size: clamp(26px, 5vw, 48px);
+  line-height: 1.12;
+  color: var(--kw-sh-white);
+  margin: 0 0 14px;
+  letter-spacing: 0.01em;
+}
+.kw-shipping-hero__title em { font-style: normal; color: var(--kw-sh-three); }
+.kw-shipping-hero__sub {
+  font-family: var(--kw-sh-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.7;
+  color: rgba(255,255,255,0.82);
+  max-width: 640px;
+  margin: 0 auto;
+}
+.kw-shipping-hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-shipping-hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--kw-sh-font-heading);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--kw-sh-radius-sm);
+  background: rgba(255,255,255,0.04);
+}
+.kw-shipping-hero__chip i { color: var(--kw-sh-accent); font-size: 10px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   2. ADVANTAGE CARDS (zalety wysyłki)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-advantages {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-shipping-adv-card {
+  text-align: center;
+  padding: 28px 20px;
+  background: var(--kw-sh-white);
+  border: 1px solid var(--kw-sh-border);
+  border-radius: var(--kw-sh-radius-sm);
+  transition: all var(--kw-sh-transition);
+  box-shadow: var(--kw-sh-shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.kw-shipping-adv-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--kw-sh-primary);
+  transform: scaleX(0);
+  transition: transform var(--kw-sh-transition);
+}
+.kw-shipping-adv-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--kw-sh-shadow-lg);
+}
+.kw-shipping-adv-card:hover::before { transform: scaleX(1); }
+.kw-shipping-adv-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--kw-sh-radius-lg);
+  background: rgba(139,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 24px;
+  color: var(--kw-sh-primary);
+  transition: all var(--kw-sh-transition);
+}
+.kw-shipping-adv-card:hover .kw-shipping-adv-icon {
+  background: var(--kw-sh-primary);
+  color: var(--kw-sh-white);
+  transform: scale(1.1);
+}
+.kw-shipping-adv-card h3 {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 700;
+  font-size: clamp(14px, 1.8vw, 16px);
+  color: var(--kw-sh-heading);
+  margin: 0 0 8px;
+}
+.kw-shipping-adv-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--kw-sh-text-muted);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   3. PRICING TABLE (cennik wysyłki)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-shipping-price-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 24px 20px;
+  background: var(--kw-sh-white);
+  border: 1px solid var(--kw-sh-border);
+  border-radius: var(--kw-sh-radius-sm);
+  transition: all var(--kw-sh-transition);
+  box-shadow: var(--kw-sh-shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+.kw-shipping-price-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--kw-sh-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--kw-sh-transition);
+}
+.kw-shipping-price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--kw-sh-shadow-lg);
+  border-color: var(--kw-sh-primary);
+}
+.kw-shipping-price-card:hover::after { transform: scaleX(1); }
+.kw-shipping-price-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--kw-sh-radius-md);
+  background: rgba(139,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--kw-sh-primary);
+  transition: all var(--kw-sh-transition);
+}
+.kw-shipping-price-card:hover .kw-shipping-price-icon {
+  background: var(--kw-sh-primary);
+  color: var(--kw-sh-white);
+}
+.kw-shipping-price-body { flex: 1; min-width: 0; }
+.kw-shipping-price-name {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 700;
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--kw-sh-heading);
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.kw-shipping-price-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--kw-sh-font-heading);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--kw-sh-radius-sm);
+  vertical-align: middle;
+}
+.kw-shipping-price-tag--green { background: var(--kw-sh-green-bg); color: var(--kw-sh-green); }
+.kw-shipping-price-tag--amber { background: var(--kw-sh-amber-bg); color: var(--kw-sh-amber); }
+.kw-shipping-price-tag--primary { background: rgba(139,0,0,0.08); color: var(--kw-sh-primary); }
+.kw-shipping-price-tag--blue { background: rgba(0,86,163,0.08); color: var(--kw-sh-secondary); }
+.kw-shipping-price-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--kw-sh-text-muted);
+  margin: 0 0 10px;
+}
+.kw-shipping-price-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--kw-sh-text-tertiary);
+  margin: 0;
+}
+.kw-shipping-price-meta strong { color: var(--kw-sh-text-muted); font-weight: 600; }
+.kw-shipping-price-value {
+  flex-shrink: 0;
+  text-align: right;
+  min-width: 90px;
+}
+.kw-shipping-price-amount {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 800;
+  font-size: clamp(22px, 3vw, 28px);
+  color: var(--kw-sh-primary);
+  line-height: 1.1;
+  margin: 0;
+}
+.kw-shipping-price-free {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--kw-sh-green);
+  background: var(--kw-sh-green-bg);
+  padding: 3px 10px;
+  border-radius: var(--kw-sh-radius-sm);
+  margin: 0;
+  display: inline-block;
+}
+.kw-shipping-price-note {
+  font-size: 11px;
+  color: var(--kw-sh-text-tertiary);
+  margin-top: 4px;
+}
+
+/* Featured card (darmowa dostawa) */
+.kw-shipping-price-card--featured {
+  border: 2px solid var(--kw-sh-green);
+  background: linear-gradient(135deg, rgba(26,122,60,0.03) 0%, var(--kw-sh-white) 100%);
+}
+.kw-shipping-price-card--featured::after { background: var(--kw-sh-green); }
+.kw-shipping-price-card--featured:hover { border-color: var(--kw-sh-green); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   4. DELIVERY METHOD DETAIL CARDS
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-method {
+  background: var(--kw-sh-white);
+  border: 1px solid var(--kw-sh-border);
+  border-radius: var(--kw-sh-radius-sm);
+  overflow: hidden;
+  transition: all var(--kw-sh-transition);
+  box-shadow: var(--kw-sh-shadow-sm);
+  margin-bottom: 20px;
+}
+.kw-shipping-method:hover {
+  box-shadow: var(--kw-sh-shadow-lg);
+  transform: translateY(-3px);
+}
+.kw-shipping-method__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-bottom: 1px solid var(--kw-sh-border);
+}
+.kw-shipping-method__icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--kw-sh-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--kw-sh-white);
+  transition: all var(--kw-sh-transition);
+}
+.kw-shipping-method__icon--inpost { background: #FF6600; }
+.kw-shipping-method__icon--dpd { background: #DC0032; }
+.kw-shipping-method__icon--pickup { background: var(--kw-sh-secondary); }
+.kw-shipping-method__title-group { flex: 1; }
+.kw-shipping-method__title {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 700;
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--kw-sh-heading);
+  margin: 0;
+}
+.kw-shipping-method__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--kw-sh-font-heading);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--kw-sh-radius-sm);
+  margin-left: 8px;
+}
+.kw-shipping-method__badge--time { background: var(--kw-sh-green-bg); color: var(--kw-sh-green); }
+.kw-shipping-method__badge--price { background: rgba(139,0,0,0.08); color: var(--kw-sh-primary); }
+.kw-shipping-method__price-inline {
+  flex-shrink: 0;
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 800;
+  font-size: clamp(18px, 2.5vw, 24px);
+  color: var(--kw-sh-primary);
+}
+.kw-shipping-method__body {
+  padding: 20px;
+}
+.kw-shipping-method__body p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--kw-sh-text-muted);
+  margin: 0 0 12px;
+}
+.kw-shipping-method__body p:last-child { margin-bottom: 0; }
+.kw-shipping-method__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--kw-sh-border);
+}
+.kw-shipping-method__detail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--kw-sh-text-muted);
+}
+.kw-shipping-method__detail i { color: var(--kw-sh-primary); font-size: 14px; }
+.kw-shipping-method__detail strong { color: var(--kw-sh-heading); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   5. FREE SHIPPING SECTION (darmowa dostawa)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-free-section {
+  background: linear-gradient(135deg, rgba(26,122,60,0.06) 0%, rgba(26,122,60,0.02) 100%);
+  border-top: 3px solid var(--kw-sh-green);
+  border-bottom: 3px solid var(--kw-sh-green);
+}
+.kw-shipping-free-box {
+  background: var(--kw-sh-white);
+  border: 2px solid var(--kw-sh-green);
+  border-radius: var(--kw-sh-radius-xl);
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: var(--kw-sh-shadow-md);
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+.kw-shipping-free-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--kw-sh-green), var(--kw-sh-accent), var(--kw-sh-green));
+}
+.kw-shipping-free-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--kw-sh-green-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 30px;
+  color: var(--kw-sh-green);
+  animation: kwShFloat 3s ease-in-out infinite;
+}
+.kw-shipping-free-box h3 {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 800;
+  font-size: clamp(20px, 3vw, 28px);
+  color: var(--kw-sh-green);
+  margin: 0 0 8px;
+}
+.kw-shipping-free-box p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--kw-sh-text-muted);
+  margin: 0 0 20px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.kw-shipping-progress-wrapper {
+  max-width: 400px;
+  margin: 0 auto 16px;
+}
+.kw-shipping-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--kw-sh-text-tertiary);
+  margin-bottom: 8px;
+  font-family: var(--kw-sh-font-heading);
+}
+.kw-shipping-progress-bar {
+  height: 10px;
+  background: var(--kw-sh-bg-light);
+  border-radius: var(--kw-sh-radius-pill);
+  overflow: hidden;
+  position: relative;
+}
+.kw-shipping-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--kw-sh-green), var(--kw-sh-accent));
+  border-radius: var(--kw-sh-radius-pill);
+  --kw-sh-progress: 66%;
+  animation: kwShProgressFill 1.5s ease both 0.5s;
+  position: relative;
+}
+.kw-shipping-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: kwShProgressFill 2s ease infinite;
+}
+.kw-shipping-progress-text {
+  font-size: 13px;
+  color: var(--kw-sh-green);
+  font-weight: 600;
+  margin-top: 8px;
+}
+.kw-shipping-free-note {
+  font-size: 13px;
+  color: var(--kw-sh-text-tertiary);
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--kw-sh-border);
+}
+.kw-shipping-free-note i { color: var(--kw-sh-amber); margin-right: 4px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   6. PACKAGING SECTION (bezpieczne pakowanie)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-packaging {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.kw-shipping-packaging__img {
+  border-radius: var(--kw-sh-radius-sm);
+  overflow: hidden;
+  box-shadow: var(--kw-sh-shadow-md);
+  position: relative;
+}
+.kw-shipping-packaging__img img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--kw-sh-transition-slow);
+}
+.kw-shipping-packaging__img:hover img { transform: scale(1.03); }
+.kw-shipping-packaging__content h3 {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 700;
+  font-size: clamp(18px, 2.5vw, 24px);
+  color: var(--kw-sh-heading);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.kw-shipping-packaging__content h3 i { color: var(--kw-sh-primary); font-size: 20px; }
+.kw-shipping-packaging__content p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--kw-sh-text-muted);
+  margin: 0 0 14px;
+}
+.kw-shipping-packaging__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+.kw-shipping-packaging__list li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--kw-sh-text);
+  margin-bottom: 8px;
+}
+.kw-shipping-packaging__list li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 11px;
+  color: var(--kw-sh-green);
+  position: absolute;
+  left: 0;
+  top: 4px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   7. TIMELINE (czas realizacji)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-timeline {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 32px;
+}
+.kw-shipping-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--kw-sh-border);
+}
+.kw-shipping-timeline__step {
+  position: relative;
+  padding-bottom: 28px;
+}
+.kw-shipping-timeline__step:last-child { padding-bottom: 0; }
+.kw-shipping-timeline__dot {
+  position: absolute;
+  left: -32px;
+  top: 2px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--kw-sh-white);
+  border: 2px solid var(--kw-sh-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--kw-sh-primary);
+  z-index: 2;
+  transition: all var(--kw-sh-transition);
+}
+.kw-shipping-timeline__step:hover .kw-shipping-timeline__dot {
+  background: var(--kw-sh-primary);
+  color: var(--kw-sh-white);
+  transform: scale(1.15);
+}
+.kw-shipping-timeline__step h4 {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--kw-sh-heading);
+  margin: 0 0 4px;
+}
+.kw-shipping-timeline__step p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--kw-sh-text-muted);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   8. CALLOUT (przesyłki gabarytowe, śledzenie)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-callout {
+  border-radius: 0 var(--kw-sh-radius-md) var(--kw-sh-radius-md) 0;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.kw-shipping-callout p { margin: 0; font-size: 14px; line-height: 1.7; }
+.kw-shipping-callout i { margin-right: 8px; }
+.kw-shipping-callout--info {
+  background: rgba(0,86,163,0.05);
+  border-left: 4px solid var(--kw-sh-secondary);
+}
+.kw-shipping-callout--info p { color: var(--kw-sh-heading); }
+.kw-shipping-callout--info i { color: var(--kw-sh-secondary); }
+.kw-shipping-callout--info a { color: var(--kw-sh-secondary); }
+.kw-shipping-callout--warning {
+  background: var(--kw-sh-amber-bg);
+  border-left: 4px solid var(--kw-sh-amber);
+}
+.kw-shipping-callout--warning p { color: var(--kw-sh-heading); }
+.kw-shipping-callout--warning i { color: var(--kw-sh-amber); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   9. TRACKING SECTION (śledzenie przesyłki)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-tracking-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.kw-shipping-tracking-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--kw-sh-white);
+  border: 1px solid var(--kw-sh-border);
+  border-radius: var(--kw-sh-radius-sm);
+  transition: all var(--kw-sh-transition);
+  box-shadow: var(--kw-sh-shadow-xs);
+}
+.kw-shipping-tracking-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--kw-sh-shadow-md);
+}
+.kw-shipping-tracking-card h4 {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--kw-sh-heading);
+  margin: 0 0 6px;
+}
+.kw-shipping-tracking-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--kw-sh-text-muted);
+  margin: 0;
+}
+.kw-shipping-tracking-card a {
+  color: var(--kw-sh-secondary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--kw-sh-transition-fast);
+}
+.kw-shipping-tracking-card a:hover { color: var(--kw-sh-three); text-decoration: underline; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   10. STATS / SOCIAL PROOF
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.kw-shipping-stat-card {
+  text-align: center;
+  padding: 24px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--kw-sh-radius-sm);
+  transition: all var(--kw-sh-transition);
+}
+.kw-shipping-stat-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+  border-color: rgba(139,0,0,0.3);
+}
+.kw-shipping-stat-number {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 42px);
+  color: var(--kw-sh-accent);
+  line-height: 1.1;
+  margin: 0 0 6px;
+}
+.kw-shipping-stat-number .kw-shipping-stat-suffix {
+  font-size: 0.6em;
+  font-weight: 700;
+  color: var(--kw-sh-primary);
+}
+.kw-shipping-stat-label {
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.72);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   11. FAQ — CSS-only accordion
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-faq { max-width: 760px; margin: 0 auto; }
+.kw-shipping-faq__item {
+  background: var(--kw-sh-white);
+  border: 1px solid var(--kw-sh-border);
+  border-radius: var(--kw-sh-radius-sm);
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: all var(--kw-sh-transition);
+  box-shadow: var(--kw-sh-shadow-xs);
+}
+.kw-shipping-faq__item:hover { box-shadow: var(--kw-sh-shadow-md); border-color: var(--kw-sh-primary); }
+.kw-shipping-faq__item[open] { border-color: var(--kw-sh-primary); box-shadow: var(--kw-sh-shadow-md); }
+.kw-shipping-faq__item summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--kw-sh-heading);
+  cursor: pointer;
+  list-style: none;
+  min-height: 48px;
+  transition: color var(--kw-sh-transition);
+}
+.kw-shipping-faq__item summary::-webkit-details-marker { display: none; }
+.kw-shipping-faq__item summary::before {
+  content: '\f105';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--kw-sh-primary);
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  transition: transform var(--kw-sh-transition);
+}
+.kw-shipping-faq__item[open] summary::before { transform: rotate(90deg); }
+.kw-shipping-faq__item summary:hover { color: var(--kw-sh-primary); }
+.kw-shipping-faq__answer {
+  padding: 0 20px 16px 50px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--kw-sh-text-muted);
+  animation: kwShFadeIn 0.3s ease both;
+}
+.kw-shipping-faq__answer a { color: var(--kw-sh-secondary); }
+.kw-shipping-faq__answer strong { color: var(--kw-sh-heading); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   12. CTA / KONTAKT
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-cta {
+  background: linear-gradient(140deg, #8B0000 0%, #5a0000 55%, #1a1a1a 100%);
+  text-align: center;
+  padding: 56px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.kw-shipping-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(55deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px);
+  pointer-events: none;
+}
+.kw-shipping-cta__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.kw-shipping-cta__inner h2 {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 700;
+  font-size: clamp(20px, 3.2vw, 34px);
+  line-height: 1.2;
+  color: var(--kw-sh-white);
+  margin: 0 0 14px;
+}
+.kw-shipping-cta__inner p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 24px;
+}
+.kw-shipping-cta__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.kw-shipping-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 13px 26px;
+  border-radius: var(--kw-sh-radius-md);
+  text-decoration: none !important;
+  min-height: 48px;
+  transition: all var(--kw-sh-transition);
+  border: 2px solid transparent;
+}
+.kw-shipping-btn--white {
+  background: var(--kw-sh-white); color: var(--kw-sh-primary); border-color: var(--kw-sh-white);
+  box-shadow: 0 4px 18px rgba(255,255,255,0.18);
+}
+.kw-shipping-btn--white:hover {
+  background: transparent; color: var(--kw-sh-white); transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,255,255,0.25);
+}
+.kw-shipping-btn--outline {
+  background: transparent; color: var(--kw-sh-white); border-color: rgba(255,255,255,0.35);
+}
+.kw-shipping-btn--outline:hover {
+  background: var(--kw-sh-white); color: var(--kw-sh-primary); border-color: var(--kw-sh-white);
+}
+.kw-shipping-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 640px;
+  margin: 28px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-shipping-contact-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px 20px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--kw-sh-radius-sm);
+  transition: all var(--kw-sh-transition);
+  text-decoration: none !important;
+  color: var(--kw-sh-white);
+}
+.kw-shipping-contact-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+  border-color: rgba(255,215,0,0.2);
+}
+.kw-shipping-contact-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--kw-sh-radius-sm);
+  background: rgba(139,0,0,0.2);
+  border: 1px solid var(--kw-sh-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--kw-sh-accent);
+  transition: all var(--kw-sh-transition);
+}
+.kw-shipping-contact-card:hover .kw-shipping-contact-icon {
+  background: var(--kw-sh-primary);
+  color: var(--kw-sh-white);
+}
+.kw-shipping-contact-card strong {
+  display: block;
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--kw-sh-white);
+  margin-bottom: 2px;
+}
+.kw-shipping-contact-card span { font-size: 13px; color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INTERNATIONAL SECTION
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-shipping-international {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.kw-shipping-international__icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0,86,163,0.08);
+  border: 2px solid var(--kw-sh-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: var(--kw-sh-secondary);
+  transition: all var(--kw-sh-transition);
+  animation: kwShFloat 3s ease-in-out infinite;
+}
+.kw-shipping-international__icon:hover {
+  background: var(--kw-sh-secondary);
+  color: var(--kw-sh-white);
+}
+.kw-shipping-international h3 {
+  font-family: var(--kw-sh-font-heading);
+  font-weight: 700;
+  font-size: clamp(18px, 2.5vw, 24px);
+  color: var(--kw-sh-heading);
+  margin: 0 0 10px;
+}
+.kw-shipping-international p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--kw-sh-text-muted);
+  margin: 0 0 16px;
+}
+.kw-shipping-international__contacts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+.kw-shipping-international__contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--kw-sh-white);
+  border: 1px solid var(--kw-sh-border);
+  border-radius: var(--kw-sh-radius-sm);
+  font-size: 14px;
+  color: var(--kw-sh-text);
+  text-decoration: none !important;
+  transition: all var(--kw-sh-transition);
+  font-weight: 500;
+}
+.kw-shipping-international__contact:hover {
+  border-color: var(--kw-sh-secondary);
+  box-shadow: var(--kw-sh-shadow-md);
+  transform: translateY(-2px);
+}
+.kw-shipping-international__contact i { color: var(--kw-sh-secondary); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 480px) {
+  .kw-shipping-cta__btns { flex-direction: row; justify-content: center; }
+}
+@media (min-width: 576px) {
+  .kw-shipping-advantages { grid-template-columns: repeat(2, 1fr); }
+  .kw-shipping-pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-shipping-stats-grid { grid-template-columns: repeat(4, 1fr); }
+  .kw-shipping-tracking-grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-shipping-contact-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 768px) {
+  .kw-shipping-section { padding: 64px 0; }
+  .kw-shipping-hero { min-height: 420px; padding: 72px 24px; }
+  .kw-shipping-header { margin-bottom: 40px; }
+  .kw-shipping-advantages { grid-template-columns: repeat(4, 1fr); }
+  .kw-shipping-packaging { grid-template-columns: 1fr 1fr; gap: 48px; }
+  .kw-shipping-packaging__img img { height: 360px; }
+  .kw-shipping-cta { padding: 72px 24px; }
+  .kw-shipping-contact-grid { max-width: 100%; }
+}
+@media (min-width: 992px) {
+  .kw-shipping-section { padding: 80px 0; }
+  .kw-shipping-hero { min-height: 480px; padding: 88px 32px; }
+  .kw-shipping-header { margin-bottom: 48px; }
+  .kw-shipping-pricing-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1440px) {
+  .kw-shipping-section { padding: 96px 0; }
+}
+</style>
+
+<!-- SCHEMA.ORG -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Koszty wysyłki — KEDAR-WIHA.pl",
+  "description": "Koszty wysyłki narzędzi specjalistycznych WIHA. Darmowa dostawa od 299 zł. InPost Paczkomaty, InPost Kurier, DPD Kurier. Bezpieczne pakowanie narzędzi VDE.",
+  "url": "https://kedar-wiha.pl/koszty-wysylki",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "KEDAR-WIHA.pl",
+    "url": "https://kedar-wiha.pl",
+    "telephone": "+48575838766",
+    "email": "info@kedar-wiha.pl"
+  }
+}
+</script>
+
+<!-- ====================================================================== -->
+<div class="kw-shipping-page">
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       1. HERO
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-hero" aria-label="Koszty wysyłki KEDAR-WIHA.pl">
+    <div class="kw-shipping-hero__inner">
+      <nav class="kw-shipping-hero__breadcrumbs" aria-label="Ścieżka nawigacji">
+        <a href="/">Strona główna</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="/informacje-dla-klienta">Informacje dla klienta</a>
+        <i class="fas fa-chevron-right"></i>
+        <span style="color:var(--kw-sh-accent);">Koszty wysyłki</span>
+      </nav>
+      <span class="kw-shipping-hero__badge"><i class="fas fa-truck"></i> Logistyka i dostawa</span>
+      <h1 class="kw-shipping-hero__title">Koszty <em>Wysyłki</em> Narzędzi WIHA</h1>
+      <p class="kw-shipping-hero__sub">Kompletny przewodnik po kosztach dostawy narzędzi specjalistycznych — wkrętaków izolowanych VDE, kluczy dynamometrycznych i&nbsp;profesjonalnych zestawów narzędzi WIHA. Darmowa wysyłka od 299&nbsp;zł, bezpieczne pakowanie i&nbsp;szybka realizacja zamówień na terenie całej Polski.</p>
+      <div class="kw-shipping-hero__trust">
+        <span class="kw-shipping-hero__chip"><i class="fas fa-truck"></i> Szybka dostawa</span>
+        <span class="kw-shipping-hero__chip"><i class="fas fa-shield-alt"></i> Bezpieczne pakowanie</span>
+        <span class="kw-shipping-hero__chip"><i class="fas fa-gift"></i> Darmowa od 299 zł</span>
+        <span class="kw-shipping-hero__chip"><i class="fas fa-map-marker-alt"></i> Cała Polska</span>
+        <span class="kw-shipping-hero__chip"><i class="fas fa-search-location"></i> Śledzenie online</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       2. KLUCZOWE ZALETY WYSYŁKI
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-section kw-shipping-section--pattern" aria-label="Zalety wysyłki">
+    <div class="container">
+      <div class="kw-shipping-header kw-shipping-reveal">
+        <span class="kw-shipping-label">Dlaczego my</span>
+        <h2 class="kw-shipping-title">Profesjonalna Wysyłka Narzędzi Specjalistycznych</h2>
+        <hr class="kw-shipping-divider" />
+        <p class="kw-shipping-subtitle">Każda przesyłka z&nbsp;narzędziami WIHA traktowana jest z&nbsp;najwyższą starannością. Wiemy, że profesjonalny elektryk nie może czekać na narzędzia — dlatego dostarczamy je szybko, bezpiecznie i&nbsp;z&nbsp;pełną kontrolą procesu logistycznego na każdym etapie.</p>
+      </div>
+      <div class="kw-shipping-advantages">
+        <article class="kw-shipping-adv-card kw-shipping-reveal kw-shipping-stagger-1">
+          <div class="kw-shipping-adv-icon"><i class="fas fa-shipping-fast"></i></div>
+          <h3>Szybka realizacja zamówienia</h3>
+          <p>Zamówienia opłacone do godz. 12:00 w&nbsp;dniu roboczym wysyłamy tego samego dnia. Narzędzia elektryczne potrzebne na budowę dotrą do Ciebie bez zbędnego czekania — <a href="https://kedar-wiha.pl" style="color:var(--kw-sh-primary);">sprawdź naszą ofertę wkrętaków VDE</a> i&nbsp;zamów teraz.</p>
+        </article>
+        <article class="kw-shipping-adv-card kw-shipping-reveal kw-shipping-stagger-2">
+          <div class="kw-shipping-adv-icon"><i class="fas fa-box-open"></i></div>
+          <h3>Bezpieczne pakowanie VDE</h3>
+          <p>Narzędzia izolowane VDE, klucze dynamometryczne i&nbsp;kompletne zestawy WIHA pakujemy w&nbsp;wzmocnione kartony z&nbsp;materiałami ochronnymi. Każda sztuka zabezpieczona przed uszkodzeniem mechanicznym w&nbsp;trakcie transportu kurierskiego.</p>
+        </article>
+        <article class="kw-shipping-adv-card kw-shipping-reveal kw-shipping-stagger-3">
+          <div class="kw-shipping-adv-icon"><i class="fas fa-hand-holding-usd"></i></div>
+          <h3>Darmowa dostawa od 299 zł</h3>
+          <p>Przy zamówieniach o&nbsp;wartości od 299,00 zł brutto koszty wysyłki pokrywa KEDAR-WIHA.pl. Dotyczy InPost Paczkomaty, InPost Kurier oraz DPD Kurier — metody przedpłaty. <a href="https://kedar-wiha.pl" style="color:var(--kw-sh-primary);">Zobacz zestawy narzędzi WIHA</a> i&nbsp;skorzystaj z&nbsp;darmowej dostawy.</p>
+        </article>
+        <article class="kw-shipping-adv-card kw-shipping-reveal kw-shipping-stagger-4">
+          <div class="kw-shipping-adv-icon"><i class="fas fa-satellite-dish"></i></div>
+          <h3>Śledzenie przesyłki online</h3>
+          <p>Do każdej wysyłki dołączamy numer śledzenia przesyłki InPost lub DPD. Monitoruj status dostawy narzędzi WIHA w&nbsp;czasie rzeczywistym — od momentu nadania w&nbsp;naszym magazynie aż po dostarczenie pod wskazany adres lub do&nbsp;paczkomatu.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       3. CENNIK WYSYŁKI
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-section kw-shipping-section--alt" id="cennik" aria-label="Cennik wysyłki">
+    <div class="container">
+      <div class="kw-shipping-header kw-shipping-reveal">
+        <span class="kw-shipping-label">Cennik</span>
+        <h2 class="kw-shipping-title">Koszty Dostawy Narzędzi WIHA na&nbsp;Terenie Polski</h2>
+        <hr class="kw-shipping-divider" />
+        <p class="kw-shipping-subtitle">Wszystkie podane ceny są cenami brutto (zawierają VAT). Darmowa dostawa od 299,00 zł obowiązuje przy płatności przedpłatą — dla przesyłek pobraniowych nie dotyczy. Wybierz optymalną metodę dostawy narzędzi specjalistycznych dopasowaną do Twoich potrzeb.</p>
+      </div>
+      <div class="kw-shipping-pricing-grid">
+        <!-- InPost Paczkomaty -->
+        <article class="kw-shipping-price-card kw-shipping-reveal kw-shipping-stagger-1">
+          <div class="kw-shipping-price-icon"><i class="fas fa-box"></i></div>
+          <div class="kw-shipping-price-body">
+            <h3 class="kw-shipping-price-name">InPost Paczkomaty <span class="kw-shipping-price-tag kw-shipping-price-tag--green"><i class="fas fa-clock"></i> 1–2 dni</span></h3>
+            <p class="kw-shipping-price-desc">Odbiór w&nbsp;dowolnym paczkomacie InPost w&nbsp;Polsce. Ponad 20&nbsp;000 lokalizacji — wygodna opcja dla elektryków i&nbsp;instalatorów odbierających narzędzia WIHA w&nbsp;drodze na&nbsp;budowę lub do zakładu pracy. Przesyłka czeka w&nbsp;paczkomacie do 48 godzin od momentu dostarczenia.</p>
+            <div class="kw-shipping-price-meta">
+              <span><strong>Czas:</strong> 1–2 dni robocze</span>
+              <span><strong>Śledzenie:</strong> online</span>
+            </div>
+          </div>
+          <div class="kw-shipping-price-value">
+            <p class="kw-shipping-price-amount">13,99 zł</p>
+            <p class="kw-shipping-price-note">brutto</p>
+          </div>
+        </article>
+
+        <!-- InPost Kurier -->
+        <article class="kw-shipping-price-card kw-shipping-reveal kw-shipping-stagger-2">
+          <div class="kw-shipping-price-icon"><i class="fas fa-truck"></i></div>
+          <div class="kw-shipping-price-body">
+            <h3 class="kw-shipping-price-name">InPost Kurier <span class="kw-shipping-price-tag kw-shipping-price-tag--green"><i class="fas fa-clock"></i> 1–2 dni</span></h3>
+            <p class="kw-shipping-price-desc">Dostawa kurierska InPost pod wskazany adres w&nbsp;Polsce. Szybka i&nbsp;niezawodna dostawa przesyłek z&nbsp;wkrętakami izolowanymi VDE, kluczami dynamometrycznymi i&nbsp;kompletnymi zestawami narzędzi WIHA bezpośrednio na miejsce pracy lub pod dom.</p>
+            <div class="kw-shipping-price-meta">
+              <span><strong>Czas:</strong> 1–2 dni robocze</span>
+              <span><strong>Śledzenie:</strong> online</span>
+            </div>
+          </div>
+          <div class="kw-shipping-price-value">
+            <p class="kw-shipping-price-amount">16,99 zł</p>
+            <p class="kw-shipping-price-note">brutto</p>
+          </div>
+        </article>
+
+        <!-- DPD Kurier -->
+        <article class="kw-shipping-price-card kw-shipping-reveal kw-shipping-stagger-3">
+          <div class="kw-shipping-price-icon"><i class="fas fa-shipping-fast"></i></div>
+          <div class="kw-shipping-price-body">
+            <h3 class="kw-shipping-price-name">DPD Kurier <span class="kw-shipping-price-tag kw-shipping-price-tag--blue"><i class="fas fa-clock"></i> 1–3 dni</span></h3>
+            <p class="kw-shipping-price-desc">Profesjonalna dostawa kurierska DPD — jeden z&nbsp;największych operatorów logistycznych w&nbsp;Europie. Przesyłki z&nbsp;narzędziami WIHA ubezpieczone i&nbsp;śledzone online na każdym etapie. Kurier dostarcza pod wskazany adres z&nbsp;możliwością awizacji.</p>
+            <div class="kw-shipping-price-meta">
+              <span><strong>Czas:</strong> 1–3 dni robocze</span>
+              <span><strong>Śledzenie:</strong> online</span>
+            </div>
+          </div>
+          <div class="kw-shipping-price-value">
+            <p class="kw-shipping-price-amount">17,99 zł</p>
+            <p class="kw-shipping-price-note">brutto</p>
+          </div>
+        </article>
+
+        <!-- DPD Kurier pobranie -->
+        <article class="kw-shipping-price-card kw-shipping-reveal kw-shipping-stagger-4">
+          <div class="kw-shipping-price-icon"><i class="fas fa-money-check-alt"></i></div>
+          <div class="kw-shipping-price-body">
+            <h3 class="kw-shipping-price-name">DPD Kurier pobranie <span class="kw-shipping-price-tag kw-shipping-price-tag--amber"><i class="fas fa-info-circle"></i> brak darmowej</span></h3>
+            <p class="kw-shipping-price-desc">Płatność gotówką lub kartą przy odbiorze przesyłki od kuriera DPD. Wygodna opcja dla klientów preferujących płatność przy odbiorze narzędzi specjalistycznych. Uwaga: dla przesyłek pobraniowych darmowa dostawa od 299 zł nie obowiązuje.</p>
+            <div class="kw-shipping-price-meta">
+              <span><strong>Czas:</strong> 1–3 dni robocze</span>
+              <span><strong>Płatność:</strong> przy odbiorze</span>
+            </div>
+          </div>
+          <div class="kw-shipping-price-value">
+            <p class="kw-shipping-price-amount">21,99 zł</p>
+            <p class="kw-shipping-price-note">brutto</p>
+          </div>
+        </article>
+
+        <!-- Odbiór osobisty -->
+        <article class="kw-shipping-price-card kw-shipping-reveal kw-shipping-stagger-5">
+          <div class="kw-shipping-price-icon" style="background:rgba(0,86,163,0.07);color:var(--kw-sh-secondary);"><i class="fas fa-store"></i></div>
+          <div class="kw-shipping-price-body">
+            <h3 class="kw-shipping-price-name">Odbiór osobisty <span class="kw-shipping-price-tag kw-shipping-price-tag--primary"><i class="fas fa-phone"></i> po uzgodnieniu</span></h3>
+            <p class="kw-shipping-price-desc">Odbiór zamówionych narzędzi WIHA osobiście — po wcześniejszym ustaleniu terminu z&nbsp;nami. Skontaktuj się telefonicznie lub e-mailem, aby ustalić szczegóły. Opcja ta jest darmowa, jednak wymaga wcześniejszego uzgodnienia.</p>
+            <div class="kw-shipping-price-meta">
+              <span><strong>Czas:</strong> po uzgodnieniu</span>
+              <span><strong>Koszt:</strong> 0,00 zł</span>
+            </div>
+          </div>
+          <div class="kw-shipping-price-value">
+            <p class="kw-shipping-price-free"><i class="fas fa-check-circle"></i> Darmowo</p>
+            <p class="kw-shipping-price-note">0,00 zł brutto</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Informacja dodatkowa -->
+      <div class="kw-shipping-callout kw-shipping-callout--info kw-shipping-reveal" style="max-width:780px;margin:28px auto 0;">
+        <p><i class="fas fa-info-circle"></i> <strong>Wszystkie ceny brutto.</strong> Podane koszty wysyłki narzędzi WIHA zawierają podatek VAT. Czas dostawy liczony jest od momentu nadania przesyłki, nie od złożenia zamówienia. Wysyłka realizowana w&nbsp;dni robocze (poniedziałek–piątek). Przed złożeniem zamówienia <a href="https://kedar-wiha.pl">sprawdź dostępność narzędzi</a> w&nbsp;naszym sklepie.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       4. METODY DOSTAWY — SZCZEGÓŁOWE OPISY
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-section" id="metody-dostawy" aria-label="Szczegółowe metody dostawy">
+    <div class="container">
+      <div class="kw-shipping-header kw-shipping-reveal">
+        <span class="kw-shipping-label">Metody dostawy</span>
+        <h2 class="kw-shipping-title">Szczegółowe Informacje o&nbsp;Metodach Dostawy</h2>
+        <hr class="kw-shipping-divider" />
+        <p class="kw-shipping-subtitle">Wybierz metodę dostawy narzędzi specjalistycznych WIHA dopasowaną do Twojego harmonogramu pracy. Każda przesyłka jest starannie pakowana, ubezpieczona i&nbsp;śledzona online od momentu nadania w&nbsp;naszym magazynie.</p>
+      </div>
+
+      <!-- InPost Paczkomaty -->
+      <div class="kw-shipping-method kw-shipping-reveal kw-shipping-stagger-1">
+        <div class="kw-shipping-method__header">
+          <div class="kw-shipping-method__icon kw-shipping-method__icon--inpost"><i class="fas fa-box"></i></div>
+          <div class="kw-shipping-method__title-group">
+            <h3 class="kw-shipping-method__title">InPost Paczkomaty <span class="kw-shipping-method__badge kw-shipping-method__badge--time"><i class="fas fa-clock"></i> 1–2 dni</span></h3>
+          </div>
+          <div class="kw-shipping-method__price-inline">13,99 zł</div>
+        </div>
+        <div class="kw-shipping-method__body">
+          <p>Paczkomaty InPost to jedna z&nbsp;najpopularniejszych i&nbsp;najwygodniejszych form dostawy narzędzi specjalistycznych w&nbsp;Polsce. Z&nbsp;ponad 20&nbsp;000 paczkomatów rozmieszczonych w&nbsp;całym kraju, elektryk i&nbsp;instalator PV może odebrać zamówione wkrętaki izolowane VDE, klucze dynamometryczne WIHA lub kompletny zestaw narzędzi w&nbsp;dogodnej lokalizacji — często na drodze do miejsca pracy, nie tracąc czasu na oczekiwanie u&nbsp;kuriera. System paczkomatowy InPost działa 24/7, co oznacza, że przesyłka jest dostępna do odbioru nawet po godzinach pracy tradycyjnych kurierów. Po dostarczeniu paczki do&nbsp;paczkomatu klient otrzymuje powiadomienie SMS oraz e-mail z&nbsp;kodem odbioru. Przesyłka czeka w&nbsp;paczkomacie przez 48 godzin, co zapewnia elastyczność w&nbsp;planowaniu odbioru zamówionych narzędzi. Metoda ta jest idealna dla zamówień mieszczących się w&nbsp;gabarytach standardowych skrytek (gabaryt A, B lub C), w tym większości asortymentu WIHA — od pojedynczych <a href="https://kedar-wiha.pl" style="color:var(--kw-sh-secondary);">wkrętaków izolowanych VDE</a> po mniejsze zestawy narzędzi.</p>
+          <div class="kw-shipping-method__details">
+            <span class="kw-shipping-method__detail"><i class="fas fa-truck"></i> <strong>Czas dostawy:</strong> 1–2 dni robocze</span>
+            <span class="kw-shipping-method__detail"><i class="fas fa-map-marker-alt"></i> <strong>Punkty odbioru:</strong> 20&nbsp;000+</span>
+            <span class="kw-shipping-method__detail"><i class="fas fa-clock"></i> <strong>Godziny dostępu:</strong> 24/7</span>
+            <span class="kw-shipping-method__detail"><i class="fas fa-gift"></i> <strong>Darmowa od:</strong> 299,00 zł</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- InPost Kurier -->
+      <div class="kw-shipping-method kw-shipping-reveal kw-shipping-stagger-2">
+        <div class="kw-shipping-method__header">
+          <div class="kw-shipping-method__icon kw-shipping-method__icon--inpost"><i class="fas fa-truck"></i></div>
+          <div class="kw-shipping-method__title-group">
+            <h3 class="kw-shipping-method__title">InPost Kurier <span class="kw-shipping-method__badge kw-shipping-method__badge--time"><i class="fas fa-clock"></i> 1–2 dni</span></h3>
+          </div>
+          <div class="kw-shipping-method__price-inline">16,99 zł</div>
+        </div>
+        <div class="kw-shipping-method__body">
+          <p>Dostawa kurierska InPost pod wskazany adres to doskonała opcja dla profesjonalistów, którzy preferują odbiór narzędzi WIHA bezpośrednio w&nbsp;firmie, na budowie lub pod adresem zamieszkania. Szybka sieć logistyczna InPost gwarantuje dostarczenie przesyłki z&nbsp;wkrętakami VDE, kluczami dynamometrycznymi lub zestawami narzędzi w&nbsp;ciągu 1–2 dni roboczych od momentu nadania. Przed dostawą kurier kontaktuje się z&nbsp;odbiorcą telefonicznie w&nbsp;celu ustalenia dogodnego terminu odbioru. Przesyłka jest w&nbsp;pełni ubezpieczona, co stanowi ważne zabezpieczenie dla cennych narzędzi specjalistycznych o&nbsp;wysokiej wartości — na przykład zestawów profesjonalnych WIHA czy <a href="https://kedar-wiha.pl" style="color:var(--kw-sh-secondary);">kluczy dynamometrycznych WIHA TorqueVario-S</a>. Każda przesyłka otrzymuje numer śledzenia, który pozwala monitorować status dostawy w&nbsp;czasie rzeczywistym. Metoda przedpłaty uprawnia do darmowej dostawy przy zamówieniach powyżej 299,00 zł brutto.</p>
+          <div class="kw-shipping-method__details">
+            <span class="kw-shipping-method__detail"><i class="fas fa-truck"></i> <strong>Czas dostawy:</strong> 1–2 dni robocze</span>
+            <span class="kw-shipping-method__detail"><i class="fas fa-shield-alt"></i> <strong>Ubezpieczenie:</strong> pełne</span>
+            <span class="kw-shipping-method__detail"><i class="fas fa-satellite-dish"></i> <strong>Śledzenie:</strong> online</span>
+            <span class="kw-shipping-method__detail"><i class="fas fa-gift"></i> <strong>Darmowa od:</strong> 299,00 zł</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DPD Kurier -->
+      <div class="kw-shipping-method kw-shipping-reveal kw-shipping-stagger-3">
+        <div class="kw-shipping-method__header">
+          <div class="kw-shipping-method__icon kw-shipping-method__icon--dpd"><i class="fas fa-shipping-fast"></i></div>
+          <div class="kw-shipping-method__title-group">
+            <h3 class="kw-shipping-method__title">DPD Kurier <span class="kw-shipping-method__badge kw-shipping-method__badge--time"><i class="fas fa-clock"></i> 1–3 dni</span></h3>
+          </div>
+          <div class="kw-shipping-method__price-inline">17,99 zł</div>
+        </div>
+        <div class="kw-shipping-method__body">
+          <p>DPD to jeden z&nbsp;wiodących operatorów logistycznych w&nbsp;Europie, oferujący niezawodną dostawę przesyłek z&nbsp;narzędziami specjalistycznymi WIHA na terenie całej Polski. Dostawa kurierska DPD to szczególnie polecana metoda dla większych zamówień — zestawów narzędzi w&nbsp;walizkach, plecakach narzędziowych oraz przesyłek o&nbsp;większych gabarytach, które mogą nie mieścić się w&nbsp;standardowych skrytkach paczkomatowych. Sieć kurierska DPD obejmuje ponad 10&nbsp;000 punktów odbioru Predict w&nbsp;Polsce, co daje elastyczność w&nbsp;wyborze miejsca i&nbsp;terminu odbioru przesyłki z&nbsp;wkrętakami izolowanymi VDE lub kluczami dynamometrycznymi WIHA. Przesyłka jest ubezpieczona, a&nbsp;każdy klient otrzymuje numer śledzenia pozwalający na monitorowanie statusu w&nbsp;czasie rzeczywistym. DPD oferuje również usługę przewidywania godziny dostawy (Predict), co ułatwia planowanie pracy na budowie lub w&nbsp;zakładzie. Przy płatności przedpłatą i&nbsp;wartości zamówienia od 299,00 zł brutto, koszt wysyłki DPD Kurier wynosi <strong>0,00 zł</strong> — pełna darmowa dostawa narzędzi WIHA.</p>
+          <div class="kw-shipping-method__details">
+            <span class="kw-shipping-method__detail"><i class="fas fa-truck"></i> <strong>Czas dostawy:</strong> 1–3 dni robocze</span>
+            <span class="kw-shipping-method__detail"><i class="fas fa-shield-alt"></i> <strong>Ubezpieczenie:</strong> pełne</span>
+            <span class="kw-shipping-method__detail"><i class="fas fa-map-marker-alt"></i> <strong>Punkty Predict:</strong> 10&nbsp;000+</span>
+            <span class="kw-shipping-method__detail"><i class="fas fa-gift"></i> <strong>Darmowa od:</strong> 299,00 zł</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DPD Kurier pobranie -->
+      <div class="kw-shipping-method kw-shipping-reveal kw-shipping-stagger-4">
+        <div class="kw-shipping-method__header">
+          <div class="kw-shipping-method__icon kw-shipping-method__icon--dpd"><i class="fas fa-money-check-alt"></i></div>
+          <div class="kw-shipping-method__title-group">
+            <h3 class="kw-shipping-method__title">DPD Kurier pobranie <span class="kw-shipping-method__badge kw-shipping-method__badge--price"><i class="fas fa-exclamation-triangle"></i> brak darmowej</span></h3>
+          </div>
+          <div class="kw-shipping-method__price-inline">21,99 zł</div>
+        </div>
+        <div class="kw-shipping-method__body">
+          <p>Przesyłka pobraniowa DPD to wygodna metoda dostawy narzędzi WIHA z&nbsp;płatnością gotówką lub kartą bezpośrednio przy odbiorze u&nbsp;kuriera. Opcja ta jest przeznaczona dla klientów, którzy preferują zapłatę za zamówienie w&nbsp;momencie jego fizycznego przekazania — bez konieczności wcześniejszego przelewu bankowego. Koszt przesyłki pobraniowej wynosi 21,99 zł brutto i&nbsp;<strong>nie podlega darmowej dostawie</strong> od progu 299 zł — jest to jedyna metoda wyłączona z&nbsp;promocji darmowej wysyłki narzędzi specjalistycznych. DPD Kurier pobranie jest dostępny dla wszystkich przesyłek na terenie Polski, w&nbsp;tym dla zestawów narzędzi WIHA, wkrętaków VDE, kluczy dynamometrycznych i&nbsp;akcesoriów. Przesyłka jest ubezpieczona, a&nbsp;klient otrzymuje numer śledzenia do monitorowania statusu dostawy.</p>
+          <div class="kw-shipping-callout kw-shipping-callout--warning" style="margin:16px 0 0;">
+            <p><i class="fas fa-exclamation-triangle"></i> <strong>Uwaga:</strong> Darmowa dostawa od 299,00 zł <strong>nie obowiązuje</strong> przy wyborze przesyłki pobraniowej. Darmowa wysyłka dotyczy wyłącznie metod przedpłaty: InPost Paczkomaty, InPost Kurier oraz DPD Kurier.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       5. DARMOWA WYSYŁKA OD 299 ZŁ
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-section kw-shipping-section kw-shipping-free-section" id="darmowa-dostawa" aria-label="Darmowa dostawa">
+    <div class="container">
+      <div class="kw-shipping-header kw-shipping-reveal">
+        <span class="kw-shipping-label" style="color:var(--kw-sh-green);background:var(--kw-sh-green-bg);">Promocja</span>
+        <h2 class="kw-shipping-title" style="color:var(--kw-sh-green);">Darmowa Wysyłka Narzędzi WIHA od 299&nbsp;zł</h2>
+        <hr class="kw-shipping-divider" style="background:var(--kw-sh-green);" />
+        <p class="kw-shipping-subtitle">Zamów profesjonalne narzędzia specjalistyczne WIHA za minimum 299,00 zł brutto, a&nbsp;koszty dostawy pokryje KEDAR-WIHA.pl. Oferta dotyczy trzech najpopularniejszych metod wysyłki na terenie Polski — przy płatności przedpłatą.</p>
+      </div>
+      <div class="kw-shipping-free-box kw-shipping-reveal">
+        <div class="kw-shipping-free-icon"><i class="fas fa-gift"></i></div>
+        <h3>Darmowa Dostawa od 299 zł brutto</h3>
+        <p>Kupując <a href="https://kedar-wiha.pl" style="color:var(--kw-sh-primary);">narzędzia WIHA</a> za minimum 299,00 zł brutto, otrzymujesz bezpłatną wysyłkę trzema najszybszymi metodami kurierskimi. To doskonała okazja, aby uzupełnić profesjonalny ekwipunek elektryka — zamów wkrętaki izolowane VDE, klucze dynamometryczne lub kompletne zestawy narzędzi i&nbsp;zaoszczędź na kosztach logistyki. Próg darmowej dostawy jest łatwy do osiągnięcia — wiele pojedynczych zestawów narzędzi WIHA przekracza ten próg.</p>
+        <div class="kw-shipping-progress-wrapper">
+          <div class="kw-shipping-progress-labels">
+            <span>0 zł</span>
+            <span>299 zł — darmowa dostawa!</span>
+          </div>
+          <div class="kw-shipping-progress-bar" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" aria-label="Postęp do darmowej dostawy">
+            <div class="kw-shipping-progress-fill"></div>
+          </div>
+          <p class="kw-shipping-progress-text">Przykładowe zamówienie: 199 zł → brakuje 100 zł do darmowej dostawy</p>
+        </div>
+        <div class="kw-shipping-free-note">
+          <p><i class="fas fa-info-circle"></i> Darmowa dostawa dotyczy <strong>InPost Paczkomaty</strong>, <strong>InPost Kurier</strong> i&nbsp;<strong>DPD Kurier</strong> — wyłącznie przy płatności przedpłatą. <strong>DPD Kurier pobranie</strong> nie jest objęty promocją darmowej wysyłki. Wszystkie ceny podane w&nbsp;brutto (z&nbsp;VAT).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       6. BEZPIECZNE PAKOWANIE NARZĘDZI
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-section kw-shipping-section--gradient" id="bezpieczne-pakowanie" aria-label="Bezpieczne pakowanie narzędzi">
+    <div class="container">
+      <div class="kw-shipping-header kw-shipping-reveal">
+        <span class="kw-shipping-label">Bezpieczeństwo</span>
+        <h2 class="kw-shipping-title">Bezpieczne Pakowanie Narzędzi Specjalistycznych WIHA</h2>
+        <hr class="kw-shipping-divider" />
+        <p class="kw-shipping-subtitle">Narzędzia izolowane VDE, klucze dynamometryczne i&nbsp;zestawy narzędzi WIHA wymagają szczególnej ostrożności w&nbsp;trakcie transportu. Każda przesyłka jest starannie pakowana, aby narzędzia dotarły do Ciebie w&nbsp;nienaruszonym stanie.</p>
+      </div>
+      <div class="kw-shipping-packaging">
+        <div class="kw-shipping-packaging__img kw-shipping-slide-left">
+          <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80" alt="Bezpieczne pakowanie narzędzi specjalistycznych WIHA w wzmocnionych kartonach z materiałami ochronnymi" loading="lazy" width="800" height="560" />
+        </div>
+        <div class="kw-shipping-packaging__content kw-shipping-slide-right">
+          <h3><i class="fas fa-shield-alt"></i> Ochrona na Każdym Etapie Transportu</h3>
+          <p>Jako autoryzowany dystrybutor narzędzi WIHA w&nbsp;Polsce, doskonale rozumiemy, że profesjonalne narzędzia elektryczne to precyzyjne instrumenty wymagające odpowiedniego zabezpieczenia w&nbsp;trakcie transportu kurierskiego. Wkrętaki izolowane VDE muszą dotrzeć do rąk elektryka w&nbsp;nienaruszonym stanie — uszkodzenie izolacji narzędzia VDE oznacza utratę certyfikatu bezpieczeństwa i&nbsp;niebezpieczeństwo pracy pod napięciem. Dlatego stosujemy rygorystyczne procedury pakowania każdej przesyłki wysyłanej z&nbsp;naszego magazynu.</p>
+          <p>Procedura pakowania narzędzi WIHA w&nbsp;KEDAR-WIHA.pl obejmuje weryfikację zamówienia, indywidualne zabezpieczenie każdego elementu, wybór odpowiedniego kartonu transportowego oraz dokładne opisanie przesyłki etykietami ostrzegawczymi i&nbsp;logistycznymi. Dbamy o&nbsp;to, aby każda przesyłka z&nbsp;<a href="https://kedar-wiha.pl" style="color:var(--kw-sh-primary);">narzędziami WIHA</a> spełniała najwyższe standardy bezpieczeństwa transportowego.</p>
+          <ul class="kw-shipping-packaging__list">
+            <li>Wzmocnione kartony transportowe o&nbsp;podwyższonej wytrzymałości — ochrona przed zgnieceniem</li>
+            <li>Materiały amortyzujące: folia bąbelkowa, pianka poliuretanowa, wkładki kartonowe</li>
+            <li>Indywidualne zabezpieczenie narzędzi VDE — ochrona powłoki izolacyjnej przed otarciami</li>
+            <li>Zabezpieczenie kluczy dynamometrycznych WIHA — ochrona mechanizmu i&nbsp;wyświetlacza momentu</li>
+            <li>Wypełnienie pustych przestrzeni w&nbsp;kartonie — brak przesuwania się narzędzi w&nbsp;trakcie transportu</li>
+            <li>Wodoodporne folie ochronne — dodatkowa ochrona przed wilgocią podczas dostawy</li>
+            <li>Etykiety „Delikatne — narzędzia precyzyjne" na przesyłkach z&nbsp;cennymi zestawami WIHA</li>
+          </ul>
+          <p>Jeśli po odbiorze przesyłki stwierdzisz jakiekolwiek uszkodzenie narzędzi WIHA wynikające z&nbsp;transportu — zgłoś to niezwłocznie pod numerem <strong>+48&nbsp;575&nbsp;838&nbsp;766</strong> lub na adres <a href="/cdn-cgi/l/email-protection#127b7c747d5279777673603f657b7a733c627e"><span class="__cf_email__" data-cfemail="3b52555d547b505e5f5a49164c52535a154b57">[email&#160;protected]</span></a>. Dokumentujemy stan przesyłki i&nbsp;procedurujemy reklamację logistyczną w&nbsp;kooperacji z&nbsp;przewoźnikiem.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       7. CZAS REALIZACJI ZAMÓWIENIA — TIMELINE
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-section kw-shipping-section--pattern" id="czas-realizacji" aria-label="Czas realizacji zamówienia">
+    <div class="container">
+      <div class="kw-shipping-header kw-shipping-reveal">
+        <span class="kw-shipping-label">Realizacja</span>
+        <h2 class="kw-shipping-title">Czas Realizacji Zamówienia — Krok po Kroku</h2>
+        <hr class="kw-shipping-divider" />
+        <p class="kw-shipping-subtitle">Od momentu złożenia zamówienia w&nbsp;sklepie KEDAR-WIHA.pl do dostarczenia narzędzi WIHA pod wskazany adres — przejrzyj cały proces logistyczny i&nbsp;planuj zakupy narzędzi specjalistycznych z&nbsp;pełną świadomością czasów dostawy.</p>
+      </div>
+      <div class="kw-shipping-timeline kw-shipping-reveal">
+        <div class="kw-shipping-timeline__step">
+          <div class="kw-shipping-timeline__dot"><i class="fas fa-mouse-pointer"></i></div>
+          <h4>Krok 1 — Złożenie zamówienia</h4>
+          <p>Dodaj wybrane narzędzia WIHA do koszyka na stronie <a href="https://kedar-wiha.pl" style="color:var(--kw-sh-primary);">kedar-wiha.pl</a>, wybierz metodę dostawy i&nbsp;płatności, a&nbsp;następnie potwierdź zamówienie. Po złożeniu zamówienia otrzymasz automatyczne powiadomienie e-mail z&nbsp;potwierdzeniem i&nbsp;numerem zamówienia. Upewnij się, że dane do wysyłki są poprawne — adres, numer telefonu i&nbsp;adres e-mail są niezbędne do sprawnego przetworzenia zamówienia i&nbsp;komunikacji kurierskiej.</p>
+        </div>
+        <div class="kw-shipping-timeline__step">
+          <div class="kw-shipping-timeline__dot"><i class="fas fa-credit-card"></i></div>
+          <h4>Krok 2 — Opłacenie zamówienia</h4>
+          <p>Opłać zamówienie wybraną metodą płatności: szybki przelew PayU/Przelewy24, karta Visa/Mastercard, BLIK lub przelew tradycyjny. Płatności online realizowane są natychmiast — po autoryzacji w&nbsp;banku zamówienie automatycznie zmienia status na „opłacone". Przelewy tradycyjne księgowane są w&nbsp;ciągu 1–2 dni roboczych. <strong>Próg 12:00</strong> — zamówienia opłacone do godziny 12:00 w&nbsp;dniu roboczym (poniedziałek–piątek) przechodzą do kompletowania tego samego dnia.</p>
+        </div>
+        <div class="kw-shipping-timeline__step">
+          <div class="kw-shipping-timeline__dot"><i class="fas fa-boxes"></i></div>
+          <h4>Krok 3 — Kompletowanie i&nbsp;pakowanie</h4>
+          <p>Po opłaceniu zamówienia nasz zespół magazynowy przystępuje do kompletowania i&nbsp;pakowania narzędzi WIHA. Każda sztuka jest weryfikowana pod kątem zgodności z&nbsp;zamówieniem, a&nbsp;następnie starannie zabezpieczana materiałami ochronnymi — folią bąbelkową, pianką poliuretanową i&nbsp;wypełnieniem kartonowym. W&nbsp;przypadku zamówień na wkrętaki izolowane VDE lub klucze dynamometryczne WIHA zwracamy szczególną uwagę na ochronę precyzyjnych elementów i&nbsp;powłoki izolacyjnej. Cały proces kompletowania trwa zazwyczaj 1–3 godziny robocze.</p>
+        </div>
+        <div class="kw-shipping-timeline__step">
+          <div class="kw-shipping-timeline__dot"><i class="fas fa-truck-loading"></i></div>
+          <h4>Krok 4 — Nadanie przesyłki</h4>
+          <p>Zamówienia opłacone do godziny <strong>12:00 w&nbsp;dniu roboczym</strong> (poniedziałek–piątek) są nadawane tego samego dnia. Zamówienia opłacone po 12:00 lub w&nbsp;dni wolne od pracy są nadawane w&nbsp;następnym dniu roboczym. Po nadaniu przesyłki otrzymasz e-mail z&nbsp;numerem śledzenia (InPost lub DPD) oraz linkiem do monitorowania statusu dostawy. Czas dostawy podany w&nbsp;cenniku jest liczony <strong>od momentu nadania przesyłki</strong>, nie od złożenia zamówienia — to istotna różnica, o&nbsp;której warto pamiętać przy planowaniu zakupów.</p>
+        </div>
+        <div class="kw-shipping-timeline__step">
+          <div class="kw-shipping-timeline__dot"><i class="fas fa-home"></i></div>
+          <h4>Krok 5 — Dostawa pod adres / odbiór w&nbsp;paczkomacie</h4>
+          <p>Kurier InPost lub DPD dostarcza przesyłkę z&nbsp;narzędziami WIHA pod wskazany adres lub do&nbsp;wybranego paczkomatu InPost. Przed dostawą kurier kontaktuje się telefonicznie w&nbsp;celu ustalenia terminu (dostawy pod adres). W&nbsp;przypadku paczkomatów — po dostarczeniu paczki otrzymasz SMS i&nbsp;e-mail z&nbsp;kodem odbioru. Po odbiorze przesyłki sprawdź stan narzędzi WIHA i&nbsp;zgodność z&nbsp;zamówieniem. W&nbsp;przypadku jakichkolwiek uwag — skontaktuj się z&nbsp;nami natychmiast.</p>
+        </div>
+      </div>
+
+      <div class="kw-shipping-callout kw-shipping-callout--info kw-shipping-reveal" style="max-width:680px;margin:28px auto 0;">
+        <p><i class="fas fa-clock"></i> <strong>Czas dostawy liczony od nadania.</strong> Czas dostawy podany w&nbsp;cenniku (1–2 dni robocze, 1–3 dni robocze) jest liczony od momentu nadania przesyłki przez nasz magazyn, nie od momentu złożenia zamówienia. Wysyłka realizowana jest w&nbsp;dni robocze (poniedziałek–piątek). Zamówienia złożone w&nbsp;sobotę, niedzielę lub święto są nadawane w&nbsp;następnym dniu roboczym.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       8. PRZESYŁKI GABARYTOWE + ŚLEDZENIE PRZESYŁKI
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-section kw-shipping-section--alt" id="gabaryty" aria-label="Przesyłki gabarytowe i śledzenie">
+    <div class="container">
+      <!-- Przesyłki gabarytowe -->
+      <div class="kw-shipping-header kw-shipping-reveal">
+        <span class="kw-shipping-label">Informacje dodatkowe</span>
+        <h2 class="kw-shipping-title">Przesyłki Gabarytowe i&nbsp;Śledzenie Przesyłki</h2>
+        <hr class="kw-shipping-divider" />
+        <p class="kw-shipping-subtitle">Ważne informacje dla klientów zamawiających większe zestawy narzędzi WIHA lub nietypowe przesyłki, a&nbsp;także instrukcja śledzenia zamówień w&nbsp;czasie rzeczywistym.</p>
+      </div>
+
+      <div class="row" style="margin-top:20px;">
+        <div class="col-md-6 kw-shipping-slide-left">
+          <div style="background:var(--kw-sh-white);border:1px solid var(--kw-sh-border);border-radius:var(--kw-sh-radius-sm);padding:24px;box-shadow:var(--kw-sh-shadow-sm);height:100%;">
+            <h3 style="font-family:var(--kw-sh-font-heading);font-weight:700;font-size:18px;color:var(--kw-sh-heading);margin:0 0 12px;display:flex;align-items:center;gap:10px;">
+              <span style="width:40px;height:40px;border-radius:var(--kw-sh-radius-md);background:rgba(224,123,0,0.08);display:inline-flex;align-items:center;justify-content:center;font-size:18px;color:var(--kw-sh-amber);"><i class="fas fa-dolly"></i></span>
+              Przesyłki Gabarytowe
+            </h3>
+            <p style="font-size:14px;line-height:1.7;color:var(--kw-sh-text-muted);margin:0 0 12px;">Niektóre zamówienia narzędzi WIHA mogą kwalifikować się jako przesyłki gabarytowe ze względu na nietypowe wymiary, wagę lub ilość produktów. Dotyczy to przede wszystkim dużych zestawów narzędzi w&nbsp;walizkach profesjonalnych, plecakach narzędziowych WIHA eMobility, zestawów instalacyjnych PV oraz zamówień hurtowych obejmujących dużą liczbę pozycji. W&nbsp;takich przypadkach standardowy cennik wysyłki może ulec zmianie.</p>
+            <div class="kw-shipping-callout kw-shipping-callout--warning">
+              <p><i class="fas fa-exclamation-triangle"></i> <strong>Informacja o&nbsp;kosztach:</strong> Klient zostanie <strong>poinformowany o&nbsp;ewentualnych dodatkowych kosztach</strong> przesyłki gabarytowej przed potwierdzeniem zamówienia. Akceptacja kosztów jest warunkiem realizacji zamówienia. Nigdy nie pobieramy dodatkowych opłat bez wcześniejszego uzgodnienia z&nbsp;klientem.</p>
+            </div>
+            <ul style="list-style:none;padding:0;margin:12px 0 0;">
+              <li style="position:relative;padding-left:24px;font-size:13px;line-height:1.6;color:var(--kw-sh-text);margin-bottom:6px;">
+                <i class="fas fa-check" style="color:var(--kw-sh-green);position:absolute;left:0;top:4px;font-size:10px;"></i>
+                Zestawy w&nbsp;walizkach i&nbsp;plecakach narzędziowych
+              </li>
+              <li style="position:relative;padding-left:24px;font-size:13px;line-height:1.6;color:var(--kw-sh-text);margin-bottom:6px;">
+                <i class="fas fa-check" style="color:var(--kw-sh-green);position:absolute;left:0;top:4px;font-size:10px;"></i>
+                Zamówienia hurtowe — duża liczba pozycji
+              </li>
+              <li style="position:relative;padding-left:24px;font-size:13px;line-height:1.6;color:var(--kw-sh-text);margin-bottom:6px;">
+                <i class="fas fa-check" style="color:var(--kw-sh-green);position:absolute;left:0;top:4px;font-size:10px;"></i>
+                Indywidualne ustalenie kosztów przed wysyłką
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 kw-shipping-slide-right">
+          <div style="background:var(--kw-sh-white);border:1px solid var(--kw-sh-border);border-radius:var(--kw-sh-radius-sm);padding:24px;box-shadow:var(--kw-sh-shadow-sm);height:100%;">
+            <h3 style="font-family:var(--kw-sh-font-heading);font-weight:700;font-size:18px;color:var(--kw-sh-heading);margin:0 0 12px;display:flex;align-items:center;gap:10px;">
+              <span style="width:40px;height:40px;border-radius:var(--kw-sh-radius-md);background:rgba(0,86,163,0.08);display:inline-flex;align-items:center;justify-content:center;font-size:18px;color:var(--kw-sh-secondary);"><i class="fas fa-search-location"></i></span>
+              Śledzenie Przesyłki
+            </h3>
+            <p style="font-size:14px;line-height:1.7;color:var(--kw-sh-text-muted);margin:0 0 14px;">Po nadaniu przesyłki z&nbsp;narzędziami WIHA otrzymasz e-mail z&nbsp;numerem śledzenia oraz linkiem do strony przewoźnika. Możesz monitorować status dostawy narzędzi VDE, kluczy dynamometrycznych i&nbsp;zestawów narzędzi WIHA w&nbsp;czasie rzeczywistym — od momentu przyjęcia przesyłki przez kuriera aż po dostarczenie pod wskazany adres lub do&nbsp;paczkomatu InPost. Poniżej linki do stron śledzenia przewoźników.</p>
+            <div class="kw-shipping-tracking-grid">
+              <div class="kw-shipping-tracking-card">
+                <div>
+                  <h4>InPost — Śledzenie paczki</h4>
+                  <p>Śledzenie przesyłek InPost Paczkomaty i&nbsp;InPost Kurier. Wpisz numer przesyłki otrzymany w&nbsp;e-mailu.</p>
+                  <a href="https://inpost.pl/sledzenie-przesylek" target="_blank" rel="noopener">inpost.pl/sledzenie-przesylek <i class="fas fa-external-link-alt" style="font-size:11px;"></i></a>
+                </div>
+              </div>
+              <div class="kw-shipping-tracking-card">
+                <div>
+                  <h4>DPD — Śledzenie paczki</h4>
+                  <p>Śledzenie przesyłek DPD Kurier i&nbsp;DPD Kurier pobranie. Wpisz numer przesyłki DPD.</p>
+                  <a href="https://tracktrace.dpd.com.pl/" target="_blank" rel="noopener">tracktrace.dpd.com.pl <i class="fas fa-external-link-alt" style="font-size:11px;"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="kw-shipping-callout kw-shipping-callout--info" style="margin:14px 0 0;">
+              <p><i class="fas fa-envelope"></i> <strong>Nie otrzymałeś numeru śledzenia?</strong> Skontaktuj się z&nbsp;nami: <a href="/cdn-cgi/l/email-protection#83eaede5ecc3e8e6e7e2f1aef4eaebe2adf3ef"><span class="__cf_email__" data-cfemail="a8c1c6cec7e8c3cdccc9da85dfc1c0c986d8c4">[email&#160;protected]</span></a> lub +48&nbsp;575&nbsp;838&nbsp;766. Podaj numer zamówienia — numer śledzenia prześlemy ponownie.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       9. WYSYŁKA MIĘDZYNARODOWA
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-section kw-shipping-section--gradient" id="wysylka-zagraniczna" aria-label="Wysyłka międzynarodowa">
+    <div class="container">
+      <div class="kw-shipping-international kw-shipping-reveal">
+        <div class="kw-shipping-international__icon"><i class="fas fa-globe-europe"></i></div>
+        <h3>Wysyłka Narzędzi WIHA poza Granice Polski</h3>
+        <p>KEDAR-WIHA.pl realizuje również dostawy narzędzi specjalistycznych WIHA poza teren Polski — do krajów Unii Europejskiej oraz poza UE. Wysyłka międzynarodowa narzędzi izolowanych VDE, kluczy dynamometrycznych i&nbsp;zestawów narzędzi profesjonalnych jest ustalana <strong>indywidualnie</strong> dla każdego zamówienia, ponieważ koszty i&nbsp;czas dostawy zależą od kraju przeznaczenia, wagi przesyłki oraz wybranej metody transportu.</p>
+        <p>Jako autoryzowany dystrybutor WIHA w&nbsp;Polsce, zapewnimy profesjonalną obsługę zamówień międzynarodowych — od precyzyjnego wycenia kosztów logistyki, przez przygotowanie dokumentacji celnej i&nbsp;handlowej, aż po bezpieczne pakowanie i&nbsp;nadanie przesyłki z&nbsp;pełnym ubezpieczeniem. Dla klientów z&nbsp;Niemiec, Czech, Słowacji i&nbsp;innych krajów europejskich oferujemy konkurencyjne warunki wysyłki profesjonalnych narzędzi WIHA.</p>
+        <div class="kw-shipping-international__contacts">
+          <a href="/cdn-cgi/l/email-protection#d4bdbab2bb94bfb1b0b5a6f9a3bdbcb5faa4b8" class="kw-shipping-international__contact"><i class="fas fa-envelope"></i> <span class="__cf_email__" data-cfemail="93fafdf5fcd3f8f6f7f2e1bee4fafbf2bde3ff">[email&#160;protected]</span></a>
+          <a href="tel:+48575838766" class="kw-shipping-international__contact"><i class="fas fa-phone"></i> +48 575 838 766</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       10. STATYSTYKI / SOCIAL PROOF
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-section kw-shipping-section--dark" id="statystyki" aria-label="Statystyki wysyłek">
+    <div class="container">
+      <div class="kw-shipping-header kw-shipping-reveal">
+        <span class="kw-shipping-label">Liczby mówią same za siebie</span>
+        <h2 class="kw-shipping-title">Zaufanie Budowane na Dostawach</h2>
+        <hr class="kw-shipping-divider" />
+      </div>
+      <div class="kw-shipping-stats-grid kw-shipping-reveal">
+        <div class="kw-shipping-stat-card">
+          <p class="kw-shipping-stat-number"><span class="kw-shipping-counter" data-target="5000">0</span><span class="kw-shipping-stat-suffix">+</span></p>
+          <p class="kw-shipping-stat-label">Bezpiecznie dostarczonych przesyłek z&nbsp;narzędziami WIHA</p>
+        </div>
+        <div class="kw-shipping-stat-card">
+          <p class="kw-shipping-stat-number"><span class="kw-shipping-counter" data-target="98">0</span><span class="kw-shipping-stat-suffix">%</span></p>
+          <p class="kw-shipping-stat-label">Zadowolonych klientów z&nbsp;procesu wysyłki i&nbsp;dostawy</p>
+        </div>
+        <div class="kw-shipping-stat-card">
+          <p class="kw-shipping-stat-number"><span class="kw-shipping-counter" data-target="24">0</span><span class="kw-shipping-stat-suffix">h</span></p>
+          <p class="kw-shipping-stat-label">Średni czas wysyłki zamówienia od momentu opłacenia</p>
+        </div>
+        <div class="kw-shipping-stat-card">
+          <p class="kw-shipping-stat-number"><span class="kw-shipping-counter" data-target="0">0</span><span class="kw-shipping-stat-suffix">%</span></p>
+          <p class="kw-shipping-stat-label">Uszkodzeń narzędzi VDE w&nbsp;trakcie transportu kurierskiego</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       11. FAQ — NAJCZĘŚCIEJ ZADAWANE PYTANIA
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-section kw-shipping-section--pattern" id="faq" aria-label="FAQ — najczęściej zadawane pytania">
+    <div class="container">
+      <div class="kw-shipping-header kw-shipping-reveal">
+        <span class="kw-shipping-label">FAQ</span>
+        <h2 class="kw-shipping-title">Najczęściej Zadawane Pytania o&nbsp;Koszty Wysyłki</h2>
+        <hr class="kw-shipping-divider" />
+        <p class="kw-shipping-subtitle">Odpowiedzi na pytania dotyczące kosztów wysyłki narzędzi specjalistycznych, darmowej dostawy, czasu realizacji zamówień, śledzenia przesyłek i&nbsp;przesyłek gabarytowych.</p>
+      </div>
+      <div class="kw-shipping-faq">
+        <details class="kw-shipping-faq__item kw-shipping-reveal kw-shipping-stagger-1">
+          <summary>Od jakiej kwoty obowiązuje darmowa dostawa narzędzi WIHA?</summary>
+          <div class="kw-shipping-faq__answer">
+            <p>Darmowa dostawa narzędzi WIHA obowiązuje przy zamówieniach o&nbsp;wartości <strong>od 299,00 zł brutto</strong>. Promocja dotyczy trzech metod dostawy na terenie Polski: <strong>InPost Paczkomaty</strong>, <strong>InPost Kurier</strong> oraz <strong>DPD Kurier</strong> — wyłącznie przy płatności przedpłatą (szybki przelew, karta, BLIK). Darmowa wysyłka <strong>nie obejmuje</strong> przesyłki pobraniowej DPD Kurier pobranie — w&nbsp;tym przypadku koszt dostawy wynosi zawsze 21,99 zł brutto, niezależnie od wartości zamówienia. Próg 299 zł łatwo osiągnąć — wiele <a href="https://kedar-wiha.pl">zestawów narzędzi WIHA</a> przekracza tę kwotę.</p>
+          </div>
+        </details>
+        <details class="kw-shipping-faq__item kw-shipping-reveal kw-shipping-stagger-2">
+          <summary>Czy darmowa dostawa od 299 zł dotyczy przesyłki pobraniowej?</summary>
+          <div class="kw-shipping-faq__answer">
+            <p><strong>Nie.</strong> Darmowa dostawa od 299,00 zł <strong>nie dotyczy</strong> przesyłki pobraniowej (DPD Kurier pobranie). Promocja darmowej wysyłki narzędzi WIHA obejmuje wyłącznie metody przedpłaty: InPost Paczkomaty (13,99 zł → 0,00 zł), InPost Kurier (16,99 zł → 0,00 zł) i&nbsp;DPD Kurier (17,99 zł → 0,00 zł). Przy wyborze przesyłki pobraniowej koszt dostawy wynosi 21,99 zł brutto, niezależnie od wartości zamówienia — jest to spowodowane dodatkowymi kosztami obsługi płatności pobraniowych ponoszonymi przez przewoźnika.</p>
+          </div>
+        </details>
+        <details class="kw-shipping-faq__item kw-shipping-reveal kw-shipping-stagger-3">
+          <summary>Jak długo trwa realizacja zamówienia i dostawa narzędzi?</summary>
+          <div class="kw-shipping-faq__answer">
+            <p>Zamówienia opłacone do godziny <strong>12:00 w&nbsp;dniu roboczym</strong> (poniedziałek–piątek) są zazwyczaj wysyłane tego samego dnia. Czas dostawy narzędzi WIHA zależy od wybranej metody: <strong>InPost Paczkomaty i&nbsp;InPost Kurier</strong> — 1–2 dni robocze od momentu nadania; <strong>DPD Kurier i&nbsp;DPD Kurier pobranie</strong> — 1–3 dni robocze od momentu nadania. Ważne: czas dostawy jest liczony od momentu nadania przesyłki przez nasz magazyn, nie od momentu złożenia zamówienia. Zamówienia złożone po 12:00 lub w&nbsp;dni wolne od pracy są nadawane w&nbsp;następnym dniu roboczym. <a href="https://kedar-wiha.pl">Sprawdź naszą ofertę narzędzi WIHA</a> i&nbsp;zamów z&nbsp;gwarancją szybkiej dostawy.</p>
+          </div>
+        </details>
+        <details class="kw-shipping-faq__item kw-shipping-reveal kw-shipping-stagger-4">
+          <summary>Jak śledzić przesyłkę z narzędziami WIHA?</summary>
+          <div class="kw-shipping-faq__answer">
+            <p>Po nadaniu przesyłki z&nbsp;narzędziami WIHA otrzymasz e-mail z&nbsp;numerem śledzenia oraz linkiem do strony przewoźnika. Numery śledzenia dla InPost znajdziesz na stronie <a href="https://inpost.pl/sledzenie-przesylek" target="_blank" rel="noopener">inpost.pl/sledzenie-przesylek</a>, a&nbsp;dla DPD na stronie <a href="https://tracktrace.dpd.com.pl/" target="_blank" rel="noopener">tracktrace.dpd.com.pl</a>. Wpisz otrzymany numer przesyłki, aby monitorować status dostawy w&nbsp;czasie rzeczywistym. W&nbsp;przypadku pytań lub braku numeru śledzenia skontaktuj się z&nbsp;nami: <a href="/cdn-cgi/l/email-protection#264f484049664d434247540b514f4e4708564a"><span class="__cf_email__" data-cfemail="f69f989099b69d93929784db819f9e97d8869a">[email&#160;protected]</span></a> lub +48&nbsp;575&nbsp;838&nbsp;766.</p>
+          </div>
+        </details>
+        <details class="kw-shipping-faq__item kw-shipping-reveal kw-shipping-stagger-5">
+          <summary>Co to są przesyłki gabarytowe i czy dotyczą narzędzi WIHA?</summary>
+          <div class="kw-shipping-faq__answer">
+            <p>Przesyłki gabarytowe to przesyłki o&nbsp;nietypowych wymiarach lub wadze, które przekraczają standardowe parametry kurierskie. W&nbsp;kontekście narzędzi WIHA przesyłki gabarytowe mogą dotyczyć dużych zestawów narzędzi w&nbsp;walizkach profesjonalnych, plecaków narzędziowych WIHA eMobility, zestawów instalacyjnych PV oraz zamówień hurtowych obejmujących dużą liczbę pozycji. W&nbsp;takich przypadkach może być wymagana dopłata za przesyłkę gabarytową. <strong>Klient zostanie poinformowany o&nbsp;ewentualnych dodatkowych kosztach przed potwierdzeniem zamówienia</strong> — akceptacja kosztów jest warunkiem realizacji. Nigdy nie pobieramy dodatkowych opłat bez wcześniejszego uzgodnienia.</p>
+          </div>
+        </details>
+        <details class="kw-shipping-faq__item kw-shipping-reveal kw-shipping-stagger-6">
+          <summary>Czy wysyłacie narzędzia WIHA za granicę?</summary>
+          <div class="kw-shipping-faq__answer">
+            <p>Tak, KEDAR-WIHA.pl realizuje wysyłki narzędzi specjalistycznych WIHA poza granice Polski — do krajów Unii Europejskiej oraz poza UE. Koszty wysyłki międzynarodowej narzędzi izolowanych VDE, kluczy dynamometrycznych i&nbsp;zestawów narzędzi są ustalane <strong>indywidualnie</strong> dla każdego zamówienia, ponieważ zależą od kraju przeznaczenia, wagi przesyłki i&nbsp;wybranej metody transportu. Aby uzyskać wycenę wysyłki międzynarodowej, skontaktuj się z&nbsp;nami: <a href="/cdn-cgi/l/email-protection#640d0a020b240f0100051649130d0c054a1408"><span class="__cf_email__" data-cfemail="4821262e2708232d2c293a653f212029663824">[email&#160;protected]</span></a> lub +48&nbsp;575&nbsp;838&nbsp;766. Zapewniamy profesjonalną obsługę zamówień międzynarodowych — od wyceny, przez dokumentację, po bezpieczne pakowanie i&nbsp;nadanie przesyłki.</p>
+          </div>
+        </details>
+        <details class="kw-shipping-faq__item kw-shipping-reveal kw-shipping-stagger-1">
+          <summary>W jakie dni realizujecie wysyłki narzędzi?</summary>
+          <div class="kw-shipping-faq__answer">
+            <p>Przesyłki z&nbsp;narzędziami WIHA wysyłamy w&nbsp;<strong>dni robocze</strong> — od poniedziałku do piątku. Wysyłka nie odbywa się w&nbsp;soboty, niedziele ani w&nbsp;dni ustawowo wolne od pracy. Zamówienia złożone w&nbsp;weekend lub święto są nadawane w&nbsp;następnym dniu roboczym. Aby zamówienie zostało wysłane tego samego dnia, musi zostać opłacone do godziny <strong>12:00</strong> — po tym czasie zamówienie trafia do kolejki następnego dnia roboczego. Płatności online (PayU, Przelewy24, BLIK, karta) księgowane są natychmiast, co ułatwia dotrzymanie progu 12:00.</p>
+          </div>
+        </details>
+        <details class="kw-shipping-faq__item kw-shipping-reveal kw-shipping-stagger-2">
+          <summary>Jak są pakowane narzędzia izolowane VDE i klucze dynamometryczne?</summary>
+          <div class="kw-shipping-faq__answer">
+            <p>Narzędzia WIHA pakujemy z&nbsp;najwyższą starannością. Każda przesyłka jest zabezpieczona w&nbsp;wzmocnionym kartonie transportowym z&nbsp;użyciem materiałów amortyzujących: folii bąbelkowej, pianki poliuretanowej i&nbsp;wkładek kartonowych. Narzędzia izolowane VDE otrzymują dodatkową ochronę powłoki izolacyjnej przed otarciami, a&nbsp;klucze dynamometryczne WIHA są zabezpieczane przed uszkodzeniem mechanizmu i&nbsp;wyświetlacza momentu obrotowego. Puste przestrzenie w&nbsp;kartonie są wypełniane, aby zapobiec przesuwaniu się narzędzi w&nbsp;trakcie transportu. Więcej szczegółów znajdziesz w&nbsp;sekcji <a href="#bezpieczne-pakowanie">Bezpieczne pakowanie narzędzi</a> powyżej.</p>
+          </div>
+        </details>
+        <details class="kw-shipping-faq__item kw-shipping-reveal kw-shipping-stagger-3">
+          <summary>Czy mogę odebrać zamówienie osobiście?</summary>
+          <div class="kw-shipping-faq__answer">
+            <p>Tak, odbiór osobisty zamówionych narzędzi WIHA jest dostępny jako metoda dostawy — koszt wynosi <strong>0,00 zł</strong> (darmowo). Odbiór osobisty wymaga jednak <strong>wcześniejszego uzgodnienia</strong> terminu z&nbsp;nami. Skontaktuj się telefonicznie pod numerem <strong>+48&nbsp;575&nbsp;838&nbsp;766</strong> lub e-mailem na adres <a href="/cdn-cgi/l/email-protection#026b6c646d4269676663702f756b6a632c726e"><span class="__cf_email__" data-cfemail="ee87808881ae858b8a8f9cc39987868fc09e82">[email&#160;protected]</span></a>, aby ustalić dogodny termin i&nbsp;sposób odbioru zamówienia. Odbiór osobisty to doskonała opcja dla klientów z&nbsp;okolicy, którzy chcą obejrzeć narzędzia WIHA przed zakupem lub odebrać zamówienie osobiście.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       12. CTA / KONTAKT
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-shipping-cta" aria-label="Kontakt KEDAR-WIHA.pl">
+    <div class="kw-shipping-cta__inner">
+      <h2>Masz Pytania o&nbsp;Koszty Wysyłki?</h2>
+      <p>Nasz zespół jest gotowy, aby odpowiedzieć na każde pytanie dotyczące dostawy narzędzi WIHA. Skontaktuj się z&nbsp;nami — chętnie doradzimy w&nbsp;wyborze optymalnej metody wysyłki i&nbsp;pomożemy zaplanować zamówienie narzędzi specjalistycznych.</p>
+      <div class="kw-shipping-cta__btns">
+        <a href="https://kedar-wiha.pl" class="kw-shipping-btn kw-shipping-btn--white"><i class="fas fa-shopping-cart"></i> Przejdź do sklepu</a>
+        <a href="/cdn-cgi/l/email-protection#d3babdb5bc93b8b6b7b2a1fea4babbb2fda3bf" class="kw-shipping-btn kw-shipping-btn--outline"><i class="fas fa-envelope"></i> Napisz e-mail</a>
+      </div>
+      <div class="kw-shipping-contact-grid">
+        <a href="tel:+48575838766" class="kw-shipping-contact-card">
+          <div class="kw-shipping-contact-icon"><i class="fas fa-phone-alt"></i></div>
+          <div>
+            <strong>Telefon</strong>
+            <span>+48 575 838 766</span>
+          </div>
+        </a>
+        <a href="/cdn-cgi/l/email-protection#e1888f878ea18a84858093cc96888980cf918d" class="kw-shipping-contact-card">
+          <div class="kw-shipping-contact-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <strong>E-mail</strong>
+            <span><span class="__cf_email__" data-cfemail="3e575058517e555b5a5f4c134957565f104e52">[email&#160;protected]</span></span>
+          </div>
+        </a>
+        <a href="https://kedar-wiha.pl" class="kw-shipping-contact-card">
+          <div class="kw-shipping-contact-icon"><i class="fas fa-globe"></i></div>
+          <div>
+            <strong>Sklep online</strong>
+            <span>kedar-wiha.pl</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- / .kw-shipping-page -->
+
+<!-- ══════════════════════════════════════════════════════════════════════════════
+     JAVASCRIPT — IntersectionObserver, Counter, Smooth Scroll
+     ══════════════════════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════════════════════
+     JAVASCRIPT — IntersectionObserver, Counter, Smooth Scroll
+     ══════════════════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  var revealSelectors = '.kw-shipping-reveal, .kw-shipping-slide-left, .kw-shipping-slide-right';
+
+  /* ── HELPER: mark element visible ─────────────────────────────────────── */
+  function markVisible(el) {
+    el.classList.add('kw-shipping-visible');
+  }
+
+  /* ── 1. INTERSECTION OBSERVER — SCROLL REVEAL ────────────────────────── */
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          markVisible(entry.target);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -20px 0px'
+    });
+
+    document.querySelectorAll(revealSelectors).forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    /* Fallback — przeglądarki bez IntersectionObserver */
+    document.querySelectorAll(revealSelectors).forEach(markVisible);
+  }
+
+  /* ── FAILSAFE: po 600ms pokaż wszystko co nadal niewidoczne ──────────── */
+  setTimeout(function() {
+    document.querySelectorAll(revealSelectors).forEach(function(el) {
+      if (!el.classList.contains('kw-shipping-visible')) {
+        markVisible(el);
+      }
+    });
+  }, 600);
+
+  /* ── 2. ANIMATED COUNTER ──────────────────────────────────────────────── */
+  function animateCounter(element) {
+    var target = parseInt(element.getAttribute('data-target'), 10) || 0;
+    var startValue = 0;
+    var duration = 2000;
+    var startTime = null;
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function step(timestamp) {
+      if (!startTime) { startTime = timestamp; }
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var current = Math.floor(startValue + (target - startValue) * easeOutCubic(progress));
+      element.textContent = current.toLocaleString('pl-PL');
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        element.textContent = target.toLocaleString('pl-PL');
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  if ('IntersectionObserver' in window) {
+    var counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.kw-shipping-counter').forEach(function(el) {
+      counterObserver.observe(el);
+    });
+  }
+
+  /* ── 3. SMOOTH SCROLL FOR ANCHOR LINKS ───────────────────────────────── */
+  document.querySelectorAll('.kw-shipping-page a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href && href.length > 1) {
+        var targetEl = document.querySelector(href);
+        if (targetEl) {
+          e.preventDefault();
+          var headerOffset = 80;
+          var possibleHeaders = [
+            '.header-main', '#header', '.l-header',
+            '.header-sticky', '.navbar', 'header'
+          ];
+          for (var i = 0; i < possibleHeaders.length; i++) {
+            var hEl = document.querySelector(possibleHeaders[i]);
+            if (hEl) {
+              headerOffset = hEl.offsetHeight + 12;
+              break;
+            }
+          }
+          var elementPosition = targetEl.getBoundingClientRect().top;
+          var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+})();
+</script>

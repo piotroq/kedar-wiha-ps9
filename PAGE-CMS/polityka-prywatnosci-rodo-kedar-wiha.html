@@ -1,0 +1,2505 @@
+<!-- ==========================================================================
+   KEDAR-WIHA.pl — Strona CMS "Polityka Prywatności & RODO"
+   PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 4.x
+   Wersja: 1.0.0 | 2026
+   Gotowe do wklejenia: Wygląd → Strony → Deklaracja zgodności
+   Namespace: .kw-privacy- (unikanie kolizji z Optima/PrestaShop)
+   Lokalne zmienne CSS | Font Awesome (fas) | IntersectionObserver JS
+   ========================================================================== -->
+
+<style>
+/* ==========================================================================
+   KEDAR-WIHA.pl — POLITYKA PRYWATNOŚCI & RODO v1.0
+   Namespace: .kw-privacy-
+   Mobile-first | BEM | LOKALNE zmienne CSS (self-contained)
+   Font Awesome (fas) | IntersectionObserver scroll-reveal
+   ========================================================================== */
+
+/* ── GOOGLE FONTS ───────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;600;700;800&display=swap');
+
+/* ── SCOPE + LOKALNE ZMIENNE ──────────────────────────────────────────── */
+.kw-privacy-page {
+  --kw-pr-primary: #8B0000;
+  --kw-pr-primary-dark: #6b0000;
+  --kw-pr-primary-light: #bf2020;
+  --kw-pr-secondary: #0056A3;
+  --kw-pr-secondary-dark: #003d7a;
+  --kw-pr-secondary-light: #1a7bc4;
+  --kw-pr-three: #ca0000;
+  --kw-pr-accent: #FFD700;
+  --kw-pr-green: #1A7A3C;
+  --kw-pr-green-bg: #e8f5ee;
+  --kw-pr-amber: #E07B00;
+  --kw-pr-amber-bg: #fff5ed;
+  --kw-pr-heading: #2D2D2D;
+  --kw-pr-text: #151515;
+  --kw-pr-text-muted: #555555;
+  --kw-pr-text-tertiary: #888888;
+  --kw-pr-bg-light: #f5f5f5;
+  --kw-pr-bg-dark: #1a1a1a;
+  --kw-pr-bg-darker: #2a2a2a;
+  --kw-pr-white: #ffffff;
+  --kw-pr-border: #e8e8e8;
+  --kw-pr-font-heading: 'Montserrat', 'Manrope', Arial, sans-serif;
+  --kw-pr-font-body: 'Inter', 'Manrope', Arial, sans-serif;
+  --kw-pr-radius-sm: 3px;
+  --kw-pr-radius-md: 4px;
+  --kw-pr-radius-lg: 8px;
+  --kw-pr-radius-xl: 12px;
+  --kw-pr-radius-pill: 50px;
+  --kw-pr-shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --kw-pr-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --kw-pr-shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --kw-pr-shadow-lg: 0 8px 28px rgba(0,0,0,0.13);
+  --kw-pr-shadow-xl: 0 12px 32px rgba(0,0,0,0.15);
+  --kw-pr-shadow-cta: 0 4px 20px rgba(139,0,0,0.30);
+  --kw-pr-transition: 300ms cubic-bezier(0.25,0.46,0.45,0.94);
+  --kw-pr-transition-slow: 500ms ease;
+  --kw-pr-transition-fast: 150ms ease;
+  --kw-pr-transition-bounce: 400ms cubic-bezier(0.34,1.56,0.64,1);
+
+  font-family: var(--kw-pr-font-body);
+  color: var(--kw-pr-text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+.kw-privacy-page *, .kw-privacy-page *::before, .kw-privacy-page *::after { box-sizing: border-box; }
+.kw-privacy-page img { max-width: 100%; height: auto; }
+
+/* ── KEYFRAMES ────────────────────────────────────────────────────────── */
+@keyframes kwPrFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes kwPrFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes kwPrSlideLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwPrSlideRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwPrPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+@keyframes kwPrFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes kwPrShieldPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139,0,0,0.2); }
+  50% { box-shadow: 0 0 0 12px rgba(139,0,0,0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kw-privacy-page * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── SCROLL-REVEAL CLASSES ───────────────────────────────────────────── */
+.kw-privacy-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--kw-pr-transition-slow), transform var(--kw-pr-transition-slow);
+}
+.kw-privacy-reveal.kw-privacy-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.kw-privacy-slide-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity var(--kw-pr-transition-slow), transform var(--kw-pr-transition-slow);
+}
+.kw-privacy-slide-left.kw-privacy-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.kw-privacy-slide-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity var(--kw-pr-transition-slow), transform var(--kw-pr-transition-slow);
+}
+.kw-privacy-slide-right.kw-privacy-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.kw-privacy-stagger-1 { transition-delay: 0ms; }
+.kw-privacy-stagger-2 { transition-delay: 100ms; }
+.kw-privacy-stagger-3 { transition-delay: 200ms; }
+.kw-privacy-stagger-4 { transition-delay: 300ms; }
+.kw-privacy-stagger-5 { transition-delay: 400ms; }
+.kw-privacy-stagger-6 { transition-delay: 500ms; }
+
+.kw-privacy-anim { animation: kwPrFadeUp 0.6s ease both; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION BASE
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-section {
+  padding: 48px 0;
+  position: relative;
+}
+.kw-privacy-section--alt {
+  background: var(--kw-pr-bg-light);
+}
+.kw-privacy-section--dark {
+  background: linear-gradient(155deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: var(--kw-pr-white);
+}
+.kw-privacy-section--dark p,
+.kw-privacy-section--dark li {
+  color: rgba(255,255,255,0.82);
+}
+.kw-privacy-section--gradient {
+  background: linear-gradient(180deg, var(--kw-pr-bg-light) 0%, var(--kw-pr-white) 100%);
+}
+.kw-privacy-section--pattern { position: relative; }
+.kw-privacy-section--pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(139,0,0,0.02) 22px, rgba(139,0,0,0.02) 23px);
+  pointer-events: none;
+  z-index: 0;
+}
+.kw-privacy-section--pattern > .container { position: relative; z-index: 1; }
+.kw-privacy-section--tint-primary {
+  background: rgba(139, 0, 0, 0.03);
+}
+.kw-privacy-section--tint-secondary {
+  background: rgba(0, 86, 163, 0.03);
+}
+
+/* ── SECTION HEADER ───────────────────────────────────────────────────── */
+.kw-privacy-header { text-align: center; margin-bottom: 32px; }
+.kw-privacy-label {
+  display: inline-block;
+  font-family: var(--kw-pr-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--kw-pr-primary);
+  background: rgba(139,0,0,0.06);
+  padding: 5px 16px;
+  border-radius: var(--kw-pr-radius-pill);
+  margin-bottom: 12px;
+}
+.kw-privacy-section--dark .kw-privacy-label {
+  color: var(--kw-pr-accent);
+  background: rgba(255,215,0,0.1);
+}
+.kw-privacy-title {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3.5vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--kw-pr-heading);
+  margin: 0 0 12px;
+}
+.kw-privacy-section--dark .kw-privacy-title { color: var(--kw-pr-white); }
+.kw-privacy-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--kw-pr-primary);
+  border: none;
+  border-radius: 2px;
+  margin: 14px auto;
+}
+.kw-privacy-subtitle {
+  font-family: var(--kw-pr-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.65;
+  color: var(--kw-pr-text-muted);
+  max-width: 720px;
+  margin: 0 auto;
+}
+.kw-privacy-section--dark .kw-privacy-subtitle { color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   1. HERO
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-hero {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(26,26,26,0.94) 0%, rgba(61,0,0,0.90) 55%, rgba(139,0,0,0.84) 100%),
+    url('https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1600&q=80') center/cover no-repeat;
+  padding: 56px 16px;
+  text-align: center;
+  overflow: hidden;
+}
+@supports (background-attachment: fixed) {
+  @media (min-width: 768px) {
+    .kw-privacy-hero { background-attachment: scroll, fixed; }
+  }
+}
+.kw-privacy-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(30deg, transparent, transparent 38px, rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px);
+  pointer-events: none;
+}
+.kw-privacy-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 56px;
+  background: linear-gradient(to top, rgba(26,26,26,0.25), transparent);
+  pointer-events: none;
+}
+.kw-privacy-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  animation: kwPrFadeUp 0.7s ease both;
+}
+.kw-privacy-hero__breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-family: var(--kw-pr-font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  flex-wrap: wrap;
+}
+.kw-privacy-hero__breadcrumbs a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color var(--kw-pr-transition-fast);
+}
+.kw-privacy-hero__breadcrumbs a:hover { color: var(--kw-pr-white); }
+.kw-privacy-hero__breadcrumbs i { font-size: 10px; }
+.kw-privacy-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--kw-pr-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--kw-pr-accent);
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.22);
+  padding: 5px 16px;
+  border-radius: var(--kw-pr-radius-pill);
+  margin-bottom: 18px;
+}
+.kw-privacy-hero__badge i { font-size: 11px; }
+.kw-privacy-hero__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(139,0,0,0.3);
+  border: 2px solid var(--kw-pr-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 32px;
+  color: var(--kw-pr-accent);
+  animation: kwPrShieldPulse 2s ease-in-out infinite;
+}
+.kw-privacy-hero__title {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 800;
+  font-size: clamp(26px, 5vw, 48px);
+  line-height: 1.12;
+  color: var(--kw-pr-white);
+  margin: 0 0 14px;
+  letter-spacing: 0.01em;
+}
+.kw-privacy-hero__title em { font-style: normal; color: var(--kw-pr-three); }
+.kw-privacy-hero__sub {
+  font-family: var(--kw-pr-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.7;
+  color: rgba(255,255,255,0.82);
+  max-width: 680px;
+  margin: 0 auto;
+}
+.kw-privacy-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-privacy-hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--kw-pr-font-heading);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--kw-pr-radius-sm);
+  background: rgba(255,255,255,0.04);
+}
+.kw-privacy-hero__chip i { color: var(--kw-pr-accent); font-size: 10px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   2. TABLE OF CONTENTS
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-toc {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--kw-pr-shadow-sm);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.kw-privacy-toc__title {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--kw-pr-heading);
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.kw-privacy-toc__title i { color: var(--kw-pr-primary); }
+.kw-privacy-toc__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.kw-privacy-toc__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--kw-pr-bg-light);
+  border-radius: var(--kw-pr-radius-md);
+  text-decoration: none !important;
+  transition: all var(--kw-pr-transition);
+  border: 1px solid transparent;
+}
+.kw-privacy-toc__item:hover {
+  background: var(--kw-pr-white);
+  border-color: var(--kw-pr-primary);
+  box-shadow: var(--kw-pr-shadow-md);
+  transform: translateX(4px);
+}
+.kw-privacy-toc__num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--kw-pr-primary);
+  color: var(--kw-pr-white);
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.kw-privacy-toc__item:hover .kw-privacy-toc__num {
+  background: var(--kw-pr-three);
+}
+.kw-privacy-toc__text {
+  font-family: var(--kw-pr-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--kw-pr-text);
+}
+.kw-privacy-toc__item:hover .kw-privacy-toc__text {
+  color: var(--kw-pr-primary);
+}
+.kw-privacy-toc__arrow {
+  margin-left: auto;
+  color: var(--kw-pr-text-tertiary);
+  font-size: 12px;
+  transition: all var(--kw-pr-transition);
+}
+.kw-privacy-toc__item:hover .kw-privacy-toc__arrow {
+  color: var(--kw-pr-primary);
+  transform: translateX(4px);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   3. ADMINISTRATOR CARD
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-admin {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-lg);
+  padding: 32px 28px;
+  box-shadow: var(--kw-pr-shadow-md);
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+.kw-privacy-admin::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--kw-pr-primary), var(--kw-pr-accent), var(--kw-pr-primary));
+}
+.kw-privacy-admin__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.kw-privacy-admin__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--kw-pr-radius-lg);
+  background: rgba(139,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--kw-pr-primary);
+}
+.kw-privacy-admin__title {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--kw-pr-heading);
+  margin: 0;
+}
+.kw-privacy-admin__subtitle {
+  font-size: 13px;
+  color: var(--kw-pr-text-muted);
+  margin: 4px 0 0;
+}
+.kw-privacy-admin__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-privacy-admin__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--kw-pr-bg-light);
+  border-radius: var(--kw-pr-radius-md);
+}
+.kw-privacy-admin__item i {
+  color: var(--kw-pr-primary);
+  font-size: 16px;
+  margin-top: 2px;
+}
+.kw-privacy-admin__item strong {
+  display: block;
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--kw-pr-text-muted);
+  margin-bottom: 2px;
+}
+.kw-privacy-admin__item span {
+  font-size: 14px;
+  color: var(--kw-pr-text);
+}
+.kw-privacy-admin__item a {
+  color: var(--kw-pr-secondary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.kw-privacy-admin__item a:hover {
+  text-decoration: underline;
+}
+.kw-privacy-admin__notice {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: var(--kw-pr-green-bg);
+  border-left: 3px solid var(--kw-pr-green);
+  border-radius: 0 var(--kw-pr-radius-md) var(--kw-pr-radius-md) 0;
+}
+.kw-privacy-admin__notice p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--kw-pr-green);
+}
+.kw-privacy-admin__notice i { margin-right: 6px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   4. LEGAL BASIS CARDS
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-legal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-privacy-legal-card {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-sm);
+  padding: 24px 20px;
+  transition: all var(--kw-pr-transition);
+  box-shadow: var(--kw-pr-shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+.kw-privacy-legal-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--kw-pr-primary);
+  transform: scaleY(0);
+  transition: transform var(--kw-pr-transition);
+}
+.kw-privacy-legal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--kw-pr-shadow-lg);
+  border-color: var(--kw-pr-primary);
+}
+.kw-privacy-legal-card:hover::before {
+  transform: scaleY(1);
+}
+.kw-privacy-legal-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--kw-pr-radius-md);
+  background: rgba(139,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--kw-pr-primary);
+  margin-bottom: 14px;
+  transition: all var(--kw-pr-transition);
+}
+.kw-privacy-legal-card:hover .kw-privacy-legal-card__icon {
+  background: var(--kw-pr-primary);
+  color: var(--kw-pr-white);
+}
+.kw-privacy-legal-card h3 {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--kw-pr-heading);
+  margin: 0 0 10px;
+}
+.kw-privacy-legal-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--kw-pr-text-muted);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   5. PURPOSES TABLE
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--kw-pr-radius-lg);
+  box-shadow: var(--kw-pr-shadow-sm);
+  border: 1px solid var(--kw-pr-border);
+}
+.kw-privacy-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--kw-pr-white);
+  font-size: 14px;
+}
+.kw-privacy-table th {
+  background: var(--kw-pr-primary);
+  color: var(--kw-pr-white);
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 16px;
+  text-align: left;
+}
+.kw-privacy-table th:first-child { border-radius: var(--kw-pr-radius-lg) 0 0 0; }
+.kw-privacy-table th:last-child { border-radius: 0 var(--kw-pr-radius-lg) 0 0; }
+.kw-privacy-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--kw-pr-border);
+  color: var(--kw-pr-text);
+  vertical-align: top;
+}
+.kw-privacy-table tr:last-child td { border-bottom: none; }
+.kw-privacy-table tr:last-child td:first-child { border-radius: 0 0 0 var(--kw-pr-radius-lg); }
+.kw-privacy-table tr:last-child td:last-child { border-radius: 0 0 var(--kw-pr-radius-lg) 0; }
+.kw-privacy-table tr:hover td {
+  background: rgba(139,0,0,0.02);
+}
+.kw-privacy-table td strong {
+  color: var(--kw-pr-primary);
+  font-weight: 600;
+}
+.kw-privacy-table__law {
+  display: inline-block;
+  background: rgba(0,86,163,0.08);
+  color: var(--kw-pr-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--kw-pr-radius-sm);
+  white-space: nowrap;
+}
+.kw-privacy-table__period {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--kw-pr-text-muted);
+}
+.kw-privacy-table__period i { color: var(--kw-pr-green); font-size: 11px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   6. DATA CATEGORIES GRID
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-categories {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-privacy-category {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-sm);
+  padding: 24px 20px;
+  transition: all var(--kw-pr-transition);
+  box-shadow: var(--kw-pr-shadow-xs);
+  position: relative;
+}
+.kw-privacy-category::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--kw-pr-primary);
+  transform: scaleX(0);
+  transition: transform var(--kw-pr-transition);
+}
+.kw-privacy-category:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--kw-pr-shadow-lg);
+}
+.kw-privacy-category:hover::after {
+  transform: scaleX(1);
+}
+.kw-privacy-category__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--kw-pr-radius-md);
+  background: rgba(139,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--kw-pr-primary);
+  margin-bottom: 14px;
+  transition: all var(--kw-pr-transition);
+}
+.kw-privacy-category:hover .kw-privacy-category__icon {
+  background: var(--kw-pr-primary);
+  color: var(--kw-pr-white);
+  transform: scale(1.1);
+}
+.kw-privacy-category h3 {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--kw-pr-heading);
+  margin: 0 0 10px;
+}
+.kw-privacy-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.kw-privacy-category li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--kw-pr-text-muted);
+  margin-bottom: 5px;
+}
+.kw-privacy-category li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 9px;
+  color: var(--kw-pr-green);
+  position: absolute;
+  left: 0;
+  top: 4px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   7. RECIPIENTS CARDS
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-recipients {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-privacy-recipient {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-sm);
+  padding: 20px;
+  transition: all var(--kw-pr-transition);
+  box-shadow: var(--kw-pr-shadow-xs);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.kw-privacy-recipient:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--kw-pr-shadow-md);
+  border-color: var(--kw-pr-primary);
+}
+.kw-privacy-recipient__icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--kw-pr-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--kw-pr-white);
+}
+.kw-privacy-recipient__icon--inpost { background: #FF6600; }
+.kw-privacy-recipient__icon--payu { background: #6C4D9B; }
+.kw-privacy-recipient__icon--google { background: #4285F4; }
+.kw-privacy-recipient__icon--meta { background: #1877F2; }
+.kw-privacy-recipient__icon--gtm { background: #246FDB; }
+.kw-privacy-recipient__icon--tawk { background: #1F8DED; }
+.kw-privacy-recipient__icon--hosting { background: var(--kw-pr-secondary); }
+.kw-privacy-recipient__icon--erp { background: var(--kw-pr-green); }
+.kw-privacy-recipient__icon--gov { background: var(--kw-pr-heading); }
+.kw-privacy-recipient__content { flex: 1; min-width: 0; }
+.kw-privacy-recipient__content h4 {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--kw-pr-heading);
+  margin: 0 0 6px;
+}
+.kw-privacy-recipient__content p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--kw-pr-text-muted);
+  margin: 0;
+}
+.kw-privacy-recipient__badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: var(--kw-pr-radius-sm);
+  margin-top: 8px;
+}
+.kw-privacy-recipient__badge--legal {
+  background: rgba(0,86,163,0.08);
+  color: var(--kw-pr-secondary);
+}
+.kw-privacy-recipient__badge--consent {
+  background: rgba(26,122,60,0.08);
+  color: var(--kw-pr-green);
+}
+.kw-privacy-recipient__badge--legitimate {
+  background: rgba(139,0,0,0.08);
+  color: var(--kw-pr-primary);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   8. RIGHTS GRID
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-rights {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-privacy-right {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-sm);
+  padding: 24px 20px;
+  transition: all var(--kw-pr-transition);
+  box-shadow: var(--kw-pr-shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+.kw-privacy-right::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--kw-pr-primary), var(--kw-pr-accent));
+  transform: scaleX(0);
+  transition: transform var(--kw-pr-transition);
+}
+.kw-privacy-right:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--kw-pr-shadow-lg);
+}
+.kw-privacy-right:hover::before {
+  transform: scaleX(1);
+}
+.kw-privacy-right__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.kw-privacy-right__num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--kw-pr-primary);
+  color: var(--kw-pr-white);
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.kw-privacy-right__title {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--kw-pr-heading);
+  margin: 0;
+}
+.kw-privacy-right__article {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--kw-pr-secondary);
+  margin-top: 2px;
+}
+.kw-privacy-right p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--kw-pr-text-muted);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   9. SECURITY MEASURES
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-security {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-privacy-security__item {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-sm);
+  padding: 24px 20px;
+  text-align: center;
+  transition: all var(--kw-pr-transition);
+  box-shadow: var(--kw-pr-shadow-xs);
+}
+.kw-privacy-security__item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--kw-pr-shadow-lg);
+  border-color: var(--kw-pr-green);
+}
+.kw-privacy-security__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--kw-pr-green-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 26px;
+  color: var(--kw-pr-green);
+  transition: all var(--kw-pr-transition);
+}
+.kw-privacy-security__item:hover .kw-privacy-security__icon {
+  background: var(--kw-pr-green);
+  color: var(--kw-pr-white);
+  transform: scale(1.1);
+}
+.kw-privacy-security__item h3 {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--kw-pr-heading);
+  margin: 0 0 10px;
+}
+.kw-privacy-security__item p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--kw-pr-text-muted);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   10. COOKIES SECTION
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-cookies {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--kw-pr-shadow-sm);
+}
+.kw-privacy-cookies__intro {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--kw-pr-text-muted);
+  margin-bottom: 24px;
+}
+.kw-privacy-cookie-type {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--kw-pr-border);
+}
+.kw-privacy-cookie-type:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.kw-privacy-cookie-type__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.kw-privacy-cookie-type__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--kw-pr-radius-md);
+  background: rgba(139,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--kw-pr-primary);
+}
+.kw-privacy-cookie-type h4 {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--kw-pr-heading);
+  margin: 0;
+}
+.kw-privacy-cookie-type__badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: var(--kw-pr-radius-sm);
+  margin-left: auto;
+}
+.kw-privacy-cookie-type__badge--necessary {
+  background: rgba(0,86,163,0.08);
+  color: var(--kw-pr-secondary);
+}
+.kw-privacy-cookie-type__badge--analytics {
+  background: rgba(26,122,60,0.08);
+  color: var(--kw-pr-green);
+}
+.kw-privacy-cookie-type__badge--marketing {
+  background: rgba(224,123,0,0.08);
+  color: var(--kw-pr-amber);
+}
+.kw-privacy-cookie-type p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--kw-pr-text-muted);
+  margin: 0 0 10px;
+}
+.kw-privacy-cookie-type__tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.kw-privacy-cookie-type__tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  padding: 4px 10px;
+  background: var(--kw-pr-bg-light);
+  border-radius: var(--kw-pr-radius-sm);
+  color: var(--kw-pr-text);
+}
+.kw-privacy-cookie-type__tool i { font-size: 11px; color: var(--kw-pr-text-tertiary); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   11. PROFILING SECTION
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-profiling {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--kw-pr-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+}
+.kw-privacy-profiling__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--kw-pr-green-bg);
+  border: 2px solid var(--kw-pr-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: var(--kw-pr-green);
+  animation: kwPrFloat 3s ease-in-out infinite;
+}
+.kw-privacy-profiling__content h3 {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--kw-pr-heading);
+  margin: 0 0 12px;
+}
+.kw-privacy-profiling__content p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--kw-pr-text-muted);
+  margin: 0 0 16px;
+}
+.kw-privacy-profiling__highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--kw-pr-green-bg);
+  color: var(--kw-pr-green);
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 10px 18px;
+  border-radius: var(--kw-pr-radius-pill);
+}
+.kw-privacy-profiling__highlight i { font-size: 14px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   12. CHANGES SECTION
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-changes {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--kw-pr-shadow-sm);
+}
+.kw-privacy-changes__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.kw-privacy-changes__header i {
+  font-size: 24px;
+  color: var(--kw-pr-amber);
+}
+.kw-privacy-changes__header h3 {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--kw-pr-heading);
+  margin: 0;
+}
+.kw-privacy-changes p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--kw-pr-text-muted);
+  margin: 0 0 16px;
+}
+.kw-privacy-changes__update {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--kw-pr-bg-light);
+  border-radius: var(--kw-pr-radius-md);
+}
+.kw-privacy-changes__update i { color: var(--kw-pr-primary); }
+.kw-privacy-changes__update strong {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--kw-pr-heading);
+}
+.kw-privacy-changes__update span {
+  font-size: 13px;
+  color: var(--kw-pr-text-muted);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   13. CTA SECTION
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-cta {
+  background: linear-gradient(140deg, #8B0000 0%, #5a0000 55%, #1a1a1a 100%);
+  text-align: center;
+  padding: 56px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.kw-privacy-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(55deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px);
+  pointer-events: none;
+}
+.kw-privacy-cta__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.kw-privacy-cta__inner h2 {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: clamp(20px, 3.2vw, 34px);
+  line-height: 1.2;
+  color: var(--kw-pr-white);
+  margin: 0 0 14px;
+}
+.kw-privacy-cta__inner p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 24px;
+}
+.kw-privacy-cta__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.kw-privacy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 13px 26px;
+  border-radius: var(--kw-pr-radius-md);
+  text-decoration: none !important;
+  min-height: 48px;
+  transition: all var(--kw-pr-transition);
+  border: 2px solid transparent;
+}
+.kw-privacy-btn--white {
+  background: var(--kw-pr-white); color: var(--kw-pr-primary); border-color: var(--kw-pr-white);
+  box-shadow: 0 4px 18px rgba(255,255,255,0.18);
+}
+.kw-privacy-btn--white:hover {
+  background: transparent; color: var(--kw-pr-white); transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,255,255,0.25);
+}
+.kw-privacy-btn--outline {
+  background: transparent; color: var(--kw-pr-white); border-color: rgba(255,255,255,0.35);
+}
+.kw-privacy-btn--outline:hover {
+  background: var(--kw-pr-white); color: var(--kw-pr-primary); border-color: var(--kw-pr-white);
+}
+.kw-privacy-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 640px;
+  margin: 28px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-privacy-contact-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px 20px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--kw-pr-radius-sm);
+  transition: all var(--kw-pr-transition);
+  text-decoration: none !important;
+  color: var(--kw-pr-white);
+}
+.kw-privacy-contact-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+  border-color: rgba(255,215,0,0.2);
+}
+.kw-privacy-contact-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--kw-pr-radius-sm);
+  background: rgba(139,0,0,0.2);
+  border: 1px solid var(--kw-pr-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--kw-pr-accent);
+  transition: all var(--kw-pr-transition);
+}
+.kw-privacy-contact-card:hover .kw-privacy-contact-icon {
+  background: var(--kw-pr-primary);
+  color: var(--kw-pr-white);
+}
+.kw-privacy-contact-card strong {
+  display: block;
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--kw-pr-white);
+  margin-bottom: 2px;
+}
+.kw-privacy-contact-card span { font-size: 13px; color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   14. FAQ ACCORDION
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-faq { max-width: 760px; margin: 0 auto; }
+.kw-privacy-faq__item {
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-sm);
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: all var(--kw-pr-transition);
+  box-shadow: var(--kw-pr-shadow-xs);
+}
+.kw-privacy-faq__item:hover { box-shadow: var(--kw-pr-shadow-md); border-color: var(--kw-pr-primary); }
+.kw-privacy-faq__item[open] { border-color: var(--kw-pr-primary); box-shadow: var(--kw-pr-shadow-md); }
+.kw-privacy-faq__item summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--kw-pr-heading);
+  cursor: pointer;
+  list-style: none;
+  min-height: 48px;
+  transition: color var(--kw-pr-transition);
+}
+.kw-privacy-faq__item summary::-webkit-details-marker { display: none; }
+.kw-privacy-faq__item summary::before {
+  content: '\f105';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--kw-pr-primary);
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  transition: transform var(--kw-pr-transition);
+}
+.kw-privacy-faq__item[open] summary::before { transform: rotate(90deg); }
+.kw-privacy-faq__item summary:hover { color: var(--kw-pr-primary); }
+.kw-privacy-faq__answer {
+  padding: 0 20px 16px 50px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--kw-pr-text-muted);
+  animation: kwPrFadeIn 0.3s ease both;
+}
+.kw-privacy-faq__answer a { color: var(--kw-pr-secondary); }
+.kw-privacy-faq__answer strong { color: var(--kw-pr-heading); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   15. TRUST BADGES
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+.kw-privacy-trust__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--kw-pr-white);
+  border: 1px solid var(--kw-pr-border);
+  border-radius: var(--kw-pr-radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--kw-pr-text);
+  transition: all var(--kw-pr-transition);
+}
+.kw-privacy-trust__badge:hover {
+  border-color: var(--kw-pr-primary);
+  box-shadow: var(--kw-pr-shadow-sm);
+  transform: translateY(-2px);
+}
+.kw-privacy-trust__badge i { font-size: 14px; }
+.kw-privacy-trust__badge i.fa-shield-alt { color: var(--kw-pr-primary); }
+.kw-privacy-trust__badge i.fa-lock { color: var(--kw-pr-green); }
+.kw-privacy-trust__badge i.fa-certificate { color: var(--kw-pr-secondary); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CALLOUT BOXES
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-callout {
+  border-radius: 0 var(--kw-pr-radius-md) var(--kw-pr-radius-md) 0;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.kw-privacy-callout p { margin: 0; font-size: 14px; line-height: 1.7; }
+.kw-privacy-callout i { margin-right: 8px; }
+.kw-privacy-callout--info {
+  background: rgba(0,86,163,0.05);
+  border-left: 4px solid var(--kw-pr-secondary);
+}
+.kw-privacy-callout--info p { color: var(--kw-pr-heading); }
+.kw-privacy-callout--info i { color: var(--kw-pr-secondary); }
+.kw-privacy-callout--warning {
+  background: var(--kw-pr-amber-bg);
+  border-left: 4px solid var(--kw-pr-amber);
+}
+.kw-privacy-callout--warning p { color: var(--kw-pr-heading); }
+.kw-privacy-callout--warning i { color: var(--kw-pr-amber); }
+.kw-privacy-callout--success {
+  background: var(--kw-pr-green-bg);
+  border-left: 4px solid var(--kw-pr-green);
+}
+.kw-privacy-callout--success p { color: var(--kw-pr-green); }
+.kw-privacy-callout--success i { color: var(--kw-pr-green); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TEXT CONTENT STYLES
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-privacy-content h3 {
+  font-family: var(--kw-pr-font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--kw-pr-heading);
+  margin: 28px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.kw-privacy-content h3 i { color: var(--kw-pr-primary); font-size: 16px; }
+.kw-privacy-content p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--kw-pr-text-muted);
+  margin: 0 0 16px;
+}
+.kw-privacy-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+.kw-privacy-content ul li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--kw-pr-text-muted);
+  margin-bottom: 8px;
+}
+.kw-privacy-content ul li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 10px;
+  color: var(--kw-pr-primary);
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+.kw-privacy-content a {
+  color: var(--kw-pr-secondary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.kw-privacy-content a:hover {
+  text-decoration: underline;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 480px) {
+  .kw-privacy-cta__btns { flex-direction: row; justify-content: center; }
+}
+@media (min-width: 576px) {
+  .kw-privacy-toc__grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-privacy-admin__grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-privacy-legal-grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-privacy-categories { grid-template-columns: repeat(2, 1fr); }
+  .kw-privacy-recipients { grid-template-columns: repeat(2, 1fr); }
+  .kw-privacy-rights { grid-template-columns: repeat(2, 1fr); }
+  .kw-privacy-security { grid-template-columns: repeat(2, 1fr); }
+  .kw-privacy-contact-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 768px) {
+  .kw-privacy-section { padding: 64px 0; }
+  .kw-privacy-hero { min-height: 440px; padding: 72px 24px; }
+  .kw-privacy-header { margin-bottom: 40px; }
+  .kw-privacy-profiling { flex-direction: row; text-align: left; }
+  .kw-privacy-cta { padding: 72px 24px; }
+  .kw-privacy-contact-grid { max-width: 100%; }
+}
+@media (min-width: 992px) {
+  .kw-privacy-section { padding: 80px 0; }
+  .kw-privacy-hero { min-height: 480px; padding: 88px 32px; }
+  .kw-privacy-header { margin-bottom: 48px; }
+  .kw-privacy-toc__grid { grid-template-columns: repeat(3, 1fr); }
+  .kw-privacy-categories { grid-template-columns: repeat(3, 1fr); }
+  .kw-privacy-security { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1440px) {
+  .kw-privacy-section { padding: 96px 0; }
+}
+</style>
+
+<!-- SCHEMA.ORG -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Polityka Prywatności & RODO — KEDAR-WIHA.pl",
+  "description": "Polityka prywatności i RODO sklepu KEDAR-WIHA.pl — autoryzowanego dystrybutora narzędzi WIHA. Informacje o przetwarzaniu danych osobowych, prawach klientów i zabezpieczeniach.",
+  "url": "https://kedar-wiha.pl/polityka-prywatnosci",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "KEDAR-WIHA.pl",
+    "url": "https://kedar-wiha.pl",
+    "telephone": "+48575838766",
+    "email": "info@kedar-wiha.pl"
+  }
+}
+</script>
+
+<!-- ====================================================================== -->
+<div class="kw-privacy-page">
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       1. HERO
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-hero" aria-label="Polityka Prywatności KEDAR-WIHA.pl">
+    <div class="kw-privacy-hero__inner">
+      <nav class="kw-privacy-hero__breadcrumbs" aria-label="Ścieżka nawigacji">
+        <a href="/">Strona główna</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="/informacje-dla-klienta">Informacje dla klienta</a>
+        <i class="fas fa-chevron-right"></i>
+        <span style="color:var(--kw-pr-accent);">Polityka prywatności</span>
+      </nav>
+      <span class="kw-privacy-hero__badge"><i class="fas fa-shield-alt"></i> Ochrona danych osobowych</span>
+      <div class="kw-privacy-hero__icon">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h1 class="kw-privacy-hero__title">Polityka Prywatności <em>& RODO</em></h1>
+      <p class="kw-privacy-hero__sub">Kompletne informacje o przetwarzaniu danych osobowych w sklepie internetowym KEDAR-WIHA.pl — autoryzowanym dystrybutorze narzędzi izolowanych VDE WIHA. Twoje dane są bezpieczne: stosujemy szyfrowanie SSL/TLS, regularne backupy i najwyższe standardy ochrony zgodne z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 (RODO).</p>
+      <div class="kw-privacy-hero__meta">
+        <span class="kw-privacy-hero__chip"><i class="fas fa-shield-alt"></i> Zgodność z RODO</span>
+        <span class="kw-privacy-hero__chip"><i class="fas fa-lock"></i> Szyfrowanie SSL/TLS</span>
+        <span class="kw-privacy-hero__chip"><i class="fas fa-user-shield"></i> Prawa osoby</span>
+        <span class="kw-privacy-hero__chip"><i class="fas fa-certificate"></i> Certyfikaty</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       2. TABLE OF CONTENTS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--pattern" aria-label="Spis treści">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">Nawigacja</span>
+        <h2 class="kw-privacy-title">Spis Treści Polityki Prywatności</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Przejdź do wybranej sekcji dokumentu, aby szybko znaleźć interesujące Cię informacje o ochronie danych osobowych w sklepie KEDAR-WIHA.pl.</p>
+      </div>
+      <nav class="kw-privacy-toc kw-privacy-reveal" aria-label="Spis treści polityki prywatności">
+        <h3 class="kw-privacy-toc__title"><i class="fas fa-list-ul"></i> Sekcje dokumentu</h3>
+        <div class="kw-privacy-toc__grid">
+          <a href="#administrator" class="kw-privacy-toc__item">
+            <span class="kw-privacy-toc__num">1</span>
+            <span class="kw-privacy-toc__text">Administrator danych osobowych</span>
+            <i class="fas fa-chevron-right kw-privacy-toc__arrow"></i>
+          </a>
+          <a href="#podstawy-prawne" class="kw-privacy-toc__item">
+            <span class="kw-privacy-toc__num">2</span>
+            <span class="kw-privacy-toc__text">Podstawy prawne przetwarzania</span>
+            <i class="fas fa-chevron-right kw-privacy-toc__arrow"></i>
+          </a>
+          <a href="#cele-przetwarzania" class="kw-privacy-toc__item">
+            <span class="kw-privacy-toc__num">3</span>
+            <span class="kw-privacy-toc__text">Cele i zakres przetwarzania danych</span>
+            <i class="fas fa-chevron-right kw-privacy-toc__arrow"></i>
+          </a>
+          <a href="#kategorie-danych" class="kw-privacy-toc__item">
+            <span class="kw-privacy-toc__num">4</span>
+            <span class="kw-privacy-toc__text">Kategorie przetwarzanych danych</span>
+            <i class="fas fa-chevron-right kw-privacy-toc__arrow"></i>
+          </a>
+          <a href="#odbiorcy" class="kw-privacy-toc__item">
+            <span class="kw-privacy-toc__num">5</span>
+            <span class="kw-privacy-toc__text">Odbiorcy danych osobowych</span>
+            <i class="fas fa-chevron-right kw-privacy-toc__arrow"></i>
+          </a>
+          <a href="#prawa" class="kw-privacy-toc__item">
+            <span class="kw-privacy-toc__num">6</span>
+            <span class="kw-privacy-toc__text">Prawa osób, których dane dotyczą</span>
+            <i class="fas fa-chevron-right kw-privacy-toc__arrow"></i>
+          </a>
+          <a href="#bezpieczenstwo" class="kw-privacy-toc__item">
+            <span class="kw-privacy-toc__num">7</span>
+            <span class="kw-privacy-toc__text">Zabezpieczenia danych osobowych</span>
+            <i class="fas fa-chevron-right kw-privacy-toc__arrow"></i>
+          </a>
+          <a href="#cookies" class="kw-privacy-toc__item">
+            <span class="kw-privacy-toc__num">8</span>
+            <span class="kw-privacy-toc__text">Pliki cookies i technologie śledzące</span>
+            <i class="fas fa-chevron-right kw-privacy-toc__arrow"></i>
+          </a>
+          <a href="#profilowanie" class="kw-privacy-toc__item">
+            <span class="kw-privacy-toc__num">9</span>
+            <span class="kw-privacy-toc__text">Profilowanie i automatyczne decyzje</span>
+            <i class="fas fa-chevron-right kw-privacy-toc__arrow"></i>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       3. ADMINISTRATOR DANYCH
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--alt" id="administrator" aria-label="Administrator danych osobowych">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">§1</span>
+        <h2 class="kw-privacy-title">Administrator Danych Osobowych</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Poznaj podmiot odpowiedzialny za bezpieczeństwo Twoich danych osobowych w sklepie internetowym KEDAR-WIHA.pl — autoryzowanym dystrybutorze narzędzi WIHA w Polsce.</p>
+      </div>
+      <div class="kw-privacy-admin kw-privacy-reveal">
+        <div class="kw-privacy-admin__header">
+          <div class="kw-privacy-admin__icon"><i class="fas fa-building"></i></div>
+          <div>
+            <h3 class="kw-privacy-admin__title">Dane Administratora</h3>
+            <p class="kw-privacy-admin__subtitle">Podmiot odpowiedzialny za przetwarzanie danych</p>
+          </div>
+        </div>
+        <div class="kw-privacy-admin__grid">
+          <div class="kw-privacy-admin__item">
+            <i class="fas fa-id-card"></i>
+            <div>
+              <strong>Nazwa firmy</strong>
+              <span>[NAZWA FIRMY]</span>
+            </div>
+          </div>
+          <div class="kw-privacy-admin__item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <strong>Adres siedziby</strong>
+              <span>[ADRES SIEDZIBY]</span>
+            </div>
+          </div>
+          <div class="kw-privacy-admin__item">
+            <i class="fas fa-file-invoice"></i>
+            <div>
+              <strong>NIP</strong>
+              <span>[NIP]</span>
+            </div>
+          </div>
+          <div class="kw-privacy-admin__item">
+            <i class="fas fa-barcode"></i>
+            <div>
+              <strong>REGON</strong>
+              <span>[REGON]</span>
+            </div>
+          </div>
+          <div class="kw-privacy-admin__item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <strong>E-mail (sprawy RODO)</strong>
+              <span><a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a></span>
+            </div>
+          </div>
+          <div class="kw-privacy-admin__item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <strong>Telefon kontaktowy</strong>
+              <span><a href="tel:+48575838766">+48 575 838 766</a></span>
+            </div>
+          </div>
+        </div>
+        <div class="kw-privacy-admin__notice">
+          <p><i class="fas fa-info-circle"></i> <strong>Brak Inspektora Ochrony Danych (IOD):</strong> Administrator nie wyznaczył Inspektora Ochrony Danych. W sprawach związanych z przetwarzaniem danych osobowych należy kontaktować się bezpośrednio z Administratorem pod adresem e-mail: <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a>.</p>
+        </div>
+      </div>
+      
+      <div class="kw-privacy-content" style="max-width:800px;margin:32px auto 0;">
+        <h3><i class="fas fa-info-circle"></i> Informacja o sklepie</h3>
+        <p>Sklep internetowy <strong>KEDAR-WIHA.pl</strong> prowadzi działalność jako autoryzowany dystrybutor narzędzi specjalistycznych marki WIHA w Polsce. W naszej ofercie znajdziesz profesjonalne narzędzia izolowane VDE, klucze dynamometryczne, zestawy narzędzi dla elektryków oraz akcesoria BHP. Jako autoryzowany partner WIHA, gwarantujemy oryginalność produktów, pełną dokumentację certyfikatową oraz wsparcie techniczne.</p>
+        <p>Polityka prywatności sklepu internetowego KEDAR-WIHA.pl określa zasady przetwarzania i ochrony danych osobowych klientów, zgodnie z wymogami Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO) oraz polskim prawem o ochronie danych osobowych.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       4. PODSTAWY PRAWNE
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--pattern" id="podstawy-prawne" aria-label="Podstawy prawne przetwarzania">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">§2</span>
+        <h2 class="kw-privacy-title">Podstawy Prawne Przetwarzania Danych</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Dane osobowe przetwarzane są zgodnie z obowiązującymi przepisami prawa Unii Europejskiej i Rzeczypospolitej Polskiej. Poznaj aktualne podstawy prawne regulujące ochronę danych osobowych w e-commerce.</p>
+      </div>
+      <div class="kw-privacy-legal-grid">
+        <article class="kw-privacy-legal-card kw-privacy-reveal kw-privacy-stagger-1">
+          <div class="kw-privacy-legal-card__icon"><i class="fas fa-gavel"></i></div>
+          <h3>Rozporządzenie RODO</h3>
+          <p>Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych (RODO) — podstawowe źródło prawa w zakresie ochrony danych osobowych w UE.</p>
+        </article>
+        <article class="kw-privacy-legal-card kw-privacy-reveal kw-privacy-stagger-2">
+          <div class="kw-privacy-legal-card__icon"><i class="fas fa-book"></i></div>
+          <h3>Ustawa o Ochronie Danych Osobowych</h3>
+          <p>Ustawa z dnia 10 maja 2018 r. o ochronie danych osobowych (Dz.U. z 2019 r. poz. 1781) — polska ustawa wdrażająca przepisy RODO do polskiego porządku prawnego, uzupełniająca regulacje unijne.</p>
+        </article>
+        <article class="kw-privacy-legal-card kw-privacy-reveal kw-privacy-stagger-3">
+          <div class="kw-privacy-legal-card__icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>Ustawa o Świadczeniu Usług Drogą Elektroniczną</h3>
+          <p>Ustawa z dnia 18 lipca 2002 r. o świadczeniu usług drogą elektroniczną (Dz.U. z 2020 r. poz. 344) — reguluje kwestie związane z prowadzeniem działalności gospodarczej w Internecie, w tym sklepów internetowych.</p>
+        </article>
+        <article class="kw-privacy-legal-card kw-privacy-reveal kw-privacy-stagger-4">
+          <div class="kw-privacy-legal-card__icon"><i class="fas fa-wifi"></i></div>
+          <h3>Prawo Komunikacji Elektronicznej</h3>
+          <p>Ustawa z dnia 12 lipca 2024 r. — Prawo komunikacji elektronicznej — najnowsze regulacje dotyczące komunikacji elektronicznej, w tym przechowywania i dostępu do informacji na urządzeniach końcowych użytkowników (pliki cookies).</p>
+        </article>
+      </div>
+      
+      <div class="kw-privacy-callout kw-privacy-callout--info kw-privacy-reveal" style="max-width:800px;margin:32px auto 0;">
+        <p><i class="fas fa-balance-scale"></i> <strong>Zgodność z prawem:</strong> Wszystkie działania związane z przetwarzaniem danych osobowych w sklepie KEDAR-WIHA.pl prowadzone są zgodnie z powyższymi aktami prawnymi. Dokumenty te stanowią podstawę prawną dla naszych procedur ochrony danych i zapewniają pełną zgodność z wymogami RODO w sklepie internetowym z narzędziami.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       5. CELE I ZAKRES PRZETWARZANIA
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--alt" id="cele-przetwarzania" aria-label="Cele i zakres przetwarzania danych">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">§3</span>
+        <h2 class="kw-privacy-title">Cele, Podstawy Prawne i Okres Przetwarzania Danych</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Administrator przetwarza dane osobowe w konkretnych, wyraźnych i prawnie uzasadnionych celach. Poniższa tabela przedstawia szczegółowe informacje o celach przetwarzania, podstawach prawnych oraz okresach przechowywania danych w sklepie KEDAR-WIHA.pl.</p>
+      </div>
+      <div class="kw-privacy-table-wrapper kw-privacy-reveal">
+        <table class="kw-privacy-table">
+          <thead>
+            <tr>
+              <th>Cel przetwarzania</th>
+              <th>Podstawa prawna (RODO)</th>
+              <th>Okres przechowywania</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Realizacja zamówień i umów sprzedaży</strong><br>Przetwarzanie danych niezbędnych do zawarcia i wykonania umowy sprzedaży narzędzi WIHA, w tym dostawa produktów, kontakt w sprawie zamówienia.</td>
+              <td><span class="kw-privacy-table__law">Art. 6 ust. 1 lit. b</span><br>Wykonanie umowy</td>
+              <td><span class="kw-privacy-table__period"><i class="fas fa-clock"></i> Do realizacji + 2 lata rękojmi + 3 lata przedawnienia</span></td>
+            </tr>
+            <tr>
+              <td><strong>Wystawianie faktur i dokumentów księgowych</strong><br>Przechowywanie danych wymaganych przepisami podatkowymi i księgowymi, w tym faktury VAT.</td>
+              <td><span class="kw-privacy-table__law">Art. 6 ust. 1 lit. c</span><br>Obowiązek prawny</td>
+              <td><span class="kw-privacy-table__period"><i class="fas fa-clock"></i> 5 lat od końca roku podatkowego</span></td>
+            </tr>
+            <tr>
+              <td><strong>Prowadzenie Konta Klienta</strong><br>Umożliwienie dostępu do historii zamówień, danych adresowych, ustawień konta w sklepie internetowym.</td>
+              <td><span class="kw-privacy-table__law">Art. 6 ust. 1 lit. b</span><br>Wykonanie umowy o świadczenie usługi</td>
+              <td><span class="kw-privacy-table__period"><i class="fas fa-clock"></i> Do czasu usunięcia konta przez Klienta</span></td>
+            </tr>
+            <tr>
+              <td><strong>Obsługa reklamacji i zwrotów</strong><br>Przetwarzanie danych w celu rozpatrzenia reklamacji, zwrotu towaru, wymiany produktu.</td>
+              <td><span class="kw-privacy-table__law">Art. 6 ust. 1 lit. b i c</span><br>Wykonanie umowy i obowiązek prawny</td>
+              <td><span class="kw-privacy-table__period"><i class="fas fa-clock"></i> Do zakończenia postępowania + okres przedawnienia</span></td>
+            </tr>
+            <tr>
+              <td><strong>Obsługa zapytań</strong><br>Kontakt w sprawach związanych z ofertą, dostępnością narzędzi WIHA, doradztwo techniczne (formularz, e-mail, telefon).</td>
+              <td><span class="kw-privacy-table__law">Art. 6 ust. 1 lit. f</span><br>Prawnie uzasadniony interes</td>
+              <td><span class="kw-privacy-table__period"><i class="fas fa-clock"></i> Do zakończenia korespondencji + 1 rok</span></td>
+            </tr>
+            <tr>
+              <td><strong>Wysyłka Newslettera</strong><br>Przesyłanie informacji o nowościach, promocjach, poradnikach technicznych dotyczących narzędzi WIHA.</td>
+              <td><span class="kw-privacy-table__law">Art. 6 ust. 1 lit. a</span><br>Zgoda</td>
+              <td><span class="kw-privacy-table__period"><i class="fas fa-clock"></i> Do czasu wycofania zgody</span></td>
+            </tr>
+            <tr>
+              <td><strong>Marketing bezpośredni własnych produktów</strong><br>Przesyłanie ofert handlowych drogą elektroniczną do istniejących klientów (art. 10 ust. 2 ustawy o świadczeniu usług drogą elektroniczną).</td>
+              <td><span class="kw-privacy-table__law">Art. 6 ust. 1 lit. f</span><br>Prawnie uzasadniony interes</td>
+              <td><span class="kw-privacy-table__period"><i class="fas fa-clock"></i> Do wniesienia sprzeciwu</span></td>
+            </tr>
+            <tr>
+              <td><strong>Działania analityczne i statystyczne</strong><br>Analiza ruchu na stronie, zachowań użytkowników, optymalizacja sklepu internetowego (Google Analytics 4).</td>
+              <td><span class="kw-privacy-table__law">Art. 6 ust. 1 lit. f</span><br>Prawnie uzasadniony interes</td>
+              <td><span class="kw-privacy-table__period"><i class="fas fa-clock"></i> Do sprzeciwu, max. 26 miesięcy</span></td>
+            </tr>
+            <tr>
+              <td><strong>Dochodzenie i obrona przed roszczeniami</strong><br>Przechowywanie danych w celu ewentualnego dochodzenia roszczeń lub obrony przed roszczeniami.</td>
+              <td><span class="kw-privacy-table__law">Art. 6 ust. 1 lit. f</span><br>Prawnie uzasadniony interes</td>
+              <td><span class="kw-privacy-table__period"><i class="fas fa-clock"></i> Do upływu terminów przedawnienia</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="kw-privacy-callout kw-privacy-callout--success kw-privacy-reveal" style="max-width:800px;margin:32px auto 0;">
+        <p><i class="fas fa-check-circle"></i> <strong>Przejrzystość przetwarzania:</strong> Każdy cel przetwarzania danych osobowych w sklepie KEDAR-WIHA.pl ma wyraźną podstawę prawną zgodną z RODO. Nie przetwarzamy danych w sposób niezgodny z pierwotnym celem ich zebrania — zapewniamy pełną zgodność z zasadą legalności, rzetelności i przejrzystości.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       6. KATEGORIE DANYCH OSOBOWYCH
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--pattern" id="kategorie-danych" aria-label="Kategorie przetwarzanych danych">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">§4</span>
+        <h2 class="kw-privacy-title">Kategorie Przetwarzanych Danych Osobowych</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Administrator przetwarza wyłącznie te dane osobowe, które są niezbędne do realizacji określonych celów. Poniżej przedstawiamy szczegółowy wykaz kategorii danych zbieranych w trakcie korzystania ze sklepu KEDAR-WIHA.pl.</p>
+      </div>
+      <div class="kw-privacy-categories">
+        <article class="kw-privacy-category kw-privacy-reveal kw-privacy-stagger-1">
+          <div class="kw-privacy-category__icon"><i class="fas fa-user"></i></div>
+          <h3>Dane identyfikacyjne</h3>
+          <ul>
+            <li>Imię i nazwisko</li>
+            <li>Nazwa firmy (dla przedsiębiorców)</li>
+            <li>Data urodzenia (opcjonalnie)</li>
+          </ul>
+        </article>
+        <article class="kw-privacy-category kw-privacy-reveal kw-privacy-stagger-2">
+          <div class="kw-privacy-category__icon"><i class="fas fa-address-book"></i></div>
+          <h3>Dane kontaktowe</h3>
+          <ul>
+            <li>Adres e-mail</li>
+            <li>Numer telefonu</li>
+            <li>Adres korespondencyjny</li>
+          </ul>
+        </article>
+        <article class="kw-privacy-category kw-privacy-reveal kw-privacy-stagger-3">
+          <div class="kw-privacy-category__icon"><i class="fas fa-home"></i></div>
+          <h3>Dane adresowe</h3>
+          <ul>
+            <li>Adres dostawy</li>
+            <li>Adres zamieszkania/siedziby</li>
+            <li>Kod pocztowy i miejscowość</li>
+          </ul>
+        </article>
+        <article class="kw-privacy-category kw-privacy-reveal kw-privacy-stagger-4">
+          <div class="kw-privacy-category__icon"><i class="fas fa-shopping-cart"></i></div>
+          <h3>Dane transakcyjne</h3>
+          <ul>
+            <li>Numer zamówienia</li>
+            <li>Historia zamówień</li>
+            <li>Wartość zamówień</li>
+            <li>Produkty zakupione</li>
+          </ul>
+        </article>
+        <article class="kw-privacy-category kw-privacy-reveal kw-privacy-stagger-5">
+          <div class="kw-privacy-category__icon"><i class="fas fa-file-invoice-dollar"></i></div>
+          <h3>Dane rozliczeniowe</h3>
+          <ul>
+            <li>NIP (Numer Identyfikacji Podatkowej)</li>
+            <li>Dane do faktury VAT</li>
+            <li>Metoda płatności</li>
+          </ul>
+        </article>
+        <article class="kw-privacy-category kw-privacy-reveal kw-privacy-stagger-6">
+          <div class="kw-privacy-category__icon"><i class="fas fa-laptop"></i></div>
+          <h3>Dane techniczne</h3>
+          <ul>
+            <li>Adres IP</li>
+            <li>Typ przeglądarki</li>
+            <li>System operacyjny</li>
+            <li>Dane z plików cookies</li>
+          </ul>
+        </article>
+      </div>
+      
+      <div class="kw-privacy-callout kw-privacy-callout--info kw-privacy-reveal" style="max-width:800px;margin:32px auto 0;">
+        <p><i class="fas fa-info-circle"></i> <strong>Zasada minimalizacji danych:</strong> Zgodnie z zasadą minimalizacji (art. 5 ust. 1 lit. c RODO), przetwarzamy wyłącznie te dane osobowe, które są adekwatne, stosowne oraz ograniczone do tego, co niezbędne do celów, w których są przetwarzane. Nie zbieramy danych wrażliwych (szczególnych kategorii) w rozumieniu art. 9 RODO.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       7. ODBIORCY DANYCH
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--alt" id="odbiorcy" aria-label="Odbiorcy danych osobowych">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">§5</span>
+        <h2 class="kw-privacy-title">Odbiorcy Danych Osobowych</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Dane osobowe Klientów mogą być przekazywane zaufanym podmiotom współpracującym z KEDAR-WIHA.pl — wyłącznie w zakresie niezbędnym do realizacji określonych celów. Poniżej znajdziesz pełną listę kategorii odbiorców danych.</p>
+      </div>
+      <div class="kw-privacy-recipients">
+        <article class="kw-privacy-recipient kw-privacy-reveal kw-privacy-stagger-1">
+          <div class="kw-privacy-recipient__icon kw-privacy-recipient__icon--inpost"><i class="fas fa-box"></i></div>
+          <div class="kw-privacy-recipient__content">
+            <h4>InPost Sp. z o.o.</h4>
+            <p>Firmy kurierskie i operatorzy logistyczni — realizacja dostawy zamówionych narzędzi WIHA (Paczkomaty, Kurier).</p>
+            <span class="kw-privacy-recipient__badge kw-privacy-recipient__badge--legal"><i class="fas fa-gavel"></i> Art. 6 ust. 1 lit. b RODO</span>
+          </div>
+        </article>
+        <article class="kw-privacy-recipient kw-privacy-reveal kw-privacy-stagger-2">
+          <div class="kw-privacy-recipient__icon kw-privacy-recipient__icon--payu"><i class="fas fa-credit-card"></i></div>
+          <div class="kw-privacy-recipient__content">
+            <h4>PayU S.A. / DialCom24 (Przelewy24)</h4>
+            <p>Operatorzy płatności elektronicznych — obsługa płatności online za zamówione narzędzia specjalistyczne.</p>
+            <span class="kw-privacy-recipient__badge kw-privacy-recipient__badge--legal"><i class="fas fa-gavel"></i> Art. 6 ust. 1 lit. b RODO</span>
+          </div>
+        </article>
+        <article class="kw-privacy-recipient kw-privacy-reveal kw-privacy-stagger-3">
+          <div class="kw-privacy-recipient__icon kw-privacy-recipient__icon--google"><i class="fas fa-chart-line"></i></div>
+          <div class="kw-privacy-recipient__content">
+            <h4>Google LLC (Google Analytics 4)</h4>
+            <p>Analiza ruchu na stronie, zachowań użytkowników sklepu z narzędziami — wyłącznie zanonimizowane dane.</p>
+            <span class="kw-privacy-recipient__badge kw-privacy-recipient__badge--legitimate"><i class="fas fa-balance-scale"></i> Art. 6 ust. 1 lit. f RODO</span>
+          </div>
+        </article>
+        <article class="kw-privacy-recipient kw-privacy-reveal kw-privacy-stagger-4">
+          <div class="kw-privacy-recipient__icon kw-privacy-recipient__icon--meta"><i class="fab fa-facebook-f"></i></div>
+          <div class="kw-privacy-recipient__content">
+            <h4>Meta Platforms Ireland (Facebook Pixel)</h4>
+            <p>Działania marketingowe, remarketing — na podstawie wyrażonej zgody przez użytkownika.</p>
+            <span class="kw-privacy-recipient__badge kw-privacy-recipient__badge--consent"><i class="fas fa-check-circle"></i> Art. 6 ust. 1 lit. a RODO</span>
+          </div>
+        </article>
+        <article class="kw-privacy-recipient kw-privacy-reveal kw-privacy-stagger-5">
+          <div class="kw-privacy-recipient__icon kw-privacy-recipient__icon--gtm"><i class="fas fa-tags"></i></div>
+          <div class="kw-privacy-recipient__content">
+            <h4>Google Tag Manager</h4>
+            <p>Zarządzanie tagami analitycznymi i marketingowymi na stronie sklepu internetowego.</p>
+            <span class="kw-privacy-recipient__badge kw-privacy-recipient__badge--legitimate"><i class="fas fa-balance-scale"></i> Art. 6 ust. 1 lit. f RODO</span>
+          </div>
+        </article>
+        <article class="kw-privacy-recipient kw-privacy-reveal kw-privacy-stagger-6">
+          <div class="kw-privacy-recipient__icon kw-privacy-recipient__icon--tawk"><i class="fas fa-comments"></i></div>
+          <div class="kw-privacy-recipient__content">
+            <h4>Tawk.to Inc.</h4>
+            <p>Obsługa czatu na żywo na stronie sklepu — komunikacja z klientami w czasie rzeczywistym.</p>
+            <span class="kw-privacy-recipient__badge kw-privacy-recipient__badge--legal"><i class="fas fa-gavel"></i> Art. 6 ust. 1 lit. f RODO</span>
+          </div>
+        </article>
+        <article class="kw-privacy-recipient kw-privacy-reveal kw-privacy-stagger-1">
+          <div class="kw-privacy-recipient__icon kw-privacy-recipient__icon--hosting"><i class="fas fa-server"></i></div>
+          <div class="kw-privacy-recipient__content">
+            <h4>Dostawca usługi hostingowej</h4>
+            <p>Przechowywanie danych na serwerze, zapewnienie dostępności sklepu internetowego.</p>
+            <span class="kw-privacy-recipient__badge kw-privacy-recipient__badge--legal"><i class="fas fa-gavel"></i> Art. 6 ust. 1 lit. f RODO</span>
+          </div>
+        </article>
+        <article class="kw-privacy-recipient kw-privacy-reveal kw-privacy-stagger-2">
+          <div class="kw-privacy-recipient__icon kw-privacy-recipient__icon--erp"><i class="fas fa-cogs"></i></div>
+          <div class="kw-privacy-recipient__content">
+            <h4>Dostawca systemu ERP</h4>
+            <p>Zarządzanie zamówieniami, stanami magazynowymi narzędzi WIHA, fakturowanie.</p>
+            <span class="kw-privacy-recipient__badge kw-privacy-recipient__badge--legal"><i class="fas fa-gavel"></i> Art. 6 ust. 1 lit. b RODO</span>
+          </div>
+        </article>
+        <article class="kw-privacy-recipient kw-privacy-reveal kw-privacy-stagger-3">
+          <div class="kw-privacy-recipient__icon kw-privacy-recipient__icon--gov"><i class="fas fa-landmark"></i></div>
+          <div class="kw-privacy-recipient__content">
+            <h4>Organy państwowe</h4>
+            <p>Na podstawie obowiązujących przepisów prawa, na żądanie uprawnionych organów (US, policja, sąd).</p>
+            <span class="kw-privacy-recipient__badge kw-privacy-recipient__badge--legal"><i class="fas fa-gavel"></i> Art. 6 ust. 1 lit. c RODO</span>
+          </div>
+        </article>
+      </div>
+      
+      <div class="kw-privacy-content" style="max-width:800px;margin:32px auto 0;">
+        <h3><i class="fas fa-globe-europe"></i> Przekazywanie danych do państw trzecich</h3>
+        <p>Dane osobowe mogą być przekazywane do państw trzecich (poza Europejski Obszar Gospodarczy) wyłącznie do podmiotów zapewniających odpowiedni stopień ochrony danych osobowych. W szczególności przekazywanie danych odbywa się na podstawie:</p>
+        <ul>
+          <li>Standardowych klauzul umownych zatwierdzonych przez Komisję Europejską</li>
+          <li>Decyzji stwierdzającej odpowiedni stopień ochrony (np. Privacy Shield — USA)</li>
+          <li>Wiążących reguł korporacyjnych (BCR)</li>
+        </ul>
+        <p>W przypadku korzystania z usług dostawców z USA (np. Google, Meta), dane mogą być przekazywane z zachowaniem odpowiednich zabezpieczeń wynikających z decyzji wykonawczej Komisji Europejskiej dotyczącej odpowiedniego stopnia ochrony w USA.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       8. PRAWA OSÓB
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--dark" id="prawa" aria-label="Prawa osób, których dane dotyczą">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">§6</span>
+        <h2 class="kw-privacy-title">Prawa Osób, Których Dane Dotyczą</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Każdej osobie, której dane osobowe są przetwarzane przez Administratora, przysługują szczególne prawa wynikające z przepisów RODO. Poniżej przedstawiamy kompletny wykaz Twoich praw oraz sposób ich realizacji.</p>
+      </div>
+      <div class="kw-privacy-rights">
+        <article class="kw-privacy-right kw-privacy-reveal kw-privacy-stagger-1">
+          <div class="kw-privacy-right__header">
+            <span class="kw-privacy-right__num">15</span>
+            <div>
+              <h4 class="kw-privacy-right__title">Prawo dostępu do danych</h4>
+              <span class="kw-privacy-right__article">Art. 15 RODO</span>
+            </div>
+          </div>
+          <p>Masz prawo do uzyskania od Administratora informacji o tym, czy przetwarzane są Twoje dane osobowe, a jeśli tak — do uzyskania dostępu do tych danych oraz kopii danych. Obejmuje to informacje o celach przetwarzania, kategoriach danych, odbiorcach, okresie przechowywania i źródle danych.</p>
+        </article>
+        <article class="kw-privacy-right kw-privacy-reveal kw-privacy-stagger-2">
+          <div class="kw-privacy-right__header">
+            <span class="kw-privacy-right__num">16</span>
+            <div>
+              <h4 class="kw-privacy-right__title">Prawo do sprostowania danych</h4>
+              <span class="kw-privacy-right__article">Art. 16 RODO</span>
+            </div>
+          </div>
+          <p>Masz prawo do żądania niezwłocznego sprostowania nieprawidłowych danych osobowych oraz do uzupełnienia niekompletnych danych. Jest to szczególnie istotne w przypadku zmiany adresu, numeru telefonu czy danych firmy.</p>
+        </article>
+        <article class="kw-privacy-right kw-privacy-reveal kw-privacy-stagger-3">
+          <div class="kw-privacy-right__header">
+            <span class="kw-privacy-right__num">17</span>
+            <div>
+              <h4 class="kw-privacy-right__title">Prawo do usunięcia danych</h4>
+              <span class="kw-privacy-right__article">Art. 17 RODO — "prawo do bycia zapomnianym"</span>
+            </div>
+          </div>
+          <p>Masz prawo do żądania usunięcia danych osobowych, gdy: dane nie są już niezbędne do celów, w których zostały zebrane; wycofałeś zgodę; wniesiono sprzeciw; dane były przetwarzane niezgodnie z prawem; dane muszą zostać usunięte w celu wywiązania się z obowiązku prawnego.</p>
+        </article>
+        <article class="kw-privacy-right kw-privacy-reveal kw-privacy-stagger-4">
+          <div class="kw-privacy-right__header">
+            <span class="kw-privacy-right__num">18</span>
+            <div>
+              <h4 class="kw-privacy-right__title">Prawo do ograniczenia przetwarzania</h4>
+              <span class="kw-privacy-right__article">Art. 18 RODO</span>
+            </div>
+          </div>
+          <p>Masz prawo do żądania ograniczenia przetwarzania danych w określonych przypadkach: gdy kwestionujesz prawidłowość danych (na czas weryfikacji); gdy przetwarzanie jest niezgodne z prawem, a Ty sprzeciwiasz się usunięciu; gdy Administrator nie potrzebuje już danych, ale są one potrzebne Tobie do obrony roszczeń.</p>
+        </article>
+        <article class="kw-privacy-right kw-privacy-reveal kw-privacy-stagger-5">
+          <div class="kw-privacy-right__header">
+            <span class="kw-privacy-right__num">20</span>
+            <div>
+              <h4 class="kw-privacy-right__title">Prawo do przenoszenia danych</h4>
+              <span class="kw-privacy-right__article">Art. 20 RODO</span>
+            </div>
+          </div>
+          <p>Masz prawo do otrzymania swoich danych osobowych w ustrukturyzowanym, powszechnie używanym formacie nadającym się do odczytu maszynowego (np. CSV, XML). Możesz również przesłać te dane bezpośrednio innemu administratorowi, jeśli jest to technicznie możliwe.</p>
+        </article>
+        <article class="kw-privacy-right kw-privacy-reveal kw-privacy-stagger-6">
+          <div class="kw-privacy-right__header">
+            <span class="kw-privacy-right__num">21</span>
+            <div>
+              <h4 class="kw-privacy-right__title">Prawo do sprzeciwu</h4>
+              <span class="kw-privacy-right__article">Art. 21 RODO</span>
+            </div>
+          </div>
+          <p>Masz prawo w dowolnym momencie wnieść sprzeciw wobec przetwarzania danych opartego na prawnie uzasadnionym interesie Administratora, w tym w celach marketingu bezpośredniego. W przypadku sprzeciwu z przyczyn związanych z Twoją szczególną sytuacją, Administrator przestanie przetwarzać dane, chyba że wykaże istnienie ważnych prawnie uzasadnionych podstaw.</p>
+        </article>
+      </div>
+      
+      <div class="kw-privacy-content" style="max-width:800px;margin:32px auto 0;">
+        <h3 style="color:var(--kw-pr-white);"><i class="fas fa-undo-alt"></i> Prawo do cofnięcia zgody</h3>
+        <p style="color:rgba(255,255,255,0.82);">W przypadku przetwarzania danych na podstawie zgody (np. newsletter, marketing), masz prawo w dowolnym momencie cofnąć zgodę. Cofnięcie zgody nie wpływa na zgodność z prawem przetwarzania dokonanego przed jej cofnięciem. Aby cofnąć zgodę, skontaktuj się z nami pod adresem <a href="mailto:info@kedar-wiha.pl" style="color:var(--kw-pr-accent);">info@kedar-wiha.pl</a> lub kliknij link "Wypisz się" w stopce newslettera.</p>
+        
+        <h3 style="color:var(--kw-pr-white);margin-top:24px;"><i class="fas fa-clock"></i> Termin realizacji żądań</h3>
+        <p style="color:rgba(255,255,255,0.82);">Administrator rozpatruje żądania bez zbędnej zwłoki, nie później niż w ciągu <strong>1 miesiąca</strong> od otrzymania żądania. W przypadkach skomplikowanych lub dużej liczby żądań termin ten może zostać przedłużony o kolejne 2 miesiące — zostaniesz o tym poinformowany wraz z podaniem przyczyn opóźnienia.</p>
+        
+        <h3 style="color:var(--kw-pr-white);margin-top:24px;"><i class="fas fa-gavel"></i> Prawo wniesienia skargi do UODO</h3>
+        <p style="color:rgba(255,255,255,0.82);">Każda osoba, której dane dotyczą, ma prawo wniesienia skargi do organu nadzorczego — <strong>Prezesa Urzędu Ochrony Danych Osobowych (UODO)</strong>, jeśli uzna, że przetwarzanie danych osobowych narusza przepisy RODO.</p>
+        <div class="kw-privacy-callout kw-privacy-callout--info kw-privacy-reveal" style="margin-top:20px;background:rgba(0,86,163,0.1);border-left-color:var(--kw-pr-secondary);">
+          <p style="color:var(--kw-pr-white);"><i class="fas fa-info-circle"></i> <strong>Adres UODO:</strong> ul. Stawki 2, 00-193 Warszawa | <strong>WWW:</strong> <a href="https://uodo.gov.pl/" target="_blank" rel="noopener" style="color:var(--kw-pr-accent);">uodo.gov.pl</a> | <strong>E-mail:</strong> kancelaria@uodo.gov.pl</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       9. BEZPIECZEŃSTWO DANYCH
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--pattern" id="bezpieczenstwo" aria-label="Zabezpieczenia danych osobowych">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">§7</span>
+        <h2 class="kw-privacy-title">Zabezpieczenia Danych Osobowych</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Administrator stosuje odpowiednie środki techniczne i organizacyjne zapewniające ochronę przetwarzanych danych osobowych. Bezpieczeństwo danych naszych klientów jest dla nas priorytetem — stosujemy najnowsze technologie i procedury zgodne ze standardami branżowymi.</p>
+      </div>
+      <div class="kw-privacy-security">
+        <article class="kw-privacy-security__item kw-privacy-reveal kw-privacy-stagger-1">
+          <div class="kw-privacy-security__icon"><i class="fas fa-lock"></i></div>
+          <h3>Szyfrowanie SSL/TLS</h3>
+          <p>Wszystkie dane przesyłane między Twoją przeglądarką a serwerem sklepu KEDAR-WIHA.pl są szyfrowane za pomocą protokołu SSL/TLS z certyfikatem SSL. Gwarantuje to poufność danych w trakcie transmisji.</p>
+        </article>
+        <article class="kw-privacy-security__item kw-privacy-reveal kw-privacy-stagger-2">
+          <div class="kw-privacy-security__icon"><i class="fas fa-sync-alt"></i></div>
+          <h3>Regularne aktualizacje</h3>
+          <p>Systemy sklepu, oprogramowanie serwera i systemy bezpieczeństwa są regularnie aktualizowane do najnowszych wersji, co eliminuje znane luki w zabezpieczeniach.</p>
+        </article>
+        <article class="kw-privacy-security__item kw-privacy-reveal kw-privacy-stagger-3">
+          <div class="kw-privacy-security__icon"><i class="fas fa-user-shield"></i></div>
+          <h3>Kontrola dostępu</h3>
+          <p>Dostęp do danych osobowych mają wyłącznie upoważnione osoby. Stosujemy uwierzytelnianie wieloskładnikowe, silne hasła i regularne audyty dostępu.</p>
+        </article>
+        <article class="kw-privacy-security__item kw-privacy-reveal kw-privacy-stagger-4">
+          <div class="kw-privacy-security__icon"><i class="fas fa-hdd"></i></div>
+          <h3>Regularne kopie zapasowe</h3>
+          <p>Dane są regularnie backupowane z zachowaniem najwyższych standardów bezpieczeństwa. Kopie zapasowe przechowywane są w zabezpieczonych lokalizacjach z ograniczonym dostępem.</p>
+        </article>
+        <article class="kw-privacy-security__item kw-privacy-reveal kw-privacy-stagger-5">
+          <div class="kw-privacy-security__icon"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Szkolenia personelu</h3>
+          <p>Personel sklepu regularnie przechodzi szkolenia z zakresu ochrony danych osobowych, bezpieczeństwa informacji i procedur RODO, co minimalizuje ryzyko błędu ludzkiego.</p>
+        </article>
+        <article class="kw-privacy-security__item kw-privacy-reveal kw-privacy-stagger-6">
+          <div class="kw-privacy-security__icon">
+          <div class="kw-privacy-security__icon"><i class="fas fa-shield-virus"></i></div>
+          <h3>Ochrona przed zagrożeniami</h3>
+          <p>Stosujemy zaawansowane systemy zabezpieczeń: firewalle, systemy wykrywania włamań (IDS), antywirusy i regularne skanowanie podatności, aby chronić dane przed cyberzagrożeniami.</p>
+        </article>
+      </div>
+      
+      <div class="kw-privacy-trust kw-privacy-reveal" style="margin-top:32px;">
+        <span class="kw-privacy-trust__badge"><i class="fas fa-shield-alt"></i> Certyfikat SSL</span>
+        <span class="kw-privacy-trust__badge"><i class="fas fa-lock"></i> Szyfrowanie 256-bit</span>
+        <span class="kw-privacy-trust__badge"><i class="fas fa-certificate"></i> Zgodność z RODO</span>
+        <span class="kw-privacy-trust__badge"><i class="fas fa-user-check"></i> Bezpieczne płatności</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       10. PLIKI COOKIES
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--alt" id="cookies" aria-label="Pliki cookies i technologie śledzące">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">§8</span>
+        <h2 class="kw-privacy-title">Pliki Cookies i Technologie Śledzące</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Sklep KEDAR-WIHA.pl wykorzystuje pliki cookies i podobne technologie w celu zapewnienia prawidłowego funkcjonowania strony, analizy ruchu oraz prowadzenia działań marketingowych. Poniżej znajdziesz szczegółowe informacje o wykorzystywanych technologiach.</p>
+      </div>
+      <div class="kw-privacy-cookies kw-privacy-reveal">
+        <p class="kw-privacy-cookies__intro"><strong>Co to są pliki cookies?</strong> Pliki cookies to niewielkie pliki tekstowe zapisywane na Twoim urządzeniu (komputerze, tablecie, smartfonie) podczas odwiedzania stron internetowych. Umożliwiają one rozpoznanie Twojego urządzenia i dostosowanie działania strony do Twoich preferencji. Cookies nie zawierają danych osobowych w rozumieniu RODO, ale mogą być powiązane z Twoim kontem użytkownika.</p>
+        
+        <div class="kw-privacy-cookie-type">
+          <div class="kw-privacy-cookie-type__header">
+            <div class="kw-privacy-cookie-type__icon"><i class="fas fa-cog"></i></div>
+            <h4>Cookies niezbędne (techniczne)</h4>
+            <span class="kw-privacy-cookie-type__badge kw-privacy-cookie-type__badge--necessary">Niezbędne</span>
+          </div>
+          <p>Pliki cookies niezbędne do prawidłowego funkcjonowania sklepu internetowego. Umożliwiają logowanie do konta, zapamiętywanie zawartości koszyka, obsługę procesu zamówienia i zapewnienie bezpieczeństwa. Te cookies są niezbędne do korzystania ze sklepu i nie można ich wyłączyć bez utraty funkcjonalności.</p>
+          <div class="kw-privacy-cookie-type__tools">
+            <span class="kw-privacy-cookie-type__tool"><i class="fas fa-shopping-cart"></i> PrestaShop</span>
+            <span class="kw-privacy-cookie-type__tool"><i class="fas fa-lock"></i> Sesja użytkownika</span>
+            <span class="kw-privacy-cookie-type__tool"><i class="fas fa-shield-alt"></i> Bezpieczeństwo</span>
+          </div>
+        </div>
+        
+        <div class="kw-privacy-cookie-type">
+          <div class="kw-privacy-cookie-type__header">
+            <div class="kw-privacy-cookie-type__icon"><i class="fas fa-chart-bar"></i></div>
+            <h4>Cookies analityczne (statystyczne)</h4>
+            <span class="kw-privacy-cookie-type__badge kw-privacy-cookie-type__badge--analytics">Analityczne</span>
+          </div>
+          <p>Pliki cookies umożliwiające analizę ruchu na stronie, zachowań użytkowników i sposobu korzystania ze sklepu. Dane te pomagają nam ulepszać funkcjonalność strony, optymalizować proces zakupowy i lepiej rozumieć potrzeby klientów. Dane są zbierane w formie zanonimizowanej lub pseudonimizowanej.</p>
+          <div class="kw-privacy-cookie-type__tools">
+            <span class="kw-privacy-cookie-type__tool"><i class="fab fa-google"></i> Google Analytics 4</span>
+            <span class="kw-privacy-cookie-type__tool"><i class="fas fa-tags"></i> Google Tag Manager</span>
+            <span class="kw-privacy-cookie-type__tool"><i class="fas fa-ad"></i> Google Ads</span>
+          </div>
+        </div>
+        
+        <div class="kw-privacy-cookie-type">
+          <div class="kw-privacy-cookie-type__header">
+            <div class="kw-privacy-cookie-type__icon"><i class="fas fa-bullhorn"></i></div>
+            <h4>Cookies marketingowe (reklamowe)</h4>
+            <span class="kw-privacy-cookie-type__badge kw-privacy-cookie-type__badge--marketing">Marketingowe</span>
+          </div>
+          <p>Pliki cookies wykorzystywane do prowadzenia działań marketingowych, remarketingu i personalizacji reklam. Umożliwiają wyświetlanie spersonalizowanych reklam narzędzi WIHA na innych stronach i platformach społecznościowych. Te cookies są instalowane wyłącznie za Twoją zgodą.</p>
+          <div class="kw-privacy-cookie-type__tools">
+            <span class="kw-privacy-cookie-type__tool"><i class="fab fa-facebook-f"></i> Meta Pixel (Facebook)</span>
+            <span class="kw-privacy-cookie-type__tool"><i class="fab fa-google"></i> Google Ads Remarketing</span>
+          </div>
+        </div>
+        
+        <div class="kw-privacy-cookie-type">
+          <div class="kw-privacy-cookie-type__header">
+            <div class="kw-privacy-cookie-type__icon"><i class="fas fa-comments"></i></div>
+            <h4>Cookies funkcjonalne (preferencje)</h4>
+            <span class="kw-privacy-cookie-type__badge kw-privacy-cookie-type__badge--necessary">Funkcjonalne</span>
+          </div>
+          <p>Pliki cookies umożliwiające zapamiętywanie Twoich preferencji i ustawień (np. język, waluta, region). Dzięki nim strona jest bardziej przyjazna i dostosowana do Twoich potrzeb.</p>
+          <div class="kw-privacy-cookie-type__tools">
+            <span class="kw-privacy-cookie-type__tool"><i class="fas fa-language"></i> Język</span>
+            <span class="kw-privacy-cookie-type__tool"><i class="fas fa-money-bill-wave"></i> Waluta</span>
+            <span class="kw-privacy-cookie-type__tool"><i class="fas fa-map-marker-alt"></i> Region</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="kw-privacy-content" style="max-width:800px;margin:32px auto 0;">
+        <h3><i class="fas fa-sliders-h"></i> Zarządzanie cookies</h3>
+        <p>Możesz w dowolnym momencie zmienić ustawienia dotyczące plików cookies. Większość przeglądarek internetowych domyślnie akceptuje pliki cookies, ale możesz zmienić te ustawienia w opcjach przeglądarki. Pamiętaj, że wyłączenie niektórych typów cookies może wpłynąć na funkcjonalność sklepu.</p>
+        <ul>
+          <li><strong>Google Chrome:</strong> Ustawienia → Prywatność i bezpieczeństwo → Pliki cookie i inne dane witryn</li>
+          <li><strong>Mozilla Firefox:</strong> Opcje → Prywatność i bezpieczeństwo → Pliki cookie i dane witryn</li>
+          <li><strong>Microsoft Edge:</strong> Ustawienia → Pliki cookie i uprawnienia witryn → Zarządzaj plikami cookie</li>
+          <li><strong>Safari:</strong> Preferencje → Prywatność → Pliki cookie i dane witryn</li>
+        </ul>
+        <p>Szczegółowe informacje o zarządzaniu plikami cookies znajdziesz w sekcji pomocy swojej przeglądarki internetowej.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       11. PROFILOWANIE
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--pattern" id="profilowanie" aria-label="Profilowanie i automatyczne decyzje">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">§9</span>
+        <h2 class="kw-privacy-title">Profilowanie i Automatyczne Podejmowanie Decyzji</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Informacja o stosowaniu profilowania i zautomatyzowanego podejmowania decyzji w kontekście przetwarzania danych osobowych w sklepie KEDAR-WIHA.pl.</p>
+      </div>
+      <div class="kw-privacy-profiling kw-privacy-reveal">
+        <div class="kw-privacy-profiling__icon"><i class="fas fa-user-check"></i></div>
+        <div class="kw-privacy-profiling__content">
+          <h3>Brak Zautomatyzowanego Podejmowania Decyzji</h3>
+          <p>Administrator <strong>nie podejmuje decyzji w sposób zautomatyzowany</strong>, w tym nie dokonuje profilowania w rozumieniu art. 22 ust. 1 i 4 RODO, które wywoływałoby wobec Klienta skutki prawne lub w podobny sposób na niego wpływało.</p>
+          <p>Administrator może wykorzystywać dane do tworzenia profili analitycznych w celach statystycznych i marketingowych (np. personalizacja treści, rekomendacje produktów), jednakże <strong>nie ma to wpływu na prawa Klienta</strong> i nie prowadzi do zautomatyzowanego podejmowania decyzji w rozumieniu art. 22 RODO.</p>
+          <span class="kw-privacy-profiling__highlight"><i class="fas fa-check-circle"></i> Brak automatycznych decyzji</span>
+        </div>
+      </div>
+      
+      <div class="kw-privacy-content" style="max-width:800px;margin:32px auto 0;">
+        <h3><i class="fas fa-brain"></i> Profilowanie analityczne</h3>
+        <p>W ramach działań analitycznych możemy tworzyć profile użytkowników na podstawie:</p>
+        <ul>
+          <li>Historii przeglądanych produktów (np. wkrętaki izolowane VDE, klucze dynamometryczne WIHA)</li>
+          <li>Historii zakupów i wartości zamówień</li>
+          <li>Zachowań na stronie (czas spędzony na stronie, kliknięcia)</li>
+          <li>Źródła ruchu (skąd trafiłeś na naszą stronę)</li>
+        </ul>
+        <p>Cele profilowania analitycznego:</p>
+        <ul>
+          <li>Personalizacja wyświetlanych treści i rekomendacji produktów</li>
+          <li>Optymalizacja struktury sklepu i procesu zakupowego</li>
+          <li>Dostosowanie komunikacji marketingowej do zainteresowań</li>
+          <li>Analiza skuteczności działań marketingowych</li>
+        </ul>
+        <div class="kw-privacy-callout kw-privacy-callout--success kw-privacy-reveal">
+          <p><i class="fas fa-check-circle"></i> <strong>Twoje prawa:</strong> W każdej chwili możesz wnieść sprzeciw wobec profilowania w celach marketingowych (art. 21 RODO). Wystarczy skontaktować się z nami pod adresem <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a> lub kliknąć link "Zrezygnuj" w komunikacji marketingowej.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       12. ZMIANY POLITYKI PRYWATNOŚCI
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--alt" aria-label="Zmiany polityki prywatności">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">Postanowienia końcowe</span>
+        <h2 class="kw-privacy-title">Zmiany Polityki Prywatności</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Administrator zastrzega sobie prawo do wprowadzania zmian w Polityce Prywatności w przypadku zmiany przepisów prawa, wdrożenia nowych rozwiązań technologicznych lub zmian w procesach przetwarzania danych.</p>
+      </div>
+      <div class="kw-privacy-changes kw-privacy-reveal">
+        <div class="kw-privacy-changes__header">
+          <i class="fas fa-history"></i>
+          <h3>Aktualizacje i zmiany</h3>
+        </div>
+        <p>O wszelkich zmianach Administrator poinformuje Klientów poprzez zamieszczenie zaktualizowanej treści na stronie sklepu internetowego KEDAR-WIHA.pl. W przypadkach istotnych zmian dotyczących sposobu przetwarzania danych osobowych, możemy dodatkowo poinformować Cię o zmianach za pośrednictwem e-maila lub powiadomienia na stronie.</p>
+        <p>Korzystanie ze sklepu po wprowadzeniu zmian w Polityce Prywatności oznacza akceptację wprowadzonych modyfikacji. Jeśli nie zgadzasz się ze zmianami, prosimy o zaprzestanie korzystania ze sklepu i skontaktowanie się z nami w celu usunięcia konta.</p>
+        <div class="kw-privacy-changes__update">
+          <i class="fas fa-calendar-alt"></i>
+          <div>
+            <strong>Data ostatniej aktualizacji:</strong>
+            <span>01.04.2026 r.</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="kw-privacy-content" style="max-width:800px;margin:32px auto 0;">
+        <h3><i class="fas fa-file-signature"></i> Obowiązywanie polityki</h3>
+        <p>Niniejsza Polityka Prywatności obowiązuje od dnia jej opublikowania na stronie sklepu internetowego KEDAR-WIHA.pl. Dokument ten stanowi integralną część regulaminu sklepu i jest wiążący dla wszystkich użytkowników korzystających z usług sklepu.</p>
+        <p>W sprawach nieuregulowanych niniejszą Polityką Prywatności zastosowanie mają odpowiednie przepisy prawa polskiego i unijnego, w szczególności RODO oraz ustawa o ochronie danych osobowych.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       13. FAQ
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-section kw-privacy-section--pattern" id="faq" aria-label="Najczęściej zadawane pytania o RODO">
+    <div class="container">
+      <div class="kw-privacy-header kw-privacy-reveal">
+        <span class="kw-privacy-label">FAQ</span>
+        <h2 class="kw-privacy-title">Najczęściej Zadawane Pytania o RODO</h2>
+        <hr class="kw-privacy-divider" />
+        <p class="kw-privacy-subtitle">Odpowiedzi na najczęściej zadawane pytania dotyczące ochrony danych osobowych, praw klientów i zasad przetwarzania danych w sklepie KEDAR-WIHA.pl.</p>
+      </div>
+      <div class="kw-privacy-faq">
+        <details class="kw-privacy-faq__item kw-privacy-reveal kw-privacy-stagger-1">
+          <summary>Jakie dane osobowe zbiera sklep KEDAR-WIHA.pl?</summary>
+          <div class="kw-privacy-faq__answer">
+            <p>Sklep KEDAR-WIHA.pl zbiera wyłącznie te dane osobowe, które są niezbędne do realizacji zamówień i świadczenia usług. Obejmuje to: dane identyfikacyjne (imię, nazwisko, nazwa firmy), dane kontaktowe (e-mail, telefon), dane adresowe (adres dostawy, adres korespondencyjny), dane transakcyjne (historia zamówień), dane rozliczeniowe (NIP do faktury) oraz dane techniczne (adres IP, cookies). Nie zbieramy danych wrażliwych w rozumieniu RODO.</p>
+          </div>
+        </details>
+        <details class="kw-privacy-faq__item kw-privacy-reveal kw-privacy-stagger-2">
+          <summary>Jak długo przechowujecie moje dane osobowe?</summary>
+          <div class="kw-privacy-faq__answer">
+            <p>Okres przechowywania danych zależy od celu ich przetwarzania. Dane związane z realizacją zamówień przechowujemy przez okres rękojmi (2 lata) plus okres przedawnienia roszczeń (3 lata). Dane księgowe (faktury) — 5 lat od końca roku podatkowego. Dane konta użytkownika — do momentu usunięcia konta. Dane związane z marketingiem — do wycofania zgody lub wniesienia sprzeciwu. Szczegółowe informacje znajdziesz w tabeli w sekcji <a href="#cele-przetwarzania">Cele i zakres przetwarzania</a>.</p>
+          </div>
+        </details>
+        <details class="kw-privacy-faq__item kw-privacy-reveal kw-privacy-stagger-3">
+          <summary>Czy moje dane są bezpieczne w sklepie KEDAR-WIHA.pl?</summary>
+          <div class="kw-privacy-faq__answer">
+            <p>Tak, bezpieczeństwo danych naszych klientów jest dla nas priorytetem. Stosujemy szereg środków technicznych i organizacyjnych: szyfrowanie SSL/TLS dla wszystkich transmisji danych, regularne aktualizacje oprogramowania, kontrolę dostępu do danych (wyłącznie upoważnione osoby), regularne kopie zapasowe, szkolenia personelu oraz zaawansowane systemy zabezpieczeń (firewalle, antywirusy). Dodatkowo współpracujemy wyłącznie z zaufanymi dostawcami usług, którzy spełniają wymogi RODO.</p>
+          </div>
+        </details>
+        <details class="kw-privacy-faq__item kw-privacy-reveal kw-privacy-stagger-4">
+          <summary>Jak mogę usunąć swoje konto i dane ze sklepu?</summary>
+          <div class="kw-privacy-faq__answer">
+            <p>Masz prawo do usunięcia swoich danych osobowych ("prawo do bycia zapomnianym") w każdej chwili. Aby usunąć konto, zaloguj się do swojego profilu i wybierz opcję "Usuń konto" lub skontaktuj się z nami pod adresem <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a>. Pamiętaj, że niektóre dane (np. faktury) musimy przechowywać przez okres wymagany przepisami prawa (5 lat), nawet po usunięciu konta. Dane te będą jednak ograniczone wyłącznie do niezbędnego minimum.</p>
+          </div>
+        </details>
+        <details class="kw-privacy-faq__item kw-privacy-reveal kw-privacy-stagger-5">
+          <summary>Czy przekazujecie moje dane podmiotom zewnętrznym?</summary>
+          <div class="kw-privacy-faq__answer">
+            <p>Tak, ale wyłącznie w niezbędnym zakresie i do zaufanych podmiotów. Dane mogą być przekazywane: firmom kurierskim (InPost, DPD) — do realizacji dostawy, operatorom płatności (PayU, Przelewy24) — do obsługi płatności, dostawcom usług analitycznych (Google Analytics 4) — do analizy ruchu, dostawcom usług marketingowych (Meta Pixel) — na podstawie zgody. Pełną listę odbiorców znajdziesz w sekcji <a href="#odbiorcy">Odbiorcy danych osobowych</a>.</p>
+          </div>
+        </details>
+        <details class="kw-privacy-faq__item kw-privacy-reveal kw-privacy-stagger-6">
+          <summary>Jak wycofać zgodę na newsletter lub marketing?</summary>
+          <div class="kw-privacy-faq__answer">
+            <p>Wycofanie zgody na otrzymywanie newslettera lub komunikacji marketingowej jest bardzo proste. Możesz to zrobić na trzy sposoby: (1) kliknij link "Wypisz się" znajdujący się w stopce każdego newslettera, (2) zaloguj się do swojego konta i zmień ustawienia powiadomień, (3) wyślij e-mail na adres <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a> z prośbą o wycofanie zgody. Cofnięcie zgody jest bezpłatne i nie wpływa na zgodność z prawem przetwarzania dokonanego przed jej cofnięciem.</p>
+          </div>
+        </details>
+        <details class="kw-privacy-faq__item kw-privacy-reveal kw-privacy-stagger-1">
+          <summary>Czy używacie plików cookies i jak je wyłączyć?</summary>
+          <div class="kw-privacy-faq__answer">
+            <p>Tak, nasz sklep wykorzystuje pliki cookies w celu zapewnienia prawidłowego funkcjonowania strony, analizy ruchu oraz prowadzenia działań marketingowych (wyłącznie za zgodą). Możesz zarządzać plikami cookies w ustawieniach swojej przeglądarki internetowej. Szczegółowe instrukcje dla poszczególnych przeglądarek znajdziesz w sekcji <a href="#cookies">Pliki cookies i technologie śledzące</a>. Pamiętaj, że wyłączenie niektórych cookies (np. technicznych) może wpłynąć na funkcjonalność sklepu.</p>
+          </div>
+        </details>
+        <details class="kw-privacy-faq__item kw-privacy-reveal kw-privacy-stagger-2">
+          <summary>Jak mogę skontaktować się w sprawie ochrony danych?</summary>
+          <div class="kw-privacy-faq__answer">
+            <p>W sprawach związanych z ochroną danych osobowych możesz skontaktować się z nami: e-mail: <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a>, telefon: <a href="tel:+48575838766">+48 575 838 766</a> (pn-pt, 8:00-16:00), lub pisemnie na adres siedziby Administratora. Administrator nie wyznaczył Inspektora Ochrony Danych (IOD), dlatego wszystkie sprawy związane z RODO obsługujemy bezpośrednio. Odpowiadamy na zapytania bez zbędnej zwłoki, nie później niż w ciągu 1 miesiąca.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       14. CTA / KONTAKT
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-privacy-cta" aria-label="Kontakt w sprawach RODO">
+    <div class="kw-privacy-cta__inner">
+      <h2>Masz Pytania o Ochronę Danych?</h2>
+      <p>Nasz zespół jest gotowy odpowiedzieć na wszystkie pytania dotyczące przetwarzania danych osobowych, realizacji praw wynikających z RODO oraz zasad ochrony prywatności w sklepie KEDAR-WIHA.pl. Skontaktuj się z nami — chętnie pomożemy.</p>
+      <div class="kw-privacy-cta__btns">
+        <a href="mailto:info@kedar-wiha.pl" class="kw-privacy-btn kw-privacy-btn--white"><i class="fas fa-envelope"></i> Napisz do nas</a>
+        <a href="tel:+48575838766" class="kw-privacy-btn kw-privacy-btn--outline"><i class="fas fa-phone-alt"></i> Zadzwoń</a>
+      </div>
+      <div class="kw-privacy-contact-grid">
+        <a href="tel:+48575838766" class="kw-privacy-contact-card">
+          <div class="kw-privacy-contact-icon"><i class="fas fa-phone-alt"></i></div>
+          <div>
+            <strong>Telefon</strong>
+            <span>+48 575 838 766</span>
+          </div>
+        </a>
+        <a href="mailto:info@kedar-wiha.pl" class="kw-privacy-contact-card">
+          <div class="kw-privacy-contact-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <strong>E-mail (sprawy RODO)</strong>
+            <span>info@kedar-wiha.pl</span>
+          </div>
+        </a>
+        <a href="https://kedar-wiha.pl" class="kw-privacy-contact-card">
+          <div class="kw-privacy-contact-icon"><i class="fas fa-globe"></i></div>
+          <div>
+            <strong>Sklep online</strong>
+            <span>kedar-wiha.pl</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- / .kw-privacy-page -->
+
+<!-- ══════════════════════════════════════════════════════════════════════════════
+     JAVASCRIPT — IntersectionObserver, Smooth Scroll, FAQ Accordion
+     ══════════════════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ── 1. INTERSECTION OBSERVER — SCROLL REVEAL ────────────────────────── */
+  var revealSelectors = '.kw-privacy-reveal, .kw-privacy-slide-left, .kw-privacy-slide-right';
+
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('kw-privacy-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll(revealSelectors).forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    /* Fallback for old browsers */
+    document.querySelectorAll(revealSelectors).forEach(function(el) {
+      el.classList.add('kw-privacy-visible');
+    });
+  }
+
+  /* ── 2. SMOOTH SCROLL FOR ANCHOR LINKS ───────────────────────────────── */
+  document.querySelectorAll('.kw-privacy-page a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href && href.length > 1) {
+        var target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          var headerOffset = 80; /* approximate sticky header height */
+          var elementPosition = target.getBoundingClientRect().top;
+          var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+
+          /* Update URL without jump */
+          if (history.pushState) {
+            history.pushState(null, null, href);
+          }
+        }
+      }
+    });
+  });
+
+  /* ── 3. FAQ ACCORDION — CLOSE OTHERS ON OPEN ────────────────────────── */
+  document.querySelectorAll('.kw-privacy-faq__item summary').forEach(function(summary) {
+    summary.addEventListener('click', function() {
+      var currentItem = this.parentElement;
+
+      /* Close other open items in the same FAQ */
+      document.querySelectorAll('.kw-privacy-faq__item[open]').forEach(function(openItem) {
+        if (openItem !== currentItem) {
+          openItem.removeAttribute('open');
+        }
+      });
+    });
+  });
+
+  /* ── 4. ACTIVE TOC ITEM ON SCROLL ───────────────────────────────────── */
+  var sections = document.querySelectorAll('.kw-privacy-section[id]');
+  var tocItems = document.querySelectorAll('.kw-privacy-toc__item');
+
+  if ('IntersectionObserver' in window && sections.length > 0) {
+    var sectionObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.getAttribute('id');
+          tocItems.forEach(function(item) {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === '#' + id) {
+              item.classList.add('active');
+            }
+          });
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '-100px 0px -50% 0px'
+    });
+
+    sections.forEach(function(section) {
+      sectionObserver.observe(section);
+    });
+  }
+})();
+</script>
+
+<!-- ==========================================================================
+   KONIEC STRONY CMS "POLITYKA PRYWATNOŚCI & RODO" KEDAR-WIHA.pl
+   ========================================================================== -->

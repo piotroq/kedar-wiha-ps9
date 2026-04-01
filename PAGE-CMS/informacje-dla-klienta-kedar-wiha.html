@@ -1,0 +1,1065 @@
+<!-- ==========================================================================
+   KEDAR-WIHA.pl — Strona "Informacje dla klienta" (Customer Information)
+   PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 4.x
+   Wersja: 2.0.0 | 2025 — PEŁNA PRZEBUDOWA
+   Gotowe do wklejenia: Wygląd > Strony > Informacje dla klienta
+   Namespace: .ci- (unikanie kolizji z .kw-about- / .kw-pay- / .kw-comp-)
+   Lokalne zmienne CSS | Font Awesome 5 (fas) | IntersectionObserver JS
+   ========================================================================== -->
+
+<style>
+/* ==========================================================================
+   KEDAR-WIHA.pl — INFORMACJE DLA KLIENTA v2.0
+   Namespace: .ci-
+   Mobile-first | BEM | LOKALNE zmienne CSS (self-contained)
+   Font Awesome 5 (fas) | IntersectionObserver scroll-reveal
+   ========================================================================== */
+
+/* ── SCOPE + LOKALNE ZMIENNE ──────────────────────────────────────────── */
+.ci-page {
+  --ci-primary: #8B0000;
+  --ci-primary-dark: #6b0000;
+  --ci-secondary: #0056A3;
+  --ci-secondary-dark: #003d7a;
+  --ci-secondary-light: #1a7bc4;
+  --ci-three: #ca0000;
+  --ci-accent: #FFD700;
+  --ci-green: #1A7A3C;
+  --ci-green-bg: #e8f5ee;
+  --ci-amber: #E07B00;
+  --ci-amber-bg: #fff5ed;
+  --ci-heading: #2D2D2D;
+  --ci-text: #151515;
+  --ci-text-muted: #555555;
+  --ci-text-tertiary: #888888;
+  --ci-bg-light: #f5f5f5;
+  --ci-bg-dark: #1a1a1a;
+  --ci-bg-darker: #2a2a2a;
+  --ci-white: #ffffff;
+  --ci-border: #e8e8e8;
+  --ci-font-heading: 'Montserrat', 'Manrope', Arial, sans-serif;
+  --ci-font-body: 'Inter', 'Manrope', Arial, sans-serif;
+  --ci-radius-sm: 3px;
+  --ci-radius-md: 4px;
+  --ci-radius-lg: 8px;
+  --ci-shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --ci-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --ci-shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --ci-shadow-lg: 0 8px 28px rgba(0,0,0,0.13);
+  --ci-shadow-cta: 0 4px 20px rgba(139,0,0,0.30);
+  --ci-transition: 300ms cubic-bezier(0.25,0.46,0.45,0.94);
+  --ci-transition-slow: 500ms ease;
+
+  font-family: var(--ci-font-body);
+  color: var(--ci-text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+.ci-page *, .ci-page *::before, .ci-page *::after { box-sizing: border-box; }
+.ci-page img { max-width: 100%; height: auto; }
+
+/* ── KEYFRAMES ────────────────────────────────────────────────────────── */
+@keyframes ciFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ciFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ci-page * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scroll-reveal classes */
+.ci-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--ci-transition-slow), transform var(--ci-transition-slow);
+}
+.ci-reveal.ci-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ci-stagger-1 { transition-delay: 0ms; }
+.ci-stagger-2 { transition-delay: 80ms; }
+.ci-stagger-3 { transition-delay: 160ms; }
+.ci-stagger-4 { transition-delay: 240ms; }
+.ci-stagger-5 { transition-delay: 320ms; }
+.ci-stagger-6 { transition-delay: 400ms; }
+
+/* CSS-only anim for hero */
+.ci-anim { animation: ciFadeUp 0.6s ease both; }
+
+/* ── SECTION BASE ─────────────────────────────────────────────────────── */
+.ci-section {
+  padding: 48px 0;
+  position: relative;
+}
+.ci-section--alt {
+  background: var(--ci-bg-light);
+}
+.ci-section--dark {
+  background: linear-gradient(155deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: var(--ci-white);
+}
+.ci-section--dark p,
+.ci-section--dark li {
+  color: rgba(255,255,255,0.82);
+}
+.ci-section--pattern { position: relative; }
+.ci-section--pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(139,0,0,0.02) 22px, rgba(139,0,0,0.02) 23px);
+  pointer-events: none;
+  z-index: 0;
+}
+.ci-section--pattern > .container { position: relative; z-index: 1; }
+
+/* ── SECTION HEADER ───────────────────────────────────────────────────── */
+.ci-header { text-align: center; margin-bottom: 32px; }
+.ci-label {
+  display: inline-block;
+  font-family: var(--ci-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ci-primary);
+  background: rgba(139,0,0,0.06);
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+.ci-section--dark .ci-label {
+  color: var(--ci-accent);
+  background: rgba(255,215,0,0.1);
+}
+.ci-title {
+  font-family: var(--ci-font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3.5vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ci-heading);
+  margin: 0 0 12px;
+}
+.ci-section--dark .ci-title { color: var(--ci-white); }
+.ci-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--ci-primary);
+  border: none;
+  border-radius: 2px;
+  margin: 14px auto;
+}
+.ci-subtitle {
+  font-family: var(--ci-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.65;
+  color: var(--ci-text-muted);
+  max-width: 680px;
+  margin: 0 auto;
+}
+.ci-section--dark .ci-subtitle { color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   1. HERO
+   ══════════════════════════════════════════════════════════════════════════ */
+.ci-hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(26,26,26,0.94) 0%, rgba(61,0,0,0.90) 55%, rgba(139,0,0,0.84) 100%),
+    url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1600&q=80') center/cover no-repeat;
+  padding: 52px 16px;
+  text-align: center;
+  overflow: hidden;
+}
+@supports (background-attachment: fixed) {
+  @media (min-width: 768px) {
+    .ci-hero { background-attachment: scroll, fixed; }
+  }
+}
+.ci-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(30deg, transparent, transparent 38px, rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px);
+  pointer-events: none;
+}
+.ci-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 56px;
+  background: linear-gradient(to top, rgba(26,26,26,0.25), transparent);
+  pointer-events: none;
+}
+.ci-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  animation: ciFadeUp 0.7s ease both;
+}
+.ci-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--ci-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ci-accent);
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.22);
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+}
+.ci-hero__badge i { font-size: 11px; }
+.ci-hero__title {
+  font-family: var(--ci-font-heading);
+  font-weight: 800;
+  font-size: clamp(24px, 5vw, 48px);
+  line-height: 1.12;
+  color: var(--ci-white);
+  margin: 0 0 14px;
+}
+.ci-hero__title em { font-style: normal; color: var(--ci-three); }
+.ci-hero__sub {
+  font-family: var(--ci-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.7;
+  color: rgba(255,255,255,0.82);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.ci-hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.ci-hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--ci-font-heading);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3px;
+  background: rgba(255,255,255,0.04);
+}
+.ci-hero__chip i { color: var(--ci-accent); font-size: 10px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CARDS (Delivery, Payments)
+   ══════════════════════════════════════════════════════════════════════════ */
+.ci-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.ci-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 24px 20px;
+  background: var(--ci-white);
+  border: 1px solid var(--ci-border);
+  border-left: 4px solid var(--ci-primary);
+  border-radius: 0 var(--ci-radius-sm) var(--ci-radius-sm) 0;
+  transition: all var(--ci-transition);
+  box-shadow: var(--ci-shadow-xs);
+}
+.ci-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ci-shadow-lg);
+  border-left-color: var(--ci-three);
+}
+.ci-card__icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ci-radius-sm);
+  background: rgba(139,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--ci-primary);
+  transition: all var(--ci-transition);
+}
+.ci-card:hover .ci-card__icon {
+  background: var(--ci-primary);
+  color: var(--ci-white);
+}
+.ci-card__body { flex: 1; min-width: 0; }
+.ci-card__name {
+  font-family: var(--ci-font-heading);
+  font-weight: 700;
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--ci-heading);
+  margin: 0 0 6px;
+}
+.ci-card__desc {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ci-text-muted);
+  margin: 0 0 8px;
+}
+.ci-card__meta { font-size: 12px; color: var(--ci-text-tertiary); margin: 0; }
+.ci-card__meta strong { color: var(--ci-text-muted); font-weight: 600; }
+
+/* Blue variant */
+.ci-card--blue { border-left-color: var(--ci-secondary); }
+.ci-card--blue .ci-card__icon { background: rgba(0,86,163,0.07); color: var(--ci-secondary); }
+.ci-card--blue:hover .ci-card__icon { background: var(--ci-secondary); color: var(--ci-white); }
+.ci-card--blue:hover { border-left-color: var(--ci-secondary-light); }
+
+/* Badge */
+.ci-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--ci-font-heading);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.ci-badge--green { background: var(--ci-green-bg); color: var(--ci-green); }
+.ci-badge--amber { background: var(--ci-amber-bg); color: var(--ci-amber); }
+
+/* Callout */
+.ci-callout {
+  background: rgba(0,86,163,0.05);
+  border-left: 4px solid var(--ci-secondary);
+  padding: 18px 20px;
+  border-radius: 0 var(--ci-radius-md) var(--ci-radius-md) 0;
+  margin: 24px 0;
+}
+.ci-callout p { margin: 0; font-size: 14px; color: var(--ci-heading); line-height: 1.6; }
+.ci-callout i { color: var(--ci-secondary); margin-right: 6px; }
+.ci-callout a { color: var(--ci-secondary); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CERT CARDS (dark)
+   ══════════════════════════════════════════════════════════════════════════ */
+.ci-cert-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.ci-cert-card {
+  text-align: center;
+  padding: 28px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--ci-radius-sm);
+  transition: all var(--ci-transition);
+}
+.ci-cert-card:hover {
+  background: rgba(255,255,255,0.09);
+  transform: translateY(-3px);
+  border-color: rgba(139,0,0,0.3);
+}
+.ci-cert-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(139,0,0,0.15);
+  border: 2px solid var(--ci-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 22px;
+  color: var(--ci-accent);
+  transition: all var(--ci-transition);
+}
+.ci-cert-card:hover .ci-cert-icon {
+  background: var(--ci-primary);
+  color: var(--ci-white);
+}
+.ci-cert-card h3 {
+  font-family: var(--ci-font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ci-white);
+  margin: 0 0 8px;
+}
+.ci-cert-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.72);
+  margin: 0;
+}
+
+/* Badges row */
+.ci-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.ci-cert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--ci-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 3px;
+  transition: all var(--ci-transition);
+}
+.ci-cert-badge:hover { transform: translateY(-2px); box-shadow: var(--ci-shadow-md); }
+.ci-cert-badge--blue { background: var(--ci-secondary); color: var(--ci-white); }
+.ci-cert-badge--dark { background: var(--ci-heading); color: var(--ci-white); }
+.ci-cert-badge--green { background: var(--ci-green); color: var(--ci-white); }
+.ci-cert-badge--red { background: var(--ci-primary); color: var(--ci-white); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PROSE (Returns section)
+   ══════════════════════════════════════════════════════════════════════════ */
+.ci-prose { max-width: 780px; margin: 0 auto; }
+.ci-prose h3 {
+  font-family: var(--ci-font-heading);
+  font-weight: 700;
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--ci-heading);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ci-prose h3 i { font-size: 16px; }
+.ci-prose p { font-size: 15px; line-height: 1.7; color: var(--ci-text); margin-bottom: 14px; }
+.ci-prose strong { color: var(--ci-heading); }
+.ci-prose ul { padding-left: 0; list-style: none; margin-bottom: 16px; }
+.ci-prose ul li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 8px;
+}
+.ci-prose ul li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 10px;
+  color: var(--ci-green);
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FAQ — CSS-only accordion
+   ══════════════════════════════════════════════════════════════════════════ */
+.ci-faq { max-width: 760px; margin: 0 auto; }
+.ci-faq__item {
+  background: var(--ci-white);
+  border: 1px solid var(--ci-border);
+  border-radius: var(--ci-radius-sm);
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: all var(--ci-transition);
+  box-shadow: var(--ci-shadow-xs);
+}
+.ci-faq__item:hover { box-shadow: var(--ci-shadow-md); border-color: var(--ci-primary); }
+.ci-faq__item[open] { border-color: var(--ci-primary); box-shadow: var(--ci-shadow-md); }
+.ci-faq__item summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  font-family: var(--ci-font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ci-heading);
+  cursor: pointer;
+  list-style: none;
+  min-height: 48px;
+  transition: color var(--ci-transition);
+}
+.ci-faq__item summary::-webkit-details-marker { display: none; }
+.ci-faq__item summary::before {
+  content: '\f105';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--ci-primary);
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  transition: transform var(--ci-transition);
+}
+.ci-faq__item[open] summary::before { transform: rotate(90deg); }
+.ci-faq__item summary:hover { color: var(--ci-primary); }
+.ci-faq__answer {
+  padding: 0 20px 16px 50px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ci-text-muted);
+  animation: ciFadeIn 0.3s ease both;
+}
+.ci-faq__answer a { color: var(--ci-secondary); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SUPPORT CARDS
+   ══════════════════════════════════════════════════════════════════════════ */
+.ci-support-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.ci-support-card {
+  text-align: center;
+  padding: 28px 20px;
+  background: var(--ci-white);
+  border: 1px solid var(--ci-border);
+  border-radius: var(--ci-radius-sm);
+  transition: all var(--ci-transition);
+  box-shadow: var(--ci-shadow-sm);
+}
+.ci-support-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ci-shadow-lg);
+  border-color: var(--ci-secondary);
+}
+.ci-support-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--ci-radius-md);
+  background: rgba(0,86,163,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 22px;
+  color: var(--ci-secondary);
+  transition: all var(--ci-transition);
+}
+.ci-support-card:hover .ci-support-icon {
+  background: var(--ci-secondary);
+  color: var(--ci-white);
+}
+.ci-support-card h3 {
+  font-family: var(--ci-font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ci-heading);
+  margin: 0 0 8px;
+}
+.ci-support-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ci-text-muted);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CONTACT CARDS (dark)
+   ══════════════════════════════════════════════════════════════════════════ */
+.ci-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.ci-contact-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px 20px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--ci-radius-sm);
+  transition: all var(--ci-transition);
+  text-decoration: none;
+  color: var(--ci-white);
+}
+.ci-contact-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+  border-color: rgba(255,215,0,0.2);
+  text-decoration: none;
+  color: var(--ci-white);
+}
+.ci-contact-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--ci-radius-sm);
+  background: rgba(139,0,0,0.2);
+  border: 1px solid var(--ci-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--ci-accent);
+  transition: all var(--ci-transition);
+}
+.ci-contact-card:hover .ci-contact-icon {
+  background: var(--ci-primary);
+  color: var(--ci-white);
+}
+.ci-contact-card strong {
+  display: block;
+  font-family: var(--ci-font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ci-white);
+  margin-bottom: 2px;
+}
+.ci-contact-card span { font-size: 13px; color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CTA
+   ══════════════════════════════════════════════════════════════════════════ */
+.ci-cta {
+  background: linear-gradient(140deg, #8B0000 0%, #5a0000 55%, #1a1a1a 100%);
+  text-align: center;
+  padding: 52px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.ci-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(55deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px);
+  pointer-events: none;
+}
+.ci-cta__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.ci-cta__inner h2 {
+  font-family: var(--ci-font-heading);
+  font-weight: 700;
+  font-size: clamp(20px, 3.2vw, 34px);
+  line-height: 1.2;
+  color: var(--ci-white);
+  margin: 0 0 14px;
+}
+.ci-cta__inner p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 24px;
+}
+.ci-cta__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.ci-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ci-font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 13px 26px;
+  border-radius: var(--ci-radius-md);
+  text-decoration: none;
+  min-height: 48px;
+  transition: all var(--ci-transition);
+  border: 2px solid transparent;
+}
+.ci-btn--white {
+  background: var(--ci-white); color: var(--ci-primary); border-color: var(--ci-white);
+  box-shadow: 0 4px 18px rgba(255,255,255,0.18);
+}
+.ci-btn--white:hover {
+  background: transparent; color: var(--ci-white); transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,255,255,0.25); text-decoration: none;
+}
+.ci-btn--outline {
+  background: transparent; color: var(--ci-white); border-color: rgba(255,255,255,0.35);
+}
+.ci-btn--outline:hover {
+  background: var(--ci-white); color: var(--ci-primary); border-color: var(--ci-white); text-decoration: none;
+}
+.ci-cta__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 28px;
+}
+.ci-cta__link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255,255,255,0.72);
+  font-size: 13px;
+  text-decoration: none;
+  transition: color var(--ci-transition);
+}
+.ci-cta__link:hover { color: var(--ci-white); text-decoration: none; }
+.ci-cta__link i { color: var(--ci-accent); font-size: 14px; width: 18px; text-align: center; }
+.ci-cta__copy { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 8px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 480px) {
+  .ci-cta__btns { flex-direction: row; justify-content: center; }
+  .ci-cta__footer { flex-direction: row; justify-content: center; flex-wrap: wrap; }
+}
+@media (min-width: 576px) {
+  .ci-cards { grid-template-columns: repeat(2, 1fr); }
+  .ci-cert-grid { grid-template-columns: repeat(2, 1fr); }
+  .ci-support-grid { grid-template-columns: repeat(3, 1fr); }
+  .ci-contact-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
+}
+@media (min-width: 768px) {
+  .ci-section { padding: 64px 0; }
+  .ci-hero { min-height: 420px; padding: 72px 24px; }
+  .ci-header { margin-bottom: 40px; }
+  .ci-cards { grid-template-columns: repeat(3, 1fr); }
+  .ci-cta { padding: 72px 24px; }
+}
+@media (min-width: 1024px) {
+  .ci-section { padding: 80px 0; }
+  .ci-hero { min-height: 480px; padding: 88px 32px; }
+  .ci-cert-grid { grid-template-columns: repeat(4, 1fr); }
+  .ci-header { margin-bottom: 48px; }
+}
+@media (min-width: 1440px) {
+  .ci-section { padding: 96px 0; }
+}
+</style>
+
+<!-- SCHEMA.ORG -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Informacje dla klienta — KEDAR-WIHA.pl",
+  "description": "Dostawa, płatności, gwarancja, zwroty i wsparcie techniczne w sklepie KEDAR-WIHA.pl — autoryzowany dystrybutor narzędzi WIHA VDE dla elektryków.",
+  "url": "https://kedar-wiha.pl/informacje-dla-klienta",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "KEDAR-WIHA.pl",
+    "url": "https://kedar-wiha.pl",
+    "telephone": "+48575838766",
+    "email": "info@kedar-wiha.pl"
+  }
+}
+</script>
+
+<!-- ====================================================================== -->
+<div class="ci-page">
+
+  <!-- 1. HERO -->
+  <section class="ci-hero" aria-label="Informacje dla klienta KEDAR-WIHA.pl">
+    <div class="ci-hero__inner">
+      <span class="ci-hero__badge"><i class="fas fa-info-circle"></i> Centrum obsługi klienta</span>
+      <h1 class="ci-hero__title">Informacje dla <em>Klienta</em></h1>
+      <p class="ci-hero__sub">Wszystko, co&nbsp;musisz wiedzieć o&nbsp;zamawianiu profesjonalnych narzędzi WIHA — metody dostawy, bezpieczne płatności, gwarancja producenta, procedury zwrotów i&nbsp;eksperckie wsparcie techniczne autoryzowanego dystrybutora.</p>
+      <div class="ci-hero__trust">
+        <span class="ci-hero__chip"><i class="fas fa-truck"></i> Szybka dostawa</span>
+        <span class="ci-hero__chip"><i class="fas fa-lock"></i> Bezpieczne płatności</span>
+        <span class="ci-hero__chip"><i class="fas fa-shield-alt"></i> Gwarancja WIHA</span>
+        <span class="ci-hero__chip"><i class="fas fa-undo-alt"></i> 14 dni na zwrot</span>
+        <span class="ci-hero__chip"><i class="fas fa-headset"></i> Wsparcie techniczne</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. DOSTAWA -->
+  <section class="ci-section ci-section--pattern" aria-label="Metody dostawy">
+    <div class="container">
+      <div class="ci-header ci-reveal">
+        <span class="ci-label">Dostawa</span>
+        <h2 class="ci-title">Metody Dostawy Narzędzi WIHA na&nbsp;Terenie Polski</h2>
+        <hr class="ci-divider" />
+        <p class="ci-subtitle">Realizujemy wysyłki na&nbsp;terenie całej Polski. Zamówienia złożone i&nbsp;opłacone do&nbsp;godz. 14:00 w&nbsp;dniu roboczym wysyłamy tego samego dnia. Każda przesyłka z&nbsp;profesjonalnymi narzędziami WIHA jest starannie zapakowana i&nbsp;zabezpieczona.</p>
+      </div>
+      <div class="ci-cards">
+        <article class="ci-card ci-reveal ci-stagger-1">
+          <div class="ci-card__icon"><i class="fas fa-truck"></i></div>
+          <div class="ci-card__body">
+            <h3 class="ci-card__name">Kurier DPD / InPost <span class="ci-badge ci-badge--green">1-2 dni</span></h3>
+            <p class="ci-card__desc">Standardowa dostawa kurierska na&nbsp;wskazany adres w&nbsp;Polsce. Przesyłka z&nbsp;wkrętakami izolowanymi VDE, kluczami dynamometrycznymi i&nbsp;zestawami narzędzi WIHA jest ubezpieczona i&nbsp;śledzona online. Kurier dostarcza przesyłkę w&nbsp;ciągu 1–2 dni roboczych od&nbsp;momentu nadania. Śledzenie statusu przesyłki możliwe przez link wysyłany w&nbsp;e-mailu z&nbsp;potwierdzeniem nadania.</p>
+            <p class="ci-card__meta"><strong>Czas:</strong> 1–2 dni robocze · <strong>Koszt:</strong> od 14,99 zł brutto · <strong>Śledzenie:</strong> online</p>
+          </div>
+        </article>
+        <article class="ci-card ci-reveal ci-stagger-2">
+          <div class="ci-card__icon"><i class="fas fa-box"></i></div>
+          <div class="ci-card__body">
+            <h3 class="ci-card__name">Paczkomat InPost <span class="ci-badge ci-badge--green">1-2 dni</span></h3>
+            <p class="ci-card__desc">Odbiór w&nbsp;dowolnym paczkomacie InPost w&nbsp;Polsce — ponad 20&nbsp;000 lokalizacji. Wygodna opcja dla elektryków i&nbsp;instalatorów PV odbierających narzędzia WIHA w&nbsp;drodze na&nbsp;budowę. Przesyłka czeka w&nbsp;paczkomacie do&nbsp;48 godzin. Idealna metoda dla zamówień o&nbsp;wymiarach mieszczących się w&nbsp;skrytkach standardowych (gabaryt A, B lub C).</p>
+            <p class="ci-card__meta"><strong>Czas:</strong> 1–2 dni robocze · <strong>Koszt:</strong> od 12,99 zł brutto · <strong>Odbiór:</strong> 48h w paczkomacie</p>
+          </div>
+        </article>
+        <article class="ci-card ci-reveal ci-stagger-3">
+          <div class="ci-card__icon"><i class="fas fa-gift"></i></div>
+          <div class="ci-card__body">
+            <h3 class="ci-card__name">Darmowa Dostawa <span class="ci-badge ci-badge--green">od 300 zł</span></h3>
+            <p class="ci-card__desc">Zamówienia powyżej <strong>300&nbsp;zł brutto</strong> wysyłamy bezpłatnie kurierem DPD lub do&nbsp;paczkomatu InPost. Darmowa dostawa obejmuje standardowe przesyłki na&nbsp;terenie Polski — dotyczy wkrętaków VDE, kluczy dynamometrycznych, zestawów narzędzi i&nbsp;pozostałego asortymentu WIHA. Próg darmowej dostawy jest widoczny w&nbsp;koszyku.</p>
+            <p class="ci-card__meta"><strong>Próg:</strong> 300 zł brutto · <strong>Metody:</strong> kurier lub paczkomat · <strong>Warunek:</strong> standardowe gabaryty</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PŁATNOŚCI -->
+  <section class="ci-section ci-section--alt" aria-label="Metody płatności">
+    <div class="container">
+      <div class="ci-header ci-reveal">
+        <span class="ci-label">Płatności</span>
+        <h2 class="ci-title">Bezpieczne Metody Płatności</h2>
+        <hr class="ci-divider" />
+        <p class="ci-subtitle">Wszystkie transakcje w&nbsp;sklepie KEDAR-WIHA.pl są chronione szyfrowaniem SSL/TLS. Operatorzy płatności posiadają licencje KNF. Dane kart płatniczych nie&nbsp;są przechowywane w&nbsp;naszych systemach.</p>
+      </div>
+      <div class="ci-cards">
+        <article class="ci-card ci-card--blue ci-reveal ci-stagger-1">
+          <div class="ci-card__icon"><i class="fas fa-bolt"></i></div>
+          <div class="ci-card__body">
+            <h3 class="ci-card__name">Szybki Przelew — PayU / Przelewy24 <span class="ci-badge ci-badge--green">Natychmiast</span></h3>
+            <p class="ci-card__desc">Szybkie przelewy online obsługiwane przez <strong>PayU&nbsp;S.A.</strong> (KRS&nbsp;0000274399) i&nbsp;<strong>PayPro&nbsp;S.A./Przelewy24</strong> (KRS&nbsp;0000347935). Płatność realizowana natychmiast po&nbsp;autoryzacji w&nbsp;Twoim banku. Obsługiwane banki: mBank, PKO&nbsp;BP, ING, Santander, Pekao, Alior i&nbsp;wiele innych. Licencja KNF i&nbsp;pełna ochrona transakcji.</p>
+          </div>
+        </article>
+        <article class="ci-card ci-card--blue ci-reveal ci-stagger-2">
+          <div class="ci-card__icon"><i class="fas fa-credit-card"></i></div>
+          <div class="ci-card__body">
+            <h3 class="ci-card__name">Karta Visa / Mastercard + BLIK <span class="ci-badge ci-badge--green">Natychmiast</span></h3>
+            <p class="ci-card__desc">Akceptujemy karty debetowe i&nbsp;kredytowe Visa oraz Mastercard z&nbsp;zabezpieczeniem <strong>3D&nbsp;Secure (SCA/PSD2)</strong>. Płatność BLIK — szybka autoryzacja 6-cyfrowym kodem z&nbsp;aplikacji bankowej. KEDAR-WIHA.pl nie&nbsp;przechowuje danych kart płatniczych — przetwarzanie odbywa się na&nbsp;certyfikowanych serwerach operatora (PCI&nbsp;DSS).</p>
+          </div>
+        </article>
+        <article class="ci-card ci-card--blue ci-reveal ci-stagger-3">
+          <div class="ci-card__icon"><i class="fas fa-university"></i></div>
+          <div class="ci-card__body">
+            <h3 class="ci-card__name">Przelew Tradycyjny / Za Pobraniem <span class="ci-badge ci-badge--amber">Do 7 dni</span></h3>
+            <p class="ci-card__desc">Klasyczny przelew bankowy — dane do przelewu (numer konta, tytuł) podawane po&nbsp;złożeniu zamówienia. Termin zapłaty: <strong>7&nbsp;dni roboczych</strong>. Płatność za pobraniem — gotówką lub kartą u&nbsp;kuriera przy odbiorze. Opłata za pobranie wliczona w&nbsp;koszt dostawy widoczny w&nbsp;koszyku.</p>
+          </div>
+        </article>
+      </div>
+      <div class="ci-callout ci-reveal" style="max-width:780px;margin:24px auto 0;">
+        <p><i class="fas fa-file-invoice"></i> <strong>Faktura VAT:</strong> Do każdego zamówienia wystawiamy paragon fiskalny lub fakturę VAT. Aby otrzymać fakturę, podaj <strong>NIP firmy</strong> w&nbsp;trakcie składania zamówienia. E-faktura dostępna na&nbsp;e-mail oraz w&nbsp;panelu Konta Klienta. <a href="/platnosci">Szczegóły →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. GWARANCJA -->
+  <section class="ci-section ci-section--dark" aria-label="Gwarancja i certyfikaty">
+    <div class="container">
+      <div class="ci-header ci-reveal">
+        <span class="ci-label">Gwarancja i certyfikaty</span>
+        <h2 class="ci-title">Gwarancja Producenta WIHA — Made&nbsp;in&nbsp;Germany od&nbsp;1939</h2>
+        <hr class="ci-divider" />
+        <p class="ci-subtitle">Jako autoryzowany dystrybutor oferujemy wyłącznie oryginalne narzędzia WIHA z&nbsp;pełną gwarancją producenta. Każde narzędzie izolowane VDE przechodzi indywidualny test dielektryczny napięciem 10&nbsp;000&nbsp;V.</p>
+      </div>
+      <div class="ci-cert-grid">
+        <div class="ci-cert-card ci-reveal ci-stagger-1">
+          <div class="ci-cert-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Gwarancja Producenta</h3>
+          <p>Wszystkie narzędzia WIHA objęte są gwarancją producenta na&nbsp;wady materiałowe i&nbsp;wykonawcze. Warunki gwarancji zawarte w&nbsp;karcie gwarancyjnej dołączonej do&nbsp;produktu. Gwarancja nie&nbsp;wyłącza uprawnień z&nbsp;tytułu rękojmi (2&nbsp;lata od&nbsp;dnia dostarczenia).</p>
+        </div>
+        <div class="ci-cert-card ci-reveal ci-stagger-2">
+          <div class="ci-cert-icon"><i class="fas fa-bolt"></i></div>
+          <h3>VDE-GS / IEC&nbsp;60900</h3>
+          <p>Narzędzia izolowane VDE WIHA certyfikowane do&nbsp;pracy pod napięciem do&nbsp;<strong>1&nbsp;000&nbsp;V&nbsp;AC / 1&nbsp;500&nbsp;V&nbsp;DC</strong>. Indywidualny test 10&nbsp;000&nbsp;V. Certyfikaty VDE-GS, IEC&nbsp;60900 i&nbsp;ASTM&nbsp;F1505 potwierdzające bezpieczeństwo elektryczne na&nbsp;najwyższym poziomie.</p>
+        </div>
+        <div class="ci-cert-card ci-reveal ci-stagger-3">
+          <div class="ci-cert-icon"><i class="fas fa-cog"></i></div>
+          <h3>ISO&nbsp;6789 — Kalibracja</h3>
+          <p>Klucze dynamometryczne WIHA z&nbsp;certyfikatami kalibracji zgodnie z&nbsp;normą ISO&nbsp;6789. Precyzja momentu obrotowego ±6% — kluczowy parametr bezpieczeństwa przy montażu instalacji PV, rozdzielnic i&nbsp;złączy wysokonapięciowych.</p>
+        </div>
+        <div class="ci-cert-card ci-reveal ci-stagger-4">
+          <div class="ci-cert-icon"><i class="fas fa-flag"></i></div>
+          <h3>Made in Germany</h3>
+          <p>Ponad 90% produkcji WIHA w&nbsp;Schwarzwaldzie w&nbsp;Niemczech. Od&nbsp;1939 roku — ponad 85&nbsp;lat doświadczenia. Certyfikaty ISO&nbsp;9001, ISO&nbsp;14001, ISO&nbsp;50001. Tytuł TOP&nbsp;100 najbardziej innowacyjnych firm w&nbsp;Niemczech.</p>
+        </div>
+      </div>
+      <div class="ci-badges-row ci-reveal">
+        <span class="ci-cert-badge ci-cert-badge--blue"><i class="fas fa-check"></i> VDE-GS</span>
+        <span class="ci-cert-badge ci-cert-badge--blue"><i class="fas fa-bolt"></i> IEC 60900</span>
+        <span class="ci-cert-badge ci-cert-badge--blue"><i class="fas fa-check"></i> ASTM F1505</span>
+        <span class="ci-cert-badge ci-cert-badge--dark"><i class="fas fa-cog"></i> ISO 6789</span>
+        <span class="ci-cert-badge ci-cert-badge--green"><i class="fas fa-heart"></i> Certyfikat AGR</span>
+        <span class="ci-cert-badge ci-cert-badge--dark"><i class="fas fa-flag"></i> Made in Germany</span>
+        <span class="ci-cert-badge ci-cert-badge--red"><i class="fas fa-bolt"></i> Test 10 000 V</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ZWROTY I REKLAMACJE -->
+  <section class="ci-section" aria-label="Zwroty i reklamacje">
+    <div class="container">
+      <div class="ci-header ci-reveal">
+        <span class="ci-label">Zwroty i reklamacje</span>
+        <h2 class="ci-title">Prawo Odstąpienia, Zwroty i&nbsp;Procedura Reklamacyjna</h2>
+        <hr class="ci-divider" />
+        <p class="ci-subtitle">Respektujemy wszystkie prawa konsumenta wynikające z&nbsp;Ustawy z&nbsp;dnia 30 maja 2014&nbsp;r. o&nbsp;prawach konsumenta.</p>
+      </div>
+      <div class="ci-prose ci-reveal">
+        <h3><i class="fas fa-undo-alt" style="color:var(--ci-primary);"></i> Prawo Odstąpienia Od Umowy — 14 Dni</h3>
+        <p>Konsument ma prawo odstąpić od&nbsp;umowy zawartej na&nbsp;odległość w&nbsp;terminie <strong>14&nbsp;dni kalendarzowych</strong> od&nbsp;dnia otrzymania narzędzi WIHA bez podania przyczyny. Termin uważa się za zachowany, jeśli oświadczenie o&nbsp;odstąpieniu zostanie wysłane przed jego upływem. Do&nbsp;zachowania terminu wystarczy wysłanie oświadczenia na&nbsp;adres <strong>info@kedar-wiha.pl</strong> lub pocztą tradycyjną. Wzór formularza odstąpienia dołączany jest do&nbsp;każdej przesyłki i&nbsp;dostępny w&nbsp;regulaminie sklepu.</p>
+        <p>Zwracane narzędzia specjalistyczne WIHA muszą być w&nbsp;stanie niepogorszonym ponad konieczność stwierdzenia ich charakteru, cech i&nbsp;funkcjonowania. Koszt odesłania towaru ponosi Konsument, chyba że&nbsp;Sprzedawca wyraził zgodę na&nbsp;jego pokrycie. Zwrot płatności następuje w&nbsp;ciągu <strong>14&nbsp;dni</strong> od&nbsp;otrzymania oświadczenia o&nbsp;odstąpieniu.</p>
+        <h3 style="margin-top:32px;"><i class="fas fa-wrench" style="color:var(--ci-secondary);"></i> Reklamacje — Rękojmia 2 Lata</h3>
+        <p>Sprzedawca ponosi odpowiedzialność za brak zgodności towaru z&nbsp;umową przez <strong>2&nbsp;lata</strong> od&nbsp;dnia dostarczenia narzędzia (rękojmia konsumencka). Jeżeli zakupiony wkrętak izolowany VDE, klucz dynamometryczny lub inny produkt WIHA wykazuje wadę — np.&nbsp;uszkodzenie izolacji, brak certyfikatu, wada fabryczna — prosimy o&nbsp;zgłoszenie reklamacji e-mailem na&nbsp;<strong>info@kedar-wiha.pl</strong> lub telefonicznie pod <strong>+48&nbsp;575&nbsp;838&nbsp;766</strong>.</p>
+        <ul>
+          <li>Opis wady i&nbsp;zdjęcia — przyśpieszają rozpatrzenie reklamacji</li>
+          <li>Numer zamówienia i&nbsp;data zakupu — umożliwiają identyfikację produktu</li>
+          <li>Reklamacja rozpatrywana w&nbsp;ciągu <strong>14&nbsp;dni kalendarzowych</strong></li>
+          <li>Naprawa, wymiana lub zwrot pieniędzy — zgodnie z&nbsp;przepisami prawa</li>
+          <li>Gwarancja producenta WIHA nie&nbsp;wyłącza uprawnień z&nbsp;rękojmi</li>
+        </ul>
+        <div class="ci-callout">
+          <p><i class="fas fa-info-circle"></i> <strong>Pozasądowe rozstrzyganie sporów:</strong> Konsument może skorzystać z&nbsp;platformy ODR (<a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>) oraz z&nbsp;pomocy rzeczników konsumentów i&nbsp;polubownych sądów konsumenckich.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section class="ci-section ci-section--alt" aria-label="FAQ">
+    <div class="container">
+      <div class="ci-header ci-reveal">
+        <span class="ci-label">FAQ</span>
+        <h2 class="ci-title">Najczęściej Zadawane Pytania</h2>
+        <hr class="ci-divider" />
+        <p class="ci-subtitle">Odpowiedzi na&nbsp;pytania, które najczęściej otrzymujemy od&nbsp;elektryków, firm instalacyjnych i&nbsp;specjalistów zamawiających narzędzia WIHA.</p>
+      </div>
+      <div class="ci-faq">
+        <details class="ci-faq__item ci-reveal ci-stagger-1"><summary>Jak długo trwa realizacja zamówienia i&nbsp;dostawa?</summary><div class="ci-faq__answer">Zamówienia złożone i&nbsp;opłacone do&nbsp;godz. 14:00 w&nbsp;dniu roboczym wysyłamy tego samego dnia. Standardowa dostawa kurierem lub do&nbsp;paczkomatu InPost trwa <strong>1–2&nbsp;dni robocze</strong>. Link do&nbsp;śledzenia przesyłki wysyłamy e-mailem automatycznie po&nbsp;nadaniu.</div></details>
+        <details class="ci-faq__item ci-reveal ci-stagger-2"><summary>Od jakiej kwoty zamówienia dostawa jest bezpłatna?</summary><div class="ci-faq__answer">Darmowa dostawa kurierem DPD lub do&nbsp;paczkomatu InPost przysługuje przy zamówieniach od&nbsp;<strong>300&nbsp;zł brutto</strong>. Próg darmowej dostawy widoczny w&nbsp;koszyku.</div></details>
+        <details class="ci-faq__item ci-reveal ci-stagger-3"><summary>Jakie metody płatności akceptujecie?</summary><div class="ci-faq__answer">Akceptujemy: szybkie przelewy online (PayU, Przelewy24), karty Visa/Mastercard, BLIK, przelew tradycyjny (7&nbsp;dni roboczych) oraz płatność za pobraniem. Wszystkie płatności elektroniczne zabezpieczone SSL/TLS i&nbsp;3D&nbsp;Secure. <a href="/platnosci">Więcej →</a></div></details>
+        <details class="ci-faq__item ci-reveal ci-stagger-4"><summary>Jak uzyskać fakturę VAT?</summary><div class="ci-faq__answer">Zaznacz „Chcę fakturę VAT" podczas składania zamówienia i&nbsp;podaj <strong>NIP firmy</strong>. E-faktura zostanie wysłana na&nbsp;e-mail i&nbsp;będzie dostępna w&nbsp;panelu Konta Klienta. Bez NIP wystawiamy paragon.</div></details>
+        <details class="ci-faq__item ci-reveal ci-stagger-5"><summary>Ile mam czasu na zwrot zakupionego narzędzia?</summary><div class="ci-faq__answer">Konsument ma prawo odstąpić od&nbsp;umowy w&nbsp;terminie <strong>14&nbsp;dni kalendarzowych</strong> od&nbsp;dnia otrzymania towaru. Wystarczy oświadczenie e-mailem na&nbsp;info@kedar-wiha.pl. Zwrot pieniędzy w&nbsp;ciągu 14&nbsp;dni. <a href="/regulamin">Regulamin →</a></div></details>
+        <details class="ci-faq__item ci-reveal ci-stagger-6"><summary>Czy produkty posiadają certyfikaty bezpieczeństwa?</summary><div class="ci-faq__answer">Tak — narzędzia izolowane VDE WIHA posiadają certyfikaty <strong>VDE-GS</strong>, <strong>IEC&nbsp;60900</strong> i&nbsp;<strong>ASTM&nbsp;F1505</strong>. Każde narzędzie testowane indywidualnie 10&nbsp;000&nbsp;V. Klucze dynamometryczne certyfikowane ISO&nbsp;6789. Dokumentację certyfikatową dostarczamy na&nbsp;życzenie.</div></details>
+        <details class="ci-faq__item ci-reveal"><summary>Jak zgłosić reklamację wadliwego narzędzia?</summary><div class="ci-faq__answer">Kontakt: <strong>info@kedar-wiha.pl</strong> lub <strong>+48&nbsp;575&nbsp;838&nbsp;766</strong> z&nbsp;opisem wady, zdjęciami i&nbsp;numerem zamówienia. Reklamacja rozpatrywana w&nbsp;ciągu <strong>14&nbsp;dni</strong>. Gwarancja WIHA nie&nbsp;wyłącza rękojmi (2&nbsp;lata).</div></details>
+        <details class="ci-faq__item ci-reveal"><summary>Czy oferujecie warunki B2B i&nbsp;zamówienia hurtowe?</summary><div class="ci-faq__answer">Tak — dedykowane warunki dla firm: faktury VAT z&nbsp;terminem płatności, indywidualne wyceny, priorytetowa realizacja i&nbsp;wsparcie techniczne w&nbsp;doborze narzędzi WIHA VDE. Skontaktuj się telefonicznie lub e-mailowo.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. WSPARCIE TECHNICZNE -->
+  <section class="ci-section ci-section--pattern" aria-label="Wsparcie techniczne">
+    <div class="container">
+      <div class="ci-header ci-reveal">
+        <span class="ci-label">Wsparcie techniczne</span>
+        <h2 class="ci-title">Eksperckie Wsparcie Techniczne</h2>
+        <hr class="ci-divider" />
+        <p class="ci-subtitle">Nie jesteśmy zwykłym sklepem — jesteśmy partnerem technicznym. Nasz zespół zna normy VDE, różnice między liniami produktowymi WIHA i&nbsp;specyfikę pracy przy instalacjach PV i&nbsp;EV.</p>
+      </div>
+      <div class="ci-support-grid">
+        <div class="ci-support-card ci-reveal ci-stagger-1">
+          <div class="ci-support-icon"><i class="fas fa-comments"></i></div>
+          <h3>Dobór Narzędzi</h3>
+          <p>Pomagamy dobrać wkrętaki VDE, klucze dynamometryczne i&nbsp;zestawy do&nbsp;konkretnego zastosowania — rozdzielnice, instalacje PV, elektromobilność. Znamy specyfikację każdego produktu WIHA.</p>
+        </div>
+        <div class="ci-support-card ci-reveal ci-stagger-2">
+          <div class="ci-support-icon"><i class="fas fa-certificate"></i></div>
+          <h3>Dokumentacja i&nbsp;Certyfikaty</h3>
+          <p>Dostarczamy deklaracje zgodności, certyfikaty VDE-GS, IEC&nbsp;60900, wyniki testów dielektrycznych. Na&nbsp;potrzeby audytów BHP, przetargów i&nbsp;dokumentacji projektowej.</p>
+        </div>
+        <div class="ci-support-card ci-reveal ci-stagger-3">
+          <div class="ci-support-icon"><i class="fas fa-clock"></i></div>
+          <h3>Dostępność</h3>
+          <p>Odpowiadamy na&nbsp;zapytania w&nbsp;ciągu jednego dnia roboczego. Telefon, e-mail, WhatsApp — wybierz najwygodniejszy kanał kontaktu. Pon.–Pt. w&nbsp;godzinach pracy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. KONTAKT -->
+  <section class="ci-section ci-section--dark" aria-label="Kontakt" style="padding-bottom:0;">
+    <div class="container">
+      <div class="ci-header ci-reveal">
+        <span class="ci-label">Kontakt</span>
+        <h2 class="ci-title">Skontaktuj Się z&nbsp;Autoryzowanym Dystrybutorem WIHA</h2>
+        <hr class="ci-divider" />
+        <p class="ci-subtitle">Masz pytania o&nbsp;zamówienie, dostawę, gwarancję lub dobór narzędzi? Jesteśmy do&nbsp;Twojej dyspozycji.</p>
+      </div>
+      <div class="ci-contact-grid ci-reveal">
+        <a href="tel:+48575838766" class="ci-contact-card" aria-label="Zadzwoń"><div class="ci-contact-icon"><i class="fas fa-phone-alt"></i></div><div><strong>Telefon</strong><span>+48 575 838 766</span></div></a>
+        <a href="mailto:info@kedar-wiha.pl" class="ci-contact-card" aria-label="Napisz e-mail"><div class="ci-contact-icon"><i class="fas fa-envelope"></i></div><div><strong>E-mail</strong><span>info@kedar-wiha.pl</span></div></a>
+        <a href="https://kedar-wiha.pl" class="ci-contact-card" target="_blank" rel="noopener" aria-label="Odwiedź stronę"><div class="ci-contact-icon"><i class="fas fa-globe"></i></div><div><strong>Strona WWW</strong><span>kedar-wiha.pl</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="ci-cta" aria-label="Zamów narzędzia WIHA">
+    <div class="ci-cta__inner ci-reveal">
+      <h2>Zamów Profesjonalne Narzędzia WIHA z&nbsp;Gwarancją i&nbsp;Szybką Dostawą</h2>
+      <p>Wkrętaki izolowane VDE, klucze dynamometryczne, zestawy narzędziowe — wszystko z&nbsp;certyfikatami VDE-GS i&nbsp;IEC&nbsp;60900, gwarancją producenta i&nbsp;fakturą VAT. Dostawa w&nbsp;1–2&nbsp;dni robocze na&nbsp;terenie całej Polski.</p>
+      <div class="ci-cta__btns">
+        <a href="/2-glowna" class="ci-btn ci-btn--white" aria-label="Przejdź do sklepu"><i class="fas fa-shopping-bag"></i> Przejdź do sklepu</a>
+        <a href="/kontakt" class="ci-btn ci-btn--outline" aria-label="Zapytaj o ofertę B2B"><i class="fas fa-headset"></i> Zapytaj o&nbsp;ofertę B2B</a>
+      </div>
+      <div class="ci-cta__footer">
+        <a href="tel:+48575838766" class="ci-cta__link"><i class="fas fa-phone-alt"></i> +48 575 838 766</a>
+        <a href="mailto:info@kedar-wiha.pl" class="ci-cta__link"><i class="fas fa-envelope"></i> info@kedar-wiha.pl</a>
+        <a href="https://kedar-wiha.pl" class="ci-cta__link" target="_blank" rel="noopener"><i class="fas fa-globe"></i> kedar-wiha.pl</a>
+      </div>
+      <p class="ci-cta__copy">&copy; 2025 KEDAR-WIHA.pl — Autoryzowany Dystrybutor Narzędzi WIHA w&nbsp;Polsce</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- SCROLL REVEAL — IntersectionObserver -->
+<script>
+(function(){
+  'use strict';
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.ci-reveal')
+      .forEach(function(el){ el.classList.add('ci-visible'); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.classList.add('ci-visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.ci-reveal').forEach(function(el){ obs.observe(el); });
+})();
+</script>

@@ -1,1 +1,0 @@
-Wygeneruj dla PrestyShop 9.0.3 z motywem "Optima" moduł który do statycznych domyślnych stron CMS W PrestaShop dorobi pole tekstowe gdzie będzie można wkleić custom CSS i 

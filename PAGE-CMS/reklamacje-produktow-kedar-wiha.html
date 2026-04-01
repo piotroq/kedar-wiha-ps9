@@ -1,0 +1,1614 @@
+<!--
+  KEDAR-WIHA.pl — Strona CMS: Reklamacje produktów
+  Wersja: 1.2.0 | Poprawka: SyntaxError JS + Bootstrap CDN
+  Meta Description: Reklamacja narzędzi WIHA w KEDAR-WIHA.pl — procedura reklamacyjna, prawa konsumenta, gwarancja VDE. Autoryzowany dystrybutor, serwis narzędzi elektrycznych, 14 dni rozpatrzenia zgłoszenia.
+-->
+
+<!-- DOŁĄCZENIE BOOTSTRAP 4.6.2 CSS (CDN) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+<!-- DOŁĄCZENIE FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6Icaqq40/QKBWXdGyF0U5e5T5j5l9K6KfB7a8t5b5N5v5v5v5v5v5v5v5v5v5v5v5v5v5v5v5v5v5v5v5v5v5g==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<style>
+/* ============================================================
+   KEDAR-WIHA.pl — Reklamacje CMS Page Styles
+   Wersja: 1.2.0 | Kompatybilność: PrestaShop Optima 3.3.0, Bootstrap 4.x
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --color-theme-primary: #8B0000;
+  --color-theme-secondary: #0056A3;
+  --color-theme-three: #ca0000;
+  --color-theme-primary-dark: #6b0000;
+  --color-accent-yellow: #FFD700;
+  --color-stock-green: #1A7A3C;
+  --color-heading-primary: #2D2D2D;
+  --primary-all-text-for-all-color-fonts: #151515;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #888888;
+  --color-text-white: #ffffff;
+  --background-theme-color: #f1f1f1;
+  --color-bg-white: #ffffff;
+  --color-bg-light: #f6f6f6;
+  --color-bg-dark: #2a2a2a;
+  --color-bg-darker: #1a1a1a;
+  --color-bg-card: #ffffff;
+  --color-bg-hero: linear-gradient(135deg, #1a1a1a 0%, #3d0000 60%, #8B0000 100%);
+  --color-bg-section-alt: linear-gradient(180deg, #f6f6f6 0%, #f1f1f1 100%);
+  --color-bg-primary-tint: rgba(139, 0, 0, 0.06);
+  --color-bg-secondary-tint: rgba(0, 86, 163, 0.06);
+  --border-color-light: #e8e8e8;
+  --border-color-medium: #cccccc;
+  --color-status-danger: #ff4c4c;
+  --color-status-info-bg: #e8f0f9;
+  --button-theme-color: #8B0000;
+  --button-theme-color-hover: #ca0000;
+  --font-family-heading: 'Montserrat', Arial, sans-serif;
+  --font-family-body: 'Inter', Arial, sans-serif;
+  --font-size-h1: clamp(1.75rem, 4.5vw, 2.875rem);
+  --font-size-h2: clamp(1.5rem, 3.5vw, 2.25rem);
+  --font-size-h3: clamp(1.25rem, 2.5vw, 1.75rem);
+  --font-size-h4: clamp(1.1rem, 2vw, 1.375rem);
+  --font-size-h5: clamp(1rem, 1.5vw, 1.125rem);
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-sm: 0.875rem;
+  --font-size-xs: 0.75rem;
+  --line-height-body: 1.65;
+  --line-height-heading: 1.15;
+  --letter-spacing-badge: 0.08em;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+  --border-radius-pill: 50px;
+  --border-radius-circle: 50%;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.07);
+  --shadow-card-hover: 0 8px 28px rgba(0, 0, 0, 0.13);
+  --shadow-cta: 0 4px 20px rgba(139, 0, 0, 0.35);
+  --shadow-primary: 0 4px 16px rgba(139, 0, 0, 0.20);
+  --transition-fast: 150ms ease;
+  --transition-medium: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --icon-lg: 32px;
+  --icon-xl: 48px;
+}
+
+.kw-complaints-page * { box-sizing: border-box; }
+
+.kw-complaints-page {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  color: var(--primary-all-text-for-all-color-fonts);
+  background-color: var(--background-theme-color);
+  overflow-x: hidden;
+}
+
+.kw-complaints-page h1, .kw-complaints-page h2, .kw-complaints-page h3,
+.kw-complaints-page h4, .kw-complaints-page h5, .kw-complaints-page h6 {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  line-height: var(--line-height-heading);
+  color: var(--color-heading-primary);
+  margin-bottom: var(--space-4);
+}
+
+.kw-complaints-page p { margin-bottom: var(--space-4); color: var(--primary-all-text-for-all-color-fonts); }
+.kw-complaints-page a { color: var(--color-theme-primary); text-decoration: none; transition: color var(--transition-fast); }
+.kw-complaints-page a:hover { color: var(--color-theme-three); }
+.kw-complaints-page img { max-width: 100%; height: auto; }
+
+/* POPRAWA CZYTELNOŚCI NA CIEMNYCH TŁACH */
+.kw-hero, .kw-section-primary, .kw-section-dark { color: #ffffff !important; }
+
+.kw-hero h1, .kw-hero h2, .kw-hero h3, .kw-hero h4, .kw-hero h5, .kw-hero h6,
+.kw-hero p, .kw-hero li, .kw-hero span, .kw-hero div,
+.kw-section-primary h1, .kw-section-primary h2, .kw-section-primary h3, .kw-section-primary h4,
+.kw-section-primary p, .kw-section-primary li, .kw-section-primary span, .kw-section-primary div,
+.kw-section-dark h1, .kw-section-dark h2, .kw-section-dark h3, .kw-section-dark h4,
+.kw-section-dark p, .kw-section-dark li, .kw-section-dark span, .kw-section-dark div { color: #ffffff !important; }
+
+.kw-hero a, .kw-section-primary a, .kw-section-dark a { color: var(--color-accent-yellow) !important; }
+.kw-hero a:hover, .kw-section-primary a:hover, .kw-section-dark a:hover { color: #ffffff !important; text-decoration: underline; }
+
+/* ANIMACJE */
+@keyframes kw-fade-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes kw-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+/* SCROLL REVEAL - DOMYŚLNIE WIDOCZNE, UKRYWANE PRZEZ JS */
+.kw-reveal { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+.kw-reveal.kw-revealed { opacity: 1; transform: translateY(0); }
+
+/* HERO */
+.kw-hero {
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-hero);
+  overflow: hidden;
+  padding: var(--space-16) 0;
+}
+
+.kw-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 40px);
+  pointer-events: none;
+}
+
+.kw-hero-content { position: relative; z-index: 2; }
+
+.kw-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #ffffff;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-badge);
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--border-radius-pill);
+  margin-bottom: var(--space-6);
+}
+
+.kw-hero-badge i { color: var(--color-accent-yellow); }
+
+.kw-hero h1 {
+  font-size: var(--font-size-h1);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: var(--space-5);
+}
+
+.kw-hero h1 span { color: var(--color-accent-yellow); }
+
+.kw-hero-lead {
+  font-size: var(--font-size-lg);
+  color: rgba(255,255,255,0.9);
+  line-height: 1.85;
+  max-width: 700px;
+  margin-bottom: var(--space-8);
+}
+
+.kw-hero-stats { display: flex; flex-wrap: wrap; gap: var(--space-8); margin-bottom: var(--space-8); }
+.kw-hero-stat { display: flex; align-items: center; gap: var(--space-3); }
+
+.kw-hero-stat-icon {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--border-radius-lg);
+  color: var(--color-accent-yellow);
+  font-size: var(--icon-lg);
+}
+
+.kw-hero-stat-content { color: #ffffff; }
+.kw-hero-stat-value { font-family: var(--font-family-heading); font-size: var(--font-size-h4); font-weight: 700; color: #ffffff; }
+.kw-hero-stat-label { font-size: var(--font-size-sm); color: rgba(255,255,255,0.7); }
+
+.kw-hero-cta { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+
+.kw-hero-image {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 35%;
+  max-width: 400px;
+  opacity: 0.15;
+  z-index: 1;
+  display: none;
+}
+
+@media (min-width: 992px) { .kw-hero-image { display: block; } }
+.kw-hero-image img { width: 100%; height: auto; filter: grayscale(20%); }
+
+/* PRZYCISKI */
+.kw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--border-radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-medium);
+  text-decoration: none;
+  min-height: 48px;
+  min-width: 48px;
+}
+
+.kw-btn-primary {
+  background: var(--button-theme-color);
+  color: #ffffff !important;
+  border-color: var(--button-theme-color);
+  box-shadow: var(--shadow-cta);
+}
+
+.kw-btn-primary:hover {
+  background: var(--button-theme-color-hover);
+  border-color: var(--button-theme-color-hover);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(139,0,0,0.45);
+}
+
+.kw-btn-outline {
+  background: transparent;
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,0.5);
+}
+
+.kw-btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: #ffffff;
+  color: #ffffff !important;
+}
+
+.kw-btn-secondary {
+  background: transparent;
+  color: var(--color-theme-primary) !important;
+  border-color: var(--color-theme-primary);
+}
+
+.kw-btn-secondary:hover {
+  background: var(--color-theme-primary);
+  color: #ffffff !important;
+}
+
+.kw-btn-lg { padding: var(--space-5) var(--space-10); font-size: var(--font-size-base); }
+
+/* SEKCJE */
+.kw-section { padding: var(--space-12) 0; position: relative; }
+@media (min-width: 768px) { .kw-section { padding: var(--space-16) 0; } }
+@media (min-width: 992px) { .kw-section { padding: var(--space-20) 0; } }
+
+.kw-section-alt { background: var(--color-bg-section-alt); }
+.kw-section-dark { background: var(--color-bg-dark); color: #ffffff; }
+.kw-section-primary { background: linear-gradient(135deg, var(--color-theme-primary-dark) 0%, var(--color-theme-primary) 100%); color: #ffffff; }
+.kw-section-pattern { background-color: var(--color-bg-light); }
+
+.kw-section-header { text-align: center; max-width: 800px; margin: 0 auto var(--space-12); }
+.kw-section-header h2 { font-size: var(--font-size-h2); margin-bottom: var(--space-4); }
+.kw-section-header p { font-size: var(--font-size-lg); color: var(--color-text-secondary); }
+
+.kw-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-bg-primary-tint);
+  color: var(--color-theme-primary);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-badge);
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--border-radius-pill);
+  margin-bottom: var(--space-4);
+}
+
+/* KARTY PRZEWAG */
+.kw-advantages-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+@media (min-width: 576px) { .kw-advantages-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 992px) { .kw-advantages-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.kw-advantage-card {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color-light);
+  padding: var(--space-8);
+  text-align: center;
+  transition: all var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.kw-advantage-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-theme-primary), var(--color-theme-secondary));
+  transform: scaleX(0);
+  transition: transform var(--transition-medium);
+}
+
+.kw-advantage-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); border-color: var(--color-theme-primary); }
+.kw-advantage-card:hover::before { transform: scaleX(1); }
+
+.kw-advantage-icon {
+  width: 64px; height: 64px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto var(--space-5);
+  background: var(--color-bg-primary-tint);
+  border-radius: var(--border-radius-circle);
+  color: var(--color-theme-primary);
+  font-size: var(--icon-xl);
+  transition: all var(--transition-medium);
+}
+
+.kw-advantage-card:hover .kw-advantage-icon { background: var(--color-theme-primary); color: #ffffff; transform: scale(1.1); }
+.kw-advantage-card h3 { font-size: var(--font-size-h5); margin-bottom: var(--space-3); color: var(--color-heading-primary); }
+.kw-advantage-card p { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: 0; }
+
+/* PODSTAWY PRAWNE */
+.kw-legal-content { display: grid; grid-template-columns: 1fr; gap: var(--space-8); }
+@media (min-width: 992px) { .kw-legal-content { grid-template-columns: 1fr 1fr; } }
+
+.kw-legal-card {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color-light);
+  padding: var(--space-8);
+  transition: all var(--transition-medium);
+}
+
+.kw-legal-card:hover { box-shadow: var(--shadow-card-hover); }
+
+.kw-legal-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.kw-legal-card-icon {
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-bg-secondary-tint);
+  border-radius: var(--border-radius-lg);
+  color: var(--color-theme-secondary);
+  font-size: var(--icon-lg);
+  flex-shrink: 0;
+}
+
+.kw-legal-card.kw-consumer .kw-legal-card-icon { background: var(--color-bg-primary-tint); color: var(--color-theme-primary); }
+.kw-legal-card h3 { font-size: var(--font-size-h4); margin-bottom: 0; color: var(--color-heading-primary); }
+.kw-legal-card p { font-size: var(--font-size-base); color: var(--color-text-secondary); margin-bottom: var(--space-4); }
+
+.kw-legal-list { list-style: none; padding: 0; margin: 0 0 var(--space-4) 0; }
+.kw-legal-list li { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-3) 0; font-size: var(--font-size-sm); color: var(--primary-all-text-for-all-color-fonts); }
+.kw-legal-list li i { color: var(--color-stock-green); margin-top: 2px; flex-shrink: 0; }
+
+.kw-legal-highlight {
+  background: var(--color-bg-primary-tint);
+  border-left: 4px solid var(--color-theme-primary);
+  padding: var(--space-4);
+  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+  margin-top: var(--space-4);
+}
+
+.kw-legal-highlight p { margin-bottom: 0; font-size: var(--font-size-sm); color: var(--primary-all-text-for-all-color-fonts); }
+.kw-legal-highlight strong { color: var(--color-theme-primary); }
+
+/* TIMELINE */
+.kw-timeline { position: relative; max-width: 900px; margin: 0 auto; }
+
+.kw-timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--color-theme-primary), var(--color-theme-secondary));
+  border-radius: var(--border-radius-pill);
+}
+
+@media (min-width: 768px) {
+  .kw-timeline::before { left: 50%; transform: translateX(-50%); }
+  .kw-timeline-item { padding-left: 0; padding-bottom: var(--space-10); }
+  .kw-timeline-item:nth-child(odd) { padding-right: calc(50% + 40px); text-align: right; }
+  .kw-timeline-item:nth-child(even) { padding-left: calc(50% + 40px); }
+}
+
+.kw-timeline-item { position: relative; padding-left: 72px; padding-bottom: var(--space-8); }
+.kw-timeline-item:last-child { padding-bottom: 0; }
+
+.kw-timeline-marker {
+  position: absolute;
+  left: 0;
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-theme-primary);
+  color: #ffffff;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  border-radius: var(--border-radius-circle);
+  box-shadow: var(--shadow-primary);
+  z-index: 1;
+}
+
+@media (min-width: 768px) { .kw-timeline-marker { left: 50%; transform: translateX(-50%); } }
+
+.kw-timeline-content {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color-light);
+  padding: var(--space-6);
+  transition: all var(--transition-medium);
+}
+
+.kw-timeline-content:hover { box-shadow: var(--shadow-card-hover); border-color: var(--color-theme-primary); }
+.kw-timeline-content h4 { font-size: var(--font-size-h5); margin-bottom: var(--space-2); color: var(--color-theme-primary); }
+.kw-timeline-content p { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: 0; }
+
+.kw-timeline-duration {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-bg-primary-tint);
+  color: var(--color-theme-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--border-radius-pill);
+  margin-top: var(--space-3);
+}
+
+/* CHECKLIST */
+.kw-checklist-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+@media (min-width: 576px) { .kw-checklist-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 992px) { .kw-checklist-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.kw-checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background: var(--color-bg-card);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-5);
+  transition: all var(--transition-medium);
+}
+
+.kw-checklist-item:hover { border-color: var(--color-theme-primary); box-shadow: var(--shadow-card); }
+.kw-checklist-item.kw-required { border-left: 4px solid var(--color-theme-primary); }
+.kw-checklist-item.kw-optional { border-left: 4px solid var(--color-theme-secondary); }
+
+.kw-checklist-icon {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-bg-primary-tint);
+  border-radius: var(--border-radius-md);
+  color: var(--color-theme-primary);
+  flex-shrink: 0;
+}
+
+.kw-checklist-item.kw-optional .kw-checklist-icon { background: var(--color-bg-secondary-tint); color: var(--color-theme-secondary); }
+.kw-checklist-content h4 { font-size: var(--font-size-base); margin-bottom: var(--space-2); color: var(--color-heading-primary); }
+.kw-checklist-content p { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: 0; }
+
+.kw-checklist-badge {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-badge);
+  padding: 2px 8px;
+  border-radius: var(--border-radius-pill);
+  margin-left: var(--space-2);
+}
+
+.kw-checklist-badge.kw-badge-required { background: var(--color-bg-primary-tint); color: var(--color-theme-primary); }
+.kw-checklist-badge.kw-badge-optional { background: var(--color-bg-secondary-tint); color: var(--color-theme-secondary); }
+
+/* PORÓWNANIE */
+.kw-comparison-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+@media (min-width: 768px) { .kw-comparison-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.kw-comparison-card {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--border-color-light);
+  overflow: hidden;
+  transition: all var(--transition-medium);
+}
+
+.kw-comparison-card:hover { box-shadow: var(--shadow-lg); }
+.kw-comparison-card.kw-consumer { border-color: var(--color-theme-primary); }
+.kw-comparison-card.kw-business { border-color: var(--color-theme-secondary); }
+
+.kw-comparison-header { padding: var(--space-6); text-align: center; }
+.kw-comparison-card.kw-consumer .kw-comparison-header { background: linear-gradient(135deg, var(--color-theme-primary-dark), var(--color-theme-primary)); }
+.kw-comparison-card.kw-business .kw-comparison-header { background: linear-gradient(135deg, #003d7a, var(--color-theme-secondary)); }
+
+.kw-comparison-header h3 { font-size: var(--font-size-h4); color: #ffffff; margin-bottom: var(--space-2); }
+.kw-comparison-header p { font-size: var(--font-size-sm); color: rgba(255,255,255,0.9); margin-bottom: 0; }
+
+.kw-comparison-body { padding: var(--space-6); }
+.kw-comparison-list { list-style: none; padding: 0; margin: 0; }
+.kw-comparison-list li { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--border-color-light); font-size: var(--font-size-sm); color: var(--primary-all-text-for-all-color-fonts); }
+.kw-comparison-list li:last-child { border-bottom: none; }
+.kw-comparison-list li i { color: var(--color-stock-green); margin-top: 3px; flex-shrink: 0; }
+
+/* GWARANCJA */
+.kw-warranty-content { display: grid; grid-template-columns: 1fr; gap: var(--space-8); align-items: center; }
+@media (min-width: 992px) { .kw-warranty-content { grid-template-columns: 1fr 1fr; } }
+
+.kw-warranty-text h3 { font-size: var(--font-size-h3); margin-bottom: var(--space-4); color: var(--color-heading-primary); }
+.kw-warranty-text p { color: var(--color-text-secondary); }
+
+.kw-warranty-certs { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+
+.kw-warranty-cert {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-bg-secondary-tint);
+  color: var(--color-theme-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--border-radius-pill);
+}
+
+.kw-warranty-cert i { color: var(--color-accent-yellow); }
+
+.kw-warranty-card {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.kw-warranty-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--color-accent-yellow), var(--color-theme-primary));
+}
+
+.kw-warranty-badge-large {
+  width: 100px; height: 100px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto var(--space-5);
+  background: linear-gradient(135deg, var(--color-accent-yellow), #e6c200);
+  border-radius: var(--border-radius-circle);
+  color: var(--color-bg-darker);
+  font-size: 42px;
+  animation: kw-pulse 2s ease infinite;
+}
+
+.kw-warranty-card h4 { font-size: var(--font-size-h4); margin-bottom: var(--space-3); color: var(--color-heading-primary); }
+.kw-warranty-card p { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: 0; }
+
+/* FORMULARZ */
+.kw-form-wrapper {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) { .kw-form-wrapper { padding: var(--space-12); } }
+
+.kw-form-header { text-align: center; margin-bottom: var(--space-8); }
+.kw-form-header h3 { font-size: var(--font-size-h3); margin-bottom: var(--space-3); color: var(--color-heading-primary); }
+.kw-form-header p { color: var(--color-text-secondary); }
+
+.kw-form-row { display: grid; grid-template-columns: 1fr; gap: var(--space-4); margin-bottom: var(--space-4); }
+@media (min-width: 576px) { .kw-form-row.kw-form-row-2 { grid-template-columns: repeat(2, 1fr); } }
+
+.kw-form-group { margin-bottom: var(--space-4); }
+
+.kw-form-label {
+  display: block;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-heading-primary);
+  margin-bottom: var(--space-2);
+}
+
+.kw-form-label .kw-required-mark { color: var(--color-theme-primary); }
+
+.kw-form-control {
+  width: 100%;
+  padding: var(--space-4);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  color: var(--primary-all-text-for-all-color-fonts);
+  background: var(--color-bg-white);
+  border: 1.5px solid var(--border-color-medium);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+  min-height: 48px;
+}
+
+.kw-form-control:focus { outline: none; border-color: var(--color-theme-primary); box-shadow: 0 0 0 3px rgba(139,0,0,0.15); }
+.kw-form-control::placeholder { color: #aaaaaa; }
+.kw-form-control.kw-error { border-color: var(--color-status-danger); }
+
+.kw-form-error { display: none; font-size: var(--font-size-xs); color: var(--color-status-danger); margin-top: var(--space-2); }
+.kw-form-control.kw-error + .kw-form-error { display: block; }
+
+textarea.kw-form-control { min-height: 120px; resize: vertical; }
+
+.kw-form-select {
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+}
+
+.kw-form-checkbox { display: flex; align-items: flex-start; gap: var(--space-3); }
+.kw-form-checkbox input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--color-theme-primary); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+.kw-form-checkbox-label { font-size: var(--font-size-sm); color: var(--color-text-secondary); cursor: pointer; }
+.kw-form-checkbox-label a { color: var(--color-theme-primary); text-decoration: underline; }
+
+.kw-form-submit { text-align: center; margin-top: var(--space-8); }
+
+.kw-form-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background: var(--color-status-info-bg);
+  border: 1px solid var(--color-theme-secondary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.kw-form-note i { color: var(--color-theme-secondary); flex-shrink: 0; }
+.kw-form-note p { font-size: var(--font-size-sm); color: var(--primary-all-text-for-all-color-fonts); margin-bottom: 0; }
+
+/* FAQ */
+.kw-faq-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); max-width: 900px; margin: 0 auto; }
+
+.kw-faq-item {
+  background: var(--color-bg-card);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-medium);
+}
+
+.kw-faq-item:hover { border-color: var(--color-theme-primary); }
+.kw-faq-item.kw-active { box-shadow: var(--shadow-md); border-color: var(--color-theme-primary); }
+
+.kw-faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 48px;
+}
+
+.kw-faq-question:hover { background: var(--color-bg-primary-tint); }
+.kw-faq-item.kw-active .kw-faq-question { background: var(--color-bg-primary-tint); }
+.kw-faq-question h4 { font-size: var(--font-size-base); font-weight: 600; margin-bottom: 0; flex: 1; color: var(--color-heading-primary); }
+
+.kw-faq-icon {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-bg-primary-tint);
+  border-radius: var(--border-radius-circle);
+  color: var(--color-theme-primary);
+  transition: all var(--transition-medium);
+  flex-shrink: 0;
+}
+
+.kw-faq-item.kw-active .kw-faq-icon { background: var(--color-theme-primary); color: #ffffff; transform: rotate(180deg); }
+
+.kw-faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+.kw-faq-item.kw-active .kw-faq-answer { max-height: 600px; }
+
+.kw-faq-answer-content { padding: 0 var(--space-6) var(--space-6); border-top: 1px solid var(--border-color-light); padding-top: var(--space-4); }
+.kw-faq-answer-content p { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--space-3); }
+.kw-faq-answer-content p:last-child { margin-bottom: 0; }
+.kw-faq-answer-content ul { margin: var(--space-3) 0; padding-left: var(--space-6); }
+.kw-faq-answer-content ul li { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--space-2); }
+
+/* STATYSTYKI */
+.kw-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+@media (min-width: 768px) { .kw-stats-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.kw-stat-item { text-align: center; padding: var(--space-6); }
+.kw-stat-value { font-family: var(--font-family-heading); font-size: var(--font-size-h1); font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: var(--space-2); }
+.kw-stat-value span { color: var(--color-accent-yellow); }
+.kw-stat-label { font-size: var(--font-size-sm); color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: var(--letter-spacing-badge); }
+
+/* KONTAKT */
+.kw-contact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-8); }
+@media (min-width: 992px) { .kw-contact-grid { grid-template-columns: 1.2fr 1fr; gap: var(--space-12); } }
+
+.kw-contact-info h3 { font-size: var(--font-size-h3); margin-bottom: var(--space-6); color: var(--color-heading-primary); }
+.kw-contact-items { display: flex; flex-direction: column; gap: var(--space-5); }
+
+.kw-contact-item { display: flex; align-items: flex-start; gap: var(--space-4); }
+
+.kw-contact-item-icon {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-bg-primary-tint);
+  border-radius: var(--border-radius-lg);
+  color: var(--color-theme-primary);
+  font-size: var(--icon-lg);
+  flex-shrink: 0;
+}
+
+.kw-contact-item-content h4 { font-size: var(--font-size-base); margin-bottom: var(--space-2); color: var(--color-heading-primary); }
+.kw-contact-item-content p { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: 0; }
+.kw-contact-item-content a { font-weight: 600; }
+
+.kw-contact-hours { margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border-color-light); }
+.kw-contact-hours h4 { font-size: var(--font-size-base); margin-bottom: var(--space-4); color: var(--color-heading-primary); }
+.kw-contact-hours-list { display: flex; flex-direction: column; gap: var(--space-2); }
+.kw-contact-hours-item { display: flex; justify-content: space-between; font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.kw-contact-hours-item span:last-child { font-weight: 500; color: var(--primary-all-text-for-all-color-fonts); }
+
+.kw-contact-cta { background: var(--color-bg-card); border-radius: var(--border-radius-xl); padding: var(--space-8); box-shadow: var(--shadow-lg); text-align: center; }
+.kw-contact-cta h4 { font-size: var(--font-size-h4); margin-bottom: var(--space-4); color: var(--color-heading-primary); }
+.kw-contact-cta p { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--space-6); }
+.kw-contact-cta-buttons { display: flex; flex-direction: column; gap: var(--space-3); }
+@media (min-width: 576px) { .kw-contact-cta-buttons { flex-direction: row; justify-content: center; } }
+
+/* TRUST BAR */
+.kw-trust-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-6); padding: var(--space-8) 0; }
+.kw-trust-badge { display: flex; align-items: center; gap: var(--space-3); color: #ffffff; font-size: var(--font-size-sm); }
+.kw-trust-badge i { font-size: var(--icon-lg); color: var(--color-accent-yellow); }
+
+/* FOOTER */
+.kw-cms-footer { background: var(--color-bg-darker); padding: var(--space-8) 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
+.kw-cms-footer p { font-size: var(--font-size-sm); color: rgba(255,255,255,0.6); margin-bottom: 0; }
+.kw-cms-footer a { color: rgba(255,255,255,0.8); }
+.kw-cms-footer a:hover { color: var(--color-accent-yellow); }
+
+/* UTILITY */
+.kw-text-primary { color: var(--color-theme-primary); }
+.kw-text-secondary { color: var(--color-theme-secondary); }
+.kw-text-muted { color: var(--color-text-tertiary); }
+.kw-mb-0 { margin-bottom: 0; }
+.kw-mt-2 { margin-top: var(--space-2); }
+
+.kw-delay-1 { transition-delay: 0.1s; }
+.kw-delay-2 { transition-delay: 0.2s; }
+.kw-delay-3 { transition-delay: 0.3s; }
+.kw-delay-4 { transition-delay: 0.4s; }
+.kw-delay-5 { transition-delay: 0.5s; }
+.kw-delay-6 { transition-delay: 0.6s; }
+</style>
+
+<div class="kw-complaints-page">
+
+  <!-- HERO SEKCJA -->
+  <section class="kw-hero">
+    <div class="kw-hero-image">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Narzędzia profesjonalne WIHA" loading="eager">
+    </div>
+    <div class="container">
+      <div class="kw-hero-content">
+        <div class="kw-hero-badge">
+          <i class="fas fa-shield-alt"></i>
+          Autoryzowany Dystrybutor WIHA
+        </div>
+        <h1>Reklamacja narzędzi <span>WIHA</span> — profesjonalny serwis i wsparcie</h1>
+        <p class="kw-hero-lead">
+          Jako autoryzowany dystrybutor narzędzi WIHA w Polsce zapewniamy sprawny proces reklamacyjny,
+          gwarancję producenta oraz pełne wsparcie techniczne. Rozpatrujemy zgłoszenia w ciągu 14 dni,
+          a wszystkie narzędzia izolowane VDE objęte są certyfikatami bezpieczeństwa IEC 60900 i VDE-GS.
+        </p>
+        <div class="kw-hero-stats">
+          <div class="kw-hero-stat">
+            <div class="kw-hero-stat-icon"><i class="fas fa-clock"></i></div>
+            <div class="kw-hero-stat-content">
+              <div class="kw-hero-stat-value">14 dni</div>
+              <div class="kw-hero-stat-label">termin rozpatrzenia</div>
+            </div>
+          </div>
+          <div class="kw-hero-stat">
+            <div class="kw-hero-stat-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="kw-hero-stat-content">
+              <div class="kw-hero-stat-value">2 lata</div>
+              <div class="kw-hero-stat-label">odpowiedzialność</div>
+            </div>
+          </div>
+          <div class="kw-hero-stat">
+            <div class="kw-hero-stat-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="kw-hero-stat-content">
+              <div class="kw-hero-stat-value">98%</div>
+              <div class="kw-hero-stat-label">rozpatrzonych pozytywnie</div>
+            </div>
+          </div>
+        </div>
+        <div class="kw-hero-cta">
+          <a href="#formularz" class="kw-btn kw-btn-primary kw-btn-lg"><i class="fas fa-file-alt"></i> Zgłoś reklamację</a>
+          <a href="#procedura" class="kw-btn kw-btn-outline kw-btn-lg"><i class="fas fa-list-ol"></i> Zobacz procedurę</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="kw-section-primary">
+    <div class="container">
+      <div class="kw-trust-bar">
+        <div class="kw-trust-badge"><i class="fas fa-certificate"></i><span>Certyfikat VDE-GS</span></div>
+        <div class="kw-trust-badge"><i class="fas fa-bolt"></i><span>Norma IEC 60900</span></div>
+        <div class="kw-trust-badge"><i class="fas fa-industry"></i><span>Made in Germany</span></div>
+        <div class="kw-trust-badge"><i class="fas fa-award"></i><span>Autoryzowany Dystrybutor</span></div>
+        <div class="kw-trust-badge"><i class="fas fa-tools"></i><span>Gwarancja Producenta</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRZEWAGI -->
+  <section class="kw-section">
+    <div class="container">
+      <div class="kw-section-header">
+        <div class="kw-section-badge"><i class="fas fa-star"></i> Dlaczego my</div>
+        <h2>Dlaczego warto nam zaufać przy reklamacji narzędzi WIHA?</h2>
+        <p>Jako autoryzowany dystrybutor marki WIHA w Polsce gwarantujemy profesjonalne podejście do każdego zgłoszenia reklamacyjnego.</p>
+      </div>
+      <div class="kw-advantages-grid">
+        <div class="kw-advantage-card">
+          <div class="kw-advantage-icon"><i class="fas fa-clock"></i></div>
+          <h3>14 dni na rozpatrzenie</h3>
+          <p>Zgodnie z ustawą o prawach konsumenta rozpatrujemy każdą reklamację w terminie 14 dni kalendarzowych.</p>
+        </div>
+        <div class="kw-advantage-card">
+          <div class="kw-advantage-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Autoryzowany serwis</h3>
+          <p>Jako oficjalny partner WIHA zapewniamy oryginalne części zamienne i pełną gwarancję producenta.</p>
+        </div>
+        <div class="kw-advantage-card">
+          <div class="kw-advantage-icon"><i class="fas fa-truck"></i></div>
+          <h3>Bezpłatna wysyłka</h3>
+          <p>Koszty dostarczenia wadliwego towaru do nas ponosi sprzedawca. Przy uznanej reklamacji zwracamy koszty odesłania.</p>
+        </div>
+        <div class="kw-advantage-card">
+          <div class="kw-advantage-icon"><i class="fas fa-headset"></i></div>
+          <h3>Wsparcie techniczne</h3>
+          <p>Nasi eksperci doradzą w zakresie procedury reklamacyjnej, dokumentacji i doboru rozwiązania.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PODSTAWY PRAWNE -->
+  <section class="kw-section kw-section-alt" id="podstawy-prawne">
+    <div class="container">
+      <div class="kw-section-header">
+        <div class="kw-section-badge"><i class="fas fa-balance-scale"></i> Podstawy prawne</div>
+        <h2>Podstawy prawne reklamacji narzędzi — prawa konsumenta i przedsiębiorcy</h2>
+        <p>Procedura reklamacyjna w sklepie KEDAR-WIHA.pl opiera się na przepisach prawa polskiego i Unii Europejskiej.</p>
+      </div>
+      <div class="kw-legal-content">
+        <div class="kw-legal-card kw-consumer">
+          <div class="kw-legal-card-header">
+            <div class="kw-legal-card-icon"><i class="fas fa-user"></i></div>
+            <div>
+              <h3>Dla Konsumentów</h3>
+              <p class="kw-mb-0 kw-text-muted">Ustawa o prawach konsumenta</p>
+            </div>
+          </div>
+          <p>Zgodnie z ustawą z dnia 30 maja 2014 r. o prawach konsumenta (Rozdział 5a — brak zgodności towaru z umową), każdy konsument zakupujący narzędzia WIHA w naszym sklepie objęty jest pełną ochroną prawną. Sprzedawca odpowiada za brak zgodności towaru z umową przez okres <strong>2 lat od dnia dostarczenia produktu</strong>.</p>
+          <p>W przypadku stwierdzenia niezgodności towaru z umową, jako konsument masz prawo żądać <strong>naprawy produktu</strong> lub <strong>wymiany na nowy</strong>. Jeżeli naprawa lub wymiana są niemożliwe, masz prawo żądać <strong>obniżenia ceny</strong> lub <strong>odstąpienia od umowy</strong>.</p>
+          <h4>Twoje uprawnienia:</h4>
+          <ul class="kw-legal-list">
+            <li><i class="fas fa-check-circle"></i><span>2 lata odpowiedzialności sprzedawcy za niezgodność towaru z umową</span></li>
+            <li><i class="fas fa-check-circle"></i><span>Prawo wyboru między naprawą a wymianą wadliwego produktu</span></li>
+            <li><i class="fas fa-check-circle"></i><span>Obniżenie ceny lub odstąpienie od umowy przy wadach istotnych</span></li>
+            <li><i class="fas fa-check-circle"></i><span>Zwrot kosztów odesłania przy uznanej reklamacji</span></li>
+            <li><i class="fas fa-check-circle"></i><span>Brak odpowiedzi w 14 dni = uznanie reklamacji</span></li>
+          </ul>
+          <div class="kw-legal-highlight">
+            <p><strong>Ważne:</strong> Korzystanie z gwarancji producenta WIHA nie wyłącza ani nie ogranicza Twoich uprawnień wobec sprzedawcy z tytułu braku zgodności towaru z umową.</p>
+          </div>
+        </div>
+        <div class="kw-legal-card">
+          <div class="kw-legal-card-header">
+            <div class="kw-legal-card-icon"><i class="fas fa-building"></i></div>
+            <div>
+              <h3>Dla Przedsiębiorców</h3>
+              <p class="kw-mb-0 kw-text-muted">Kodeks cywilny — rękojmia</p>
+            </div>
+          </div>
+          <p>W przypadku zakupu narzędzi WIHA na rzecz działalności gospodarczej, reklamacje rozpatrywane są na podstawie przepisów Kodeksu cywilnego dotyczących <strong>rękojmi</strong> (art. 556–576). Jako przedsiębiorca masz prawo dochodzić swoich roszczeń w przypadku wad fizycznych lub prawnych towaru.</p>
+          <p>W ramach rękojmi przysługują Ci uprawnienia do <strong>żądania obniżenia ceny</strong> lub <strong>odstąpienia od umowy</strong>. W przypadku wad dających się usunąć, możesz wybrać naprawę lub wymianę produktu. Termin dochodzenia roszczeń z rękojmi wynosi domyślnie 2 lata.</p>
+          <h4>Uprawnienia przedsiębiorcy:</h4>
+          <ul class="kw-legal-list">
+            <li><i class="fas fa-check-circle"></i><span>Rękojmia wg Kodeksu cywilnego (art. 556–576)</span></li>
+            <li><i class="fas fa-check-circle"></i><span>Możliwość indywidualnych ustaleń umownych</span></li>
+            <li><i class="fas fa-check-circle"></i><span>Naprawa, wymiana, obniżenie ceny lub odstąpienie od umowy</span></li>
+            <li><i class="fas fa-check-circle"></i><span>Dedykowana obsługa B2B i wsparcie techniczne</span></li>
+            <li><i class="fas fa-check-circle"></i><span>Możliwość korzystania z gwarancji producenta WIHA</span></li>
+          </ul>
+          <div class="kw-legal-highlight">
+            <p><strong>Dla firm:</strong> Oferujemy priorytetową obsługę reklamacyjną dla klientów biznesowych i indywidualne podejście do każdego zgłoszenia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCES REKLAMACYJNY -->
+  <section class="kw-section" id="procedura">
+    <div class="container">
+      <div class="kw-section-header">
+        <div class="kw-section-badge"><i class="fas fa-route"></i> Krok po kroku</div>
+        <h2>Proces reklamacyjny krok po kroku</h2>
+        <p>Procedura reklamacji narzędzi WIHA jest prosta i przejrzysta. Poniżej przedstawiamy wszystkie etapy.</p>
+      </div>
+      <div class="kw-timeline">
+        <div class="kw-timeline-item">
+          <div class="kw-timeline-marker"><span>1</span></div>
+          <div class="kw-timeline-content">
+            <h4><i class="fas fa-paper-plane kw-text-primary"></i> Zgłoszenie reklamacji</h4>
+            <p>Wypełnij formularz reklamacyjny na tej stronie, wyślij e-mail na adres <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a> lub skontaktuj się telefonicznie pod numerem <a href="tel:+48575838766">+48 575 838 766</a>.</p>
+            <div class="kw-timeline-duration"><i class="fas fa-clock"></i><span>Dowolny moment</span></div>
+          </div>
+        </div>
+        <div class="kw-timeline-item">
+          <div class="kw-timeline-marker"><span>2</span></div>
+          <div class="kw-timeline-content">
+            <h4><i class="fas fa-search kw-text-primary"></i> Weryfikacja zgłoszenia</h4>
+            <p>Nasz zespół analizuje zgłoszenie i weryfikuje dokumentację. W razie potrzeby kontaktujemy się w celu uzupełnienia informacji.</p>
+            <div class="kw-timeline-duration"><i class="fas fa-clock"></i><span>1-2 dni robocze</span></div>
+          </div>
+        </div>
+        <div class="kw-timeline-item">
+          <div class="kw-timeline-marker"><span>3</span></div>
+          <div class="kw-timeline-content">
+            <h4><i class="fas fa-cogs kw-text-primary"></i> Rozpatrzenie reklamacji</h4>
+            <p>Przeprowadzamy szczegółową analizę produktu i podejmujemy decyzję reklamacyjną. Termin rozpatrzenia wynosi maksymalnie 14 dni kalendarzowych.</p>
+            <div class="kw-timeline-duration"><i class="fas fa-clock"></i><span>Do 14 dni</span></div>
+          </div>
+        </div>
+        <div class="kw-timeline-item">
+          <div class="kw-timeline-marker"><span>4</span></div>
+          <div class="kw-timeline-content">
+            <h4><i class="fas fa-check-double kw-text-primary"></i> Realizacja roszczenia</h4>
+            <p>Po uznaniu reklamacji realizujemy Twoje żądanie: naprawiamy produkt, wymieniamy na nowy, obniżamy cenę lub zwracamy środki.</p>
+            <div class="kw-timeline-duration"><i class="fas fa-clock"></i><span>Zależnie od rodzaju</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLISTA -->
+  <section class="kw-section kw-section-pattern">
+    <div class="container">
+      <div class="kw-section-header">
+        <div class="kw-section-badge"><i class="fas fa-clipboard-list"></i> Wymagania</div>
+        <h2>Co powinno zawierać zgłoszenie reklamacyjne?</h2>
+        <p>Aby przyspieszyć proces rozpatrzenia reklamacji, przygotuj wymagane informacje i dokumenty.</p>
+      </div>
+      <div class="kw-checklist-grid">
+        <div class="kw-checklist-item kw-required">
+          <div class="kw-checklist-icon"><i class="fas fa-user"></i></div>
+          <div class="kw-checklist-content">
+            <h4>Dane kontaktowe <span class="kw-checklist-badge kw-badge-required">Wymagane</span></h4>
+            <p>Imię, nazwisko, numer telefonu i adres e-mail do kontaktu w sprawie reklamacji.</p>
+          </div>
+        </div>
+        <div class="kw-checklist-item kw-required">
+          <div class="kw-checklist-icon"><i class="fas fa-file-invoice"></i></div>
+          <div class="kw-checklist-content">
+            <h4>Numer zamówienia <span class="kw-checklist-badge kw-badge-required">Wymagane</span></h4>
+            <p>Numer zamówienia z potwierdzenia zakupu lub kopia paragonu/faktury VAT.</p>
+          </div>
+        </div>
+        <div class="kw-checklist-item kw-required">
+          <div class="kw-checklist-icon"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="kw-checklist-content">
+            <h4>Opis wady <span class="kw-checklist-badge kw-badge-required">Wymagane</span></h4>
+            <p>Szczegółowy opis stwierdzonej wady lub niezgodności produktu z umową.</p>
+          </div>
+        </div>
+        <div class="kw-checklist-item kw-required">
+          <div class="kw-checklist-icon"><i class="fas fa-hand-point-right"></i></div>
+          <div class="kw-checklist-content">
+            <h4>Żądanie reklamacyjne <span class="kw-checklist-badge kw-badge-required">Wymagane</span></h4>
+            <p>Określ, czego żądasz: naprawa, wymiana, obniżenie ceny czy odstąpienie od umowy.</p>
+          </div>
+        </div>
+        <div class="kw-checklist-item kw-optional">
+          <div class="kw-checklist-icon"><i class="fas fa-camera"></i></div>
+          <div class="kw-checklist-content">
+            <h4>Zdjęcia dokumentujące <span class="kw-checklist-badge kw-badge-optional">Zalecane</span></h4>
+            <p>Zdjęcia wady, uszkodzenia lub niezgodności znacznie przyspieszają weryfikację.</p>
+          </div>
+        </div>
+        <div class="kw-checklist-item kw-optional">
+          <div class="kw-checklist-icon"><i class="fas fa-video"></i></div>
+          <div class="kw-checklist-content">
+            <h4>Film pokazowy <span class="kw-checklist-badge kw-badge-optional">Zalecane</span></h4>
+            <p>Dla wad funkcjonalnych krótki film demonstrujący problem.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORÓWNANIE -->
+  <section class="kw-section kw-section-alt">
+    <div class="container">
+      <div class="kw-section-header">
+        <div class="kw-section-badge"><i class="fas fa-balance-scale-right"></i> Porównanie</div>
+        <h2>Prawa konsumenta vs przedsiębiorcy — kluczowe różnice</h2>
+        <p>W zależności od statusu zakupu, przysługują różne uprawnienia reklamacyjne.</p>
+      </div>
+      <div class="kw-comparison-grid">
+        <div class="kw-comparison-card kw-consumer">
+          <div class="kw-comparison-header">
+            <h3><i class="fas fa-user"></i> Konsument</h3>
+            <p>Zakup na użytek osobisty, niezwiązany z działalnością gospodarczą</p>
+          </div>
+          <div class="kw-comparison-body">
+            <ul class="kw-comparison-list">
+              <li><i class="fas fa-check"></i><span><strong>2 lata</strong> odpowiedzialności sprzedawcy</span></li>
+              <li><i class="fas fa-check"></i><span><strong>Swoboda wyboru</strong> między naprawą a wymianą</span></li>
+              <li><i class="fas fa-check"></i><span><strong>14 dni</strong> na rozpatrzenie reklamacji</span></li>
+              <li><i class="fas fa-check"></i><span><strong>Zwrot kosztów</strong> odesłania przy uznanej reklamacji</span></li>
+              <li><i class="fas fa-check"></i><span><strong>Brak odpowiedzi</strong> = uznanie reklamacji</span></li>
+              <li><i class="fas fa-check"></i><span><strong>Odstąpienie od umowy</strong> w ciągu 14 dni bez przyczyny</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="kw-comparison-card kw-business">
+          <div class="kw-comparison-header">
+            <h3><i class="fas fa-building"></i> Przedsiębiorca</h3>
+            <p>Zakup w związku z działalnością gospodarczą</p>
+          </div>
+          <div class="kw-comparison-body">
+            <ul class="kw-comparison-list">
+              <li><i class="fas fa-check"></i><span><strong>Rękojmia</strong> wg Kodeksu cywilnego</span></li>
+              <li><i class="fas fa-check"></i><span><strong>Elastyczne warunki</strong> — indywidualne ustalenia</span></li>
+              <li><i class="fas fa-check"></i><span><strong>Dedykowana obsługa B2B</strong></span></li>
+              <li><i class="fas fa-check"></i><span><strong>Gwarancja producenta WIHA</strong></span></li>
+              <li><i class="fas fa-check"></i><span><strong>Dokumentacja VAT</strong> — faktury</span></li>
+              <li><i class="fas fa-check"></i><span><strong>Serwis techniczny</strong> i doradztwo</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GWARANCJA WIHA -->
+  <section class="kw-section">
+    <div class="container">
+      <div class="kw-warranty-content">
+        <div class="kw-warranty-text">
+          <div class="kw-section-badge"><i class="fas fa-award"></i> Gwarancja WIHA</div>
+          <h3>Gwarancja producenta WIHA — Made in Germany</h3>
+          <p>Narzędzia WIHA objęte są gwarancją producenta udzielaną przez WIHA Werkzeuge GmbH, która działa niezależnie od uprawnień przysługujących Ci wobec sprzedawcy. Gwarancja ta może rozszerzać Twoje prawa i oferować dodatkową ochronę.</p>
+          <p><strong>Skorzystanie z gwarancji producenta nie wyłącza ani nie ogranicza Twoich uprawnień z tytułu braku zgodności towaru z umową wobec sprzedawcy.</strong> Masz prawo złożyć reklamację bezpośrednio do nas jako autoryzowanego dystrybutora.</p>
+          <p>Narzędzia izolowane WIHA VDE przechodzą indywidualny test napięciem 10 000 V i posiadają certyfikaty bezpieczeństwa VDE-GS oraz IEC 60900, co gwarantuje najwyższą jakość i bezpieczeństwo użytkowania.</p>
+          <div class="kw-warranty-certs">
+            <span class="kw-warranty-cert"><i class="fas fa-certificate"></i> VDE-GS</span>
+            <span class="kw-warranty-cert"><i class="fas fa-bolt"></i> IEC 60900</span>
+            <span class="kw-warranty-cert"><i class="fas fa-industry"></i> Made in Germany</span>
+            <span class="kw-warranty-cert"><i class="fas fa-shield-alt"></i> Test 10 000V</span>
+          </div>
+        </div>
+        <div class="kw-warranty-visual">
+          <div class="kw-warranty-card">
+            <div class="kw-warranty-badge-large"><i class="fas fa-award"></i></div>
+            <h4>Gwarancja Producenta WIHA</h4>
+            <p>Oryginalne narzędzia WIHA objęte są gwarancją producenta. Warunki szczegółowe określone są w karcie gwarancyjnej dołączonej do produktu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULARZ -->
+  <section class="kw-section kw-section-pattern" id="formularz">
+    <div class="container">
+      <div class="kw-form-wrapper">
+        <div class="kw-form-header">
+          <div class="kw-section-badge"><i class="fas fa-file-alt"></i> Formularz zgłoszenia</div>
+          <h3>Zgłoś reklamację online</h3>
+          <p>Wypełnij poniższy formularz, aby złożyć reklamację narzędzi WIHA. Wymagane pola oznaczone są gwiazdką (<span class="kw-text-primary">*</span>).</p>
+        </div>
+        <form id="kw-complaint-form" action="mailto:info@kedar-wiha.pl" method="POST" enctype="text/plain">
+          <div class="kw-form-row kw-form-row-2">
+            <div class="kw-form-group">
+              <label class="kw-form-label" for="kw-name">Imię i nazwisko <span class="kw-required-mark">*</span></label>
+              <input type="text" class="kw-form-control" id="kw-name" name="imie_nazwisko" placeholder="Jan Kowalski" required>
+              <span class="kw-form-error">Proszę podać imię i nazwisko.</span>
+            </div>
+            <div class="kw-form-group">
+              <label class="kw-form-label" for="kw-email">Adres e-mail <span class="kw-required-mark">*</span></label>
+              <input type="email" class="kw-form-control" id="kw-email" name="email" placeholder="jan.kowalski@email.pl" required>
+              <span class="kw-form-error">Proszę podać prawidłowy adres e-mail.</span>
+            </div>
+          </div>
+          <div class="kw-form-row kw-form-row-2">
+            <div class="kw-form-group">
+              <label class="kw-form-label" for="kw-phone">Numer telefonu <span class="kw-required-mark">*</span></label>
+              <input type="tel" class="kw-form-control" id="kw-phone" name="telefon" placeholder="+48 123 456 789" required>
+              <span class="kw-form-error">Proszę podać numer telefonu.</span>
+            </div>
+            <div class="kw-form-group">
+              <label class="kw-form-label" for="kw-order">Numer zamówienia <span class="kw-required-mark">*</span></label>
+              <input type="text" class="kw-form-control" id="kw-order" name="numer_zamowienia" placeholder="np. 12345 lub data zakupu" required>
+              <span class="kw-form-error">Proszę podać numer zamówienia.</span>
+            </div>
+          </div>
+          <div class="kw-form-group">
+            <label class="kw-form-label" for="kw-product">Nazwa produktu / numer katalogowy WIHA</label>
+            <input type="text" class="kw-form-control" id="kw-product" name="produkt" placeholder="np. Wkrętak izolowany WIHA SoftFinish 36791">
+          </div>
+          <div class="kw-form-group">
+            <label class="kw-form-label" for="kw-description">Opis wady / niezgodności <span class="kw-required-mark">*</span></label>
+            <textarea class="kw-form-control" id="kw-description" name="opis_wady" rows="4" placeholder="Opisz szczegółowo stwierdzoną wadę lub problem z produktem..." required></textarea>
+            <span class="kw-form-error">Proszę opisać wadę produktu.</span>
+          </div>
+          <div class="kw-form-group">
+            <label class="kw-form-label" for="kw-demand">Żądanie reklamacyjne <span class="kw-required-mark">*</span></label>
+            <select class="kw-form-control kw-form-select" id="kw-demand" name="zadanie" required>
+              <option value="">— Wybierz żądanie —</option>
+              <option value="naprawa">Naprawa produktu</option>
+              <option value="wymiana">Wymiana na nowy produkt</option>
+              <option value="obnizenie">Obniżenie ceny</option>
+              <option value="odstapienie">Odstąpienie od umowy (zwrot pieniędzy)</option>
+            </select>
+            <span class="kw-form-error">Proszę wybrać żądanie reklamacyjne.</span>
+          </div>
+          <div class="kw-form-group">
+            <label class="kw-form-label" for="kw-files">Załączniki (zdjęcia, dokumenty)</label>
+            <input type="file" class="kw-form-control" id="kw-files" name="zalaczniki" multiple accept="image/*,.pdf">
+            <small class="kw-text-muted">Dozwolone formaty: JPG, PNG, PDF. Maksymalnie 5 plików.</small>
+          </div>
+          <div class="kw-form-group">
+            <div class="kw-form-checkbox">
+              <input type="checkbox" id="kw-consent" name="zgoda_rodo" required>
+              <label class="kw-form-checkbox-label" for="kw-consent">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu realizacji procedury reklamacyjnej zgodnie z <a href="/polityka-prywatnosci" target="_blank">Polityką prywatności</a>. <span class="kw-required-mark">*</span></label>
+            </div>
+            <span class="kw-form-error kw-mt-2">Zgoda jest wymagana do wysłania formularza.</span>
+          </div>
+          <div class="kw-form-submit">
+            <button type="submit" class="kw-btn kw-btn-primary kw-btn-lg"><i class="fas fa-paper-plane"></i> Wyślij zgłoszenie reklamacyjne</button>
+          </div>
+          <div class="kw-form-note">
+            <i class="fas fa-info-circle"></i>
+            <p><strong>Uwaga:</strong> Formularz otworzy Twój program pocztowy z wypełnionymi danymi. Alternatywnie możesz wysłać zgłoszenie bezpośrednio na adres <a href="mailto:info@kedar-wiha.pl"><strong>info@kedar-wiha.pl</strong></a>.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="kw-section kw-section-alt" id="faq">
+    <div class="container">
+      <div class="kw-section-header">
+        <div class="kw-section-badge"><i class="fas fa-question-circle"></i> FAQ</div>
+        <h2>Najczęściej zadawane pytania o reklamacje narzędzi WIHA</h2>
+        <p>Poniżej znajdziesz odpowiedzi na najczęściej zadawane pytania dotyczące procedury reklamacyjnej.</p>
+      </div>
+      <div class="kw-faq-grid">
+        <div class="kw-faq-item">
+          <div class="kw-faq-question" role="button" tabindex="0">
+            <h4>Jaki jest termin rozpatrzenia reklamacji?</h4>
+            <div class="kw-faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="kw-faq-answer">
+            <div class="kw-faq-answer-content">
+              <p>Zgodnie z ustawą o prawach konsumenta, sprzedawca ma obowiązek rozpatrzyć reklamację w terminie <strong>14 dni kalendarzowych</strong> od dnia otrzymania zgłoszenia. <strong>Brak odpowiedzi w tym terminie oznacza uznanie reklamacji</strong>.</p>
+            </div>
+          </div>
+        </div>
+        <div class="kw-faq-item">
+          <div class="kw-faq-question" role="button" tabindex="0">
+            <h4>Ile lat trwa odpowiedzialność sprzedawcy za wady?</h4>
+            <div class="kw-faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="kw-faq-answer">
+            <div class="kw-faq-answer-content">
+              <p>Dla konsumentów odpowiedzialność sprzedawcy za brak zgodności towaru z umową trwa <strong>2 lata od dnia dostarczenia produktu</strong>. Dla przedsiębiorców termin ten wynosi również 2 lata w ramach rękojmi.</p>
+            </div>
+          </div>
+        </div>
+        <div class="kw-faq-item">
+          <div class="kw-faq-question" role="button" tabindex="0">
+            <h4>Czy mogę wybrać między naprawą a wymianą?</h4>
+            <div class="kw-faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="kw-faq-answer">
+            <div class="kw-faq-answer-content">
+              <p><strong>Tak, jako konsument masz prawo wyboru</strong> między naprawą produktu a jego wymianą na nowy. Sprzedawca ma obowiązek dostarczyć naprawiony lub wymieniony produkt w rozsądnym czasie.</p>
+            </div>
+          </div>
+        </div>
+        <div class="kw-faq-item">
+          <div class="kw-faq-question" role="button" tabindex="0">
+            <h4>Kto pokrywa koszty wysyłki przy reklamacji?</h4>
+            <div class="kw-faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="kw-faq-answer">
+            <div class="kw-faq-answer-content">
+              <p><strong>Koszty dostarczenia reklamowanego towaru do sprzedawcy ponosi sprzedawca</strong>. W przypadku uznanej reklamacji sprzedawca zwraca konsumentowi poniesione koszty odesłania towaru.</p>
+            </div>
+          </div>
+        </div>
+        <div class="kw-faq-item">
+          <div class="kw-faq-question" role="button" tabindex="0">
+            <h4>Czy gwarancja WIHA ogranicza moje prawa?</h4>
+            <div class="kw-faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="kw-faq-answer">
+            <div class="kw-faq-answer-content">
+              <p><strong>Nie</strong>, gwarancja producenta nie ogranicza ani nie wyłącza uprawnień konsumenta wobec sprzedawcy. Możesz złożyć reklamację bezpośrednio do nas niezależnie od gwarancji WIHA.</p>
+            </div>
+          </div>
+        </div>
+        <div class="kw-faq-item">
+          <div class="kw-faq-question" role="button" tabindex="0">
+            <h4>Czy mogę zwrócić narzędzie bez podania przyczyny?</h4>
+            <div class="kw-faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="kw-faq-answer">
+            <div class="kw-faq-answer-content">
+              <p><strong>Tak</strong>, konsument ma prawo odstąpienia od umowy w ciągu 14 dni bez podania jakiejkolwiek przyczyny. Produkt musi być kompletny i nie nosić śladów użytkowania wykraczających poza zwykły zarząd.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATYSTYKI -->
+  <section class="kw-section kw-section-primary">
+    <div class="container">
+      <div class="kw-stats-grid">
+        <div class="kw-stat-item">
+          <div class="kw-stat-value kw-counter" data-target="98">0</div>
+          <div class="kw-stat-label">% reklamacji rozpatrzonych pozytywnie</div>
+        </div>
+        <div class="kw-stat-item">
+          <div class="kw-stat-value"><span>&lt;</span> <span class="kw-counter" data-target="14">0</span></div>
+          <div class="kw-stat-label">dni średni czas rozpatrzenia</div>
+        </div>
+        <div class="kw-stat-item">
+          <div class="kw-stat-value"><span class="kw-counter" data-target="2">0</span> <span>lata</span></div>
+          <div class="kw-stat-label">gwarancja producenta WIHA</div>
+        </div>
+        <div class="kw-stat-item">
+          <div class="kw-stat-value"><span class="kw-counter" data-target="10000">0</span><span>+</span></div>
+          <div class="kw-stat-label">obsłużonych klientów</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="kw-section" id="kontakt">
+    <div class="container">
+      <div class="kw-contact-grid">
+        <div class="kw-contact-info">
+          <h3>Kontakt i dane firmy</h3>
+          <p class="kw-text-secondary">Masz pytania dotyczące reklamacji narzędzi WIHA? Skontaktuj się z nami — nasi eksperci są do Twojej dyspozycji.</p>
+          <div class="kw-contact-items">
+            <div class="kw-contact-item">
+              <div class="kw-contact-item-icon"><i class="fas fa-building"></i></div>
+              <div class="kw-contact-item-content">
+                <h4>Dane firmy</h4>
+                <p>P.P.H.U. KEDAR Radosław Bizub<br>ul. Kukułcza 24D<br>55-100 Księginice</p>
+              </div>
+            </div>
+            <div class="kw-contact-item">
+              <div class="kw-contact-item-icon"><i class="fas fa-phone-alt"></i></div>
+              <div class="kw-contact-item-content">
+                <h4>Telefon</h4>
+                <p><a href="tel:+48575838766"><strong>+48 575 838 766</strong></a></p>
+              </div>
+            </div>
+            <div class="kw-contact-item">
+              <div class="kw-contact-item-icon"><i class="fas fa-envelope"></i></div>
+              <div class="kw-contact-item-content">
+                <h4>E-mail</h4>
+                <p><a href="mailto:info@kedar-wiha.pl"><strong>info@kedar-wiha.pl</strong></a></p>
+              </div>
+            </div>
+            <div class="kw-contact-item">
+              <div class="kw-contact-item-icon"><i class="fas fa-globe"></i></div>
+              <div class="kw-contact-item-content">
+                <h4>Strona internetowa</h4>
+                <p><a href="https://kedar-wiha.pl" target="_blank"><strong>kedar-wiha.pl</strong></a></p>
+              </div>
+            </div>
+          </div>
+          <div class="kw-contact-hours">
+            <h4><i class="fas fa-clock kw-text-primary"></i> Godziny pracy</h4>
+            <div class="kw-contact-hours-list">
+              <div class="kw-contact-hours-item"><span>Poniedziałek — Piątek</span><span>8:00 — 16:00</span></div>
+              <div class="kw-contact-hours-item"><span>Sobota</span><span>Zamknięte</span></div>
+              <div class="kw-contact-hours-item"><span>Niedziela i święta</span><span>Zamknięte</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="kw-contact-cta">
+          <h4>Gotowy do zgłoszenia reklamacji?</h4>
+          <p>Wypełnij formularz online lub skontaktuj się bezpośrednio. Rozpatrujemy zgłoszenia w ciągu 14 dni.</p>
+          <div class="kw-contact-cta-buttons">
+            <a href="#formularz" class="kw-btn kw-btn-primary"><i class="fas fa-file-alt"></i> Zgłoś reklamację</a>
+            <a href="mailto:info@kedar-wiha.pl" class="kw-btn kw-btn-secondary"><i class="fas fa-envelope"></i> Wyślij e-mail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="kw-cms-footer">
+    <div class="container">
+      <p>&copy; 2025 <a href="https://kedar-wiha.pl" target="_blank">KEDAR-WIHA.pl</a> — Autoryzowany Dystrybutor Narzędzi WIHA w Polsce. Wszelkie prawa zastrzeżone. <a href="/regulamin">Regulamin</a> | <a href="/polityka-prywatnosci">Polityka prywatności</a></p>
+    </div>
+  </footer>
+
+</div>
+
+<!-- SCHEMA.ORG FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Jaki jest termin rozpatrzenia reklamacji narzędzi WIHA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Zgodnie z ustawą o prawach konsumenta, sprzedawca ma obowiązek rozpatrzyć reklamację w terminie 14 dni kalendarzowych od dnia otrzymania zgłoszenia."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ile lat trwa odpowiedzialność sprzedawcy za wady narzędzi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dla konsumentów odpowiedzialność sprzedawcy za brak zgodności towaru z umową trwa 2 lata od dnia dostarczenia produktu."
+      }
+    }
+  ]
+}
+</script>
+
+<script>
+(function() {
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function() {
+
+    /* SCROLL REVEAL */
+    var revealElements = document.querySelectorAll('.kw-reveal');
+
+    if (revealElements.length > 0) {
+      var revealObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('kw-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
+      });
+
+      revealElements.forEach(function(el) {
+        revealObserver.observe(el);
+      });
+    }
+
+    /* FAQ ACCORDION */
+    var faqItems = document.querySelectorAll('.kw-faq-item');
+
+    faqItems.forEach(function(item) {
+      var question = item.querySelector('.kw-faq-question');
+
+      if (question) {
+        question.addEventListener('click', function() {
+          var isActive = item.classList.contains('kw-active');
+
+          faqItems.forEach(function(otherItem) {
+            otherItem.classList.remove('kw-active');
+          });
+
+          if (!isActive) {
+            item.classList.add('kw-active');
+          }
+        });
+      }
+    });
+
+    /* COUNTER ANIMATION */
+    var counters = document.querySelectorAll('.kw-counter');
+
+    if (counters.length > 0) {
+      var counterObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var counter = entry.target;
+            var target = parseInt(counter.getAttribute('data-target'), 10) || 0;
+            var duration = 2000;
+            var step = target / (duration / 16);
+            var current = 0;
+
+            var updateCounter = function() {
+              current += step;
+              if (current < target) {
+                counter.textContent = Math.floor(current).toLocaleString('pl-PL');
+                requestAnimationFrame(updateCounter);
+              } else {
+                counter.textContent = target.toLocaleString('pl-PL');
+              }
+            };
+
+            updateCounter();
+            observer.unobserve(counter);
+          }
+        });
+      }, {
+        threshold: 0.5
+      });
+
+      counters.forEach(function(counter) {
+        counterObserver.observe(counter);
+      });
+    }
+
+    /* FORM VALIDATION */
+    var form = document.getElementById('kw-complaint-form');
+
+    if (form) {
+      var inputs = form.querySelectorAll('.kw-form-control[required]');
+
+      inputs.forEach(function(input) {
+        input.addEventListener('blur', function() {
+          validateField(input);
+        });
+
+        input.addEventListener('input', function() {
+          if (input.classList.contains('kw-error')) {
+            validateField(input);
+          }
+        });
+      });
+
+      var checkbox = document.getElementById('kw-consent');
+
+      if (checkbox) {
+        checkbox.addEventListener('change', function() {
+          var errorSpan = checkbox.closest('.kw-form-group').querySelector('.kw-form-error');
+          if (checkbox.checked && errorSpan) {
+            errorSpan.style.display = 'none';
+          }
+        });
+      }
+
+      form.addEventListener('submit', function(e) {
+        var isValid = true;
+
+        inputs.forEach(function(input) {
+          if (!validateField(input)) {
+            isValid = false;
+          }
+        });
+
+        if (checkbox && !checkbox.checked) {
+          var errorSpan = checkbox.closest('.kw-form-group').querySelector('.kw-form-error');
+          if (errorSpan) {
+            errorSpan.style.display = 'block';
+          }
+          isValid = false;
+        }
+
+        if (!isValid) {
+          e.preventDefault();
+          var firstError = form.querySelector('.kw-error');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            firstError.focus();
+          }
+          return false;
+        }
+      });
+
+      function validateField(field) {
+        var value = field.value.trim();
+        var type = field.type;
+        var isValid = true;
+
+        field.classList.remove('kw-error');
+
+        if (field.hasAttribute('required') && !value) {
+          isValid = false;
+        }
+
+        if (type === 'email' && value) {
+          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            isValid = false;
+          }
+        }
+
+        if (type === 'tel' && value) {
+          var phoneRegex = /^[\d\s\+\-\(\)]{7,20}$/;
+          if (!phoneRegex.test(value)) {
+            isValid = false;
+          }
+        }
+
+        if (!isValid) {
+          field.classList.add('kw-error');
+        }
+
+        return isValid;
+      }
+    }
+
+    /* SMOOTH SCROLL */
+    var anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+    anchorLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var href = this.getAttribute('href');
+        if (href && href !== '#') {
+          var target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            var headerOffset = 100;
+            var elementPosition = target.getBoundingClientRect().top;
+            var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+  });
+})();
+</script>

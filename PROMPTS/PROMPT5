@@ -1,10 +1,10 @@
-Wygeneruj dla PrestyShop z motywem "Optima" wykorzystując funkcję (Wygląd > Strony > Deklaracja zgodności) stronę do CMS o tytule: "Deklaracja zgodności" zakoduj kodzie HTML/CSS Bootstrap do wklejenia do zawartości strony i ostyluj w CSS ten kod HTML Bootstrap stosując wygląd nowoczesny-premium zgodnie z brandem. Stosuj przejścia, animacje, hovery, ikony, backgroundy, gradienty, patterny. Sam zaplanuj odpowiednie sekcje na tej stronie i je wdróż/wygeneruj. Twórz treśći w sekcjach bardzo rozbudowane oraz obszerne, pamiętając o najlepszych praktykach Copywritingu SEO, teksty optymalizująco pozycjonujące nasycone i sekcje rozbudowane. 
+Wygeneruj dla PrestyShop z motywem "Optima" wykorzystując funkcję (Wygląd > Strony > Deklaracja zgodności) stronę do CMS o tytule: "Zwroty towaru" zakoduj kodzie HTML/CSS Bootstrap do wklejenia do zawartości strony i ostyluj w CSS ten kod HTML Bootstrap stosując wygląd nowoczesny-premium zgodnie z brandem. Stosuj przejścia, animacje, hovery, ikony, backgroundy, gradienty, patterny. Sam zaplanuj odpowiednie sekcje na tej stronie i je wdróż/wygeneruj. Twórz treśći w sekcjach bardzo rozbudowane oraz obszerne, pamiętając o najlepszych praktykach Copywritingu SEO, teksty optymalizująco pozycjonujące nasycone i sekcje rozbudowane.
 
 INFO O FIRMIE KEDAR-WIHA.pl (DO ROZSZERZENIA):
-Sklep KEDAR-WIHA.pl - Narzędzia Specjalistyczne dla elektryków. Narzędzia specjalistyczne sklep internetowy. Narzędzia dla elektryków. Jesteśmy dystrybutorem sprzętu specjalistycznego dla elektryków. Gwarancja jakości. Szybka dostawa. Wsparcie techniczne. Wkrętaki Izolowane - Profesjonalne wkrętaki VDE do prac elektrycznych z certyfikatem bezpieczeństwa. Klucze Dynamometryczne - Precyzyjne klucze dynamometryczne WIHA do dokładnego dokręcania. Zestawy Narzędzi - Kompletne zestawy narzędzi dla profesjonalistów i hobbystów. Skontaktuj się z nami - Telefon: +48 575 838 766, E-mail: info@kedar-wiha.pl, Strona www: https://kedar-wiha.pl . Wygeneruj finalnie kod HTML i CSS.
-Zdjęcia placeholdery z darmowego banku zdjęć Unsplash - https://unsplash.com . Kody mają być we Frameworku Bootstrap 4x - https://github.com/twbs/bootstrap . Stosuj .container, .col, .row . Ikony Font Awesome. Stosuj kolory :root z pliku "custom-style.css". Nie implementuj nowych skryptów JS i tych function JS inline.
+Sklep KEDAR-WIHA.pl - Narzędzia Specjalistyczne dla elektryków. Narzędzia specjalistyczne sklep internetowy. Narzędzia dla elektryków. Jesteśmy dystrybutorem sprzętu specjalistycznego dla elektryków. Gwarancja jakości. Szybka dostawa. Wsparcie techniczne. Wkrętaki Izolowane - Profesjonalne wkrętaki VDE do prac elektrycznych z certyfikatem bezpieczeństwa. Klucze Dynamometryczne - Precyzyjne klucze dynamometryczne WIHA do dokładnego dokręcania. Zestawy Narzędzi - Kompletne zestawy narzędzi dla profesjonalistów i hobbystów. Skontaktuj się z nami - Telefon: +48 575 838 766, E-mail: info@kedar-wiha.pl, Strona www: https://kedar-wiha.pl .
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap');
+Wygeneruj finalnie kod HTML i CSS.
+Zdjęcia placeholdery z darmowego banku zdjęć Unsplash - https://unsplash.com . Ikony Font Awesome. Stosuj zmienne CSS z :root. Możesz też implementować nowe skrypty JS i również też te function JS inline. Przykładowy szablon strony w pliku: "koszty-wysylki-kedar-wiha.html".
 
 :root {
   /* ── 2.1 KOLORY MARKI (Brand Colors) ────────────────────────────────────
@@ -78,7 +78,7 @@ Zdjęcia placeholdery z darmowego banku zdjęć Unsplash - https://unsplash.com 
   --button-theme-color-hover: #ca0000;
   --button-theme-color-text:  #ffffff;
 
-  /* ── 2.7 TYPOGRAFIA (Typography) ────────────────────────────────────── 
+  /* ── 2.7 TYPOGRAFIA (Typography) ──────────────────────────────────────
      Montserrat: nagłówki mocne i profesjonalne; Inter: body czytelne technicznie */
   --font-family-heading: 'Montserrat', 'Manrope', Arial, sans-serif;
   --font-family-body:    'Inter', 'Manrope', Arial, sans-serif;
@@ -120,7 +120,7 @@ Zdjęcia placeholdery z darmowego banku zdjęć Unsplash - https://unsplash.com 
   --letter-spacing-badge:    0.08em;  /* odznaki certyfikatów */
   --letter-spacing-tight:   -0.01em;  /* wyróżnienia, ceny */
 
-  /* ── 2.8 SPACING — System 8px ────────────────────────────────────────── 
+  /* ── 2.8 SPACING — System 8px ──────────────────────────────────────────
      Konsekwentne 8px grid dla całej przestrzeni layoutu */
   --space-1:  4px;   /* 0.5× — mikro */
   --space-2:  8px;   /* 1× — bazowy */
@@ -147,7 +147,7 @@ Zdjęcia placeholdery z darmowego banku zdjęć Unsplash - https://unsplash.com 
   --space-section: var(--space-20);
   --space-section-mobile: var(--space-12);
 
-  /* ── 2.9 BORDER RADIUS ──────────────────────────────────────────────── 
+  /* ── 2.9 BORDER RADIUS ────────────────────────────────────────────────
      Optima używa border-radius:0; zachowujemy ostrość + małe zaokrąglenia */
   --border-radius-none: 0;
   --border-radius-xs:   2px;
@@ -172,7 +172,7 @@ Zdjęcia placeholdery z darmowego banku zdjęć Unsplash - https://unsplash.com 
   --shadow-primary:    0 4px 16px rgba(139, 0, 0, 0.20);
   --shadow-secondary:  0 4px 16px rgba(0, 86, 163, 0.20);
 
-  /* ── 2.11 TRANSITIONS ───────────────────────────────────────────────── 
+  /* ── 2.11 TRANSITIONS ─────────────────────────────────────────────────
      GPU-accelerated (transform, opacity) — gładkie bez repaint */
   --transition-fast:   150ms ease;
   --transition-base:   300ms linear;         /* standard dla całego projektu */

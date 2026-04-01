@@ -1,0 +1,287 @@
+/**
+ * KEDAR-WIHA.pl — kw_cmscustomcss :: Admin Styles
+ * Styling panelu konfiguracji modułu w Back Office.
+ * Kompatybilne z Bootstrap 3.x (PrestaShop BO) i Bootstrap 4.x.
+ *
+ * @version 1.0.0
+ */
+
+/* ==========================================================================
+   1. PANELE — Brand styling
+   ========================================================================== */
+
+.kw-panel-info .panel-heading,
+.kw-panel-form .panel-heading,
+.kw-panel-list .panel-heading,
+.kw-panel-reference .panel-heading {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+}
+
+.kw-panel-form .panel-heading {
+    background-color: #8B0000;
+    color: #ffffff;
+    border-color: #6b0000;
+}
+
+.kw-panel-form .panel-heading i {
+    color: #ffffff;
+}
+
+.kw-panel-list .panel-heading .badge {
+    background-color: #8B0000;
+    color: #ffffff;
+    margin-left: 8px;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   2. CSS EDITOR — Textarea + Toolbar
+   ========================================================================== */
+
+.kw-css-editor-wrapper {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+}
+
+.kw-css-editor-wrapper:focus-within {
+    border-color: #8B0000;
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+}
+
+.kw-css-editor-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    font-size: 12px;
+}
+
+.kw-css-label {
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.kw-css-label i {
+    margin-right: 4px;
+    color: #8B0000;
+}
+
+.kw-css-counter {
+    color: #888;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+}
+
+.kw-css-counter.kw-css-warning {
+    color: #e67e22;
+    font-weight: 700;
+}
+
+.kw-css-counter.kw-css-danger {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.kw-css-textarea {
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #2c3e50;
+    background-color: #fafafa;
+    border: none;
+    border-radius: 0;
+    padding: 16px;
+    resize: vertical;
+    min-height: 300px;
+    tab-size: 2;
+    -moz-tab-size: 2;
+}
+
+.kw-css-textarea:focus {
+    background-color: #ffffff;
+    box-shadow: none;
+    outline: none;
+}
+
+.kw-css-textarea::placeholder {
+    color: #bbb;
+    font-style: italic;
+}
+
+/* ==========================================================================
+   3. SELECT — Dropdown CMS pages
+   ========================================================================== */
+
+.kw-cms-select {
+    max-width: 500px;
+    font-size: 14px;
+}
+
+.kw-cms-select option.kw-cms-inactive {
+    color: #999;
+    font-style: italic;
+}
+
+/* ==========================================================================
+   4. TABELA — Lista zapisanych CSS
+   ========================================================================== */
+
+.kw-css-table thead th {
+    background-color: #f8f8f8;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #555;
+    border-bottom: 2px solid #ddd;
+    white-space: nowrap;
+}
+
+.kw-css-table tbody td {
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+.kw-css-table .badge {
+    font-size: 12px;
+    padding: 3px 8px;
+    background-color: #555;
+    font-weight: 600;
+}
+
+.kw-css-size {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+}
+
+.kw-delete-btn {
+    color: #c0392b;
+}
+
+.kw-delete-btn:hover {
+    color: #ffffff;
+    background-color: #c0392b;
+    border-color: #a93226;
+}
+
+/* ==========================================================================
+   5. REFERENCE PANEL — Collapsible
+   ========================================================================== */
+
+.kw-collapsible {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.kw-collapsible:hover {
+    background-color: #f0f0f0;
+}
+
+.kw-code-block {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid #444;
+}
+
+.kw-panel-reference h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #8B0000;
+}
+
+/* ==========================================================================
+   6. FOOTER
+   ========================================================================== */
+
+.kw-module-footer {
+    padding: 12px;
+    background: #f8f8f8;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 4px 4px;
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   7. SAVE BUTTON — Brand color
+   ========================================================================== */
+
+#kw-save-btn {
+    background-color: #8B0000;
+    color: #ffffff;
+    border-color: #6b0000;
+    font-weight: 600;
+    padding: 8px 24px;
+    transition: all 0.2s ease;
+}
+
+#kw-save-btn:hover,
+#kw-save-btn:focus {
+    background-color: #ca0000;
+    border-color: #a00000;
+    color: #ffffff;
+}
+
+#kw-save-btn .process-icon-save {
+    color: #ffffff;
+}
+
+#kw-load-css-btn {
+    margin-top: 6px;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE — Mobile adjustments
+   ========================================================================== */
+
+@media (max-width: 991px) {
+    .kw-css-textarea {
+        min-height: 200px;
+        font-size: 12px;
+    }
+
+    .kw-css-editor-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .kw-panel-reference .row .col-md-4,
+    .kw-panel-reference .row .col-md-6 {
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    .kw-css-table {
+        font-size: 12px;
+    }
+
+    .kw-css-table .btn-sm {
+        padding: 2px 6px;
+        font-size: 11px;
+    }
+}

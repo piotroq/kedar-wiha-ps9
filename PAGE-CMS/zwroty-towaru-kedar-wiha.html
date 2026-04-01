@@ -1,0 +1,1472 @@
+<!-- ==========================================================================
+KEDAR-WIHA.pl — Strona CMS "Zwroty i Reklamacje"
+PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 4.x
+Wersja: 1.0.0 | 2026
+Gotowe do wklejenia: Wygląd → Strony → Zwroty i Reklamacje
+Namespace: .kw-rt- (unikanie kolizji z Optima/PrestaShop)
+Lokalne zmienne CSS | Font Awesome (fas) | IntersectionObserver JS | Counter JS
+========================================================================== -->
+<style>
+/* ==========================================================================
+KEDAR-WIHA.pl — ZWROTY I REKLAMACJE v1.0
+Namespace: .kw-rt-
+Mobile-first | BEM | LOKALNE zmienne CSS (self-contained)
+Font Awesome (fas) | IntersectionObserver scroll-reveal | Animated Counter
+========================================================================== */
+/* ── SCOPE + LOKALNE ZMIENNE ──────────────────────────────────────────── */
+.kw-returns-page {
+--kw-rt-primary: #8B0000;
+--kw-rt-primary-dark: #6b0000;
+--kw-rt-secondary: #0056A3;
+--kw-rt-secondary-dark: #003d7a;
+--kw-rt-secondary-light: #1a7bc4;
+--kw-rt-three: #ca0000;
+--kw-rt-accent: #FFD700;
+--kw-rt-green: #1A7A3C;
+--kw-rt-green-bg: #e8f5ee;
+--kw-rt-amber: #E07B00;
+--kw-rt-amber-bg: #fff5ed;
+--kw-rt-heading: #2D2D2D;
+--kw-rt-text: #151515;
+--kw-rt-text-muted: #555555;
+--kw-rt-text-tertiary: #888888;
+--kw-rt-bg-light: #f5f5f5;
+--kw-rt-bg-dark: #1a1a1a;
+--kw-rt-bg-darker: #2a2a2a;
+--kw-rt-white: #ffffff;
+--kw-rt-border: #e8e8e8;
+--kw-rt-font-heading: 'Montserrat', 'Manrope', Arial, sans-serif;
+--kw-rt-font-body: 'Inter', 'Manrope', Arial, sans-serif;
+--kw-rt-radius-sm: 3px;
+--kw-rt-radius-md: 4px;
+--kw-rt-radius-lg: 8px;
+--kw-rt-radius-xl: 12px;
+--kw-rt-radius-pill: 50px;
+--kw-rt-shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+--kw-rt-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+--kw-rt-shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+--kw-rt-shadow-lg: 0 8px 28px rgba(0,0,0,0.13);
+--kw-rt-shadow-xl: 0 12px 32px rgba(0,0,0,0.15);
+--kw-rt-shadow-cta: 0 4px 20px rgba(139,0,0,0.30);
+--kw-rt-transition: 300ms cubic-bezier(0.25,0.46,0.45,0.94);
+--kw-rt-transition-slow: 500ms ease;
+--kw-rt-transition-fast: 150ms ease;
+--kw-rt-transition-bounce: 400ms cubic-bezier(0.34,1.56,0.64,1);
+font-family: var(--kw-rt-font-body);
+color: var(--kw-rt-text);
+line-height: 1.65;
+overflow-x: hidden;
+}
+.kw-returns-page *, .kw-returns-page *::before, .kw-returns-page *::after { box-sizing: border-box; }
+.kw-returns-page img { max-width: 100%; height: auto; }
+/* ── KEYFRAMES ────────────────────────────────────────────────────────── */
+@keyframes kwRtFadeUp {
+from { opacity: 0; transform: translateY(28px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes kwRtFadeIn {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+@keyframes kwRtSlideLeft {
+from { opacity: 0; transform: translateX(-40px); }
+to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwRtSlideRight {
+from { opacity: 0; transform: translateX(40px); }
+to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwRtPulse {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.05); }
+}
+@keyframes kwRtFloat {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-6px); }
+}
+@keyframes kwRtCheckmark {
+0% { stroke-dashoffset: 100; }
+100% { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+.kw-returns-page * {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+}
+/* ── SCROLL-REVEAL CLASSES ───────────────────────────────────────────── */
+.kw-rt-reveal {
+opacity: 0;
+transform: translateY(24px);
+transition: opacity var(--kw-rt-transition-slow), transform var(--kw-rt-transition-slow);
+}
+.kw-rt-reveal.kw-rt-visible {
+opacity: 1;
+transform: translateY(0);
+}
+.kw-rt-slide-left {
+opacity: 0;
+transform: translateX(-30px);
+transition: opacity var(--kw-rt-transition-slow), transform var(--kw-rt-transition-slow);
+}
+.kw-rt-slide-left.kw-rt-visible {
+opacity: 1;
+transform: translateX(0);
+}
+.kw-rt-slide-right {
+opacity: 0;
+transform: translateX(30px);
+transition: opacity var(--kw-rt-transition-slow), transform var(--kw-rt-transition-slow);
+}
+.kw-rt-slide-right.kw-rt-visible {
+opacity: 1;
+transform: translateX(0);
+}
+.kw-rt-stagger-1 { transition-delay: 0ms; }
+.kw-rt-stagger-2 { transition-delay: 100ms; }
+.kw-rt-stagger-3 { transition-delay: 200ms; }
+.kw-rt-stagger-4 { transition-delay: 300ms; }
+.kw-rt-stagger-5 { transition-delay: 400ms; }
+.kw-rt-stagger-6 { transition-delay: 500ms; }
+.kw-rt-anim { animation: kwRtFadeUp 0.6s ease both; }
+/* ══════════════════════════════════════════════════════════════════════════
+SECTION BASE
+══════════════════════════════════════════════════════════════════════════ */
+.kw-rt-section {
+padding: 48px 0;
+position: relative;
+}
+.kw-rt-section--alt {
+background: var(--kw-rt-bg-light);
+}
+.kw-rt-section--dark {
+background: linear-gradient(155deg, #1a1a1a 0%, #2a2a2a 100%);
+color: var(--kw-rt-white);
+}
+.kw-rt-section--dark p,
+.kw-rt-section--dark li {
+color: rgba(255,255,255,0.82);
+}
+.kw-rt-section--gradient {
+background: linear-gradient(180deg, var(--kw-rt-bg-light) 0%, var(--kw-rt-white) 100%);
+}
+.kw-rt-section--pattern { position: relative; }
+.kw-rt-section--pattern::before {
+content: '';
+position: absolute;
+inset: 0;
+background: repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(139,0,0,0.02) 22px, rgba(139,0,0,0.02) 23px);
+pointer-events: none;
+z-index: 0;
+}
+.kw-rt-section--pattern > .container { position: relative; z-index: 1; }
+/* ── SECTION HEADER ───────────────────────────────────────────────────── */
+.kw-rt-header { text-align: center; margin-bottom: 32px; }
+.kw-rt-label {
+display: inline-block;
+font-family: var(--kw-rt-font-heading);
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--kw-rt-primary);
+background: rgba(139,0,0,0.06);
+padding: 5px 16px;
+border-radius: var(--kw-rt-radius-pill);
+margin-bottom: 12px;
+}
+.kw-rt-section--dark .kw-rt-label {
+color: var(--kw-rt-accent);
+background: rgba(255,215,0,0.1);
+}
+.kw-rt-title {
+font-family: var(--kw-rt-font-heading);
+font-weight: 700;
+font-size: clamp(22px, 3.5vw, 36px);
+line-height: 1.2;
+letter-spacing: -0.01em;
+color: var(--kw-rt-heading);
+margin: 0 0 12px;
+}
+.kw-rt-section--dark .kw-rt-title { color: var(--kw-rt-white); }
+.kw-rt-divider {
+width: 48px;
+height: 3px;
+background: var(--kw-rt-primary);
+border: none;
+border-radius: 2px;
+margin: 14px auto;
+}
+.kw-rt-subtitle {
+font-family: var(--kw-rt-font-body);
+font-size: clamp(14px, 1.8vw, 17px);
+line-height: 1.65;
+color: var(--kw-rt-text-muted);
+max-width: 720px;
+margin: 0 auto;
+}
+.kw-rt-section--dark .kw-rt-subtitle { color: rgba(255,255,255,0.65); }
+/* ══════════════════════════════════════════════════════════════════════════
+1. HERO
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-hero {
+position: relative;
+min-height: 360px;
+display: flex;
+align-items: center;
+justify-content: center;
+background:
+linear-gradient(135deg, rgba(26,26,26,0.94) 0%, rgba(61,0,0,0.90) 55%, rgba(139,0,0,0.84) 100%),
+url('https://images.unsplash.com/photo-1554774853-719586f8c277?w=1600&q=80') center/cover no-repeat;
+padding: 56px 16px;
+text-align: center;
+overflow: hidden;
+}
+@supports (background-attachment: fixed) {
+@media (min-width: 768px) {
+.kw-rt-hero { background-attachment: scroll, fixed; }
+}
+}
+.kw-rt-hero::before {
+content: '';
+position: absolute;
+inset: 0;
+background: repeating-linear-gradient(30deg, transparent, transparent 38px, rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px);
+pointer-events: none;
+}
+.kw-rt-hero::after {
+content: '';
+position: absolute;
+bottom: 0; left: 0; right: 0;
+height: 56px;
+background: linear-gradient(to top, rgba(26,26,26,0.25), transparent);
+pointer-events: none;
+}
+.kw-rt-hero__inner {
+position: relative;
+z-index: 2;
+max-width: 780px;
+animation: kwRtFadeUp 0.7s ease both;
+}
+.kw-rt-hero__breadcrumbs {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+margin-bottom: 18px;
+font-family: var(--kw-rt-font-body);
+font-size: 13px;
+color: rgba(255,255,255,0.5);
+}
+.kw-rt-hero__breadcrumbs a {
+color: rgba(255,255,255,0.6);
+text-decoration: none;
+transition: color var(--kw-rt-transition-fast);
+}
+.kw-rt-hero__breadcrumbs a:hover { color: var(--kw-rt-white); }
+.kw-rt-hero__breadcrumbs i { font-size: 10px; }
+.kw-rt-hero__badge {
+display: inline-flex;
+align-items: center;
+gap: 7px;
+font-family: var(--kw-rt-font-heading);
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 0.13em;
+text-transform: uppercase;
+color: var(--kw-rt-accent);
+background: rgba(255,215,0,0.1);
+border: 1px solid rgba(255,215,0,0.22);
+padding: 5px 16px;
+border-radius: var(--kw-rt-radius-pill);
+margin-bottom: 18px;
+}
+.kw-rt-hero__badge i { font-size: 11px; }
+.kw-rt-hero__title {
+font-family: var(--kw-rt-font-heading);
+font-weight: 800;
+font-size: clamp(26px, 5vw, 48px);
+line-height: 1.12;
+color: var(--kw-rt-white);
+margin: 0 0 14px;
+letter-spacing: 0.01em;
+}
+.kw-rt-hero__title em { font-style: normal; color: var(--kw-rt-three); }
+.kw-rt-hero__sub {
+font-family: var(--kw-rt-font-body);
+font-size: clamp(14px, 1.8vw, 17px);
+line-height: 1.7;
+color: rgba(255,255,255,0.82);
+max-width: 640px;
+margin: 0 auto;
+}
+.kw-rt-hero__trust {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 10px;
+margin-top: 24px;
+padding-top: 20px;
+border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-rt-hero__chip {
+display: inline-flex;
+align-items: center;
+gap: 5px;
+font-family: var(--kw-rt-font-heading);
+font-size: 10px;
+font-weight: 600;
+letter-spacing: 0.07em;
+text-transform: uppercase;
+color: rgba(255,255,255,0.7);
+padding: 4px 10px;
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: var(--kw-rt-radius-sm);
+background: rgba(255,255,255,0.04);
+}
+.kw-rt-hero__chip i { color: var(--kw-rt-accent); font-size: 10px; }
+/* ══════════════════════════════════════════════════════════════════════════
+2. GUARANTEE CARDS (gwarancje zwrotu)
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-guarantees {
+display: grid;
+grid-template-columns: 1fr;
+gap: 16px;
+}
+.kw-rt-guarantee-card {
+text-align: center;
+padding: 28px 20px;
+background: var(--kw-rt-white);
+border: 1px solid var(--kw-rt-border);
+border-radius: var(--kw-rt-radius-sm);
+transition: all var(--kw-rt-transition);
+box-shadow: var(--kw-rt-shadow-sm);
+position: relative;
+overflow: hidden;
+}
+.kw-rt-guarantee-card::before {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 3px;
+background: var(--kw-rt-primary);
+transform: scaleX(0);
+transition: transform var(--kw-rt-transition);
+}
+.kw-rt-guarantee-card:hover {
+transform: translateY(-6px);
+box-shadow: var(--kw-rt-shadow-lg);
+}
+.kw-rt-guarantee-card:hover::before { transform: scaleX(1); }
+.kw-rt-guarantee-icon {
+width: 60px;
+height: 60px;
+border-radius: var(--kw-rt-radius-lg);
+background: rgba(139,0,0,0.07);
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 0 auto 16px;
+font-size: 24px;
+color: var(--kw-rt-primary);
+transition: all var(--kw-rt-transition);
+}
+.kw-rt-guarantee-card:hover .kw-rt-guarantee-icon {
+background: var(--kw-rt-primary);
+color: var(--kw-rt-white);
+transform: scale(1.1);
+}
+.kw-rt-guarantee-card h3 {
+font-family: var(--kw-rt-font-heading);
+font-weight: 700;
+font-size: clamp(14px, 1.8vw, 16px);
+color: var(--kw-rt-heading);
+margin: 0 0 8px;
+}
+.kw-rt-guarantee-card p {
+font-size: 14px;
+line-height: 1.6;
+color: var(--kw-rt-text-muted);
+margin: 0;
+}
+/* ══════════════════════════════════════════════════════════════════════════
+3. RETURN PROCEDURE TIMELINE (procedura krok po kroku)
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-timeline {
+max-width: 800px;
+margin: 0 auto;
+position: relative;
+padding-left: 32px;
+}
+.kw-rt-timeline::before {
+content: '';
+position: absolute;
+left: 15px;
+top: 0;
+bottom: 0;
+width: 2px;
+background: var(--kw-rt-border);
+}
+.kw-rt-timeline__step {
+position: relative;
+padding-bottom: 32px;
+}
+.kw-rt-timeline__step:last-child { padding-bottom: 0; }
+.kw-rt-timeline__dot {
+position: absolute;
+left: -32px;
+top: 2px;
+width: 32px;
+height: 32px;
+border-radius: 50%;
+background: var(--kw-rt-white);
+border: 2px solid var(--kw-rt-primary);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 12px;
+color: var(--kw-rt-primary);
+z-index: 2;
+transition: all var(--kw-rt-transition);
+}
+.kw-rt-timeline__step:hover .kw-rt-timeline__dot {
+background: var(--kw-rt-primary);
+color: var(--kw-rt-white);
+transform: scale(1.15);
+}
+.kw-rt-timeline__step h4 {
+font-family: var(--kw-rt-font-heading);
+font-weight: 700;
+font-size: 15px;
+color: var(--kw-rt-heading);
+margin: 0 0 6px;
+}
+.kw-rt-timeline__step p {
+font-size: 14px;
+line-height: 1.6;
+color: var(--kw-rt-text-muted);
+margin: 0;
+}
+.kw-rt-timeline__step--completed .kw-rt-timeline__dot {
+background: var(--kw-rt-green);
+border-color: var(--kw-rt-green);
+color: var(--kw-rt-white);
+}
+/* ══════════════════════════════════════════════════════════════════════════
+4. RETURN CONDITIONS (warunki przyjęcia zwrotu)
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-conditions {
+display: grid;
+grid-template-columns: 1fr;
+gap: 32px;
+align-items: center;
+}
+.kw-rt-conditions__img {
+border-radius: var(--kw-rt-radius-sm);
+overflow: hidden;
+box-shadow: var(--kw-rt-shadow-md);
+position: relative;
+}
+.kw-rt-conditions__img img {
+width: 100%;
+height: 280px;
+object-fit: cover;
+display: block;
+transition: transform var(--kw-rt-transition-slow);
+}
+.kw-rt-conditions__img:hover img { transform: scale(1.03); }
+.kw-rt-conditions__content h3 {
+font-family: var(--kw-rt-font-heading);
+font-weight: 700;
+font-size: clamp(18px, 2.5vw, 24px);
+color: var(--kw-rt-heading);
+margin: 0 0 12px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.kw-rt-conditions__content h3 i { color: var(--kw-rt-primary); font-size: 20px; }
+.kw-rt-conditions__content p {
+font-size: 15px;
+line-height: 1.7;
+color: var(--kw-rt-text-muted);
+margin: 0 0 14px;
+}
+.kw-rt-conditions__list {
+list-style: none;
+padding: 0;
+margin: 0 0 16px;
+}
+.kw-rt-conditions__list li {
+position: relative;
+padding-left: 28px;
+font-size: 14px;
+line-height: 1.65;
+color: var(--kw-rt-text);
+margin-bottom: 8px;
+}
+.kw-rt-conditions__list li::before {
+content: '\f00c';
+font-family: 'Font Awesome 5 Free';
+font-weight: 900;
+font-size: 11px;
+color: var(--kw-rt-green);
+position: absolute;
+left: 0;
+top: 4px;
+}
+.kw-rt-conditions__list li.kw-rt-warning::before {
+content: '\f071';
+color: var(--kw-rt-amber);
+}
+/* ══════════════════════════════════════════════════════════════════════════
+5. REFUND INFO (zwrot pieniędzy i koszty)
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-refund-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 16px;
+}
+.kw-rt-refund-card {
+display: flex;
+gap: 16px;
+align-items: flex-start;
+padding: 24px 20px;
+background: var(--kw-rt-white);
+border: 1px solid var(--kw-rt-border);
+border-radius: var(--kw-rt-radius-sm);
+transition: all var(--kw-rt-transition);
+box-shadow: var(--kw-rt-shadow-xs);
+position: relative;
+overflow: hidden;
+}
+.kw-rt-refund-card::after {
+content: '';
+position: absolute;
+bottom: 0; left: 0; right: 0;
+height: 3px;
+background: var(--kw-rt-primary);
+transform: scaleX(0);
+transform-origin: left;
+transition: transform var(--kw-rt-transition);
+}
+.kw-rt-refund-card:hover {
+transform: translateY(-4px);
+box-shadow: var(--kw-rt-shadow-lg);
+border-color: var(--kw-rt-primary);
+}
+.kw-rt-refund-card:hover::after { transform: scaleX(1); }
+.kw-rt-refund-icon {
+flex-shrink: 0;
+width: 52px;
+height: 52px;
+border-radius: var(--kw-rt-radius-md);
+background: rgba(139,0,0,0.07);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 22px;
+color: var(--kw-rt-primary);
+transition: all var(--kw-rt-transition);
+}
+.kw-rt-refund-card:hover .kw-rt-refund-icon {
+background: var(--kw-rt-primary);
+color: var(--kw-rt-white);
+}
+.kw-rt-refund-body { flex: 1; min-width: 0; }
+.kw-rt-refund-name {
+font-family: var(--kw-rt-font-heading);
+font-weight: 700;
+font-size: clamp(15px, 2vw, 18px);
+color: var(--kw-rt-heading);
+margin: 0 0 6px;
+}
+.kw-rt-refund-desc {
+font-size: 14px;
+line-height: 1.6;
+color: var(--kw-rt-text-muted);
+margin: 0 0 10px;
+}
+.kw-rt-refund-highlight {
+font-size: 13px;
+color: var(--kw-rt-primary);
+font-weight: 600;
+margin: 0;
+}
+/* ══════════════════════════════════════════════════════════════════════════
+6. WHO CAN RETURN (kto może zwrócić)
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-who-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 16px;
+}
+.kw-rt-who-card {
+padding: 24px 20px;
+background: var(--kw-rt-white);
+border: 1px solid var(--kw-rt-border);
+border-radius: var(--kw-rt-radius-sm);
+transition: all var(--kw-rt-transition);
+box-shadow: var(--kw-rt-shadow-xs);
+}
+.kw-rt-who-card:hover {
+box-shadow: var(--kw-rt-shadow-md);
+border-color: var(--kw-rt-primary);
+}
+.kw-rt-who-card--consumer {
+border-left: 4px solid var(--kw-rt-green);
+}
+.kw-rt-who-card--business {
+border-left: 4px solid var(--kw-rt-secondary);
+}
+.kw-rt-who-card h4 {
+font-family: var(--kw-rt-font-heading);
+font-weight: 700;
+font-size: 16px;
+color: var(--kw-rt-heading);
+margin: 0 0 8px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.kw-rt-who-card p {
+font-size: 14px;
+line-height: 1.6;
+color: var(--kw-rt-text-muted);
+margin: 0;
+}
+/* ══════════════════════════════════════════════════════════════════════════
+7. CALLOUT (ważne informacje)
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-callout {
+border-radius: 0 var(--kw-rt-radius-md) var(--kw-rt-radius-md) 0;
+padding: 20px 24px;
+margin: 20px 0;
+}
+.kw-rt-callout p { margin: 0; font-size: 14px; line-height: 1.7; }
+.kw-rt-callout i { margin-right: 8px; }
+.kw-rt-callout--info {
+background: rgba(0,86,163,0.05);
+border-left: 4px solid var(--kw-rt-secondary);
+}
+.kw-rt-callout--info p { color: var(--kw-rt-heading); }
+.kw-rt-callout--info i { color: var(--kw-rt-secondary); }
+.kw-rt-callout--warning {
+background: var(--kw-rt-amber-bg);
+border-left: 4px solid var(--kw-rt-amber);
+}
+.kw-rt-callout--warning p { color: var(--kw-rt-heading); }
+.kw-rt-callout--warning i { color: var(--kw-rt-amber); }
+.kw-rt-callout--success {
+background: var(--kw-rt-green-bg);
+border-left: 4px solid var(--kw-rt-green);
+}
+.kw-rt-callout--success p { color: var(--kw-rt-heading); }
+.kw-rt-callout--success i { color: var(--kw-rt-green); }
+/* ══════════════════════════════════════════════════════════════════════════
+8. FORM DOWNLOAD (formularz do pobrania)
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-form-download {
+background: linear-gradient(135deg, rgba(139,0,0,0.05) 0%, rgba(0,86,163,0.05) 100%);
+border: 2px solid var(--kw-rt-border);
+border-radius: var(--kw-rt-radius-lg);
+padding: 32px 24px;
+text-align: center;
+max-width: 700px;
+margin: 0 auto;
+}
+.kw-rt-form-download__icon {
+width: 72px;
+height: 72px;
+border-radius: 50%;
+background: var(--kw-rt-green-bg);
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 0 auto 16px;
+font-size: 30px;
+color: var(--kw-rt-green);
+animation: kwRtFloat 3s ease-in-out infinite;
+}
+.kw-rt-form-download h3 {
+font-family: var(--kw-rt-font-heading);
+font-weight: 700;
+font-size: clamp(18px, 2.5vw, 24px);
+color: var(--kw-rt-heading);
+margin: 0 0 8px;
+}
+.kw-rt-form-download p {
+font-size: 15px;
+line-height: 1.7;
+color: var(--kw-rt-text-muted);
+margin: 0 0 20px;
+}
+.kw-rt-btn {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+font-family: var(--kw-rt-font-heading);
+font-weight: 600;
+font-size: 13px;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+padding: 13px 26px;
+border-radius: var(--kw-rt-radius-md);
+text-decoration: none !important;
+min-height: 48px;
+transition: all var(--kw-rt-transition);
+border: 2px solid transparent;
+}
+.kw-rt-btn--primary {
+background: var(--kw-rt-primary); color: var(--kw-rt-white); border-color: var(--kw-rt-primary);
+box-shadow: var(--kw-rt-shadow-cta);
+}
+.kw-rt-btn--primary:hover {
+background: var(--kw-rt-three); border-color: var(--kw-rt-three);
+transform: translateY(-2px);
+box-shadow: var(--kw-rt-shadow-cta-hover);
+}
+.kw-rt-btn--outline {
+background: transparent; color: var(--kw-rt-primary); border-color: var(--kw-rt-primary);
+}
+.kw-rt-btn--outline:hover {
+background: var(--kw-rt-primary); color: var(--kw-rt-white);
+}
+/* ══════════════════════════════════════════════════════════════════════════
+9. FAQ — CSS-only accordion
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-faq { max-width: 760px; margin: 0 auto; }
+.kw-rt-faq__item {
+background: var(--kw-rt-white);
+border: 1px solid var(--kw-rt-border);
+border-radius: var(--kw-rt-radius-sm);
+margin-bottom: 10px;
+overflow: hidden;
+transition: all var(--kw-rt-transition);
+box-shadow: var(--kw-rt-shadow-xs);
+}
+.kw-rt-faq__item:hover { box-shadow: var(--kw-rt-shadow-md); border-color: var(--kw-rt-primary); }
+.kw-rt-faq__item[open] { border-color: var(--kw-rt-primary); box-shadow: var(--kw-rt-shadow-md); }
+.kw-rt-faq__item summary {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 16px 20px;
+font-family: var(--kw-rt-font-heading);
+font-weight: 600;
+font-size: 15px;
+color: var(--kw-rt-heading);
+cursor: pointer;
+list-style: none;
+min-height: 48px;
+transition: color var(--kw-rt-transition);
+}
+.kw-rt-faq__item summary::-webkit-details-marker { display: none; }
+.kw-rt-faq__item summary::before {
+content: '\f105';
+font-family: 'Font Awesome 5 Free';
+font-weight: 900;
+font-size: 14px;
+color: var(--kw-rt-primary);
+flex-shrink: 0;
+width: 20px;
+text-align: center;
+transition: transform var(--kw-rt-transition);
+}
+.kw-rt-faq__item[open] summary::before { transform: rotate(90deg); }
+.kw-rt-faq__item summary:hover { color: var(--kw-rt-primary); }
+.kw-rt-faq__answer {
+padding: 0 20px 16px 50px;
+font-size: 14px;
+line-height: 1.7;
+color: var(--kw-rt-text-muted);
+animation: kwRtFadeIn 0.3s ease both;
+}
+.kw-rt-faq__answer a { color: var(--kw-rt-secondary); }
+.kw-rt-faq__answer strong { color: var(--kw-rt-heading); }
+/* ══════════════════════════════════════════════════════════════════════════
+10. STATS / SOCIAL PROOF
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-stats-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 16px;
+}
+.kw-rt-stat-card {
+text-align: center;
+padding: 24px 16px;
+background: rgba(255,255,255,0.06);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: var(--kw-rt-radius-sm);
+transition: all var(--kw-rt-transition);
+}
+.kw-rt-stat-card:hover {
+background: rgba(255,255,255,0.1);
+transform: translateY(-3px);
+border-color: rgba(139,0,0,0.3);
+}
+.kw-rt-stat-number {
+font-family: var(--kw-rt-font-heading);
+font-weight: 800;
+font-size: clamp(28px, 4vw, 42px);
+color: var(--kw-rt-accent);
+line-height: 1.1;
+margin: 0 0 6px;
+}
+.kw-rt-stat-number .kw-rt-stat-suffix {
+font-size: 0.6em;
+font-weight: 700;
+color: var(--kw-rt-primary);
+}
+.kw-rt-stat-label {
+font-size: 13px;
+line-height: 1.4;
+color: rgba(255,255,255,0.72);
+margin: 0;
+}
+/* ══════════════════════════════════════════════════════════════════════════
+11. CTA / KONTAKT
+═══════════════════════════════════════════════════════════════════════ */
+.kw-rt-cta {
+background: linear-gradient(140deg, #8B0000 0%, #5a0000 55%, #1a1a1a 100%);
+text-align: center;
+padding: 56px 16px;
+position: relative;
+overflow: hidden;
+}
+.kw-rt-cta::before {
+content: '';
+position: absolute;
+inset: 0;
+background: repeating-linear-gradient(55deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px);
+pointer-events: none;
+}
+.kw-rt-cta__inner {
+position: relative;
+z-index: 2;
+max-width: 700px;
+margin: 0 auto;
+}
+.kw-rt-cta__inner h2 {
+font-family: var(--kw-rt-font-heading);
+font-weight: 700;
+font-size: clamp(20px, 3.2vw, 34px);
+line-height: 1.2;
+color: var(--kw-rt-white);
+margin: 0 0 14px;
+}
+.kw-rt-cta__inner p {
+font-size: 15px;
+line-height: 1.65;
+color: rgba(255,255,255,0.78);
+margin: 0 0 24px;
+}
+.kw-rt-cta__btns {
+display: flex;
+flex-direction: column;
+gap: 12px;
+align-items: center;
+}
+.kw-rt-cta__btns .kw-rt-btn--white {
+background: var(--kw-rt-white); color: var(--kw-rt-primary); border-color: var(--kw-rt-white);
+box-shadow: 0 4px 18px rgba(255,255,255,0.18);
+}
+.kw-rt-cta__btns .kw-rt-btn--white:hover {
+background: transparent; color: var(--kw-rt-white); transform: translateY(-2px);
+box-shadow: 0 8px 28px rgba(255,255,255,0.25);
+}
+.kw-rt-cta__btns .kw-rt-btn--outline-white {
+background: transparent; color: var(--kw-rt-white); border-color: rgba(255,255,255,0.35);
+}
+.kw-rt-cta__btns .kw-rt-btn--outline-white:hover {
+background: var(--kw-rt-white); color: var(--kw-rt-primary); border-color: var(--kw-rt-white);
+}
+.kw-rt-contact-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 16px;
+max-width: 640px;
+margin: 28px auto 0;
+padding-top: 24px;
+border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-rt-contact-card {
+display: flex;
+gap: 14px;
+align-items: center;
+padding: 18px 20px;
+background: rgba(255,255,255,0.06);
+border: 1px solid rgba(255,255,255,0.08);
+border-radius: var(--kw-rt-radius-sm);
+transition: all var(--kw-rt-transition);
+text-decoration: none !important;
+color: var(--kw-rt-white);
+}
+.kw-rt-contact-card:hover {
+background: rgba(255,255,255,0.1);
+transform: translateY(-2px);
+border-color: rgba(255,215,0,0.2);
+}
+.kw-rt-contact-icon {
+flex-shrink: 0;
+width: 44px;
+height: 44px;
+border-radius: var(--kw-rt-radius-sm);
+background: rgba(139,0,0,0.2);
+border: 1px solid var(--kw-rt-primary);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 18px;
+color: var(--kw-rt-accent);
+transition: all var(--kw-rt-transition);
+}
+.kw-rt-contact-card:hover .kw-rt-contact-icon {
+background: var(--kw-rt-primary);
+color: var(--kw-rt-white);
+}
+.kw-rt-contact-card strong {
+display: block;
+font-family: var(--kw-rt-font-heading);
+font-weight: 600;
+font-size: 14px;
+color: var(--kw-rt-white);
+margin-bottom: 2px;
+}
+.kw-rt-contact-card span { font-size: 13px; color: rgba(255,255,255,0.65); }
+/* ══════════════════════════════════════════════════════════════════════════
+RESPONSIVE
+══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 480px) {
+.kw-rt-cta__btns { flex-direction: row; justify-content: center; }
+}
+@media (min-width: 576px) {
+.kw-rt-guarantees { grid-template-columns: repeat(2, 1fr); }
+.kw-rt-refund-grid { grid-template-columns: repeat(2, 1fr); }
+.kw-rt-who-grid { grid-template-columns: repeat(2, 1fr); }
+.kw-rt-stats-grid { grid-template-columns: repeat(4, 1fr); }
+.kw-rt-contact-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 768px) {
+.kw-rt-section { padding: 64px 0; }
+.kw-rt-hero { min-height: 420px; padding: 72px 24px; }
+.kw-rt-header { margin-bottom: 40px; }
+.kw-rt-guarantees { grid-template-columns: repeat(4, 1fr); }
+.kw-rt-conditions { grid-template-columns: 1fr 1fr; gap: 48px; }
+.kw-rt-conditions__img img { height: 360px; }
+.kw-rt-cta { padding: 72px 24px; }
+.kw-rt-contact-grid { max-width: 100%; }
+}
+@media (min-width: 992px) {
+.kw-rt-section { padding: 80px 0; }
+.kw-rt-hero { min-height: 480px; padding: 88px 32px; }
+.kw-rt-header { margin-bottom: 48px; }
+.kw-rt-refund-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1440px) {
+.kw-rt-section { padding: 96px 0; }
+}
+</style>
+<!-- SCHEMA.ORG -->
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "WebPage",
+"name": "Zwroty i Reklamacje — KEDAR-WIHA.pl",
+"description": "Procedura zwrotu towaru w sklepie KEDAR-WIHA.pl. 14 dni na zwrot narzędzi WIHA bez podania przyczyny. Formularz zwrotu, warunki, koszty przesyłki i refund.",
+"url": "https://kedar-wiha.pl/zwroty-i-reklamacje",
+"mainEntity": {
+"@type": "Organization",
+"name": "KEDAR-WIHA.pl",
+"url": "https://kedar-wiha.pl",
+"telephone": "+48575838766",
+"email": "info@kedar-wiha.pl"
+}
+}
+</script>
+<!-- ====================================================================== -->
+<div class="kw-returns-page">
+<!-- ═══════════════════════════════════════════════════════════════════════
+1. HERO
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="kw-rt-hero" aria-label="Zwroty i Reklamacje KEDAR-WIHA.pl">
+<div class="kw-rt-hero__inner">
+<nav class="kw-rt-hero__breadcrumbs" aria-label="Ścieżka nawigacji">
+<a href="/">Strona główna</a>
+<i class="fas fa-chevron-right"></i>
+<a href="/informacje-dla-klienta">Informacje dla klienta</a>
+<i class="fas fa-chevron-right"></i>
+<span style="color:var(--kw-rt-accent);">Zwroty i Reklamacje</span>
+</nav>
+<span class="kw-rt-hero__badge"><i class="fas fa-undo-alt"></i> Prawo do zwrotu</span>
+<h1 class="kw-rt-hero__title">Zwroty i <em>Reklamacje</em> Narzędzi WIHA</h1>
+<p class="kw-rt-hero__sub">Kompletna procedura zwrotu towaru w sklepie KEDAR-WIHA.pl — 14 dni na odstąpienie od umowy bez podania przyczyny, szybki refund i pełne wsparcie przy zwrotach narzędzi specjalistycznych WIHA.</p>
+<div class="kw-rt-hero__trust">
+<span class="kw-rt-hero__chip"><i class="fas fa-calendar-check"></i> 14 dni na zwrot</span>
+<span class="kw-rt-hero__chip"><i class="fas fa-shield-alt"></i> Bezpieczny proces</span>
+<span class="kw-rt-hero__chip"><i class="fas fa-clock"></i> Szybki refund</span>
+<span class="kw-rt-hero__chip"><i class="fas fa-headset"></i> Wsparcie eksperta</span>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════════
+2. GWARANCJE ZWROTU
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="kw-rt-section kw-rt-section--pattern" aria-label="Gwarancje zwrotu">
+<div class="container">
+<div class="kw-rt-header kw-rt-reveal">
+<span class="kw-rt-label">Twoje prawa</span>
+<h2 class="kw-rt-title">Bezpieczny Zwrot Narzędzi Specjalistycznych</h2>
+<hr class="kw-rt-divider" />
+<p class="kw-rt-subtitle">Jako autoryzowany dystrybutor narzędzi WIHA w Polsce, szanujemy prawo każdego klienta do zwrotu zakupionych produktów. Nasza procedura zwrotu jest prosta, przejrzysta i zgodna z polskim prawem konsumenckim — gwarantujemy pełne wsparcie na każdym etapie procesu.</p>
+</div>
+<div class="kw-rt-guarantees">
+<article class="kw-rt-guarantee-card kw-rt-reveal kw-rt-stagger-1">
+<div class="kw-rt-guarantee-icon"><i class="fas fa-calendar-alt"></i></div>
+<h3>14 Dni na Zwrot</h3>
+<p>Masz pełne 14 dni od daty otrzymania przesyłki na odstąpienie od umowy bez podania jakiejkolwiek przyczyny. To Twoje prawo wynikające z ustawy o prawach konsumenta — my je w pełni respektujemy.</p>
+</article>
+<article class="kw-rt-guarantee-card kw-rt-reveal kw-rt-stagger-2">
+<div class="kw-rt-guarantee-icon"><i class="fas fa-file-signature"></i></div>
+<h3>Prosta Procedura</h3>
+<p>Wystarczy wysłać oświadczenie e-mailem na <a href="mailto:info@kedar-wiha.pl" style="color:var(--kw-rt-primary);">info@kedar-wiha.pl</a> lub skorzystać z gotowego formularza zwrotu dostępnego do pobrania na tej stronie.</p>
+</article>
+<article class="kw-rt-guarantee-card kw-rt-reveal kw-rt-stagger-3">
+<div class="kw-rt-guarantee-icon"><i class="fas fa-money-bill-wave"></i></div>
+<h3>Szybki Refund</h3>
+<p>Zwrot środków realizujemy w ciągu 14 dni od otrzymania zwracanego towaru lub dowodu jego nadania. Pieniądze wracają na oryginalne konto płatności użyte podczas składania zamówienia.</p>
+</article>
+<article class="kw-rt-guarantee-card kw-rt-reveal kw-rt-stagger-4">
+<div class="kw-rt-guarantee-icon"><i class="fas fa-headset"></i></div>
+<h3>Wsparcie Eksperta</h3>
+<p>Nasz zespół jest dostępny pod numerem <strong>+48 575 838 766</strong> — pomożemy w każdym etapie zwrotu, odpowiemy na pytania i doradzimy w kwestii reklamacji narzędzi WIHA.</p>
+</article>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════════
+3. PROCEDURA ZWROTU KROK PO KROKU
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="kw-rt-section kw-rt-section--alt" id="procedura" aria-label="Procedura zwrotu krok po kroku">
+<div class="container">
+<div class="kw-rt-header kw-rt-reveal">
+<span class="kw-rt-label">Instrukcja</span>
+<h2 class="kw-rt-title">Procedura Zwrotu — 5 Prostych Kroków</h2>
+<hr class="kw-rt-divider" />
+<p class="kw-rt-subtitle">Przedstawiamy szczegółową procedurę zwrotu towaru zakupionego w sklepie KEDAR-WIHA.pl. Każdy krok jest jasno opisany — od złożenia oświadczenia po otrzymanie zwrotu pieniędzy na konto.</p>
+</div>
+<div class="kw-rt-timeline kw-rt-reveal">
+<div class="kw-rt-timeline__step kw-rt-timeline__step--completed">
+<div class="kw-rt-timeline__dot"><i class="fas fa-envelope-open-text"></i></div>
+<h4>Krok 1 — Złóż Oświadczenie o Odstąpieniu</h4>
+<p>Wyślij oświadczenie o odstąpieniu od umowy na adres e-mail <strong>info@kedar-wiha.pl</strong> lub wyślij pismem tradycyjnym na adres siedziby firmy. Możesz skorzystać z gotowego formularza zwrotu dostępnego do pobrania poniżej. W oświadczeniu podaj numer zamówienia, datę zakupu oraz dane do zwrotu środków. Oświadczenie możesz złożyć w dowolnym momencie w ciągu 14 dni od otrzymania przesyłki z narzędziami WIHA.</p>
+</div>
+<div class="kw-rt-timeline__step kw-rt-timeline__step--completed">
+<div class="kw-rt-timeline__dot"><i class="fas fa-check-circle"></i></div>
+<h4>Krok 2 — Potwierdzenie od Sprzedawcy</h4>
+<p>Po otrzymaniu Twojego oświadczenia niezwłocznie potwierdzimy je drogą e-mailową. W potwierdzeniu znajdziesz szczegółowe instrukcje dotyczące pakowania i wysyłki zwracanego towaru, adres do odsyłki oraz numer referencyjny zwrotu. To potwierdzenie jest ważne dla dokumentacji procesu zwrotu.</p>
+</div>
+<div class="kw-rt-timeline__step kw-rt-timeline__step--completed">
+<div class="kw-rt-timeline__dot"><i class="fas fa-box"></i></div>
+<h4>Krok 3 — Zapakuj Towar Kompletny</h4>
+<p>Zapakuj zwracany produkt w oryginalne opakowanie — narzędzia WIHA muszą być kompletne z instrukcjami, akcesoriami, kartą gwarancyjną i wszystkimi elementami dołączonymi do zestawu. Narzędzia nie mogą nosić śladów użytkowania wykraczających poza konieczne do stwierdzenia ich charakteru, cech i funkcjonowania. Zabezpiecz przesyłkę przed uszkodzeniem w transporcie.</p>
+</div>
+<div class="kw-rt-timeline__step kw-rt-timeline__step--completed">
+<div class="kw-rt-timeline__dot"><i class="fas fa-shipping-fast"></i></div>
+<h4>Krok 4 — Wyślij Paczkę do Sprzedawcy</h4>
+<p>Nadaj paczkę przez wybranego przewoźnika (InPost, DPD) na adres podany w potwierdzeniu zwrotu. Masz 14 dni od złożenia oświadczenia na wysyłkę towaru. Do przesyłki dołącz kopię oświadczenia i dowód zakupu. Zachowaj numer śledzenia przesyłki — pozwoli to monitorować status zwrotu i będzie potrzebny w razie pytań.</p>
+</div>
+<div class="kw-rt-timeline__step kw-rt-timeline__step--completed">
+<div class="kw-rt-timeline__dot"><i class="fas fa-hand-holding-usd"></i></div>
+<h4>Krok 5 — Otrzymaj Zwrot Pieniądzy</h4>
+<p>Po otrzymaniu i weryfikacji zwróconego towaru dokonamy zwrotu płatności w ciągu 14 dni. Środki wrócą na oryginalne konto płatności użyte podczas składania zamówienia (konto bankowe, karta płatnicza). W przypadku płatności gotówką przy odbiorze zwrot zostanie zrealizowany na wskazany przez Ciebie rachunek bankowy.</p>
+</div>
+</div>
+<div class="kw-rt-callout kw-rt-callout--info kw-rt-reveal" style="max-width:800px;margin:28px auto 0;">
+<p><i class="fas fa-info-circle"></i> <strong>Ważne:</strong> Sprzedawca może wstrzymać zwrot płatności do momentu otrzymania zwracanego towaru lub dowodu jego nadania. To standardowa procedura zabezpieczająca obie strony transakcji.</p>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════════
+4. WARUNKI PRZYJĘCIA ZWROTU
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="kw-rt-section" id="warunki" aria-label="Warunki przyjęcia zwrotu">
+<div class="container">
+<div class="kw-rt-header kw-rt-reveal">
+<span class="kw-rt-label">Wymagania</span>
+<h2 class="kw-rt-title">Warunki Przyjęcia Zwrotu Narzędzi WIHA</h2>
+<hr class="kw-rt-divider" />
+<p class="kw-rt-subtitle">Aby zwrot został przyjęty i przetworzony bez opóźnień, zwracany towar musi spełniać określone warunki. Poniżej znajdziesz szczegółowe wymagania dotyczące stanu narzędzi, opakowania i kompletności zestawu.</p>
+</div>
+<div class="kw-rt-conditions">
+<div class="kw-rt-conditions__img kw-rt-slide-left">
+<img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Profesjonalne pakowanie narzędzi WIHA do zwrotu w oryginalnym opakowaniu" loading="lazy" width="800" height="560" />
+</div>
+<div class="kw-rt-conditions__content kw-rt-slide-right">
+<h3><i class="fas fa-clipboard-check"></i> Stan Towaru i Opakowanie</h3>
+<p>Jako dystrybutor profesjonalnych narzędzi specjalistycznych WIHA, rozumiemy, że narzędzia VDE, klucze dynamometryczne i zestawy narzędziowe to produkty wysokiej precyzji. Aby zwrot mógł zostać przyjęty, towar nie może nosić śladów użytkowania wykraczających poza konieczne do stwierdzenia jego charakteru, cech i funkcjonowania.</p>
+<p>Oznacza to, że możesz rozpakować narzędzia, obejrzeć je, sprawdzić wymiary i ergonomię — ale nie możesz ich używać w pracy. Narzędzia izolowane VDE z widocznymi śladami pracy przy instalacjach elektrycznych nie mogą zostać przyjęte do zwrotu ze względów bezpieczeństwa.</p>
+<ul class="kw-rt-conditions__list">
+<li>Oryginalne opakowanie producenta WIHA — pudełko, etui, walizka</li>
+<li>Wszystkie elementy zestawu kompletne — narzędzia, bity, adaptery, instrukcje</li>
+<li>Karta gwarancyjna i dokumentacja techniczna dołączone</li>
+<li>Brak śladów intensywnego użytkowania — otarć, zarysowań, zabrudzeń</li>
+<li>Zabezpieczenie przed uszkodzeniem w transporcie powrotnym</li>
+<li>Dołączona kopia dowodu zakupu (faktura VAT lub paragon)</li>
+</ul>
+<div class="kw-rt-callout kw-rt-callout--warning" style="margin:16px 0 0;">
+<p><i class="fas fa-exclamation-triangle"></i> <strong>Uwaga:</strong> Konsument odpowiada za zmniejszenie wartości towaru będące wynikiem korzystania z niego w sposób wykraczający poza konieczny do stwierdzenia właściwości. W takim przypadku sprzedawca może potrącić odpowiednią kwotę ze zwracanej płatności.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════════
+5. KOSZTY I REFUND
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="kw-rt-section kw-rt-section--alt" id="koszty-refund" aria-label="Koszty zwrotu i refund">
+<div class="container">
+<div class="kw-rt-header kw-rt-reveal">
+<span class="kw-rt-label">Finanse</span>
+<h2 class="kw-rt-title">Koszty Zwrotu i Terminy Refundu</h2>
+<hr class="kw-rt-divider" />
+<p class="kw-rt-subtitle">Przedstawiamy przejrzyste informacje o kosztach przesyłki zwrotnej oraz terminach zwrotu pieniędzy na Twoje konto. Wszystkie kwoty i czas realizacji są zgodne z polskim prawem konsumenckim.</p>
+</div>
+<div class="kw-rt-refund-grid">
+<article class="kw-rt-refund-card kw-rt-reveal kw-rt-stagger-1">
+<div class="kw-rt-refund-icon"><i class="fas fa-truck-loading"></i></div>
+<div class="kw-rt-refund-body">
+<h3 class="kw-rt-refund-name">Koszt Przesyłki Zwrotnej</h3>
+<p class="kw-rt-refund-desc">Koszt odesłania towaru do sprzedawcy ponosi kupujący. Możesz wybrać dowolnego przewoźnika (InPost, DPD, Poczta Polska) — zalecamy usługi ze śledzeniem przesyłki dla bezpieczeństwa procesu zwrotu.</p>
+<p class="kw-rt-refund-highlight"><i class="fas fa-info-circle"></i> Średni koszt: 13–18 zł (paczkomat/kurier)</p>
+</div>
+</article>
+<article class="kw-rt-refund-card kw-rt-reveal kw-rt-stagger-2">
+<div class="kw-rt-refund-icon"><i class="fas fa-shipping-fast"></i></div>
+<div class="kw-rt-refund-body">
+<h3 class="kw-rt-refund-name">Zwrot Kosztu Dostawy</h3>
+<p class="kw-rt-refund-desc">Sprzedawca zwraca koszt dostawy towaru do klienta, jednak tylko do wysokości najtańszego zwykłego sposobu dostawy oferowanego w sklepie. Jeśli wybrałeś droższą metodę dostawy, zwrócimy kwotę odpowiadającą najtańszej opcji.</p>
+<p class="kw-rt-refund-highlight"><i class="fas fa-check-circle"></i> Zwrot: do wysokości najtańszej metody</p>
+</div>
+</article>
+<article class="kw-rt-refund-card kw-rt-reveal kw-rt-stagger-3">
+<div class="kw-rt-refund-icon"><i class="fas fa-clock"></i></div>
+<div class="kw-rt-refund-body">
+<h3 class="kw-rt-refund-name">Termin Zwrotu Pieniądzy</h3>
+<p class="kw-rt-refund-desc">Zwrot płatności realizujemy w ciągu 14 dni od dnia otrzymania oświadczenia o odstąpieniu od umowy. Sprzedawca może jednak wstrzymać zwrot do momentu otrzymania towaru lub dowodu jego odesłania — to standardowa procedura.</p>
+<p class="kw-rt-refund-highlight"><i class="fas fa-calendar-check"></i> Maksymalny czas: 14 dni roboczych</p>
+</div>
+</article>
+<article class="kw-rt-refund-card kw-rt-reveal kw-rt-stagger-4">
+<div class="kw-rt-refund-icon"><i class="fas fa-credit-card"></i></div>
+<div class="kw-rt-refund-body">
+<h3 class="kw-rt-refund-name">Metoda Zwrotu Środków</h3>
+<p class="kw-rt-refund-desc">Zwrot dokonywany jest na rachunek bankowy, z którego dokonano płatności, lub w inny uzgodniony sposób. W przypadku płatności kartą, środki wracają na kartę w ciągu 3–5 dni roboczych od zlecenia zwrotu przez sprzedawcę.</p>
+<p class="kw-rt-refund-highlight"><i class="fas fa-shield-alt"></i> Bezpiecznie na oryginalne konto</p>
+</div>
+</article>
+</div>
+<div class="kw-rt-callout kw-rt-callout--success kw-rt-reveal" style="max-width:780px;margin:28px auto 0;">
+<p><i class="fas fa-check-circle"></i> <strong>Gwarancja refundu:</strong> Wszystkie zwroty płatności są realizowane zgodnie z ustawą o prawach konsumenta. Otrzymasz potwierdzenie zwrotu e-mailem z numerem referencyjnym transakcji.</p>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════════
+6. KTO MOŻE ZWRÓCIĆ (konsument vs przedsiębiorca)
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="kw-rt-section kw-rt-section--gradient" id="kto-moze-zwrocic" aria-label="Kto może zwrócić towar">
+<div class="container">
+<div class="kw-rt-header kw-rt-reveal">
+<span class="kw-rt-label">Uprawnienia</span>
+<h2 class="kw-rt-title">Prawo do Zwrotu — Konsument vs Przedsiębiorca</h2>
+<hr class="kw-rt-divider" />
+<p class="kw-rt-subtitle">Prawo do zwrotu towaru bez podania przyczyny przysługuje różnym grupom klientów w różnym zakresie. Poniżej wyjaśniamy, kto może skorzystać z 14-dniowego okresu na odstąpienie od umowy.</p>
+</div>
+<div class="kw-rt-who-grid">
+<div class="kw-rt-who-card kw-rt-who-card--consumer kw-rt-reveal kw-rt-stagger-1">
+<h4><i class="fas fa-user" style="color:var(--kw-rt-green);"></i> Konsument (Osoba Fizyczna)</h4>
+<p>Osoba fizyczna dokonująca zakupu niezwiązanego bezpośrednio z jej działalnością gospodarczą lub zawodową. <strong>Pełne prawo do zwrotu</strong> w ciągu 14 dni od otrzymania towaru bez podania przyczyny. Dotyczy wszystkich narzędzi WIHA zakupionych na potrzeby prywatne.</p>
+</div>
+<div class="kw-rt-who-card kw-rt-who-card--consumer kw-rt-reveal kw-rt-stagger-2">
+<h4><i class="fas fa-user-tie" style="color:var(--kw-rt-green);"></i> Przedsiębiorca na Prawach Konsumenta</h4>
+<p>Osoba fizyczna prowadząca działalność gospodarczą, gdy zakup nie ma dla niej charakteru zawodowego. Również korzysta z <strong>pełnego prawa do zwrotu</strong> w ciągu 14 dni. Przykład: elektryk kupujący pojedyncze narzędzia na własne potrzeby, nie do firmy.</p>
+</div>
+<div class="kw-rt-who-card kw-rt-who-card--business kw-rt-reveal kw-rt-stagger-3">
+<h4><i class="fas fa-building" style="color:var(--kw-rt-secondary);"></i> Przedsiębiorca (Firma)</h4>
+<p>Osoba prawna lub jednostka organizacyjna dokonująca zakupu związanego z działalnością gospodarczą. <strong>Prawo do zwrotu bez przyczyny nie przysługuje</strong>. Zwrot możliwy wyłącznie w ramach procedury reklamacyjnej (rękojmia/gwarancja) w przypadku wadliwego towaru.</p>
+</div>
+<div class="kw-rt-who-card kw-rt-who-card--business kw-rt-reveal kw-rt-stagger-4">
+<h4><i class="fas fa-file-contract" style="color:var(--kw-rt-secondary);"></i> Zamówienia B2B / Hurtowe</h4>
+<p>Firmy zamawiające narzędzia WIHA w ramach współpracy B2B podlegają indywidualnym warunkom umowy handlowej. Zwroty i reklamacje realizowane są zgodnie z zapisami umowy i Ogólnymi Warunkami Sprzedaży (OWS) dla przedsiębiorców.</p>
+</div>
+</div>
+<div class="kw-rt-callout kw-rt-callout--info kw-rt-reveal" style="max-width:800px;margin:28px auto 0;">
+<p><i class="fas fa-info-circle"></i> <strong>Nie jesteś pewien?</strong> Skontaktuj się z nami: <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a> lub +48 575 838 766. Wyjaśnimy Twoje uprawnienia do zwrotu w zależności od formy zakupu.</p>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════════
+7. FORMULARZ ZWROTU DO POBRANIA
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="kw-rt-section" id="formularz" aria-label="Formularz zwrotu do pobrania">
+<div class="container">
+<div class="kw-rt-header kw-rt-reveal">
+<span class="kw-rt-label">Dokumenty</span>
+<h2 class="kw-rt-title">Formularz Odstąpienia od Umowy</h2>
+<hr class="kw-rt-divider" />
+<p class="kw-rt-subtitle">Przygotowaliśmy gotowy formularz odstąpienia od umowy, który możesz pobrać, wypełnić i dołączyć do zwracanej przesyłki. Użycie formularza przyspieszy proces przetwarzania Twojego zwrotu.</p>
+</div>
+<div class="kw-rt-form-download kw-rt-reveal">
+<div class="kw-rt-form-download__icon"><i class="fas fa-file-download"></i></div>
+<h3>Gotowy Formularz Zwrotu (PDF)</h3>
+<p>Pobierz oficjalny formularz odstąpienia od umowy zgodny z wymogami ustawy o prawach konsumenta. Wypełnij wszystkie pola, podpisz i dołącz do zwracanej przesyłki z narzędziami WIHA.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px;">
+<a href="#" class="kw-rt-btn kw-rt-btn--primary"><i class="fas fa-download"></i> Pobierz Formularz (PDF)</a>
+<a href="mailto:info@kedar-wiha.pl?subject=Zwrot towaru - zamówienie" class="kw-rt-btn kw-rt-btn--outline"><i class="fas fa-envelope"></i> Wyślij E-mailem</a>
+</div>
+<p style="font-size:13px;color:var(--kw-rt-text-tertiary);margin-top:16px;"><i class="fas fa-info-circle"></i> Formularz w formacie PDF, gotowy do druku i wypełnienia ręcznego.</p>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════════
+8. STATYSTYKI / SOCIAL PROOF
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="kw-rt-section kw-rt-section--dark" id="statystyki" aria-label="Statystyki zwrotów">
+<div class="container">
+<div class="kw-rt-header kw-rt-reveal">
+<span class="kw-rt-label">Liczby mówią same za siebie</span>
+<h2 class="kw-rt-title">Proces Zwrotów w Liczbach</h2>
+<hr class="kw-rt-divider" />
+</div>
+<div class="kw-rt-stats-grid kw-rt-reveal">
+<div class="kw-rt-stat-card">
+<p class="kw-rt-stat-number"><span class="kw-rt-counter" data-target="14">0</span><span class="kw-rt-stat-suffix">dni</span></p>
+<p class="kw-rt-stat-label">Okres na zwrot bez przyczyny</p>
+</div>
+<div class="kw-rt-stat-card">
+<p class="kw-rt-stat-number"><span class="kw-rt-counter" data-target="14">0</span><span class="kw-rt-stat-suffix">dni</span></p>
+<p class="kw-rt-stat-label">Maksymalny czas refundu płatności</p>
+</div>
+<div class="kw-rt-stat-card">
+<p class="kw-rt-stat-number"><span class="kw-rt-counter" data-target="98">0</span><span class="kw-rt-stat-suffix">%</span></p>
+<p class="kw-rt-stat-label">Zadowolonych klientów z procesu zwrotu</p>
+</div>
+<div class="kw-rt-stat-card">
+<p class="kw-rt-stat-number"><span class="kw-rt-counter" data-target="24">0</span><span class="kw-rt-stat-suffix">h</span></p>
+<p class="kw-rt-stat-label">Średni czas odpowiedzi na zgłoszenie</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════════
+9. FAQ — NAJCZĘŚCIEJ ZADAWANE PYTANIA
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="kw-rt-section kw-rt-section--pattern" id="faq" aria-label="FAQ — najczęściej zadawane pytania">
+<div class="container">
+<div class="kw-rt-header kw-rt-reveal">
+<span class="kw-rt-label">FAQ</span>
+<h2 class="kw-rt-title">Najczęściej Zadawane Pytania o Zwroty</h2>
+<hr class="kw-rt-divider" />
+<p class="kw-rt-subtitle">Odpowiedzi na najczęściej zadawane pytania dotyczące procedury zwrotu towaru, kosztów przesyłki, terminów refundu i uprawnień klientów sklepu KEDAR-WIHA.pl.</p>
+</div>
+<div class="kw-rt-faq">
+<details class="kw-rt-faq__item kw-rt-reveal kw-rt-stagger-1">
+<summary>Ile dni mam na zwrot towaru zakupionego w KEDAR-WIHA.pl?</summary>
+<div class="kw-rt-faq__answer">
+<p>Masz <strong>14 dni</strong> od dnia otrzymania przesyłki na odstąpienie od umowy bez podania przyczyny. Termin ten wynika z ustawy o prawach konsumenta i obowiązuje dla wszystkich konsumentów oraz przedsiębiorców na prawach konsumenta. Liczysz 14 dni kalendarzowych od momentu, gdy fizycznie otrzymasz przesyłkę z narzędziami WIHA.</p>
+</div>
+</details>
+<details class="kw-rt-faq__item kw-rt-reveal kw-rt-stagger-2">
+<summary>Kto ponosi koszt przesyłki zwrotnej?</summary>
+<div class="kw-rt-faq__answer">
+<p>Koszt odesłania towaru do sprzedawcy <strong>ponosi kupujący</strong>. Możesz wybrać dowolnego przewoźnika (InPost Paczkomaty, InPost Kurier, DPD, Poczta Polska). Zalecamy usługi ze śledzeniem przesyłki dla bezpieczeństwa. Sprzedawca zwraca jedynie koszt oryginalnej dostawy do klienta — do wysokości najtańszej standardowej metody oferowanej w sklepie.</p>
+</div>
+</details>
+<details class="kw-rt-faq__item kw-rt-reveal kw-rt-stagger-3">
+<summary>Czy muszę podać przyczynę zwrotu?</summary>
+<div class="kw-rt-faq__answer">
+<p><strong>Nie.</strong> Jako konsument masz prawo do zwrotu towaru bez podania jakiejkolwiek przyczyny. Wystarczy, że złożysz oświadczenie o odstąpieniu od umowy w ciągu 14 dni od otrzymania przesyłki. Nie musisz uzasadniać swojej decyzji ani tłumaczyć się ze zwrotu narzędzi WIHA.</p>
+</div>
+</details>
+<details class="kw-rt-faq__item kw-rt-reveal kw-rt-stagger-4">
+<summary>Jak szybko otrzymam zwrot pieniędzy na konto?</summary>
+<div class="kw-rt-faq__answer">
+<p>Zwrot płatności realizujemy w ciągu <strong>14 dni</strong> od dnia otrzymania oświadczenia o odstąpieniu od umowy. Sprzedawca może jednak wstrzymać zwrot do momentu otrzymania zwracanego towaru lub dowodu jego nadania. Po zaksięgowaniu zwrotu przez sprzedawcę, środki wracają na konto w ciągu 3–5 dni roboczych (w przypadku płatności kartą).</p>
+</div>
+</details>
+<details class="kw-rt-faq__item kw-rt-reveal kw-rt-stagger-5">
+<summary>Czy mogę zwrócić używane narzędzia WIHA?</summary>
+<div class="kw-rt-faq__answer">
+<p>Towar nie może nosić śladów użytkowania wykraczających poza konieczne do stwierdzenia jego charakteru, cech i funkcjonowania. Oznacza to, że możesz rozpakować, obejrzeć i przetestować narzędzia, ale <strong>nie możesz ich używać w pracy</strong>. Narzędzia VDE ze śladami pracy przy instalacjach elektrycznych nie zostaną przyjęte do zwrotu ze względów bezpieczeństwa.</p>
+</div>
+</details>
+<details class="kw-rt-faq__item kw-rt-reveal kw-rt-stagger-6">
+<summary>Czy firma (przedsiębiorca) może zwrócić towar bez przyczyny?</summary>
+<div class="kw-rt-faq__answer">
+<p><strong>Nie.</strong> Prawo do zwrotu bez podania przyczyny przysługuje wyłącznie konsumentom oraz przedsiębiorcom na prawach konsumenta. Pozostali przedsiębiorcy mogą zwrócić towar wyłącznie w ramach procedury reklamacyjnej (rękojmia/gwarancja) w przypadku stwierdzenia wadliwości produktu. Szczegóły w Ogólnych Warunkach Sprzedaży dla firm B2B.</p>
+</div>
+</details>
+<details class="kw-rt-faq__item kw-rt-reveal kw-rt-stagger-1">
+<summary>Jak mam zapakować zwracany towar?</summary>
+<div class="kw-rt-faq__answer">
+<p>Najlepiej w <strong>oryginalne opakowanie producenta WIHA</strong> — pudełko, etui lub walizkę. Towar powinien być kompletny z instrukcjami, akcesoriami, kartą gwarancyjną i wszystkimi elementami dołączonymi do zestawu. Zabezpiecz przesyłkę przed uszkodzeniem w transporcie (folia bąbelkowa, wypełniacze). Do przesyłki dołącz kopię oświadczenia i dowodu zakupu.</p>
+</div>
+</details>
+<details class="kw-rt-faq__item kw-rt-reveal kw-rt-stagger-2">
+<summary>Czy otrzymam potwierdzenie zwrotu?</summary>
+<div class="kw-rt-faq__answer">
+<p><strong>Tak.</strong> Po otrzymaniu Twojego oświadczenia o odstąpieniu od umowy niezwłocznie potwierdzimy je drogą e-mailową. Po zrealizowaniu zwrotu płatności otrzymasz dodatkowe potwierdzenie z numerem referencyjnym transakcji. Wszystkie komunikaty wysyłamy na adres e-mail podany w zamówieniu.</p>
+</div>
+</details>
+<details class="kw-rt-faq__item kw-rt-reveal kw-rt-stagger-3">
+<summary>Co jeśli towar został uszkodzony w transporcie?</summary>
+<div class="kw-rt-faq__answer">
+<p>Jeśli otrzymałeś uszkodzony produkt, niezwłocznie skontaktuj się z nami: <strong>info@kedar-wiha.pl</strong> lub +48 575 838 766. W takim przypadku procedura wygląda inaczej — zgłaszasz reklamację z tytułu rękojmi, a nie zwrot z odstąpienia od umowy. Koszty przesyłki reklamacyjnej pokrywa sprzedawca.</p>
+</div>
+</details>
+</div>
+</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════════
+10. CTA / KONTAKT
+═══════════════════════════════════════════════════════════════════════ -->
+<section class="kw-rt-cta" aria-label="Kontakt KEDAR-WIHA.pl">
+<div class="kw-rt-cta__inner">
+<h2>Masz Pytania o Zwroty lub Reklamacje?</h2>
+<p>Nasz zespół jest gotowy, aby odpowiedzieć na każde pytanie dotyczące procedury zwrotu narzędzi WIHA. Skontaktuj się z nami — chętnie pomożemy w każdym etapie procesu i wyjaśnimy wszelkie wątpliwości.</p>
+<div class="kw-rt-cta__btns">
+<a href="/" class="kw-rt-btn kw-rt-btn--white"><i class="fas fa-shopping-cart"></i> Przejdź do sklepu</a>
+<a href="mailto:info@kedar-wiha.pl" class="kw-rt-btn kw-rt-btn--outline-white"><i class="fas fa-envelope"></i> Napisz e-mail</a>
+</div>
+<div class="kw-rt-contact-grid">
+<a href="tel:+48575838766" class="kw-rt-contact-card">
+<div class="kw-rt-contact-icon"><i class="fas fa-phone-alt"></i></div>
+<div>
+<strong>Telefon</strong>
+<span>+48 575 838 766</span>
+</div>
+</a>
+<a href="mailto:info@kedar-wiha.pl" class="kw-rt-contact-card">
+<div class="kw-rt-contact-icon"><i class="fas fa-envelope"></i></div>
+<div>
+<strong>E-mail</strong>
+<span>info@kedar-wiha.pl</span>
+</div>
+</a>
+<a href="/" class="kw-rt-contact-card">
+<div class="kw-rt-contact-icon"><i class="fas fa-globe"></i></div>
+<div>
+<strong>Sklep online</strong>
+<span>kedar-wiha.pl</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+</div><!-- / .kw-returns-page -->
+<!-- ══════════════════════════════════════════════════════════════════════════════
+JAVASCRIPT — IntersectionObserver, Counter, Smooth Scroll
+══════════════════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+'use strict';
+/* ── 1. INTERSECTION OBSERVER — SCROLL REVEAL ────────────────────────── */
+var revealSelectors = '.kw-rt-reveal, .kw-rt-slide-left, .kw-rt-slide-right';
+if ('IntersectionObserver' in window) {
+var revealObserver = new IntersectionObserver(function(entries) {
+entries.forEach(function(entry) {
+if (entry.isIntersecting) {
+entry.target.classList.add('kw-rt-visible');
+revealObserver.unobserve(entry.target);
+}
+});
+}, {
+threshold: 0.1,
+rootMargin: '0px 0px -40px 0px'
+});
+document.querySelectorAll(revealSelectors).forEach(function(el) {
+revealObserver.observe(el);
+});
+} else {
+/* Fallback for old browsers */
+document.querySelectorAll(revealSelectors).forEach(function(el) {
+el.classList.add('kw-rt-visible');
+});
+}
+/* ── 2. ANIMATED COUNTER ──────────────────────────────────────────────── */
+if ('IntersectionObserver' in window) {
+var counterElements = document.querySelectorAll('.kw-rt-counter');
+var counterObserver = new IntersectionObserver(function(entries) {
+entries.forEach(function(entry) {
+if (entry.isIntersecting) {
+animateCounter(entry.target);
+counterObserver.unobserve(entry.target);
+}
+});
+}, { threshold: 0.3 });
+counterElements.forEach(function(el) {
+counterObserver.observe(el);
+});
+}
+function animateCounter(element) {
+var target = parseInt(element.getAttribute('data-target'), 10) || 0;
+var current = 0;
+var duration = 2000; /* 2 seconds */
+var startTime = null;
+var startValue = 0;
+function easeOutCubic(t) {
+return 1 - Math.pow(1 - t, 3);
+}
+function step(timestamp) {
+if (!startTime) startTime = timestamp;
+var progress = Math.min((timestamp - startTime) / duration, 1);
+var easedProgress = easeOutCubic(progress);
+current = Math.floor(startValue + (target - startValue) * easedProgress);
+element.textContent = current.toLocaleString('pl-PL');
+if (progress < 1) {
+requestAnimationFrame(step);
+} else {
+element.textContent = target.toLocaleString('pl-PL');
+}
+}
+requestAnimationFrame(step);
+}
+/* ── 3. SMOOTH SCROLL FOR ANCHOR LINKS ───────────────────────────────── */
+document.querySelectorAll('.kw-returns-page a[href^="#"]').forEach(function(link) {
+link.addEventListener('click', function(e) {
+var href = this.getAttribute('href');
+if (href && href.length > 1) {
+var target = document.querySelector(href);
+if (target) {
+e.preventDefault();
+var headerOffset = 80; /* approximate sticky header height */
+var elementPosition = target.getBoundingClientRect().top;
+var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+window.scrollTo({
+top: offsetPosition,
+behavior: 'smooth'
+});
+/* Update URL without jump */
+if (history.pushState) {
+history.pushState(null, null, href);
+}
+}
+}
+});
+});
+/* ── 4. FAQ ACCORDION — CLOSE OTHERS ON OPEN ────────────────────────── */
+document.querySelectorAll('.kw-rt-faq__item summary').forEach(function(summary) {
+summary.addEventListener('click', function() {
+var currentItem = this.parentElement;
+/* Close other open items in the same FAQ */
+document.querySelectorAll('.kw-rt-faq__item[open]').forEach(function(openItem) {
+if (openItem !== currentItem) {
+openItem.removeAttribute('open');
+}
+});
+});
+});
+})();
+</script>

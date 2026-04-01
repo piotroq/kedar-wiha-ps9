@@ -1,0 +1,1660 @@
+<!-- ==========================================================================
+   KEDAR-WIHA.pl — Strona CMS "Prawo odstąpienia od umowy"
+   PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 4.x
+   Wersja: 1.0.0 | 2026
+   Gotowe do wklejenia: Wygląd → Strony → Prawo odstąpienia od umowy
+   Namespace: .kw-return- (unikanie kolizji z Optima/PrestaShop)
+   Lokalne zmienne CSS | Font Awesome (fas) | IntersectionObserver JS
+   ========================================================================== -->
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<style>
+/* ==========================================================================
+   KEDAR-WIHA.pl — PRAWO ODSTĄPIENIA OD UMOWY v1.0
+   Namespace: .kw-return-
+   Mobile-first | BEM | LOKALNE zmienne CSS (self-contained)
+   Font Awesome (fas) | IntersectionObserver scroll-reveal
+   ========================================================================== */
+
+/* ── SCOPE + LOKALNE ZMIENNE ──────────────────────────────────────────── */
+.kw-return-page {
+  --kw-ret-primary: #8B0000;
+  --kw-ret-primary-dark: #6b0000;
+  --kw-ret-primary-light: #bf2020;
+  --kw-ret-secondary: #0056A3;
+  --kw-ret-secondary-dark: #003d7a;
+  --kw-ret-secondary-light: #1a7bc4;
+  --kw-ret-three: #ca0000;
+  --kw-ret-accent: #FFD700;
+  --kw-ret-green: #1A7A3C;
+  --kw-ret-green-bg: #e8f5ee;
+  --kw-ret-green-light: #d4edda;
+  --kw-ret-amber: #E07B00;
+  --kw-ret-amber-bg: #fff5ed;
+  --kw-ret-info: #0056A3;
+  --kw-ret-info-bg: #e8f0f9;
+  --kw-ret-danger: #ff4c4c;
+  --kw-ret-danger-bg: #fff0f0;
+  --kw-ret-heading: #2D2D2D;
+  --kw-ret-text: #151515;
+  --kw-ret-text-muted: #555555;
+  --kw-ret-text-tertiary: #888888;
+  --kw-ret-bg-light: #f5f5f5;
+  --kw-ret-bg-dark: #1a1a1a;
+  --kw-ret-bg-darker: #2a2a2a;
+  --kw-ret-white: #ffffff;
+  --kw-ret-border: #e8e8e8;
+  --kw-ret-font-heading: 'Montserrat', 'Manrope', Arial, sans-serif;
+  --kw-ret-font-body: 'Inter', 'Manrope', Arial, sans-serif;
+  --kw-ret-radius-xs: 2px;
+  --kw-ret-radius-sm: 3px;
+  --kw-ret-radius-md: 4px;
+  --kw-ret-radius-lg: 8px;
+  --kw-ret-radius-xl: 12px;
+  --kw-ret-radius-pill: 50px;
+  --kw-ret-shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --kw-ret-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --kw-ret-shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --kw-ret-shadow-lg: 0 8px 28px rgba(0,0,0,0.13);
+  --kw-ret-shadow-xl: 0 12px 32px rgba(0,0,0,0.15);
+  --kw-ret-shadow-cta: 0 4px 20px rgba(139,0,0,0.30);
+  --kw-ret-transition: 300ms cubic-bezier(0.25,0.46,0.45,0.94);
+  --kw-ret-transition-slow: 500ms ease;
+  --kw-ret-transition-fast: 150ms ease;
+  --kw-ret-transition-bounce: 400ms cubic-bezier(0.34,1.56,0.64,1);
+
+  font-family: var(--kw-ret-font-body);
+  color: var(--kw-ret-text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+.kw-return-page *, .kw-return-page *::before, .kw-return-page *::after { box-sizing: border-box; }
+.kw-return-page img { max-width: 100%; height: auto; }
+
+/* ── KEYFRAMES ────────────────────────────────────────────────────────── */
+@keyframes kwRetFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes kwRetFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes kwRetSlideLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwRetSlideRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes kwRetPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+@keyframes kwRetFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes kwRetShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kw-return-page * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── SCROLL-REVEAL CLASSES ───────────────────────────────────────────── */
+.kw-return-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--kw-ret-transition-slow), transform var(--kw-ret-transition-slow);
+}
+.kw-return-reveal.kw-return-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.kw-return-slide-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity var(--kw-ret-transition-slow), transform var(--kw-ret-transition-slow);
+}
+.kw-return-slide-left.kw-return-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.kw-return-slide-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity var(--kw-ret-transition-slow), transform var(--kw-ret-transition-slow);
+}
+.kw-return-slide-right.kw-return-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.kw-return-stagger-1 { transition-delay: 0ms; }
+.kw-return-stagger-2 { transition-delay: 100ms; }
+.kw-return-stagger-3 { transition-delay: 200ms; }
+.kw-return-stagger-4 { transition-delay: 300ms; }
+.kw-return-stagger-5 { transition-delay: 400ms; }
+.kw-return-stagger-6 { transition-delay: 500ms; }
+
+.kw-return-anim { animation: kwRetFadeUp 0.6s ease both; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION BASE
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-section {
+  padding: 48px 0;
+  position: relative;
+}
+.kw-return-section--alt {
+  background: var(--kw-ret-bg-light);
+}
+.kw-return-section--dark {
+  background: linear-gradient(155deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: var(--kw-ret-white);
+}
+.kw-return-section--dark p,
+.kw-return-section--dark li {
+  color: rgba(255,255,255,0.82);
+}
+.kw-return-section--gradient {
+  background: linear-gradient(180deg, var(--kw-ret-bg-light) 0%, var(--kw-ret-white) 100%);
+}
+.kw-return-section--pattern { position: relative; }
+.kw-return-section--pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(139,0,0,0.02) 22px, rgba(139,0,0,0.02) 23px);
+  pointer-events: none;
+  z-index: 0;
+}
+.kw-return-section--pattern > .container { position: relative; z-index: 1; }
+
+/* ── SECTION HEADER ───────────────────────────────────────────────────── */
+.kw-return-header { text-align: center; margin-bottom: 32px; }
+.kw-return-label {
+  display: inline-block;
+  font-family: var(--kw-ret-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--kw-ret-primary);
+  background: rgba(139,0,0,0.06);
+  padding: 5px 16px;
+  border-radius: var(--kw-ret-radius-pill);
+  margin-bottom: 12px;
+}
+.kw-return-section--dark .kw-return-label {
+  color: var(--kw-ret-accent);
+  background: rgba(255,215,0,0.1);
+}
+.kw-return-title {
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3.5vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--kw-ret-heading);
+  margin: 0 0 12px;
+}
+.kw-return-section--dark .kw-return-title { color: var(--kw-ret-white); }
+.kw-return-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--kw-ret-primary);
+  border: none;
+  border-radius: 2px;
+  margin: 14px auto;
+}
+.kw-return-subtitle {
+  font-family: var(--kw-ret-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.65;
+  color: var(--kw-ret-text-muted);
+  max-width: 720px;
+  margin: 0 auto;
+}
+.kw-return-section--dark .kw-return-subtitle { color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   1. HERO
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-hero {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(26,26,26,0.94) 0%, rgba(61,0,0,0.90) 55%, rgba(139,0,0,0.84) 100%),
+    url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1600&q=80') center/cover no-repeat;
+  padding: 56px 16px;
+  text-align: center;
+  overflow: hidden;
+}
+@supports (background-attachment: fixed) {
+  @media (min-width: 768px) {
+    .kw-return-hero { background-attachment: scroll, fixed; }
+  }
+}
+.kw-return-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(30deg, transparent, transparent 38px, rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px);
+  pointer-events: none;
+}
+.kw-return-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 56px;
+  background: linear-gradient(to top, rgba(26,26,26,0.25), transparent);
+  pointer-events: none;
+}
+.kw-return-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  animation: kwRetFadeUp 0.7s ease both;
+}
+.kw-return-hero__breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-family: var(--kw-ret-font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  flex-wrap: wrap;
+}
+.kw-return-hero__breadcrumbs a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color var(--kw-ret-transition-fast);
+}
+.kw-return-hero__breadcrumbs a:hover { color: var(--kw-ret-white); }
+.kw-return-hero__breadcrumbs i { font-size: 10px; }
+.kw-return-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--kw-ret-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--kw-ret-accent);
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.22);
+  padding: 5px 16px;
+  border-radius: var(--kw-ret-radius-pill);
+  margin-bottom: 18px;
+}
+.kw-return-hero__badge i { font-size: 11px; }
+.kw-return-hero__title {
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 800;
+  font-size: clamp(26px, 5vw, 48px);
+  line-height: 1.12;
+  color: var(--kw-ret-white);
+  margin: 0 0 14px;
+  letter-spacing: 0.01em;
+}
+.kw-return-hero__title em { font-style: normal; color: var(--kw-ret-three); }
+.kw-return-hero__sub {
+  font-family: var(--kw-ret-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.7;
+  color: rgba(255,255,255,0.82);
+  max-width: 640px;
+  margin: 0 auto;
+}
+.kw-return-hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-return-hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--kw-ret-font-heading);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--kw-ret-radius-sm);
+  background: rgba(255,255,255,0.04);
+}
+.kw-return-hero__chip i { color: var(--kw-ret-accent); font-size: 10px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   2. INFO CARDS (kto przysługuje, termin)
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-return-info-card {
+  background: var(--kw-ret-white);
+  border: 1px solid var(--kw-ret-border);
+  border-radius: var(--kw-ret-radius-sm);
+  padding: 28px 24px;
+  transition: all var(--kw-ret-transition);
+  box-shadow: var(--kw-ret-shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.kw-return-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--kw-ret-primary);
+  transform: scaleX(0);
+  transition: transform var(--kw-ret-transition);
+}
+.kw-return-info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--kw-ret-shadow-lg);
+}
+.kw-return-info-card:hover::before { transform: scaleX(1); }
+.kw-return-info-card--highlight {
+  border: 2px solid var(--kw-ret-green);
+  background: linear-gradient(135deg, rgba(26,122,60,0.03) 0%, var(--kw-ret-white) 100%);
+}
+.kw-return-info-card--highlight::before { background: var(--kw-ret-green); }
+.kw-return-info-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--kw-ret-radius-lg);
+  background: rgba(139,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 22px;
+  color: var(--kw-ret-primary);
+  transition: all var(--kw-ret-transition);
+}
+.kw-return-info-card:hover .kw-return-info-icon {
+  background: var(--kw-ret-primary);
+  color: var(--kw-ret-white);
+  transform: scale(1.1);
+}
+.kw-return-info-card--highlight .kw-return-info-icon {
+  background: var(--kw-ret-green-bg);
+  color: var(--kw-ret-green);
+}
+.kw-return-info-card--highlight:hover .kw-return-info-icon {
+  background: var(--kw-ret-green);
+  color: var(--kw-ret-white);
+}
+.kw-return-info-card h3 {
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 700;
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--kw-ret-heading);
+  margin: 0 0 12px;
+}
+.kw-return-info-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--kw-ret-text-muted);
+  margin: 0 0 12px;
+}
+.kw-return-info-card p:last-child { margin-bottom: 0; }
+.kw-return-info-card strong { color: var(--kw-ret-text); }
+.kw-return-info-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.kw-return-info-card li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--kw-ret-text-muted);
+  margin-bottom: 6px;
+}
+.kw-return-info-card li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 10px;
+  color: var(--kw-ret-green);
+  position: absolute;
+  left: 0;
+  top: 4px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   3. PROCEDURE STEPS
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-steps {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 40px;
+}
+.kw-return-steps::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--kw-ret-primary), var(--kw-ret-secondary));
+}
+.kw-return-step {
+  position: relative;
+  padding-bottom: 32px;
+}
+.kw-return-step:last-child { padding-bottom: 0; }
+.kw-return-step__number {
+  position: absolute;
+  left: -40px;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--kw-ret-white);
+  border: 2px solid var(--kw-ret-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--kw-ret-primary);
+  z-index: 2;
+  transition: all var(--kw-ret-transition);
+}
+.kw-return-step:hover .kw-return-step__number {
+  background: var(--kw-ret-primary);
+  color: var(--kw-ret-white);
+  transform: scale(1.1);
+}
+.kw-return-step__content {
+  background: var(--kw-ret-white);
+  border: 1px solid var(--kw-ret-border);
+  border-radius: var(--kw-ret-radius-sm);
+  padding: 20px 24px;
+  box-shadow: var(--kw-ret-shadow-xs);
+}
+.kw-return-step__content h4 {
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--kw-ret-heading);
+  margin: 0 0 8px;
+}
+.kw-return-step__content p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--kw-ret-text-muted);
+  margin: 0;
+}
+.kw-return-step__content a {
+  color: var(--kw-ret-secondary);
+  font-weight: 500;
+  text-decoration: none;
+}
+.kw-return-step__content a:hover { text-decoration: underline; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   4. CALLOUT BOXES
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-callout {
+  border-radius: 0 var(--kw-ret-radius-md) var(--kw-ret-radius-md) 0;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.kw-return-callout p { margin: 0; font-size: 14px; line-height: 1.7; }
+.kw-return-callout i { margin-right: 8px; }
+.kw-return-callout--info {
+  background: var(--kw-ret-info-bg);
+  border-left: 4px solid var(--kw-ret-secondary);
+}
+.kw-return-callout--info p { color: var(--kw-ret-heading); }
+.kw-return-callout--info i { color: var(--kw-ret-secondary); }
+.kw-return-callout--success {
+  background: var(--kw-ret-green-bg);
+  border-left: 4px solid var(--kw-ret-green);
+}
+.kw-return-callout--success p { color: var(--kw-ret-heading); }
+.kw-return-callout--success i { color: var(--kw-ret-green); }
+.kw-return-callout--warning {
+  background: var(--kw-ret-amber-bg);
+  border-left: 4px solid var(--kw-ret-amber);
+}
+.kw-return-callout--warning p { color: var(--kw-ret-heading); }
+.kw-return-callout--warning i { color: var(--kw-ret-amber); }
+.kw-return-callout--danger {
+  background: var(--kw-ret-danger-bg);
+  border-left: 4px solid var(--kw-ret-danger);
+}
+.kw-return-callout--danger p { color: var(--kw-ret-heading); }
+.kw-return-callout--danger i { color: var(--kw-ret-danger); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   5. EXCEPTIONS GRID
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-exceptions-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.kw-return-exception-card {
+  background: var(--kw-ret-white);
+  border: 1px solid var(--kw-ret-border);
+  border-radius: var(--kw-ret-radius-sm);
+  padding: 24px;
+  transition: all var(--kw-ret-transition);
+  box-shadow: var(--kw-ret-shadow-xs);
+}
+.kw-return-exception-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--kw-ret-shadow-md);
+  border-color: var(--kw-ret-amber);
+}
+.kw-return-exception-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--kw-ret-radius-md);
+  background: var(--kw-ret-amber-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  font-size: 20px;
+  color: var(--kw-ret-amber);
+}
+.kw-return-exception-card h4 {
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--kw-ret-heading);
+  margin: 0 0 10px;
+}
+.kw-return-exception-card p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--kw-ret-text-muted);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   6. FORM TEMPLATE SECTION
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-form-section {
+  background: linear-gradient(135deg, rgba(0,86,163,0.04) 0%, rgba(139,0,0,0.04) 100%);
+  border-top: 3px solid var(--kw-ret-secondary);
+  border-bottom: 3px solid var(--kw-ret-secondary);
+}
+.kw-return-form-box {
+  background: var(--kw-ret-white);
+  border: 1px solid var(--kw-ret-border);
+  border-radius: var(--kw-ret-radius-lg);
+  padding: 32px 24px;
+  box-shadow: var(--kw-ret-shadow-md);
+  max-width: 800px;
+  margin: 0 auto;
+}
+.kw-return-form-header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--kw-ret-border);
+}
+.kw-return-form-header__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--kw-ret-info-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 26px;
+  color: var(--kw-ret-secondary);
+  animation: kwRetFloat 3s ease-in-out infinite;
+}
+.kw-return-form-header h3 {
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 700;
+  font-size: clamp(18px, 2.5vw, 24px);
+  color: var(--kw-ret-heading);
+  margin: 0 0 8px;
+}
+.kw-return-form-header p {
+  font-size: 14px;
+  color: var(--kw-ret-text-muted);
+  margin: 0;
+}
+.kw-return-form-template {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--kw-ret-radius-sm);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.kw-return-form-template h4 {
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--kw-ret-heading);
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed #ccc;
+}
+.kw-return-form-template__field {
+  margin-bottom: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+.kw-return-form-template__field:last-of-type { border-bottom: none; }
+.kw-return-form-template__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--kw-ret-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+.kw-return-form-template__value {
+  font-size: 14px;
+  color: var(--kw-ret-text);
+  min-height: 24px;
+}
+.kw-return-form-template__notice {
+  font-size: 12px;
+  color: var(--kw-ret-text-muted);
+  font-style: italic;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed #ccc;
+}
+.kw-return-btn-pdf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--kw-ret-white);
+  background: linear-gradient(135deg, var(--kw-ret-primary) 0%, var(--kw-ret-three) 100%);
+  padding: 16px 28px;
+  border-radius: var(--kw-ret-radius-md);
+  text-decoration: none !important;
+  transition: all var(--kw-ret-transition);
+  box-shadow: var(--kw-ret-shadow-cta);
+  min-height: 52px;
+}
+.kw-return-btn-pdf:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(139,0,0,0.45);
+  color: var(--kw-ret-white);
+}
+.kw-return-btn-pdf i { font-size: 18px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   7. FAQ — CSS-only accordion
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-faq { max-width: 760px; margin: 0 auto; }
+.kw-return-faq__item {
+  background: var(--kw-ret-white);
+  border: 1px solid var(--kw-ret-border);
+  border-radius: var(--kw-ret-radius-sm);
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: all var(--kw-ret-transition);
+  box-shadow: var(--kw-ret-shadow-xs);
+}
+.kw-return-faq__item:hover { box-shadow: var(--kw-ret-shadow-md); border-color: var(--kw-ret-primary); }
+.kw-return-faq__item[open] { border-color: var(--kw-ret-primary); box-shadow: var(--kw-ret-shadow-md); }
+.kw-return-faq__item summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--kw-ret-heading);
+  cursor: pointer;
+  list-style: none;
+  min-height: 48px;
+  transition: color var(--kw-ret-transition);
+}
+.kw-return-faq__item summary::-webkit-details-marker { display: none; }
+.kw-return-faq__item summary::before {
+  content: '\f105';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--kw-ret-primary);
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  transition: transform var(--kw-ret-transition);
+}
+.kw-return-faq__item[open] summary::before { transform: rotate(90deg); }
+.kw-return-faq__item summary:hover { color: var(--kw-ret-primary); }
+.kw-return-faq__answer {
+  padding: 0 20px 16px 50px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--kw-ret-text-muted);
+  animation: kwRetFadeIn 0.3s ease both;
+}
+.kw-return-faq__answer a { color: var(--kw-ret-secondary); }
+.kw-return-faq__answer strong { color: var(--kw-ret-heading); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   8. STATS / SOCIAL PROOF
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.kw-return-stat-card {
+  text-align: center;
+  padding: 24px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--kw-ret-radius-sm);
+  transition: all var(--kw-ret-transition);
+}
+.kw-return-stat-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-3px);
+  border-color: rgba(139,0,0,0.3);
+}
+.kw-return-stat-number {
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 42px);
+  color: var(--kw-ret-accent);
+  line-height: 1.1;
+  margin: 0 0 6px;
+}
+.kw-return-stat-number .kw-return-stat-suffix {
+  font-size: 0.6em;
+  font-weight: 700;
+  color: var(--kw-ret-primary);
+}
+.kw-return-stat-label {
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.72);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   9. CTA / KONTAKT
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-cta {
+  background: linear-gradient(140deg, #8B0000 0%, #5a0000 55%, #1a1a1a 100%);
+  text-align: center;
+  padding: 56px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.kw-return-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(55deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px);
+  pointer-events: none;
+}
+.kw-return-cta__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.kw-return-cta__inner h2 {
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 700;
+  font-size: clamp(20px, 3.2vw, 34px);
+  line-height: 1.2;
+  color: var(--kw-ret-white);
+  margin: 0 0 14px;
+}
+.kw-return-cta__inner p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 24px;
+}
+.kw-return-cta__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.kw-return-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 13px 26px;
+  border-radius: var(--kw-ret-radius-md);
+  text-decoration: none !important;
+  min-height: 48px;
+  transition: all var(--kw-ret-transition);
+  border: 2px solid transparent;
+}
+.kw-return-btn--white {
+  background: var(--kw-ret-white); color: var(--kw-ret-primary); border-color: var(--kw-ret-white);
+  box-shadow: 0 4px 18px rgba(255,255,255,0.18);
+}
+.kw-return-btn--white:hover {
+  background: transparent; color: var(--kw-ret-white); transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,255,255,0.25);
+}
+.kw-return-btn--outline {
+  background: transparent; color: var(--kw-ret-white); border-color: rgba(255,255,255,0.35);
+}
+.kw-return-btn--outline:hover {
+  background: var(--kw-ret-white); color: var(--kw-ret-primary); border-color: var(--kw-ret-white);
+}
+.kw-return-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 640px;
+  margin: 28px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.kw-return-contact-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px 20px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--kw-ret-radius-sm);
+  transition: all var(--kw-ret-transition);
+  text-decoration: none !important;
+  color: var(--kw-ret-white);
+}
+.kw-return-contact-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+  border-color: rgba(255,215,0,0.2);
+}
+.kw-return-contact-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--kw-ret-radius-sm);
+  background: rgba(139,0,0,0.2);
+  border: 1px solid var(--kw-ret-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--kw-ret-accent);
+  transition: all var(--kw-ret-transition);
+}
+.kw-return-contact-card:hover .kw-return-contact-icon {
+  background: var(--kw-ret-primary);
+  color: var(--kw-ret-white);
+}
+.kw-return-contact-card strong {
+  display: block;
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--kw-ret-white);
+  margin-bottom: 2px;
+}
+.kw-return-contact-card span { font-size: 13px; color: rgba(255,255,255,0.65); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   10. LEGAL NOTICE BOX
+   ══════════════════════════════════════════════════════════════════════════ */
+.kw-return-legal-notice {
+  background: var(--kw-ret-white);
+  border: 1px solid var(--kw-ret-border);
+  border-radius: var(--kw-ret-radius-sm);
+  padding: 24px;
+  margin-top: 24px;
+}
+.kw-return-legal-notice h4 {
+  font-family: var(--kw-ret-font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--kw-ret-heading);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.kw-return-legal-notice h4 i { color: var(--kw-ret-secondary); }
+.kw-return-legal-notice p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--kw-ret-text-muted);
+  margin: 0;
+}
+.kw-return-legal-notice a { color: var(--kw-ret-secondary); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 480px) {
+  .kw-return-cta__btns { flex-direction: row; justify-content: center; }
+}
+@media (min-width: 576px) {
+  .kw-return-info-grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-return-exceptions-grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-return-stats-grid { grid-template-columns: repeat(4, 1fr); }
+  .kw-return-contact-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 768px) {
+  .kw-return-section { padding: 64px 0; }
+  .kw-return-hero { min-height: 420px; padding: 72px 24px; }
+  .kw-return-header { margin-bottom: 40px; }
+  .kw-return-info-grid { grid-template-columns: repeat(3, 1fr); }
+  .kw-return-exceptions-grid { grid-template-columns: repeat(2, 1fr); }
+  .kw-return-cta { padding: 72px 24px; }
+  .kw-return-contact-grid { max-width: 100%; }
+}
+@media (min-width: 992px) {
+  .kw-return-section { padding: 80px 0; }
+  .kw-return-hero { min-height: 480px; padding: 88px 32px; }
+  .kw-return-header { margin-bottom: 48px; }
+  .kw-return-exceptions-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 1440px) {
+  .kw-return-section { padding: 96px 0; }
+}
+</style>
+
+<!-- SCHEMA.ORG -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Prawo odstąpienia od umowy — KEDAR-WIHA.pl",
+  "description": "Informacje o prawie odstąpienia od umowy w sklepie KEDAR-WIHA.pl. 14 dni na zwrot narzędzi specjalistycznych WIHA. Procedura zwrotu, formularz odstąpienia, wyjątki.",
+  "url": "https://kedar-wiha.pl/prawo-odstapienia",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "KEDAR-WIHA.pl",
+    "url": "https://kedar-wiha.pl",
+    "telephone": "+48575838766",
+    "email": "info@kedar-wiha.pl"
+  }
+}
+</script>
+
+<!-- FAQ SCHEMA -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ile mam czasu na odstąpienie od umowy w sklepie KEDAR-WIHA.pl?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Termin na odstąpienie od umowy wynosi 14 dni kalendarzowych. Bieg terminu rozpoczyna się od dnia objęcia towaru w posiadanie przez konsumenta lub wskazaną przez niego osobę trzecią inną niż przewoźnik. Do zachowania terminu wystarczy wysłanie oświadczenia o odstąpieniu przed jego upływem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy mogę zwrócić narzędzia WIHA jeśli znalazłem tańszą ofertę?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tak, jako konsument masz prawo odstąpić od umowy zawartej na odległość w ciągu 14 dni bez podawania przyczyny. Prawo to przysługuje niezależnie od powodu — może to być znalezienie tańszej oferty, zmiana decyzji lub inne okoliczności. Zwrotowi podlegają wszystkie otrzymane płatności, w tym koszty dostawy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Jak szybko otrzymam zwrot pieniędzy za zwrócone narzędzia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sprzedawca zwraca wszystkie otrzymane płatności niezwłocznie, nie później niż 14 dni od dnia otrzymania oświadczenia o odstąpieniu. Zwrot dokonywany jest przy użyciu takiego samego sposobu płatności, jakiego użył konsument, chyba że wyraźnie zgodził się na inny sposób."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy muszę płacić za zwrot narzędzi do KEDAR-WIHA.pl?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tak, konsument ponosi bezpośrednie koszty zwrotu towaru — są to koszty opakowania i nadania przesyłki zwrotnej. Sprzedawca nie jest zobowiązany do pokrywania kosztów zwrotu, chyba że w regulaminie lub ofercie zawarto inne postanowienia."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy mogę przetestować narzędzia WIHA przed zwrotem?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tak, konsument może sprawdzić towar w taki sposób, w jaki mógłby to uczynić w sklepie stacjonarnym — jest to tzw. zwykły zarząd rzeczą. Towar powinien być zwrócony w stanie niepogorszonym, chyba że zmiana była konieczna w granicach tego zarządu. Nie można jednak używać narzędzi w sposób przekraczający konieczny do sprawdzenia ich właściwości."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy mogę zwrócić narzędzia z indywidualnym grawerem?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nie, prawo odstąpienia od umowy nie przysługuje w przypadku rzeczy nieprefabrykowanych, wyprodukowanych według specyfikacji konsumenta lub służących zaspokojeniu jego zindywidualizowanych potrzeb. Narzędzia z indywidualnym grawerem, personalizowane lub wykonane na specjalne zamówienie nie podlegają zwrotowi na podstawie prawa odstąpienia."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Co zrobić jeśli otrzymałem uszkodzone narzędzie WIHA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "W przypadku otrzymania uszkodzonego towaru nie stosuje się prawa odstąpienia od umowy, lecz zasady reklamacji na podstawie rękojmi lub gwarancji. Skontaktuj się z nami niezwłocznie pod numerem +48 575 838 766 lub na adres info@kedar-wiha.pl. Dokumentuj uszkodzenie zdjęciami i zachowaj oryginalne opakowanie."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy przedsiębiorca może skorzystać z prawa odstąpienia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prawo odstąpienia przysługuje konsumentom oraz przedsiębiorcom na prawach konsumenta — osobom fizycznym prowadzącym jednoosobową działalność gospodarczą, zawierającym umowę bezpośrednio związaną z ich działalnością gospodarczą, gdy z treści umowy wynika, że nie posiada ona dla tej osoby charakteru zawodowego."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Gdzie mogę pobrać formularz odstąpienia od umowy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Wzór formularza odstąpienia od umowy jest dostępny na stronie KEDAR-WIHA.pl w sekcji Prawo odstąpienia od umowy. Można go pobrać jako plik PDF, wypełnić i przesłać do sprzedawcy drogą elektroniczną lub listownie. Formularz zawiera wszystkie wymagane elementy oświadczenia o odstąpieniu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy mogę odstąpić od umowy jeśli otworzyłem opakowanie narzędzi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Otwarcie opakowania nie wyklucza możliwości odstąpienia od umowy, jeśli towar nie jest dostarczany w zapieczętowanym opakowaniu, którego po otwarciu nie można zwrócić ze względu na ochronę zdrowia lub higieny. W przypadku standardowych narzędzi WIHA otwarcie opakowania w celu sprawdzenia zawartości nie pozbawia prawa do odstąpienia, o ile narzędzia nie były używane."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ====================================================================== -->
+<div class="kw-return-page">
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       1. HERO
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-return-hero" aria-label="Prawo odstąpienia od umowy KEDAR-WIHA.pl">
+    <div class="kw-return-hero__inner">
+      <nav class="kw-return-hero__breadcrumbs" aria-label="Ścieżka nawigacji">
+        <a href="/">Strona główna</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="/informacje-dla-klienta">Informacje dla klienta</a>
+        <i class="fas fa-chevron-right"></i>
+        <span style="color:var(--kw-ret-accent);">Prawo odstąpienia</span>
+      </nav>
+      <span class="kw-return-hero__badge"><i class="fas fa-undo-alt"></i> Zwrot towaru</span>
+      <h1 class="kw-return-hero__title">Prawo <em>Odstąpienia</em> od Umowy</h1>
+      <p class="kw-return-hero__sub">Kompletne informacje o prawie odstąpienia od umowy zawartej na odległość w sklepie KEDAR-WIHA.pl. <strong>14 dni na zwrot</strong> narzędzi specjalistycznych WIHA — bez podawania przyczyny. Poznaj procedurę, terminy i wyjątki obowiązujące przy zakupie wkrętaków izolowanych VDE, kluczy dynamometrycznych i profesjonalnych zestawów narzędzi.</p>
+      <div class="kw-return-hero__trust">
+        <span class="kw-return-hero__chip"><i class="fas fa-calendar-alt"></i> 14 dni na zwrot</span>
+        <span class="kw-return-hero__chip"><i class="fas fa-shield-alt"></i> Bezpieczne zakupy</span>
+        <span class="kw-return-hero__chip"><i class="fas fa-file-contract"></i> Ustawa o prawach konsumenta</span>
+        <span class="kw-return-hero__chip"><i class="fas fa-money-bill-wave"></i> Zwrot płatności</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       2. KOMU PRZYSŁUGUJE PRAWO ODSTĄPIENIA
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-return-section kw-return-section--pattern" aria-label="Kto przysługuje prawo odstąpienia">
+    <div class="container">
+      <div class="kw-return-header kw-return-reveal">
+        <span class="kw-return-label">Podstawa prawna</span>
+        <h2 class="kw-return-title">Komu Przysługuje Prawo Odstąpienia?</h2>
+        <hr class="kw-return-divider" />
+        <p class="kw-return-subtitle">Prawo odstąpienia od umowy zawartej na odległość (w tym za pośrednictwem Sklepu Internetowego KEDAR-WIHA.pl) reguluje ustawa z dnia 30 maja 2014 r. o prawach konsumenta (t.j. Dz.U. z 2024 r. poz. 1796). Przysługuje ono określonej grupie podmiotów.</p>
+      </div>
+      
+      <div class="kw-return-info-grid">
+        <article class="kw-return-info-card kw-return-reveal kw-return-stagger-1">
+          <div class="kw-return-info-icon"><i class="fas fa-user"></i></div>
+          <h3>Konsument</h3>
+          <p>Prawo odstąpienia przysługuje <strong>osobom fizycznym</strong> dokonującym zakupu niezwiązanego bezpośrednio z działalnością gospodarczą lub zawodową. Jeśli kupujesz narzędzia WIHA na własny użytek, jako elektryk-hobbysta lub do domowego warsztatu — masz pełne prawo do odstąpienia.</p>
+        </article>
+        
+        <article class="kw-return-info-card kw-return-reveal kw-return-stagger-2">
+          <div class="kw-return-info-icon"><i class="fas fa-briefcase"></i></div>
+          <h3>Przedsiębiorca na prawach konsumenta</h3>
+          <p>Osoba fizyczna prowadząca <strong>jednoosobową działalność gospodarczą</strong>, zawierająca umowę bezpośrednio związaną z jej działalnością, gdy z treści umowy wynika, że nie posiada ona dla tej osoby charakteru zawodowego.</p>
+        </article>
+        
+        <article class="kw-return-info-card kw-return-info-card--highlight kw-return-reveal kw-return-stagger-3">
+          <div class="kw-return-info-icon"><i class="fas fa-calendar-check"></i></div>
+          <h3>Termin odstąpienia</h3>
+          <p>Termin na odstąpienie od umowy wynosi <strong>14 dni kalendarzowych</strong>. Bieg terminu rozpoczyna się od dnia objęcia Towaru w posiadanie przez konsumenta lub wskazaną przez niego osobę trzecią inną niż przewoźnik.</p>
+          <ul style="margin-top: 10px;">
+            <li>Wiele towarów — termin od ostatniej sztuki</li>
+            <li>Do zachowania terminu wystarczy wysłanie oświadczenia</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="kw-return-callout kw-return-callout--info kw-return-reveal" style="max-width: 800px; margin: 28px auto 0;">
+        <p><i class="fas fa-info-circle"></i> <strong>Ważne:</strong> Prawo odstąpienia od umowy <strong>nie przysługuje</strong> podmiotom prowadzącym działalność gospodarczą w zakresie, w jakim umowa ma charakter zawodowy (B2B). Firmy elektroinstalacyjne dokonujące zakupów w ramach swojej działalności nie korzystają z ochrony przewidzianej dla konsumentów.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       3. JAK ODSTĄPIĆ OD UMOWY — PROCEDURA
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-return-section kw-return-section--alt" id="procedura" aria-label="Jak odstąpić od umowy">
+    <div class="container">
+      <div class="kw-return-header kw-return-reveal">
+        <span class="kw-return-label">Procedura</span>
+        <h2 class="kw-return-title">Jak Odstąpić od Umowy? — Krok po Kroku</h2>
+        <hr class="kw-return-divider" />
+        <p class="kw-return-subtitle">Aby skorzystać z prawa odstąpienia od umowy, Konsument powinien poinformować Sprzedawcę o swojej decyzji w drodze jednoznacznego oświadczenia. Procedura jest prosta i nie wymaga podawania przyczyny odstąpienia.</p>
+      </div>
+      
+      <div class="kw-return-steps kw-return-reveal">
+        <div class="kw-return-step">
+          <div class="kw-return-step__number">1</div>
+          <div class="kw-return-step__content">
+            <h4><i class="fas fa-envelope" style="color: var(--kw-ret-primary); margin-right: 8px;"></i> Złóż oświadczenie o odstąpieniu</h4>
+            <p>Poinformuj nas o decyzji odstąpienia od umowy w drodze jednoznacznego oświadczenia. Możesz to zrobić <strong>e-mailem</strong> na adres <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a>, <strong>listownie</strong> na adres siedziby Sprzedawcy lub korzystając ze <strong>wzoru formularza odstąpienia od umowy</strong> dostępnego poniżej. Nie musisz podawać przyczyny odstąpienia — wystarczy sama informacja o decyzji.</p>
+          </div>
+        </div>
+        
+        <div class="kw-return-step">
+          <div class="kw-return-step__number">2</div>
+          <div class="kw-return-step__content">
+            <h4><i class="fas fa-box" style="color: var(--kw-ret-primary); margin-right: 8px;"></i> Odeślij towar na adres Sprzedawcy</h4>
+            <p>Konsument ma obowiązek odesłać Towar na adres Sprzedawcy <strong>niezwłocznie, nie później niż 14 dni</strong> od dnia odstąpienia. Towar powinien być zwrócony w stanie niepogorszonym, chyba że zmiana była konieczna w granicach zwykłego zarządu. Możesz sprawdzić narzędzia WIHA w taki sposób, w jaki mógłbyś to uczynić w sklepie stacjonarnym.</p>
+          </div>
+        </div>
+        
+        <div class="kw-return-step">
+          <div class="kw-return-step__number">3</div>
+          <div class="kw-return-step__content">
+            <h4><i class="fas fa-euro-sign" style="color: var(--kw-ret-primary); margin-right: 8px;"></i> Poniesienie kosztów zwrotu</h4>
+            <p><strong>Konsument ponosi bezpośrednie koszty zwrotu Towaru</strong> — są to koszty opakowania i nadania przesyłki zwrotnej. Koszty te nie podlegają zwrotowi przez Sprzedawcę, chyba że w regulaminie lub ofercie zawarto inne postanowienie. Zalecamy użycie usług InPost lub DPD z możliwością śledzenia przesyłki.</p>
+          </div>
+        </div>
+        
+        <div class="kw-return-step">
+          <div class="kw-return-step__number">4</div>
+          <div class="kw-return-step__content">
+            <h4><i class="fas fa-money-check-alt" style="color: var(--kw-ret-primary); margin-right: 8px;"></i> Otrzymanie zwrotu płatności</h4>
+            <p>Sprzedawca zwraca wszystkie otrzymane od Konsumenta płatności, w tym koszty dostawy (z wyjątkiem dodatkowych kosztów wynikających z wybrania sposobu dostawy droższego niż najtańszy zwykły sposób oferowany przez Sprzedawcę) — <strong>niezwłocznie, nie później niż 14 dni</strong> od dnia otrzymania oświadczenia o odstąpieniu.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="kw-return-callout kw-return-callout--success kw-return-reveal" style="max-width: 800px; margin: 28px auto 0;">
+        <p><i class="fas fa-check-circle"></i> <strong>Forma zwrotu płatności:</strong> Zwrot dokonywany jest przy użyciu takiego samego sposobu płatności, jakiego użył Konsument, chyba że Konsument wyraźnie zgodził się na inny sposób. Sprzedawca może wstrzymać się ze zwrotem płatności do czasu otrzymania Towaru z powrotem lub dostarczenia dowodu odesłania.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       4. SKUTKI ODSTĄPIENIA — SZCZEGÓŁY
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-return-section" aria-label="Skutki odstąpienia od umowy">
+    <div class="container">
+      <div class="kw-return-header kw-return-reveal">
+        <span class="kw-return-label">Skutki prawne</span>
+        <h2 class="kw-return-title">Skutki Odstąpienia od Umowy</h2>
+        <hr class="kw-return-divider" />
+        <p class="kw-return-subtitle">Odstąpienie od umowy wiąże się z konkretnymi skutkami prawnymi dla obu stron — konsumenta i sprzedawcy. Poniżej przedstawiamy szczegółowe informacje o zwrocie płatności, obowiązkach konsumenta oraz zasadach dotyczących stanu zwracanego towaru.</p>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6 kw-return-slide-left">
+          <div style="background: var(--kw-ret-white); border: 1px solid var(--kw-ret-border); border-radius: var(--kw-ret-radius-sm); padding: 24px; box-shadow: var(--kw-ret-shadow-sm); height: 100%;">
+            <h3 style="font-family: var(--kw-ret-font-heading); font-weight: 700; font-size: 18px; color: var(--kw-ret-heading); margin: 0 0 16px; display: flex; align-items: center; gap: 10px;">
+              <span style="width: 40px; height: 40px; border-radius: var(--kw-ret-radius-md); background: var(--kw-ret-green-bg); display: inline-flex; align-items: center; justify-content: center; font-size: 18px; color: var(--kw-ret-green);"><i class="fas fa-undo"></i></span>
+              Zwrot płatności przez Sprzedawcę
+            </h3>
+            <p style="font-size: 14px; line-height: 1.7; color: var(--kw-ret-text-muted); margin: 0 0 12px;">Sprzedawca zobowiązany jest do zwrotu <strong>wszystkich otrzymanych płatności</strong>, w tym:</p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 16px;">
+              <li style="position: relative; padding-left: 24px; font-size: 14px; line-height: 1.65; color: var(--kw-ret-text-muted); margin-bottom: 8px;">
+                <i class="fas fa-check" style="color: var(--kw-ret-green); position: absolute; left: 0; top: 4px; font-size: 11px;"></i>
+                Ceny zakupionych narzędzi WIHA
+              </li>
+              <li style="position: relative; padding-left: 24px; font-size: 14px; line-height: 1.65; color: var(--kw-ret-text-muted); margin-bottom: 8px;">
+                <i class="fas fa-check" style="color: var(--kw-ret-green); position: absolute; left: 0; top: 4px; font-size: 11px;"></i>
+                Kosztów dostawy (najtańszy zwykły sposób)
+              </li>
+              <li style="position: relative; padding-left: 24px; font-size: 14px; line-height: 1.65; color: var(--kw-ret-text-muted); margin-bottom: 8px;">
+                <i class="fas fa-check" style="color: var(--kw-ret-green); position: absolute; left: 0; top: 4px; font-size: 11px;"></i>
+                Innych opłat związanych z zakupem
+              </li>
+            </ul>
+            <div class="kw-return-callout kw-return-callout--info" style="margin: 0;">
+              <p style="font-size: 13px;"><i class="fas fa-info-circle"></i> <strong>Termin zwrotu:</strong> Niezwłocznie, nie później niż 14 dni od dnia otrzymania oświadczenia o odstąpieniu.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 kw-return-slide-right">
+          <div style="background: var(--kw-ret-white); border: 1px solid var(--kw-ret-border); border-radius: var(--kw-ret-radius-sm); padding: 24px; box-shadow: var(--kw-ret-shadow-sm); height: 100%;">
+            <h3 style="font-family: var(--kw-ret-font-heading); font-weight: 700; font-size: 18px; color: var(--kw-ret-heading); margin: 0 0 16px; display: flex; align-items: center; gap: 10px;">
+              <span style="width: 40px; height: 40px; border-radius: var(--kw-ret-radius-md); background: var(--kw-ret-amber-bg); display: inline-flex; align-items: center; justify-content: center; font-size: 18px; color: var(--kw-ret-amber);"><i class="fas fa-user-check"></i></span>
+              Obowiązki Konsumenta
+            </h3>
+            <p style="font-size: 14px; line-height: 1.7; color: var(--kw-ret-text-muted); margin: 0 0 12px;">Konsument zobowiązany jest do:</p>
+            <ul style="list-style: none; padding: 0; margin: 0 0 16px;">
+              <li style="position: relative; padding-left: 24px; font-size: 14px; line-height: 1.65; color: var(--kw-ret-text-muted); margin-bottom: 8px;">
+                <i class="fas fa-check" style="color: var(--kw-ret-green); position: absolute; left: 0; top: 4px; font-size: 11px;"></i>
+                Odesłania towaru niezwłocznie, nie później niż 14 dni od odstąpienia
+              </li>
+              <li style="position: relative; padding-left: 24px; font-size: 14px; line-height: 1.65; color: var(--kw-ret-text-muted); margin-bottom: 8px;">
+                <i class="fas fa-check" style="color: var(--kw-ret-green); position: absolute; left: 0; top: 4px; font-size: 11px;"></i>
+                Poniesienia bezpośrednich kosztów zwrotu towaru
+              </li>
+              <li style="position: relative; padding-left: 24px; font-size: 14px; line-height: 1.65; color: var(--kw-ret-text-muted); margin-bottom: 8px;">
+                <i class="fas fa-check" style="color: var(--kw-ret-green); position: absolute; left: 0; top: 4px; font-size: 11px;"></i>
+                Zwrotu towaru w stanie niepogorszonym
+              </li>
+            </ul>
+            <div class="kw-return-callout kw-return-callout--warning" style="margin: 0;">
+              <p style="font-size: 13px;"><i class="fas fa-exclamation-triangle"></i> <strong>Stan towaru:</strong> Konsument może sprawdzić narzędzia WIHA w taki sposób, w jaki mógłby to uczynić w sklepie stacjonarnym — jest to tzw. zwykły zarząd rzeczą.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       5. WYJĄTKI — KIEDY PRAWO NIE PRZYSŁUGUJE
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-return-section kw-return-section--alt" id="wyjatki" aria-label="Wyjątki od prawa odstąpienia">
+    <div class="container">
+      <div class="kw-return-header kw-return-reveal">
+        <span class="kw-return-label" style="color: var(--kw-ret-amber); background: var(--kw-ret-amber-bg);">Wyjątki</span>
+        <h2 class="kw-return-title">Kiedy Prawo Odstąpienia Nie Przysługuje?</h2>
+        <hr class="kw-return-divider" style="background: var(--kw-ret-amber);" />
+        <p class="kw-return-subtitle">Zgodnie z art. 38 ustawy o prawach konsumenta, prawo odstąpienia od umowy <strong>nie przysługuje</strong> w odniesieniu do określonych kategorii umów. Poniżej przedstawiamy szczegółową listę wyjątków obowiązujących w sklepie KEDAR-WIHA.pl.</p>
+      </div>
+      
+      <div class="kw-return-exceptions-grid">
+        <article class="kw-return-exception-card kw-return-reveal kw-return-stagger-1">
+          <div class="kw-return-exception-card__icon"><i class="fas fa-cogs"></i></div>
+          <h4>Usługi wykonane w pełni</h4>
+          <p>O świadczenie usług, jeżeli Sprzedawca wykonał w pełni usługę za wyraźną zgodą Konsumenta, który został poinformowany przed rozpoczęciem świadczenia, że po spełnieniu świadczenia przez Sprzedawcę utraci prawo odstąpienia od umowy.</p>
+        </article>
+        
+        <article class="kw-return-exception-card kw-return-reveal kw-return-stagger-2">
+          <div class="kw-return-exception-card__icon"><i class="fas fa-pen-fancy"></i></div>
+          <h4>Produkty zindywidualizowane</h4>
+          <p>W których przedmiotem świadczenia jest rzecz nieprefabrykowana, wyprodukowana według specyfikacji Konsumenta lub służąca zaspokojeniu jego zindywidualizowanych potrzeb — np. narzędzia WIHA z indywidualnym grawerem, personalizowane zestawy.</p>
+        </article>
+        
+        <article class="kw-return-exception-card kw-return-reveal kw-return-stagger-3">
+          <div class="kw-return-exception-card__icon"><i class="fas fa-box-open"></i></div>
+          <h4>Otwarte opakowania higieniczne</h4>
+          <p>W których przedmiotem świadczenia jest rzecz dostarczana w zapieczętowanym opakowaniu, której po otwarciu nie można zwrócić ze względu na ochronę zdrowia lub higieny, jeżeli opakowanie zostało otwarte po dostarczeniu.</p>
+        </article>
+        
+        <article class="kw-return-exception-card kw-return-reveal kw-return-stagger-4">
+          <div class="kw-return-exception-card__icon"><i class="fas fa-link"></i></div>
+          <h4>Rzeczy nierozłącznie połączone</h4>
+          <p>W których przedmiotem świadczenia są rzeczy, które po dostarczeniu, ze względu na swój charakter, zostają nierozłącznie połączone z innymi rzeczami — np. narzędzia, które zostały zainstalowane lub wbudowane w inne urządzenia.</p>
+        </article>
+      </div>
+
+      <div class="kw-return-legal-notice kw-return-reveal">
+        <h4><i class="fas fa-balance-scale"></i> Pełna lista wyjątków — art. 38 ustawy o prawach konsumenta</h4>
+        <p>Powyższa lista przedstawia najczęściej spotykane wyjątki mające zastosowanie w przypadku zakupu narzędzi specjalistycznych. Pełna lista wyjątków zawarta jest w <strong>art. 38 ustawy z dnia 30 maja 2014 r. o prawach konsumenta</strong> (t.j. Dz.U. z 2024 r. poz. 1796). W przypadku wątpliwości co do zastosowania prawa odstąpienia w konkretnym przypadku, zachęcamy do kontaktu z naszym działem obsługi klienta pod numerem <strong>+48 575 838 766</strong> lub na adres <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       6. WZÓR FORMULARZA ODSTĄPIENIA
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-return-section kw-return-form-section" id="formularz" aria-label="Wzór formularza odstąpienia">
+    <div class="container">
+      <div class="kw-return-header kw-return-reveal">
+        <span class="kw-return-label" style="color: var(--kw-ret-secondary); background: var(--kw-ret-info-bg);">Formularz</span>
+        <h2 class="kw-return-title">Wzór Formularza Odstąpienia od Umowy</h2>
+        <hr class="kw-return-divider" style="background: var(--kw-ret-secondary);" />
+        <p class="kw-return-subtitle">Poniżej przedstawiamy wzór formularza odstąpienia od umowy zgodny z wymogami ustawy o prawach konsumenta. Możesz pobrać go jako plik PDF, wypełnić i przesłać do nas drogą elektroniczną lub listowną.</p>
+      </div>
+      
+      <div class="kw-return-form-box kw-return-reveal">
+        <div class="kw-return-form-header">
+          <div class="kw-return-form-header__icon"><i class="fas fa-file-signature"></i></div>
+          <h3>Wzór formularza odstąpienia od umowy</h3>
+          <p>Załącznik nr 1 do Regulaminu Sklepu Internetowego KEDAR-WIHA.pl</p>
+        </div>
+        
+        <div class="kw-return-form-template">
+          <h4>Oświadczenie o odstąpieniu od umowy</h4>
+          <div class="kw-return-form-template__field">
+            <div class="kw-return-form-template__label">Adresat:</div>
+            <div class="kw-return-form-template__value">KEDAR-WIHA.pl, [adres siedziby]</div>
+          </div>
+          <div class="kw-return-form-template__field">
+            <div class="kw-return-form-template__label">Ja/My (*) niniejszym informuję/informujemy (*) o moim/naszym odstąpieniu od umowy sprzedaży następujących rzeczy (*):</div>
+            <div class="kw-return-form-template__value" style="min-height: 60px;"></div>
+          </div>
+          <div class="kw-return-form-template__field">
+            <div class="kw-return-form-template__label">Numer zamówienia:</div>
+            <div class="kw-return-form-template__value"></div>
+          </div>
+          <div class="kw-return-form-template__field">
+            <div class="kw-return-form-template__label">Data zawarcia umowy (*)/odbiór (*):</div>
+            <div class="kw-return-form-template__value"></div>
+          </div>
+          <div class="kw-return-form-template__field">
+            <div class="kw-return-form-template__label">Imię i nazwisko konsumenta/konsumentów (*):</div>
+            <div class="kw-return-form-template__value"></div>
+          </div>
+          <div class="kw-return-form-template__field">
+            <div class="kw-return-form-template__label">Adres konsumenta/konsumentów (*):</div>
+            <div class="kw-return-form-template__value"></div>
+          </div>
+          <div class="kw-return-form-template__field">
+            <div class="kw-return-form-template__label">Podpis konsumenta/konsumentów (tylko jeżeli formularz jest przesyłany w wersji papierowej):</div>
+            <div class="kw-return-form-template__value" style="min-height: 40px;"></div>
+          </div>
+          <div class="kw-return-form-template__field">
+            <div class="kw-return-form-template__label">Data:</div>
+            <div class="kw-return-form-template__value"></div>
+          </div>
+          <p class="kw-return-form-template__notice">(*) Niepotrzebne skreślić</p>
+        </div>
+        
+        <a href="#formularz-odstapienia.pdf" class="kw-return-btn-pdf" download>
+          <i class="fas fa-file-pdf"></i>
+          Pobierz formularz odstąpienia (PDF)
+        </a>
+        
+        <p style="text-align: center; font-size: 12px; color: var(--kw-ret-text-muted); margin-top: 16px;">
+          <i class="fas fa-info-circle"></i> Plik PDF gotowy do pobrania, wydruku i wypełnienia. Po wypełnieniu prześlij skan lub zdjęcie na <a href="mailto:info@kedar-wiha.pl" style="color: var(--kw-ret-secondary);">info@kedar-wiha.pl</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       7. FAQ — NAJCZĘŚCIEJ ZADAWANE PYTANIA
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-return-section kw-return-section--pattern" id="faq" aria-label="FAQ — najczęściej zadawane pytania">
+    <div class="container">
+      <div class="kw-return-header kw-return-reveal">
+        <span class="kw-return-label">FAQ</span>
+        <h2 class="kw-return-title">Najczęściej Zadawane Pytania o Prawo Odstąpienia</h2>
+        <hr class="kw-return-divider" />
+        <p class="kw-return-subtitle">Odpowiedzi na najczęstsze pytania dotyczące zwrotu narzędzi specjalistycznych WIHA, terminów odstąpienia, procedury zwrotu oraz wyjątków od prawa odstąpienia.</p>
+      </div>
+      
+      <div class="kw-return-faq">
+        <details class="kw-return-faq__item kw-return-reveal kw-return-stagger-1">
+          <summary>Ile mam czasu na odstąpienie od umowy w sklepie KEDAR-WIHA.pl?</summary>
+          <div class="kw-return-faq__answer">
+            <p>Termin na odstąpienie od umowy wynosi <strong>14 dni kalendarzowych</strong>. Bieg terminu rozpoczyna się od dnia objęcia towaru w posiadanie przez konsumenta lub wskazaną przez niego osobę trzecią inną niż przewoźnik. W przypadku zamówienia obejmującego wiele towarów dostarczanych osobno — termin biegnie od dnia objęcia w posiadanie ostatniego towaru. <strong>Do zachowania terminu wystarczy wysłanie oświadczenia o odstąpieniu przed jego upływem</strong> — nie jest wymagane, aby towar dotarł do sprzedawcy w tym terminie.</p>
+          </div>
+        </details>
+        
+        <details class="kw-return-faq__item kw-return-reveal kw-return-stagger-2">
+          <summary>Czy mogę zwrócić narzędzia WIHA jeśli znalazłem tańszą ofertę?</summary>
+          <div class="kw-return-faq__answer">
+            <p>Tak, jako konsument masz prawo odstąpić od umowy zawartej na odległość w ciągu 14 dni <strong>bez podawania przyczyny</strong>. Prawo to przysługuje niezależnie od powodu — może to być znalezienie tańszej oferty, zmiana decyzji, niepasujące parametry techniczne lub inne okoliczności. Zwrotowi podlegają wszystkie otrzymane płatności, w tym koszty dostawy (z wyjątkiem dodatkowych kosztów wynikających z wybrania sposobu dostawy droższego niż najtańszy zwykły sposób oferowany przez Sprzedawcę).</p>
+          </div>
+        </details>
+        
+        <details class="kw-return-faq__item kw-return-reveal kw-return-stagger-3">
+          <summary>Jak szybko otrzymam zwrot pieniędzy za zwrócone narzędzia?</summary>
+          <div class="kw-return-faq__answer">
+            <p>Sprzedawca zwraca wszystkie otrzymane płatności <strong>niezwłocznie, nie później niż 14 dni</strong> od dnia otrzymania oświadczenia o odstąpieniu. Zwrot dokonywany jest przy użyciu takiego samego sposobu płatności, jakiego użył konsument, chyba że wyraźnie zgodził się na inny sposób. Sprzedawca może wstrzymać się ze zwrotem płatności do czasu otrzymania towaru z powrotem lub dostarczenia przez konsumenta dowodu odesłania — w zależności od tego, które zdarzenie nastąpi wcześniej.</p>
+          </div>
+        </details>
+        
+        <details class="kw-return-faq__item kw-return-reveal kw-return-stagger-4">
+          <summary>Czy muszę płacić za zwrot narzędzi do KEDAR-WIHA.pl?</summary>
+          <div class="kw-return-faq__answer">
+            <p>Tak, <strong>konsument ponosi bezpośrednie koszty zwrotu towaru</strong> — są to koszty opakowania i nadania przesyłki zwrotnej. Sprzedawca nie jest zobowiązany do pokrywania kosztów zwrotu, chyba że w regulaminie lub ofercie zawarto inne postanowienie. Zalecamy użycie usług InPost lub DPD z możliwością śledzenia przesyłki — dzięki temu masz pewność, że towar dotrze do naszego magazynu. Koszty zwrotu nie podlegają zwrotowi przez Sprzedawcę.</p>
+          </div>
+        </details>
+        
+        <details class="kw-return-faq__item kw-return-reveal kw-return-stagger-5">
+          <summary>Czy mogę przetestować narzędzia WIHA przed zwrotem?</summary>
+          <div class="kw-return-faq__answer">
+            <p>Tak, konsument może sprawdzić towar w taki sposób, w jaki mógłby to uczynić w sklepie stacjonarnym — jest to tzw. <strong>zwykły zarząd rzeczą</strong>. Towar powinien być zwrócony w stanie niepogorszonym, chyba że zmiana była konieczna w granicach tego zarządu. Nie można jednak używać narzędzi w sposób przekraczający konieczny do sprawdzenia ich właściwości — np. używać wkrętaków do wykonywania prac instalacyjnych, a następnie zwracać jako nieużywane. W przypadku zwrotu towaru używanego w stopniu przekraczającym zwykły zarząd, Sprzedawca może domagać się naprawienia szkody.</p>
+          </div>
+        </details>
+        
+        <details class="kw-return-faq__item kw-return-reveal kw-return-stagger-6">
+          <summary>Czy mogę zwrócić narzędzia z indywidualnym grawerem?</summary>
+          <div class="kw-return-faq__answer">
+            <p><strong>Nie</strong>, prawo odstąpienia od umowy nie przysługuje w przypadku rzeczy nieprefabrykowanych, wyprodukowanych według specyfikacji konsumenta lub służących zaspokojeniu jego zindywidualizowanych potrzeb (art. 38 pkt 3 ustawy o prawach konsumenta). Narzędzia WIHA z indywidualnym grawerem, personalizowane lub wykonane na specjalne zamówienie nie podlegają zwrotowi na podstawie prawa odstąpienia. Przed złożeniem zamówienia na produkty personalizowane upewnij się co do wyboru — po wykonaniu graweru nie ma możliwości zwrotu.</p>
+          </div>
+        </details>
+        
+        <details class="kw-return-faq__item kw-return-reveal kw-return-stagger-1">
+          <summary>Co zrobić jeśli otrzymałem uszkodzone narzędzie WIHA?</summary>
+          <div class="kw-return-faq__answer">
+            <p>W przypadku otrzymania uszkodzonego towaru <strong>nie stosuje się prawa odstąpienia od umowy</strong>, lecz zasady reklamacji na podstawie rękojmi lub gwarancji. Skontaktuj się z nami niezwłocznie pod numerem <strong>+48 575 838 766</strong> lub na adres <a href="mailto:info@kedar-wiha.pl">info@kedar-wiha.pl</a>. Dokumentuj uszkodzenie zdjęciami i zachowaj oryginalne opakowanie. Jako autoryzowany dystrybutor WIHA zapewniamy pełne wsparcie w procesie reklamacyjnym — narzędzia objęte są gwarancją producenta, a w przypadku uszkodzeń transportowych procedujemy reklamację logistyczną.</p>
+          </div>
+        </details>
+        
+        <details class="kw-return-faq__item kw-return-reveal kw-return-stagger-2">
+          <summary>Czy przedsiębiorca może skorzystać z prawa odstąpienia?</summary>
+          <div class="kw-return-faq__answer">
+            <p>Prawo odstąpienia przysługuje <strong>przedsiębiorcom na prawach konsumenta</strong> — osobom fizycznym prowadzącym jednoosobową działalność gospodarczą, zawierającym umowę bezpośrednio związaną z ich działalnością gospodarczą, gdy z treści umowy wynika, że nie posiada ona dla tej osoby charakteru zawodowego. Z kolei przedsiębiorcy prowadzący działalność w zakresie, w jakim umowa ma charakter zawodowy (B2B), nie korzystają z ochrony przewidzianej dla konsumentów. Firmy elektroinstalacyjne dokonujące zakupów w ramach swojej działalności powinny kierować się postanowieniami umowy handlowej.</p>
+          </div>
+        </details>
+        
+        <details class="kw-return-faq__item kw-return-reveal kw-return-stagger-3">
+          <summary>Gdzie mogę pobrać formularz odstąpienia od umowy?</summary>
+          <div class="kw-return-faq__answer">
+            <p>Wzór formularza odstąpienia od umowy jest dostępny na stronie KEDAR-WIHA.pl w sekcji <strong>Prawo odstąpienia od umowy</strong>. Możesz go pobrać jako plik PDF, wypełnić i przesłać do sprzedawcy drogą elektroniczną lub listowną. Formularz zawiera wszystkie wymagane elementy oświadczenia o odstąpieniu. Alternatywnie, możesz złożyć oświadczenie o odstąpieniu w dowolnej formie — wystarczy jednoznaczna informacja o decyzji odstąpienia, numer zamówienia oraz dane kontaktowe.</p>
+          </div>
+        </details>
+        
+        <details class="kw-return-faq__item kw-return-reveal kw-return-stagger-4">
+          <summary>Czy mogę odstąpić od umowy jeśli otworzyłem opakowanie narzędzi?</summary>
+          <div class="kw-return-faq__answer">
+            <p>Otwarcie opakowania nie wyklucza możliwości odstąpienia od umowy, jeśli towar nie jest dostarczany w zapieczętowanym opakowaniu, którego po otwarciu nie można zwrócić ze względu na ochronę zdrowia lub higieny. W przypadku standardowych narzędzi WIHA otwarcie opakowania w celu sprawdzenia zawartości nie pozbawia prawa do odstąpienia, o ile narzędzia nie były używane w sposób przekraczający zwykły zarząd. Narzędzia powinny być zwrócone w oryginalnym opakowaniu wraz z wszystkimi akcesoriami, dokumentacją i certyfikatami.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       8. STATS / SOCIAL PROOF
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-return-section kw-return-section--dark" id="statystyki" aria-label="Statystyki zwrotów">
+    <div class="container">
+      <div class="kw-return-header kw-return-reveal">
+        <span class="kw-return-label">Zaufanie klientów</span>
+        <h2 class="kw-return-title">Transparentność i Profesjonalizm</h2>
+        <hr class="kw-return-divider" />
+      </div>
+      <div class="kw-return-stats-grid kw-return-reveal">
+        <div class="kw-return-stat-card">
+          <p class="kw-return-stat-number">14<span class="kw-return-stat-suffix"> dni</span></p>
+          <p class="kw-return-stat-label">Na odstąpienie od umowy bez podania przyczyny</p>
+        </div>
+        <div class="kw-return-stat-card">
+          <p class="kw-return-stat-number">100<span class="kw-return-stat-suffix">%</span></p>
+          <p class="kw-return-stat-label">Zwrotu płatności w terminie do 14 dni</p>
+        </div>
+        <div class="kw-return-stat-card">
+          <p class="kw-return-stat-number">24<span class="kw-return-stat-suffix">h</span></p>
+          <p class="kw-return-stat-label">Czas reakcji na zgłoszenie odstąpienia</p>
+        </div>
+        <div class="kw-return-stat-card">
+          <p class="kw-return-stat-number">0<span class="kw-return-stat-suffix">%</span></p>
+          <p class="kw-return-stat-label">Ukrytych opłat przy zwrocie towaru</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       9. CTA / KONTAKT
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="kw-return-cta" aria-label="Kontakt KEDAR-WIHA.pl">
+    <div class="kw-return-cta__inner">
+      <h2>Masz Pytania o Prawo Odstąpienia?</h2>
+      <p>Nasz zespół jest gotowy, aby odpowiedzieć na każde pytanie dotyczące zwrotu narzędzi WIHA. Skontaktuj się z nami — chętnie doradzimy w procedurze odstąpienia od umowy i pomożemy rozwiązać wszelkie wątpliwości.</p>
+      <div class="kw-return-cta__btns">
+        <a href="https://kedar-wiha.pl" class="kw-return-btn kw-return-btn--white"><i class="fas fa-shopping-cart"></i> Przejdź do sklepu</a>
+        <a href="mailto:info@kedar-wiha.pl" class="kw-return-btn kw-return-btn--outline"><i class="fas fa-envelope"></i> Napisz e-mail</a>
+      </div>
+      <div class="kw-return-contact-grid">
+        <a href="tel:+48575838766" class="kw-return-contact-card">
+          <div class="kw-return-contact-icon"><i class="fas fa-phone-alt"></i></div>
+          <div>
+            <strong>Telefon</strong>
+            <span>+48 575 838 766</span>
+          </div>
+        </a>
+        <a href="mailto:info@kedar-wiha.pl" class="kw-return-contact-card">
+          <div class="kw-return-contact-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <strong>E-mail</strong>
+            <span>info@kedar-wiha.pl</span>
+          </div>
+        </a>
+        <a href="https://kedar-wiha.pl" class="kw-return-contact-card">
+          <div class="kw-return-contact-icon"><i class="fas fa-globe"></i></div>
+          <div>
+            <strong>Sklep online</strong>
+            <span>kedar-wiha.pl</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- / .kw-return-page -->
+
+<!-- ══════════════════════════════════════════════════════════════════════════════
+     JAVASCRIPT — IntersectionObserver, Smooth Scroll, FAQ Accordion
+     ══════════════════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ── 1. INTERSECTION OBSERVER — SCROLL REVEAL ────────────────────────── */
+  var revealSelectors = '.kw-return-reveal, .kw-return-slide-left, .kw-return-slide-right';
+
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('kw-return-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll(revealSelectors).forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    /* Fallback for old browsers */
+    document.querySelectorAll(revealSelectors).forEach(function(el) {
+      el.classList.add('kw-return-visible');
+    });
+  }
+
+  /* ── 2. SMOOTH SCROLL FOR ANCHOR LINKS ───────────────────────────────── */
+  document.querySelectorAll('.kw-return-page a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href && href.length > 1) {
+        var target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          var headerOffset = 80; /* approximate sticky header height */
+          var elementPosition = target.getBoundingClientRect().top;
+          var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+
+          /* Update URL without jump */
+          if (history.pushState) {
+            history.pushState(null, null, href);
+          }
+        }
+      }
+    });
+  });
+
+  /* ── 3. FAQ ACCORDION — CLOSE OTHERS ON OPEN ────────────────────────── */
+  document.querySelectorAll('.kw-return-faq__item summary').forEach(function(summary) {
+    summary.addEventListener('click', function() {
+      var currentItem = this.parentElement;
+
+      /* Close other open items in the same FAQ */
+      document.querySelectorAll('.kw-return-faq__item[open]').forEach(function(openItem) {
+        if (openItem !== currentItem) {
+          openItem.removeAttribute('open');
+        }
+      });
+    });
+  });
+
+})();
+</script>
