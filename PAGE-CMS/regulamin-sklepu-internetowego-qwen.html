@@ -1,0 +1,216 @@
+<style>
+.kw-reg-outer-container {
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--color-bg-white);
+}
+
+.kw-reg-section {
+  padding: calc(var(--space-section-mobile) * 1.2) 0;
+}
+
+.kw-reg-section-header {
+  margin-bottom: calc(var(--space-12) * 1.2);
+}
+
+.kw-reg-card {
+  background: white;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  overflow: hidden;
+}
+
+.kw-reg-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.kw-reg-icon {
+  font-size: 2.5rem;
+  color: var(--color-theme-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.kw-reg-subtitle {
+  color: var(--color-theme-three);
+  font-weight: var(--font-weight-bold);
+  margin-top: var(--space-6);
+  font-size: 1.25rem;
+}
+
+.kw-reg-hint {
+  font-style: italic;
+  color: var(--color-text-muted);
+  border-left: 3px solid var(--color-theme-secondary);
+  padding-left: var(--space-4);
+  margin: var(--space-6) 0;
+}
+
+.kw-reg-bg {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
+
+.kw-reg-bg h2, .kw-reg-bg h3, .kw-reg-bg p {
+  color: white;
+}
+
+.kw-reg-cta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--color-theme-primary), var(--color-theme-three));
+  color: white;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--border-radius-pill);
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  transition: all var(--transition-base);
+  border: none;
+  cursor: pointer;
+}
+
+.kw-reg-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(139, 0, 0, 0.3);
+  color: white;
+}
+
+.kw-reg-paragraph {
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.kw-reg-ul {
+  padding-left: var(--space-6);
+}
+
+.kw-reg-ul li {
+  margin-bottom: var(--space-3);
+  position: relative;
+}
+
+.kw-reg-ul li:before {
+  content: "●";
+  color: var(--color-theme-secondary);
+  font-weight: bold;
+  position: absolute;
+  left: -18px;
+  top: 0;
+}
+
+.kw-reg-eyebrow {
+  display: inline-block;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-theme-three);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-heading);
+  margin-bottom: var(--space-3);
+}
+
+</style>
+
+<div class="kw-reg-outer-container">
+
+  <!-- SEKCJA 1: HERO -->
+  <section class="kw-reg-section kw-reg-bg text-center py-5">
+    <div class="container">
+      <span class="kw-reg-eyebrow">Warunki użytkowania</span>
+      <h1 class="display-4 fw-bold">Regulamin Sklepu Internetowego</h1>
+      <p class="lead">Zapoznaj się z zasadami korzystania ze sklepu KEDAR-WIHA.pl. Gwarantujemy przejrzystość, bezpieczeństwo i zgodność z polskim prawem.</p>
+      <a href="#regulamin" class="kw-reg-cta-btn mt-4">Przejdź do regulaminu</a>
+    </div>
+  </section>
+
+  <!-- SEKCJA 2: Główne postanowienia -->
+  <section id="regulamin" class="kw-reg-section">
+    <div class="container">
+      <div class="kw-reg-section-header text-center">
+        <h2>Postanowienia ogólne</h2>
+        <p class="kw-reg-paragraph">Niniejszy regulamin określa zasady i warunki świadczenia usług drogą elektroniczną przez Administratora Serwisu.</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div class="kw-reg-card p-4">
+            <div class="text-center">
+              <i class="fas fa-file-contract kw-reg-icon"></i>
+              <h3>Podmiot świadczący usługę</h3>
+            </div>
+            <p class="kw-reg-paragraph">
+              Administratorem sklepu internetowego KEDAR-WIHA.pl jest firma specjalizująca się w dystrybucji narzędzi specjalistycznych WIHA. Naszym celem jest dostarczanie produktów najwyższej jakości oraz pełne wsparcie techniczne.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <div class="kw-reg-card p-4">
+            <div class="text-center">
+              <i class="fas fa-shopping-cart kw-reg-icon"></i>
+              <h3>Zakupy w sklepie</h3>
+            </div>
+            <p class="kw-reg-paragraph">
+              Każdy zakup w sklepie KEDAR-WIHA.pl odbywa się zgodnie z niniejszym regulaminem. Użytkownik podejmuje decyzję zakupową po zapoznaniu się z opisem produktu, ceną oraz warunkami dostawy i zwrotu.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEKCJA 3: Prawa konsumenta -->
+  <section class="kw-reg-section bg-light">
+    <div class="container">
+      <div class="kw-reg-section-header text-center">
+        <h2>Prawa konsumenta</h2>
+        <p class="kw-reg-paragraph">Jako klient masz szereg uprawnień, które chronią Cię podczas zakupów online.</p>
+      </div>
+      <div class="kw-reg-card p-4">
+        <h3 class="kw-reg-subtitle">Prawo odstąpienia od umowy</h3>
+        <p class="kw-reg-paragraph">
+          Konsumentowi przysługuje prawo do odstąpienia od umowy w ciągu 14 dni bez podania przyczyny. Zwrot pieniędzy następuje w ciągu 14 dni od otrzymania informacji o odstąpieniu od umowy.
+        </p>
+        <ul class="kw-reg-ul">
+          <li>Produkt musi być nieuszkodzony i w oryginalnym opakowaniu.</li>
+          <li>Klient ponosi koszty zwrotu towaru, chyba że produkt był wadliwy.</li>
+          <li>Nie można złożyć reklamacji na uszkodzenia mechaniczne wynikające z niewłaściwego użytkowania.</li>
+        </ul>
+        <div class="kw-reg-hint">
+          <strong>Wskazówka:</strong> Zalecamy zwracać produkty w oryginalnym opakowaniu z dodatkowym pakowaniem ochronnym.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEKCJA 4: Dane kontaktowe i zakończenie -->
+  <section class="kw-reg-section">
+    <div class="container text-center">
+      <h2>Dane kontaktowe</h2>
+      <p class="kw-reg-paragraph">Jeśli masz pytania dotyczące regulaminu lub zakupów, skontaktuj się z nami:</p>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="kw-reg-card p-4">
+            <i class="fas fa-phone kw-reg-icon"></i>
+            <h4>Telefon</h4>
+            <p class="fw-bold">+48 575 838 766</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="kw-reg-card p-4">
+            <i class="fas fa-envelope kw-reg-icon"></i>
+            <h4>E-mail</h4>
+            <p class="fw-bold">info@kedar-wiha.pl</p>
+          </div>
+        </div>
+      </div>
+      <p class="mt-4">
+        <a href="/" class="kw-reg-cta-btn">Powrót do sklepu</a>
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<!-- FontAwesome 5 Free CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
