@@ -1,0 +1,18 @@
+-- Insert Code HTML to HEAD/FOOTER — Installation SQL
+--
+-- This module uses the ps_configuration table directly via Db::execute()
+-- with canonical single-quoted SQL. No custom database tables required.
+--
+-- Configuration keys (v1.1.0+):
+--   ICHF_HEAD_CODE   - Custom HTML/JS/CSS for the <head> section
+--   ICHF_FOOTER_CODE - Custom HTML/JS/CSS for before </body>
+--
+-- Legacy keys (auto-migrated on install from v1.0.0):
+--   INSERTCODE_HEAD
+--   INSERTCODE_FOOTER
+--
+-- v1.1.4 fixes the v1.1.3 regression where Db::update() with LIMIT 1
+-- parameter triggered "Syntax error near 'LIMIT 1' at line 5" under
+-- the PrestaShop 9 Doctrine wrapper. v1.1.4 uses Db::execute() with
+-- canonical single-quoted SQL and NO LIMIT clauses (id_configuration
+-- is a primary key, so LIMIT 1 was redundant).

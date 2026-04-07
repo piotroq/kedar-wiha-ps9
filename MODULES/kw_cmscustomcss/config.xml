@@ -2,7 +2,7 @@
 <module>
     <name>kw_cmscustomcss</name>
     <displayName><![CDATA[KW CMS Custom CSS]]></displayName>
-    <version><![CDATA[1.1.1]]></version>
+    <version><![CDATA[2.0.1]]></version>
     <description><![CDATA[Pozwala na dodanie niestandardowego CSS per strona CMS. CSS jest wstrzykiwany do <head> tylko na tej konkretnej stronie.]]></description>
     <author><![CDATA[KEDAR-WIHA.pl]]></author>
     <tab><![CDATA[front_office_features]]></tab>

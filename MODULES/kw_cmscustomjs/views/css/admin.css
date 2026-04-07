@@ -1,0 +1,184 @@
+/**
+ * KEDAR-WIHA.pl — kw_cmscustomjs :: Admin Styles
+ * Akcent: amber/yellow (#D4A017) — odróżnienie od kw_cmscustomcss (crimson).
+ * @version 1.0.0
+ */
+
+/* === PANELS === */
+.kwjs-panel-form .panel-heading {
+    background-color: #D4A017;
+    color: #1a1a1a;
+    border-color: #b8890f;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.kwjs-panel-form .panel-heading i { color: #1a1a1a; }
+
+.kwjs-panel-list .panel-heading .badge {
+    background-color: #D4A017;
+    color: #1a1a1a;
+    margin-left: 8px;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+/* === JS EDITOR === */
+.kwjs-editor-wrapper {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+}
+
+.kwjs-editor-wrapper:focus-within {
+    border-color: #D4A017;
+    box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.15);
+}
+
+.kwjs-editor-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    background: #2a2a2a;
+    border-bottom: 1px solid #444;
+    font-size: 12px;
+}
+
+.kwjs-label {
+    font-weight: 700;
+    color: #D4A017;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.kwjs-label i { margin-right: 4px; }
+
+.kwjs-counter {
+    color: #888;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+}
+
+.kwjs-counter.kwjs-warning { color: #e67e22; font-weight: 700; }
+.kwjs-counter.kwjs-danger  { color: #e74c3c; font-weight: 700; }
+
+.kwjs-textarea {
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #e0e0e0;
+    background-color: #1e1e1e;
+    border: none;
+    border-radius: 0;
+    padding: 16px;
+    resize: vertical;
+    min-height: 300px;
+    tab-size: 2;
+    -moz-tab-size: 2;
+}
+
+.kwjs-textarea:focus {
+    background-color: #1a1a1a;
+    box-shadow: none;
+    outline: none;
+    color: #f0f0f0;
+}
+
+.kwjs-textarea::placeholder {
+    color: #555;
+    font-style: italic;
+}
+
+/* === SELECT === */
+.kwjs-cms-select { max-width: 500px; font-size: 14px; }
+.kwjs-cms-select option.kwjs-cms-inactive { color: #999; font-style: italic; }
+
+/* === TABLE === */
+.kwjs-table thead th {
+    background-color: #f8f8f8;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #555;
+    border-bottom: 2px solid #ddd;
+    white-space: nowrap;
+}
+
+.kwjs-table tbody td { vertical-align: middle; font-size: 13px; }
+.kwjs-table .badge { font-size: 12px; padding: 3px 8px; background-color: #555; font-weight: 600; }
+.kwjs-size { font-family: 'Courier New', Courier, monospace; font-size: 12px; }
+.kwjs-delete-btn { color: #c0392b; }
+.kwjs-delete-btn:hover { color: #fff; background-color: #c0392b; border-color: #a93226; }
+
+/* === REFERENCE PANEL === */
+.kwjs-collapsible { cursor: pointer; user-select: none; transition: background-color 0.2s ease; }
+.kwjs-collapsible:hover { background-color: #f0f0f0; }
+
+.kwjs-code-block {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border-left: 3px solid #D4A017;
+}
+
+.kwjs-panel-reference h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #D4A017;
+}
+
+/* === FOOTER === */
+.kwjs-module-footer {
+    padding: 12px;
+    background: #f8f8f8;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 4px 4px;
+    margin-top: 10px;
+}
+
+/* === SAVE BUTTON === */
+#kwjs-save-btn {
+    background-color: #D4A017;
+    color: #1a1a1a;
+    border-color: #b8890f;
+    font-weight: 600;
+    padding: 8px 24px;
+    transition: all 0.2s ease;
+}
+
+#kwjs-save-btn:hover,
+#kwjs-save-btn:focus {
+    background-color: #e6b422;
+    border-color: #D4A017;
+    color: #1a1a1a;
+}
+
+#kwjs-save-btn .process-icon-save { color: #1a1a1a; }
+#kwjs-load-btn { margin-top: 6px; }
+
+/* === RESPONSIVE === */
+@media (max-width: 991px) {
+    .kwjs-textarea { min-height: 200px; font-size: 12px; }
+    .kwjs-editor-toolbar { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+
+@media (max-width: 767px) {
+    .kwjs-table { font-size: 12px; }
+    .kwjs-table .btn-sm { padding: 2px 6px; font-size: 11px; }
+}
