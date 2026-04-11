@@ -1,0 +1,1106 @@
+<!-- ==========================================================================
+KEDAR-WIHA.pl — Strona "Reklamacje Produktów" (Complaints/Returns)
+PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 5.3.x
+Wersja: 1.0.0 | 2026
+Gotowe do wklejenia: Wygląd > Strony > Reklamacje produktów > Zawartość
+Namespace: .kw-recl- (unikanie kolizji z innymi stronami)
+SEO-optimized | Mobile-first | AOS.js animations
+========================================================================== -->
+
+<!-- ======================================================================
+META TAGI SEO
+====================================================================== -->
+<!-- 
+Title: Reklamacje Produktów — Procedura i Prawa Konsumenta | KEDAR-WIHA.pl
+Meta Description: Procedura reklamacyjna KEDAR-WIHA.pl. Jakie masz prawa jako konsument? Jak zgłosić reklamację narzędzi WIHA? Czas realizacji 14 dni. Pełna zgodność z prawem konsumenckim.
+Keywords: reklamacje, zwroty, prawa konsumenta, rękojmia, niezgodność towaru z umową, gwarancja WIHA, procedura reklamacyjna, KEDAR-WIHA
+-->
+
+<!-- ======================================================================
+SCHEMA.ORG JSON-LD
+====================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Reklamacje Produktów — KEDAR-WIHA.pl",
+  "description": "Procedura reklamacyjna sklepu KEDAR-WIHA.pl. Prawa konsumenta, rękojmia, gwarancja producenta WIHA. Czas realizacji 14 dni.",
+  "url": "https://kedar-wiha.pl/reklamacje-produktow",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "KEDAR-WIHA.pl",
+    "telephone": "+48575838766",
+    "email": "info@kedar-wiha.pl",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "PL"
+    }
+  }
+}
+</script>
+
+<!-- ======================================================================
+STYLE CSS
+====================================================================== -->
+<style>
+/* ── SCOPE & VARIABLES ────────────────────────────────────────────────── */
+.kw-recl {
+  --kw-primary: #8B0000;
+  --kw-primary-dark: #6b0000;
+  --kw-secondary: #0056A3;
+  --kw-secondary-dark: #003d7a;
+  --kw-three: #ca0000;
+  --kw-accent: #FFD700;
+  --kw-green: #1A7A3C;
+  --kw-heading: #2D2D2D;
+  --kw-text: #151515;
+  --kw-text-muted: #555555;
+  --kw-text-tertiary: #888888;
+  --kw-bg-light: #f5f5f5;
+  --kw-bg-alt: #f1f1f1;
+  --kw-bg-dark: #1a1a1a;
+  --kw-white: #ffffff;
+  --kw-border: #e8e8e8;
+  --kw-font-heading: 'Montserrat', 'Manrope', Arial, sans-serif;
+  --kw-font-body: 'Inter', 'Manrope', Arial, sans-serif;
+  --kw-radius-sm: 3px;
+  --kw-radius-md: 4px;
+  --kw-radius-lg: 8px;
+  --kw-shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --kw-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --kw-shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --kw-shadow-lg: 0 8px 28px rgba(0,0,0,0.13);
+  --kw-transition: 300ms cubic-bezier(0.25,0.46,0.45,0.94);
+  
+  font-family: var(--kw-font-body);
+  color: var(--kw-text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+.kw-recl *, .kw-recl *::before, .kw-recl *::after { 
+  box-sizing: border-box; 
+}
+
+.kw-recl img { 
+  max-width: 100%; 
+  height: auto; 
+}
+
+/* ── KEYFRAMES ────────────────────────────────────────────────────────── */
+@keyframes kwReclFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes kwReclSlideRight {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kw-recl * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── SECTION BASE ─────────────────────────────────────────────────────── */
+.kw-recl__section {
+  padding: 48px 0;
+  position: relative;
+}
+
+.kw-recl__section--alt {
+  background: var(--kw-bg-light);
+}
+
+.kw-recl__section--dark {
+  background: linear-gradient(155deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: var(--kw-white);
+}
+
+.kw-recl__section--dark p,
+.kw-recl__section--dark li {
+  color: rgba(255,255,255,0.82);
+}
+
+.kw-recl__section--pattern { 
+  position: relative; 
+}
+
+.kw-recl__section--pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg, 
+    transparent, 
+    transparent 22px, 
+    rgba(139,0,0,0.02) 22px, 
+    rgba(139,0,0,0.02) 23px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.kw-recl__section--pattern > .container { 
+  position: relative; 
+  z-index: 1; 
+}
+
+/* ── HEADER ───────────────────────────────────────────────────────────── */
+.kw-recl__header { 
+  text-align: center; 
+  margin-bottom: 32px; 
+}
+
+.kw-recl__label {
+  display: inline-block;
+  font-family: var(--kw-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--kw-primary);
+  background: rgba(139,0,0,0.06);
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+
+.kw-recl__section--dark .kw-recl__label {
+  color: var(--kw-accent);
+  background: rgba(255,215,0,0.1);
+}
+
+.kw-recl__title {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(22px, 3.5vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--kw-heading);
+  margin: 0 0 12px;
+}
+
+.kw-recl__section--dark .kw-recl__title { 
+  color: var(--kw-white); 
+}
+
+.kw-recl__divider {
+  width: 48px;
+  height: 3px;
+  background: var(--kw-primary);
+  border: none;
+  border-radius: 2px;
+  margin: 14px auto;
+}
+
+.kw-recl__subtitle {
+  font-family: var(--kw-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.65;
+  color: var(--kw-text-muted);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.kw-recl__section--dark .kw-recl__subtitle { 
+  color: rgba(255,255,255,0.65); 
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+1. HERO SECTION
+══════════════════════════════════════════════════════════════════════════ */
+.kw-recl__hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg, 
+    rgba(26,26,26,0.94) 0%, 
+    rgba(61,0,0,0.90) 55%, 
+    rgba(139,0,0,0.84) 100%
+  ),
+  url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1600&q=80') center/cover no-repeat;
+  padding: 52px 16px;
+  text-align: center;
+  overflow: hidden;
+}
+
+@supports (background-attachment: fixed) {
+  @media (min-width: 768px) {
+    .kw-recl__hero { 
+      background-attachment: scroll, fixed; 
+    }
+  }
+}
+
+.kw-recl__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    35deg, 
+    transparent, 
+    transparent 36px, 
+    rgba(255,255,255,0.018) 36px, 
+    rgba(255,255,255,0.018) 37px
+  );
+  pointer-events: none;
+}
+
+.kw-recl__hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  animation: kwReclFadeUp 0.75s ease both;
+}
+
+.kw-recl__hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--kw-font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--kw-accent);
+  background: rgba(255,215,0,0.1);
+  border: 1px solid rgba(255,215,0,0.22);
+  padding: 5px 16px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+}
+
+.kw-recl__hero-badge i { 
+  font-size: 11px; 
+}
+
+.kw-recl__hero-title {
+  font-family: var(--kw-font-heading);
+  font-weight: 800;
+  font-size: clamp(24px, 5vw, 48px);
+  line-height: 1.12;
+  color: var(--kw-white);
+  margin: 0 0 14px;
+}
+
+.kw-recl__hero-title em { 
+  font-style: normal; 
+  color: var(--kw-three); 
+}
+
+.kw-recl__hero-sub {
+  font-family: var(--kw-font-body);
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.7;
+  color: rgba(255,255,255,0.82);
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.kw-recl__hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--kw-white);
+  background: var(--kw-primary);
+  border: 2px solid var(--kw-primary);
+  padding: 13px 28px;
+  border-radius: var(--kw-radius-md);
+  text-decoration: none;
+  min-height: 48px;
+  transition: all var(--kw-transition);
+  box-shadow: 0 4px 20px rgba(139,0,0,0.30);
+}
+
+.kw-recl__hero-cta:hover {
+  background: var(--kw-three);
+  border-color: var(--kw-three);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(202,0,0,0.4);
+  color: var(--kw-white);
+  text-decoration: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+2. LEGAL BASIS & CONSUMER RIGHTS
+══════════════════════════════════════════════════════════════════════════ */
+.kw-recl__rights-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.kw-recl__rights-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--kw-white);
+  border: 1px solid var(--kw-border);
+  border-left: 4px solid var(--kw-primary);
+  border-radius: 0 var(--kw-radius-lg) var(--kw-radius-lg) 0;
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-xs);
+}
+
+.kw-recl__rights-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--kw-shadow-lg);
+  border-left-color: var(--kw-three);
+}
+
+.kw-recl__rights-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(139,0,0,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--kw-primary);
+  transition: all var(--kw-transition);
+}
+
+.kw-recl__rights-card:hover .kw-recl__rights-icon {
+  background: var(--kw-primary);
+  color: var(--kw-white);
+}
+
+.kw-recl__rights-body h3 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: var(--kw-heading);
+  margin: 0 0 6px;
+}
+
+.kw-recl__rights-body p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--kw-text-muted);
+  margin: 0;
+}
+
+.kw-recl__prose {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.kw-recl__prose h2 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(20px, 2.8vw, 30px);
+  line-height: 1.2;
+  color: var(--kw-heading);
+  margin: 0 0 14px;
+}
+
+.kw-recl__prose p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--kw-text);
+  margin-bottom: 14px;
+}
+
+.kw-recl__prose strong { 
+  color: var(--kw-heading); 
+}
+
+.kw-recl__prose ul {
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+.kw-recl__prose ul li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--kw-text);
+  margin-bottom: 8px;
+}
+
+.kw-recl__prose ul li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 10px;
+  color: var(--kw-green);
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+
+.kw-recl__callout {
+  background: rgba(0,86,163,0.05);
+  border-left: 4px solid var(--kw-secondary);
+  padding: 18px 20px;
+  border-radius: 0 var(--kw-radius-md) var(--kw-radius-md) 0;
+  margin: 20px 0;
+}
+
+.kw-recl__callout p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--kw-heading);
+  line-height: 1.6;
+}
+
+.kw-recl__callout i { 
+  color: var(--kw-secondary); 
+  margin-right: 6px; 
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+3. PROCEDURE STEPS
+══════════════════════════════════════════════════════════════════════════ */
+.kw-recl__steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.kw-recl__step {
+  background: var(--kw-white);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  padding: 24px;
+  box-shadow: var(--kw-shadow-sm);
+  transition: all var(--kw-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.kw-recl__step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--kw-primary);
+  transition: width var(--kw-transition);
+}
+
+.kw-recl__step:hover {
+  box-shadow: var(--kw-shadow-md);
+  transform: translateX(4px);
+}
+
+.kw-recl__step:hover::before {
+  width: 6px;
+}
+
+.kw-recl__step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--kw-primary);
+  color: var(--kw-white);
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 50%;
+  margin-bottom: 14px;
+}
+
+.kw-recl__step h3 {
+  font-family: var(--kw-font-heading);
+  font-weight: 700;
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--kw-heading);
+  margin: 0 0 10px;
+}
+
+.kw-recl__step p,
+.kw-recl__step li {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--kw-text-muted);
+  margin-bottom: 8px;
+}
+
+.kw-recl__step ul {
+  padding-left: 0;
+  list-style: none;
+  margin-top: 10px;
+}
+
+.kw-recl__step ul li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.kw-recl__step ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--kw-primary);
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+4. CONTACT & FAQ
+══════════════════════════════════════════════════════════════════════════ */
+.kw-recl__contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto 32px;
+}
+
+.kw-recl__contact-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px 20px;
+  background: var(--kw-white);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-xs);
+  text-decoration: none;
+  color: var(--kw-text);
+}
+
+.kw-recl__contact-card:hover {
+  box-shadow: var(--kw-shadow-md);
+  border-color: var(--kw-secondary);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--kw-text);
+}
+
+.kw-recl__contact-card-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--kw-radius-md);
+  background: rgba(0,86,163,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--kw-secondary);
+  transition: all var(--kw-transition);
+}
+
+.kw-recl__contact-card:hover .kw-recl__contact-card-icon {
+  background: var(--kw-secondary);
+  color: var(--kw-white);
+}
+
+.kw-recl__contact-card strong {
+  display: block;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--kw-heading);
+}
+
+.kw-recl__contact-card span {
+  font-size: 13px;
+  color: var(--kw-text-muted);
+}
+
+.kw-recl__faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.kw-recl__faq-item {
+  background: var(--kw-white);
+  border: 1px solid var(--kw-border);
+  border-radius: var(--kw-radius-lg);
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: all var(--kw-transition);
+  box-shadow: var(--kw-shadow-xs);
+}
+
+.kw-recl__faq-item:hover {
+  box-shadow: var(--kw-shadow-md);
+  border-color: var(--kw-primary);
+}
+
+.kw-recl__faq-item[open] {
+  border-color: var(--kw-primary);
+  box-shadow: var(--kw-shadow-md);
+}
+
+.kw-recl__faq-item summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  font-family: var(--kw-font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--kw-heading);
+  cursor: pointer;
+  list-style: none;
+  min-height: 48px;
+  transition: color var(--kw-transition);
+}
+
+.kw-recl__faq-item summary::-webkit-details-marker { 
+  display: none; 
+}
+
+.kw-recl__faq-item summary::before {
+  content: '\f105';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--kw-primary);
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  transition: transform var(--kw-transition);
+}
+
+.kw-recl__faq-item[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.kw-recl__faq-item summary:hover { 
+  color: var(--kw-primary); 
+}
+
+.kw-recl__faq-answer {
+  padding: 0 20px 16px 50px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--kw-text-muted);
+  animation: kwReclFadeUp 0.3s ease both;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+MEDIA QUERIES — MOBILE-FIRST
+══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 576px) {
+  .kw-recl__rights-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+  
+  .kw-recl__steps { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+  
+  .kw-recl__contact-grid { 
+    grid-template-columns: repeat(3, 1fr); 
+    max-width: 100%; 
+  }
+}
+
+@media (min-width: 768px) {
+  .kw-recl__section { 
+    padding: 64px 0; 
+  }
+  
+  .kw-recl__hero { 
+    min-height: 420px; 
+    padding: 72px 24px; 
+  }
+  
+  .kw-recl__header { 
+    margin-bottom: 40px; 
+  }
+}
+
+@media (min-width: 1024px) {
+  .kw-recl__section { 
+    padding: 80px 0; 
+  }
+  
+  .kw-recl__hero { 
+    min-height: 480px; 
+    padding: 88px 32px; 
+  }
+  
+  .kw-recl__rights-grid { 
+    grid-template-columns: repeat(3, 1fr); 
+  }
+  
+  .kw-recl__steps { 
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
+
+@media (min-width: 1440px) {
+  .kw-recl__section { 
+    padding: 96px 0; 
+  }
+}
+</style>
+
+<!-- ======================================================================
+HTML CONTENT
+====================================================================== -->
+<div class="kw-recl">
+
+  <!-- ═════════════════════════════════════════════════════════════════
+  1. HERO SECTION
+  ═════════════════════════════════════════════════════════════════ -->
+  <section class="kw-recl__hero" aria-label="Reklamacje produktów KEDAR-WIHA.pl">
+    <div class="kw-recl__hero-inner">
+      <span class="kw-recl__hero-badge">
+        <i class="fas fa-shield-alt"></i> Prawa Konsumenta
+      </span>
+      <h1 class="kw-recl__hero-title">
+        Reklamacje Produktów <em>KEDAR&#8209;WIHA.pl</em>
+      </h1>
+      <p class="kw-recl__hero-sub">
+        Jako autoryzowany dystrybutor profesjonalnych narzędzi WIHA w Polsce, 
+        zapewniajemy pełną ochronę praw konsumenta. Każda reklamacja jest 
+        rozpatrywana z najwyższą starannością w terminie 14 dni.
+      </p>
+      <a href="#procedura" class="kw-recl__hero-cta" aria-label="Poznaj procedurę reklamacyjną">
+        <i class="fas fa-clipboard-list"></i> Poznaj procedurę
+      </a>
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════════════════════════════════════
+  2. LEGAL BASIS & CONSUMER RIGHTS
+  ═════════════════════════════════════════════════════════════════ -->
+  <section class="kw-recl__section kw-recl__section--pattern" aria-label="Podstawa prawna reklamacji">
+    <div class="container">
+      <div class="kw-recl__header">
+        <span class="kw-recl__label">Podstawa prawna</span>
+        <h2 class="kw-recl__title">Twoje Prawa Jako Konsumenta</h2>
+        <hr class="kw-recl__divider" />
+        <p class="kw-recl__subtitle">
+          Reklamacje produktów w sklepie KEDAR-WIHA.pl rozpatrywane są zgodnie 
+          z polskim prawem konsumenckim i unijnymi dyrektywami ochronnymi.
+        </p>
+      </div>
+
+      <div class="kw-recl__rights-grid">
+        <!-- Consumer Rights Act -->
+        <article class="kw-recl__rights-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="kw-recl__rights-icon">
+            <i class="fas fa-gavel"></i>
+          </div>
+          <div class="kw-recl__rights-body">
+            <h3>Prawo Konsumenckie</h3>
+            <p>
+              Działamy zgodnie z <strong>Ustawą z dnia 30 maja 2014 r. o prawach konsumenta</strong> 
+              (Rozdział 5a — brak zgodności towaru z umową) oraz 
+              <strong>Ustawą z dnia 16 lutego 2007 r. o ochronie konkurencji i konsumentów</strong>.
+            </p>
+          </div>
+        </article>
+
+        <!-- Civil Code -->
+        <article class="kw-recl__rights-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="kw-recl__rights-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="kw-recl__rights-body">
+            <h3>Kodeks Cywilny</h3>
+            <p>
+              Dla przedsiębiorców stosujemy przepisy 
+              <strong>Kodeksu cywilnego (art. 556–576 — rękojmia)</strong>, 
+              zapewniając kompleksową ochronę zakupów narzędzi specjalistycznych.
+            </p>
+          </div>
+        </article>
+
+        <!-- Warranty Period -->
+        <article class="kw-recl__rights-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="kw-recl__rights-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <div class="kw-recl__rights-body">
+            <h3>2 Lata Odpowiedzialności</h3>
+            <p>
+              Sprzedawca odpowiada za brak zgodności towaru z umową przez okres 
+              <strong>2 lat od dnia dostarczenia towaru</strong>. 
+              Masz pełne prawo do naprawy, wymiany, obniżenia ceny lub odstąpienia od umowy.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="kw-recl__prose" style="margin-top: 40px;">
+        <h2>Brak Zgodności Towaru z Umową — Twoje Uprawnienia</h2>
+        <p>
+          Jako konsument zakupujący profesjonalne narzędzia WIHA w sklepie KEDAR-WIHA.pl, 
+          jesteś chroniony przez przepisy prawa konsumenckiego. Jeśli stwierdzisz, 
+          że zakupione narzędzia — wkrętaki izolowane VDE, klucze dynamometryczne 
+          lub zestawy narzędzi — nie są zgodne z umową, przysługują Ci konkretne 
+          uprawnienia, które możesz skutecznie egzekwować.
+        </p>
+        <p>
+          W przypadku stwierdzenia niezgodności towaru z umową, masz prawo żądać:
+        </p>
+        <ul>
+          <li><strong>Naprawy towaru</strong> — bezpłatnej naprawy wadliwego narzędzia 
+              w autoryzowanym serwisie WIHA</li>
+          <li><strong>Wymiany towaru na nowy</strong> — wymiany na nowy, wolny od wad 
+              produkt tej samej marki i modelu</li>
+          <li><strong>Obniżenia ceny</strong> — proporcjonalnego obniżenia ceny, 
+              jeśli naprawa i wymiana są niemożliwe lub nadmiernie kosztowne</li>
+          <li><strong>Odstąpienia od umowy</strong> — jeśli brak zgodności jest istotny 
+              i uniemożliwia korzystanie z narzędzia zgodnie z przeznaczeniem</li>
+        </ul>
+        <div class="kw-recl__callout">
+          <p>
+            <i class="fas fa-info-circle"></i>
+            <strong>Wažna informacja:</strong> Narzędzia WIHA objęte są również 
+            dodatkową gwarancją producenta (WIHA Werkzeuge GmbH). Skorzystanie 
+            z gwarancji producenta nie wyłącza ani nie ogranicza Twoich uprawnień 
+            z tytułu braku zgodności towaru z umową wobec sprzedawcy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════════════════════════════════════
+  3. PROCEDURE STEPS
+  ═════════════════════════════════════════════════════════════════ -->
+  <section class="kw-recl__section kw-recl__section--alt" id="procedura" aria-label="Procedura reklamacyjna krok po kroku">
+    <div class="container">
+      <div class="kw-recl__header">
+        <span class="kw-recl__label">Procedura krok po kroku</span>
+        <h2 class="kw-recl__title">Jak Złożyć Reklamację?</h2>
+        <hr class="kw-recl__divider" />
+        <p class="kw-recl__subtitle">
+          Proces reklamacyjny w KEDAR-WIHA.pl jest prosty i przejrzysty. 
+          Poniżej znajdziesz szczegółową instrukcję krok po kroku.
+        </p>
+      </div>
+
+      <div class="kw-recl__steps">
+        <!-- Step 1 -->
+        <div class="kw-recl__step" data-aos="fade-right" data-aos-delay="0">
+          <div class="kw-recl__step-number">1</div>
+          <h3>Skontaktuj się z nami</h3>
+          <p>
+            Reklamację możesz złożyć na trzy wygodne sposoby — wybierz ten, 
+            który najbardziej Ci odpowiada:
+          </p>
+          <ul>
+            <li><strong>E-mail:</strong> info@kedar-wiha.pl</li>
+            <li><strong>Telefon:</strong> +48 575 838 766</li>
+            <li><strong>Listownie:</strong> na adres siedziby firmy</li>
+          </ul>
+          <p style="margin-top: 12px; font-size: 13px; color: var(--kw-text-tertiary);">
+            <i class="fas fa-clock" style="margin-right: 4px;"></i>
+            Godziny pracy: Pon-Pt 8:00-16:00
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="kw-recl__step" data-aos="fade-right" data-aos-delay="100">
+          <div class="kw-recl__step-number">2</div>
+          <h3>Przygotuj dokumentację</h3>
+          <p>Aby reklamacja została rozpatrzona szybko i sprawnie, przygotuj:</p>
+          <ul>
+            <li><strong>Dane kontaktowe:</strong> imię, nazwisko, telefon, e-mail</li>
+            <li><strong>Numer zamówienia</strong> lub kopię dowodu zakupu (paragon/faktura)</li>
+            <li><strong>Opis wady:</strong> szczegółowy opis niezgodności towaru z umową</li>
+            <li><strong>Żądanie:</strong> naprawa, wymiana, obniżenie ceny lub zwrot</li>
+            <li><strong>Zdjęcia:</strong> dokumentujące wadę (jeśli to możliwe)</li>
+          </ul>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="kw-recl__step" data-aos="fade-right" data-aos-delay="200">
+          <div class="kw-recl__step-number">3</div>
+          <h3>Czas realizacji</h3>
+          <p>
+            Sprzedawca rozpatrzy reklamację w terminie 
+            <strong>14 dni kalendarzowych</strong> od dnia jej otrzymania. 
+            Brak odpowiedzi w tym terminie oznacza uznanie reklamacji.
+          </p>
+          <ul>
+            <li><strong>Koszty dostawy:</strong> ponosi sprzedawca</li>
+            <li><strong>Zwrot kosztów:</strong> przy uznanej reklamacji</li>
+            <li><strong>Powiadomienie:</strong> e-mail lub telefon</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="kw-recl__prose" style="margin-top: 48px;">
+        <h2>Co Powinna Zawierać Reklamacja?</h2>
+        <p>
+          Aby proces reklamacyjny przebiegł sprawnie i szybko, Twoja reklamacja 
+          powinna zawierać konkretne informacje. Im bardziej szczegółowo opiszesz 
+          problem, tym szybciej będziemy mogli Ci pomóc i znaleźć optymalne rozwiązanie.
+        </p>
+        <p>
+          <strong>Pełne dane kontaktowe</strong> są niezbędne do komunikacji w trakcie 
+          procesu reklamacyjnego. Podaj numer telefonu i adres e-mail, abyśmy mogli 
+          na bieżąco informować Cię o statusie reklamacji. Jeśli posiadasz numer 
+          zamówienia z naszego sklepu internetowego, koniecznie go podaj — 
+          znacznie przyspieszy to identyfikację transakcji.
+        </p>
+        <p>
+          <strong>Szczegółowy opis wady</strong> jest kluczowy. Opisz dokładnie, 
+          na czym polega niezgodność towaru z umową. Czy narzędzie nie działa 
+          prawidłowo? Czy występują uszkodzenia mechaniczne? Czy izolacja VDE 
+          wykazuje oznaki zużycia? Im więcej szczegółów podasz, tym lepiej 
+          zrozumiemy problem i dobierzemy odpowiednie rozwiązanie.
+        </p>
+        <div class="kw-recl__callout">
+          <p>
+            <i class="fas fa-camera"></i>
+            <strong>Zdjęcia dokumentujące:</strong> Jeśli to możliwe, dołącz zdjęcia 
+            pokazujące wadę. Fotografie znacznie ułatwiają ocenę sytuacji i przyspieszają 
+            proces reklamacyjny.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════════════════════════════════════════
+  4. CONTACT & FAQ
+  ═════════════════════════════════════════════════════════════════ -->
+  <section class="kw-recl__section kw-recl__section--dark" aria-label="Kontakt i najczęściej zadawane pytania">
+    <div class="container">
+      <div class="kw-recl__header">
+        <span class="kw-recl__label">Kontakt i pomoc</span>
+        <h2 class="kw-recl__title">Potrzebujesz Pomocy?</h2>
+        <hr class="kw-recl__divider" style="background: var(--kw-accent);" />
+        <p class="kw-recl__subtitle">
+          Jesteśmy do Twojej dyspozycji. Skontaktuj się z nami w sprawie reklamacji, 
+          pytań o produkty WIHA lub doradztwa technicznego.
+        </p>
+      </div>
+
+      <div class="kw-recl__contact-grid">
+        <a href="tel:+48575838766" class="kw-recl__contact-card" data-aos="zoom-in" data-aos-delay="0">
+          <div class="kw-recl__contact-card-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div>
+            <strong>Telefon</strong>
+            <span>+48 575 838 766</span>
+          </div>
+        </a>
+
+        <a href="mailto:info@kedar-wiha.pl" class="kw-recl__contact-card" data-aos="zoom-in" data-aos-delay="100">
+          <div class="kw-recl__contact-card-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div>
+            <strong>E-mail</strong>
+            <span>info@kedar-wiha.pl</span>
+          </div>
+        </a>
+
+        <a href="https://kedar-wiha.pl" class="kw-recl__contact-card" data-aos="zoom-in" data-aos-delay="200" target="_blank" rel="noopener">
+          <div class="kw-recl__contact-card-icon">
+            <i class="fas fa-globe"></i>
+          </div>
+          <div>
+            <strong>Strona WWW</strong>
+            <span>kedar-wiha.pl</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="kw-recl__faq-list" style="margin-top: 48px;">
+        <h2 style="text-align: center; color: var(--kw-white); margin-bottom: 32px; font-family: var(--kw-font-heading);">
+          Najczęściej Zadawane Pytania
+        </h2>
+
+        <details class="kw-recl__faq-item">
+          <summary>Jak długo trwa rozpatrzenie reklamacji?</summary>
+          <div class="kw-recl__faq-answer">
+            Reklamacje rozpatrujemy w terminie <strong>14 dni kalendarzowych</strong> 
+            od dnia ich otrzymania. Brak odpowiedzi w tym terminie oznacza uznanie 
+            reklamacji. O wyniku reklamacji informujemy niezwłocznie drogą e-mail 
+            lub telefonicznie. W przypadku reklamacji narzędzi WIHA wymagających 
+            ekspertyzy technicznej, proces może być nieco dłuższy, ale zawsze 
+            staramy się działać jak najszybciej.
+          </div>
+        </details>
+
+        <details class="kw-recl__faq-item">
+          <summary>Kto ponosi koszty wysyłki reklamowanego produktu?</summary>
+          <div class="kw-recl__faq-answer">
+            Koszty dostarczenia reklamowanego towaru do sprzedawcy 
+            <strong>ponosi sprzedawca</strong>. Jeśli reklamacja zostanie uznana, 
+            zwracamy również klientowi poniesione koszty odesłania towaru. 
+            Wystarczy, że prześlesz nam potwierdzenie nadania przesyłki, 
+            a my zwrócimy koszty na wskazane konto bankowe.
+          </div>
+        </details>
+
+        <details class="kw-recl__faq-item">
+          <summary>Czy mogę skorzystać z gwarancji producenta WIHA?</summary>
+          <div class="kw-recl__faq-answer">
+            Tak, narzędzia WIHA mogą być objęte dodatkową 
+            <strong>gwarancją producenta</strong> (WIHA Werkzeuge GmbH). 
+            Warunki gwarancji producenta określone są w karcie gwarancyjnej 
+            dołączonej do towaru. Pamiętaj, że skorzystanie z gwarancji producenta 
+            nie wyłącza ani nie ogranicza Twoich uprawnień z tytułu braku zgodności 
+            towaru z umową wobec sprzedawcy. Masz wybór — możesz skorzystać z obu ścieżek.
+          </div>
+        </details>
+
+        <details class="kw-recl__faq-item">
+          <summary>Jakie mam prawa jako konsument?</summary>
+          <div class="kw-recl__faq-answer">
+            Jako konsument masz prawo do: <strong>naprawy towaru</strong>, 
+            <strong>wymiany na nowy</strong>, <strong>obniżenia ceny</strong> 
+            proporcjonalnie do wady lub <strong>odstąpienia od umowy</strong>, 
+            jeśli brak zgodności jest istotny. Sprzedawca odpowiada za brak 
+            zgodności towaru z umową przez okres <strong>2 lat</strong> od dnia 
+            dostarczenia towaru. Te prawa są chronione ustawą o prawach konsumenta.
+          </div>
+        </details>
+
+        <details class="kw-recl__faq-item">
+          <summary>Czy muszę mieć oryginalne opakowanie do reklamacji?</summary>
+          <div class="kw-recl__faq-answer">
+            Nie, <strong>nie musisz posiadać oryginalnego opakowania</strong>, 
+            aby zgłosić reklamację. Ważne jest, abyś miał dowód zakupu (paragon 
+            lub fakturę) lub numer zamówienia. Narzędzie powinno być jednak 
+            odpowiednio zabezpieczone przed uszkodzeniem podczas transportu 
+            do serwisu. Jeśli nie masz oryginalnego opakowania, użyj innego 
+            solidnego opakowania chroniącego narzędzie.
+          </div>
+        </details>
+      </div>
+
+      <div style="text-align: center; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="font-size: 14px; color: rgba(255,255,255,0.65); margin-bottom: 16px;">
+          <strong style="color: var(--kw-white); font-family: var(--kw-font-heading);">
+            KEDAR-WIHA.pl dokłada wszelkich starań, aby każda reklamacja 
+            została rozpatrzona rzetelnie i szybko.
+          </strong>
+        </p>
+        <p style="font-size: 13px; color: rgba(255,255,255,0.45);">
+          Zobowiązujemy się do udzielania odpowiedzi na każde zgłoszenie 
+          w terminie <strong>14 dni roboczych</strong> od jego otrzymania.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- END .kw-recl -->

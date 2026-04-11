@@ -1,0 +1,987 @@
+<!-- ==========================================================================
+  KEDAR-WIHA.pl — Sekcje CTA dla strony głównej (WERSJA KOMPLETNA)
+  PrestaShop 9.0.3 | Motyw Optima 3.3.0 | Bootstrap 5.3.x
+  Wersja: 1.0.0 | 2025
+  Autoryzowany Dystrybutor Narzędzi WIHA — Narzędzia VDE dla Profesjonalistów
+  
+  INSTRUKCJA: Wklej TEN CAŁY KOD do modułu CMS / bloku HTML w panelu admina PrestaShop
+  Kod zawiera zarówno HTML jak i CSS — jest samowystarczalny
+  ========================================================================== -->
+
+<style>
+/* ==========================================================================
+  STYLE CSS — Sekcje CTA KEDAR-WIHA.pl
+  Używają zmiennych z custom-style.css (Bootstrap/Optima theme)
+  ========================================================================== */
+
+/* ==========================================================================
+  SEKCJA 1: HERO CTA BANNER
+  ========================================================================== */
+
+.kedar-hero-cta {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--color-bg-darker, #1a1a1a);
+}
+
+.kedar-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(
+      135deg,
+      rgba(26, 26, 26, 0.95) 0%,
+      rgba(61, 0, 0, 0.90) 50%,
+      rgba(139, 0, 0, 0.85) 100%
+    ),
+    url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: -1;
+}
+
+.kedar-hero-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.02) 10px,
+    rgba(255, 255, 255, 0.02) 20px
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.kedar-hero-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 48px 16px;
+}
+
+.kedar-hero-badge {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.badge-authorized {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #8B0000;
+  color: #ffffff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(139, 0, 0, 0.20);
+}
+
+.badge-authorized i {
+  color: #FFD700;
+  font-size: 14px;
+}
+
+.kedar-hero-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+.kedar-hero-title .highlight {
+  color: #FFD700;
+  display: block;
+  margin-top: 8px;
+}
+
+.kedar-hero-subtitle {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 32px;
+}
+
+.kedar-hero-usp-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+}
+
+.kedar-hero-usp-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.kedar-hero-usp-item i {
+  color: #FFD700;
+  font-size: 18px;
+}
+
+.kedar-hero-cta-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.btn-kedar-primary {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 64px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #8B0000 0%, #ca0000 100%);
+  color: #ffffff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 0;
+  box-shadow: 0 4px 20px rgba(139, 0, 0, 0.35);
+  transition: transform 150ms ease, box-shadow 300ms linear, background-color 300ms linear;
+  width: 100%;
+  max-width: 320px;
+}
+
+.btn-kedar-primary:hover,
+.btn-kedar-primary:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(139, 0, 0, 0.45);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.btn-kedar-primary:focus-visible {
+  outline: 3px solid #FFD700;
+  outline-offset: 3px;
+}
+
+.btn-kedar-primary i {
+  font-size: 20px;
+  color: #FFD700;
+}
+
+.btn-phone-number {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.btn-kedar-secondary {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 56px;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: #ffffff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0;
+  transition: background-color 300ms linear, border-color 300ms linear, transform 150ms ease;
+  width: 100%;
+  max-width: 320px;
+}
+
+.btn-kedar-secondary:hover,
+.btn-kedar-secondary:focus-visible {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.btn-kedar-secondary:focus-visible {
+  outline: 3px solid #FFD700;
+  outline-offset: 3px;
+}
+
+.btn-email-address {
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.kedar-hero-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin: 0;
+}
+
+.kedar-hero-footer i {
+  color: #FFD700;
+}
+
+.kedar-hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 10;
+}
+
+.kedar-hero-wave svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+  SEKCJA 2: WYRÓŻNIONE KATEGORIE PRODUKTÓW
+  ========================================================================== */
+
+.kedar-categories-section {
+  padding: 64px 0;
+  background-color: #f1f1f1;
+}
+
+.kedar-section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.kedar-section-label {
+  display: inline-block;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8B0000;
+  margin-bottom: 12px;
+}
+
+.kedar-section-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #2D2D2D;
+  margin-bottom: 16px;
+}
+
+.kedar-section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #8B0000;
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
+
+.kedar-section-desc {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #555555;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.kedar-category-card {
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  transition: transform 300ms linear, box-shadow 300ms linear;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-left: 0 solid #FFD700;
+}
+
+.kedar-category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-left: 4px solid #FFD700;
+}
+
+.kedar-card-image-wrapper {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background-color: #f6f6f6;
+}
+
+.kedar-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.kedar-category-card:hover .kedar-card-image {
+  transform: scale(1.05);
+}
+
+.kedar-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+.kedar-card-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  z-index: 10;
+}
+
+.badge-vde {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #0056A3;
+  color: #ffffff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.badge-10kv {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, #FFD700 0%, #e6c200 100%);
+  color: #1a1a1a;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.badge-iso {
+  display: inline-flex;
+  align-items: center;
+  background-color: #8B0000;
+  color: #ffffff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.badge-germany {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(90deg, #000 33%, #CC0000 33% 66%, #FFCE00 66%);
+  color: #ffffff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.kedar-card-body {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.kedar-card-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: clamp(15px, 1.8vw, 18px);
+  font-weight: 600;
+  color: #2D2D2D;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.kedar-card-desc {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #555555;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.kedar-card-desc strong {
+  color: #2D2D2D;
+  font-weight: 600;
+}
+
+.kedar-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.kedar-card-features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  color: #555555;
+  margin-bottom: 8px;
+}
+
+.kedar-card-features li i {
+  color: #8B0000;
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
+}
+
+.kedar-card-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 16px;
+  margin-top: auto;
+}
+
+.price-label {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  color: #888888;
+}
+
+.price-value {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #8B0000;
+}
+
+.btn-kedar-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 20px;
+  background-color: #8B0000;
+  color: #ffffff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid #8B0000;
+  border-radius: 0;
+  transition: background-color 300ms linear, border-color 300ms linear, transform 150ms ease, box-shadow 300ms linear;
+  width: 100%;
+}
+
+.btn-kedar-card:hover,
+.btn-kedar-card:focus-visible {
+  background-color: #ca0000;
+  border-color: #ca0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(139, 0, 0, 0.35);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.btn-kedar-card:focus-visible {
+  outline: 3px solid #0056A3;
+  outline-offset: 2px;
+}
+
+.btn-kedar-card i {
+  transition: transform 150ms ease;
+}
+
+.btn-kedar-card:hover i {
+  transform: translateX(4px);
+}
+
+.kedar-trust-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 32px;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-top: 32px;
+}
+
+.kedar-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555555;
+}
+
+.kedar-trust-item i {
+  color: #8B0000;
+  font-size: 18px;
+}
+
+/* ==========================================================================
+  RESPONSIVE — TABLET (min-width: 768px)
+  ========================================================================== */
+@media (min-width: 768px) {
+  .kedar-hero-content {
+    padding: 64px 24px;
+  }
+  
+  .kedar-hero-cta-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .btn-kedar-primary,
+  .btn-kedar-secondary {
+    width: auto;
+    min-width: 280px;
+  }
+  
+  .kedar-categories-section {
+    padding: 80px 0;
+  }
+}
+
+/* ==========================================================================
+  RESPONSIVE — DESKTOP (min-width: 1024px)
+  ========================================================================== */
+@media (min-width: 1024px) {
+  .kedar-hero-cta {
+    min-height: 700px;
+  }
+  
+  .kedar-hero-content {
+    padding: 80px 32px;
+  }
+  
+  .kedar-hero-usp-list {
+    gap: 24px 40px;
+  }
+  
+  .kedar-card-body {
+    padding: 32px;
+  }
+}
+
+/* ==========================================================================
+  RESPONSIVE — LARGE DESKTOP (min-width: 1440px)
+  ========================================================================== */
+@media (min-width: 1440px) {
+  .kedar-hero-content {
+    padding: 96px 32px;
+  }
+}
+
+/* ==========================================================================
+  REDUCED MOTION
+  ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .kedar-hero-bg {
+    background-attachment: scroll;
+  }
+  
+  .kedar-category-card,
+  .kedar-card-image,
+  .btn-kedar-primary,
+  .btn-kedar-secondary,
+  .btn-kedar-card {
+    transition: none;
+  }
+  
+  .kedar-category-card:hover {
+    transform: none;
+  }
+  
+  .kedar-card-image {
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+  HIGH CONTRAST MODE
+  ========================================================================== */
+@media (prefers-contrast: high) {
+  .kedar-hero-title {
+    text-shadow: none;
+  }
+  
+  .btn-kedar-primary,
+  .btn-kedar-secondary,
+  .btn-kedar-card {
+    border-width: 3px;
+  }
+  
+  .kedar-category-card {
+    border: 2px solid #cccccc;
+  }
+  
+  .kedar-category-card:hover {
+    border-left-width: 6px;
+  }
+}
+</style>
+
+<!-- ==========================================================================
+  SEKCJA 1: HERO CTA BANNER
+  ========================================================================== -->
+<section class="kedar-hero-cta" aria-label="Sekcja powitalna - skontaktuj się z ekspertem WIHA">
+  <div class="kedar-hero-bg" role="img" aria-label="Profesjonalny elektryk pracujący z narzędziami WIHA"></div>
+  <div class="kedar-hero-pattern" aria-hidden="true"></div>
+  
+  <div class="kedar-hero-content">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8">
+          
+          <div class="kedar-hero-badge" data-aos="fade-down" data-aos-duration="600" data-aos-delay="100">
+            <span class="badge-authorized">
+              <i class="fa-solid fa-shield-check" aria-hidden="true"></i>
+              Autoryzowany Dystrybutor WIHA w Polsce
+            </span>
+          </div>
+          
+          <h1 class="kedar-hero-title" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+            Narzędzia Izolowane VDE — <span class="highlight">Bezpieczeństwo Potwierdzone Testem 10&nbsp;000&nbsp;V</span>
+          </h1>
+          
+          <p class="kedar-hero-subtitle" data-aos="fade-up" data-aos-duration="700" data-aos-delay="300">
+            Jako autoryzowany dystrybutor narzędzi WIHA dostarczamy oryginalne, certyfikowane 
+            narzędzia izolowane VDE z gwarancją producenta. Każde narzędzie testowane indywidualnie 
+            napięciem 10&nbsp;000&nbsp;V — dziesięciokrotna rezerwa bezpieczeństwa ponad normę IEC&nbsp;60900. 
+            Made in Germany od 1939 roku. Certyfikaty VDE-GS, IEC&nbsp;60900, ASTM&nbsp;F1505.
+          </p>
+          
+          <ul class="kedar-hero-usp-list" data-aos="fade-up" data-aos-duration="700" data-aos-delay="400">
+            <li class="kedar-hero-usp-item">
+              <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+              <span>Test 10 000 V każda sztuka</span>
+            </li>
+            <li class="kedar-hero-usp-item">
+              <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+              <span>Certyfikaty VDE-GS, IEC 60900</span>
+            </li>
+            <li class="kedar-hero-usp-item">
+              <i class="fa-solid fa-industry" aria-hidden="true"></i>
+              <span>Made in Germany od 1939</span>
+            </li>
+            <li class="kedar-hero-usp-item">
+              <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+              <span>Certyfikat ergonomii AGR</span>
+            </li>
+          </ul>
+          
+          <div class="kedar-hero-cta-buttons" data-aos="fade-up" data-aos-duration="700" data-aos-delay="500">
+            <a href="tel:+48575838766" 
+               class="btn btn-kedar-primary" 
+               role="button"
+               aria-label="Zadzwoń do eksperta KEDAR-WIHA pod numer +48 575 838 766">
+              <i class="fa-solid fa-phone" aria-hidden="true"></i>
+              <span>Zadzwoń do eksperta</span>
+              <span class="btn-phone-number">+48 575 838 766</span>
+            </a>
+            
+            <a href="mailto:info@kedar-wiha.pl" 
+               class="btn btn-kedar-secondary" 
+               role="button"
+               aria-label="Napisz wiadomość e-mail do info@kedar-wiha.pl">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <span>Napisz do nas</span>
+              <span class="btn-email-address">info@kedar-wiha.pl</span>
+            </a>
+          </div>
+          
+          <p class="kedar-hero-footer" data-aos="fade-up" data-aos-duration="700" data-aos-delay="600">
+            <i class="fa-solid fa-headset" aria-hidden="true"></i>
+            Doradztwo techniczne · Wyceny B2B · Szybka wysyłka · Gwarancja producenta
+          </p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="kedar-hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0 80V40C240 80 480 0 720 0C960 0 1200 80 1440 40V80H0Z" fill="#f1f1f1"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ==========================================================================
+  SEKCJA 2: WYRÓŻNIONE KATEGORIE PRODUKTÓW
+  ========================================================================== -->
+<section class="kedar-categories-section" aria-label="Wyróżnione kategorie produktów WIHA">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-12">
+        <header class="kedar-section-header" data-aos="fade-up" data-aos-duration="600">
+          <span class="kedar-section-label">Kategorie produktowe</span>
+          <h2 class="kedar-section-title">Profesjonalne Narzędzia VDE dla Elektryków</h2>
+          <p class="kedar-section-desc">
+            Odkryj naszą ofertę certyfikowanych narzędzi izolowanych WIHA — od wkrętaków VDE 
+            testowanych 10 000 V, przez precyzyjne klucze dynamometryczne, po kompletne zestawy 
+            narzędzi dla instalatorów fotowoltaiki i elektryków przemysłowych.
+          </p>
+        </header>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      
+      <!-- Karta 1: Wkrętaki Izolowane VDE -->
+      <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+        <article class="kedar-category-card" aria-labelledby="cat-title-1">
+          <div class="kedar-card-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a782?auto=format&fit=crop&w=600&h=400&q=80" 
+                 alt="Wkrętak izolowany WIHA SoftFinish Electric w rękach elektryka pracującego przy rozdzielni" 
+                 class="kedar-card-image"
+                 loading="lazy"
+                 width="600"
+                 height="400">
+            <div class="kedar-card-badges">
+              <span class="badge-vde">
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                VDE
+              </span>
+              <span class="badge-10kv">10 000 V</span>
+            </div>
+            <div class="kedar-card-overlay" aria-hidden="true"></div>
+          </div>
+          
+          <div class="kedar-card-body">
+            <h3 id="cat-title-1" class="kedar-card-title">Wkrętaki Izolowane VDE</h3>
+            
+            <p class="kedar-card-desc">
+              Najsmuklejsze wkrętaki izolowane VDE na rynku dzięki technologii <strong>slimTechnology</strong>. 
+              Każdy wkrętak testowany indywidualnie napięciem 10&nbsp;000&nbsp;V — dziesięciokrotna rezerwa 
+              bezpieczeństwa. Uchwyty SoftFinish z certyfikatem <strong>AGR</strong> zapewniają pewny chwyt 
+              nawet w rękawicach roboczych. Linie: SoftFinish electric, slimFix, PicoFinish, speedE II.
+              Certyfikaty: VDE-GS, IEC 60900, ASTM F1505.
+            </p>
+            
+            <ul class="kedar-card-features">
+              <li><i class="fa-solid fa-bolt" aria-hidden="true"></i> Izolacja 1000V AC / 1500V DC</li>
+              <li><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> Technologia slimTechnology</li>
+              <li><i class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i> Certyfikat ergonomii AGR</li>
+            </ul>
+            
+            <p class="kedar-card-price">
+              <span class="price-label">ceny od</span>
+              <span class="price-value">45 zł</span>
+            </p>
+            
+            <a href="/wkretaki-vde/" 
+               class="btn btn-kedar-card"
+               aria-label="Przejdź do kategorii wkrętaków izolowanych VDE">
+              <span>Zobacz wkrętaki VDE</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+      
+      <!-- Karta 2: Klucze Dynamometryczne WIHA -->
+      <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+        <article class="kedar-category-card" aria-labelledby="cat-title-2">
+          <div class="kedar-card-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=600&h=400&q=80" 
+                 alt="Klucz dynamometryczny WIHA TorqueVario w użyciu przy precyzyjnym dokręcaniu" 
+                 class="kedar-card-image"
+                 loading="lazy"
+                 width="600"
+                 height="400">
+            <div class="kedar-card-badges">
+              <span class="badge-vde">
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                VDE
+              </span>
+              <span class="badge-iso">ISO 6789</span>
+            </div>
+            <div class="kedar-card-overlay" aria-hidden="true"></div>
+          </div>
+          
+          <div class="kedar-card-body">
+            <h3 id="cat-title-2" class="kedar-card-title">Klucze Dynamometryczne WIHA</h3>
+            
+            <p class="kedar-card-desc">
+              Precyzyjne klucze dynamometryczne WIHA z zakresami momentu od <strong>0,1 do 200 Nm</strong>. 
+              Modele z izolacją VDE 1000V dla prac przy instalacjach elektrycznych. Systemy 
+              <strong>TorqueVario-S</strong>, <strong>easyTorque</strong> i <strong>torque</strong> — 
+              kalibrowane zgodnie z ISO 6789, z możliwością wymiany końcówek. Niezbędne przy 
+              dokręcaniu szyn zbiorczych, modułów PV i połączeń HV w elektromobilności.
+            </p>
+            
+            <ul class="kedar-card-features">
+              <li><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Zakres 0,1 – 200 Nm</li>
+              <li><i class="fa-solid fa-rotate" aria-hidden="true"></i> Kalibracja ISO 6789</li>
+              <li><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Wymienne końcówki</li>
+            </ul>
+            
+            <p class="kedar-card-price">
+              <span class="price-label">ceny od</span>
+              <span class="price-value">189 zł</span>
+            </p>
+            
+            <a href="/klucze-dynamometryczne/" 
+               class="btn btn-kedar-card"
+               aria-label="Przejdź do kategorii kluczy dynamometrycznych WIHA">
+              <span>Zobacz klucze dynamometryczne</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+      
+      <!-- Karta 3: Zestawy Narzędzi -->
+      <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+        <article class="kedar-category-card" aria-labelledby="cat-title-3">
+          <div class="kedar-card-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&h=400&q=80" 
+                 alt="Kompletny zestaw narzędzi WIHA w walizce dla elektryka" 
+                 class="kedar-card-image"
+                 loading="lazy"
+                 width="600"
+                 height="400">
+            <div class="kedar-card-badges">
+              <span class="badge-vde">
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                VDE
+              </span>
+              <span class="badge-germany">
+                <i class="fa-solid fa-flag" aria-hidden="true"></i>
+                Germany
+              </span>
+            </div>
+            <div class="kedar-card-overlay" aria-hidden="true"></div>
+          </div>
+          
+          <div class="kedar-card-body">
+            <h3 id="cat-title-3" class="kedar-card-title">Zestawy Narzędzi VDE</h3>
+            
+            <p class="kedar-card-desc">
+              Kompletne zestawy narzędzi izolowanych VDE w walizkach, plecakach i trollejach WIHA. 
+              Zestawy skompletowane specjalnie dla <strong>instalatorów fotowoltaiki</strong>, 
+              elektryków przemysłowych i techników elektromobilności. Zawierają wkrętaki, szczypce, 
+              klucze, bity i akcesoria — wszystko certyfikowane VDE i testowane 10&nbsp;000&nbsp;V. 
+              Idealne na start lub jako uzupełnienie wyposażenia.
+            </p>
+            
+            <ul class="kedar-card-features">
+              <li><i class="fa-solid fa-solar-panel" aria-hidden="true"></i> Dedykowane dla instalatorów PV</li>
+              <li><i class="fa-solid fa-car-battery" aria-hidden="true"></i> Zestawy eMobility HV</li>
+              <li><i class="fa-solid fa-suitcase" aria-hidden="true"></i> Walizki, plecaki, trolley</li>
+            </ul>
+            
+            <p class="kedar-card-price">
+              <span class="price-label">ceny od</span>
+              <span class="price-value">349 zł</span>
+            </p>
+            
+            <a href="/zestawy-narzedzi/" 
+               class="btn btn-kedar-card"
+               aria-label="Przejdź do kategorii zestawów narzędzi VDE">
+              <span>Zobacz zestawy narzędzi</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+      
+    </div>
+    
+    <div class="row">
+      <div class="col-12">
+        <div class="kedar-trust-bar" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
+          <div class="kedar-trust-item">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <span>Gwarancja producenta WIHA</span>
+          </div>
+          <div class="kedar-trust-item">
+            <i class="fa-solid fa-truck-fast" aria-hidden="true"></i>
+            <span>Szybka wysyłka 24h</span>
+          </div>
+          <div class="kedar-trust-item">
+            <i class="fa-solid fa-award" aria-hidden="true"></i>
+            <span>Autoryzowany dystrybutor</span>
+          </div>
+          <div class="kedar-trust-item">
+            <i class="fa-solid fa-headset" aria-hidden="true"></i>
+            <span>Doradztwo techniczne</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
