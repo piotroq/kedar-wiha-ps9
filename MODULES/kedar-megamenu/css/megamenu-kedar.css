@@ -1,0 +1,1252 @@
+/* ==========================================================================
+   KEDAR-WIHA.pl — MEGAMENU STYLES
+   Horizontal Megamenu (Customer/CMS) + Vertical Megamenu (Shop/Kategorie)
+   PrestaShop 9.0.3 | Optima 3.3.0 | Bootstrap 4.x | Mobile-First
+   Wersja: 1.0.0 | 2025
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SEKCJA 1: LOKALNE ZMIENNE CSS — megamenu namespace
+   Referencja do globalnych zmiennych :root z custom-style.css
+   -------------------------------------------------------------------------- */
+:root {
+  /* Megamenu — wymiary */
+  --mm-dropdown-max-width:    1200px;
+  --mm-dropdown-padding:      32px;
+  --mm-col-gap:               24px;
+  --mm-item-py:               9px;
+  --mm-item-px:               14px;
+  --mm-top-item-height:       52px;
+  --mm-icon-size:             16px;
+  --mm-promo-height:          260px;
+
+  /* Megamenu — kolory (dziedziczą z :root projektu) */
+  --mm-bg:                    #ffffff;
+  --mm-bg-dark:               #1a1a1a;
+  --mm-bg-header:             #8B0000;          /* --color-theme-primary */
+  --mm-border:                #e8e8e8;          /* --border-color-light */
+  --mm-shadow:                0 12px 48px rgba(0,0,0,0.16);
+  --mm-item-hover-bg:         rgba(139,0,0,0.06);
+  --mm-item-hover-color:      #8B0000;          /* --color-theme-primary */
+  --mm-item-color:            #2D2D2D;          /* --color-heading-primary */
+  --mm-item-color-sub:        #555555;
+  --mm-heading-color:         #8B0000;
+  --mm-badge-bg:              #8B0000;
+  --mm-badge-new-bg:          #4cbb6c;
+  --mm-badge-hot-bg:          #ca0000;
+  --mm-badge-sale-bg:         #FFD700;
+  --mm-badge-sale-color:      #151515;
+  --mm-accent-line:           3px solid #8B0000;
+
+  /* Vertical megamenu */
+  --vmm-width:                260px;
+  --vmm-bg:                   #ffffff;
+  --vmm-header-bg:            linear-gradient(135deg, #8B0000 0%, #6b0000 100%);
+  --vmm-header-height:        52px;
+  --vmm-item-height:          44px;
+  --vmm-flyout-width:         680px;
+  --vmm-shadow:               4px 0 32px rgba(0,0,0,0.14);
+
+  /* Transitions */
+  --mm-transition:            0.28s cubic-bezier(0.25,0.46,0.45,0.94);
+  --mm-transition-fast:       0.16s ease;
+}
+
+/* ==========================================================================
+   SEKCJA 2: HORIZONTAL MEGAMENU — główna nawigacja (CMS/Customer)
+   Moduł: pos_megamenu | Hook: displayNav
+   ========================================================================== */
+
+/* ── 2.1 Wrapper górnej nawigacji ── */
+#pos_megamenu,
+.pos-megamenu-wrapper,
+#header .menu-content {
+  position: relative;
+  width: 100%;
+  z-index: var(--z-sticky, 1020);
+}
+
+/* ── 2.2 Pasek nawigacji top-level ── */
+#pos_megamenu ul.megamenu,
+.pos-megamenu > ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  height: var(--mm-top-item-height);
+}
+
+/* ── 2.3 Element top-level (pozycja nawigacji) ── */
+#pos_megamenu ul.megamenu > li,
+.pos-megamenu > ul > li {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* ── 2.4 Link top-level ── */
+#pos_megamenu ul.megamenu > li > a,
+.pos-megamenu > ul > li > a,
+#pos_megamenu ul.megamenu > li > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  padding: 0 var(--mm-item-px);
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-white, #fff);
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  transition: color var(--mm-transition-fast),
+              background-color var(--mm-transition-fast);
+}
+
+/* Podkreślenie aktywne — czerwona kreska na dole */
+#pos_megamenu ul.megamenu > li > a::after,
+.pos-megamenu > ul > li > a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: calc(100% - 28px);
+  height: 3px;
+  background: var(--color-accent-yellow, #FFD700);
+  border-radius: 2px 2px 0 0;
+  transition: transform 0.22s ease;
+  transform-origin: center;
+}
+
+#pos_megamenu ul.megamenu > li:hover > a::after,
+#pos_megamenu ul.megamenu > li.active > a::after,
+#pos_megamenu ul.megamenu > li > a:focus::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Kolor hover linku top-level */
+#pos_megamenu ul.megamenu > li:hover > a,
+#pos_megamenu ul.megamenu > li > a:focus {
+  color: var(--color-accent-yellow, #FFD700);
+  background-color: rgba(0,0,0,0.15);
+}
+
+/* ── 2.5 Ikona strzałki chevron przy elementach z dziećmi ── */
+#pos_megamenu ul.megamenu > li > a .mm-chevron,
+#pos_megamenu ul.megamenu > li > a > i.arrow {
+  font-size: 10px;
+  opacity: 0.7;
+  transition: transform var(--mm-transition-fast);
+}
+
+#pos_megamenu ul.megamenu > li:hover > a .mm-chevron,
+#pos_megamenu ul.megamenu > li:hover > a > i.arrow {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* ── 2.6 Badge / etykieta (Hot, New, Sale) ── */
+#pos_megamenu .mm-label,
+#pos_megamenu .menu-label {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  line-height: 1.4;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+#pos_megamenu .mm-label.hot,
+#pos_megamenu .menu-label-hot { background: var(--mm-badge-hot-bg); color: #fff; }
+#pos_megamenu .mm-label.new,
+#pos_megamenu .menu-label-new { background: var(--mm-badge-new-bg); color: #fff; }
+#pos_megamenu .mm-label.sale,
+#pos_megamenu .menu-label-sale { background: var(--mm-badge-sale-bg); color: var(--mm-badge-sale-color); }
+#pos_megamenu .mm-label.vde  { background: var(--color-theme-secondary, #0056A3); color: #fff; }
+
+/* ── 2.7 Panel dropdown (megamenu panel) ── */
+#pos_megamenu ul.megamenu > li > .sub-menu,
+#pos_megamenu ul.megamenu > li > .megamenu-content,
+.pos-megamenu > ul > li > .dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0px);
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  min-width: 280px;
+  max-width: var(--mm-dropdown-max-width);
+  background: var(--mm-bg);
+  border-top: var(--mm-accent-line);
+  box-shadow: var(--mm-shadow);
+  border-radius: 0 0 4px 4px;
+  padding: var(--mm-dropdown-padding);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--mm-transition),
+              transform var(--mm-transition),
+              visibility 0s var(--mm-transition);
+  z-index: var(--z-dropdown, 1000);
+}
+
+#pos_megamenu ul.megamenu > li:hover > .sub-menu,
+#pos_megamenu ul.megamenu > li:hover > .megamenu-content,
+#pos_megamenu ul.megamenu > li:focus-within > .megamenu-content {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity var(--mm-transition),
+              transform var(--mm-transition),
+              visibility 0s 0s;
+}
+
+/* Panel wyrównany do lewej (dla 1. elementu) */
+#pos_megamenu ul.megamenu > li:first-child > .sub-menu,
+#pos_megamenu ul.megamenu > li:first-child > .megamenu-content {
+  left: 0;
+  transform: translateY(12px);
+}
+#pos_megamenu ul.megamenu > li:first-child:hover > .megamenu-content {
+  transform: translateY(0);
+}
+
+/* Panel wyrównany do prawej (dla ostatniego elementu) */
+#pos_megamenu ul.megamenu > li:last-child > .sub-menu,
+#pos_megamenu ul.megamenu > li:last-child > .megamenu-content {
+  left: auto;
+  right: 0;
+  transform: translateY(12px);
+}
+#pos_megamenu ul.megamenu > li:last-child:hover > .megamenu-content {
+  transform: translateY(0);
+}
+
+/* ── 2.8 Megamenu — wewnętrzna siatka kolumn ── */
+.mm-grid {
+  display: grid;
+  gap: var(--mm-col-gap);
+  align-items: start;
+}
+
+.mm-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.mm-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.mm-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.mm-grid-5 { grid-template-columns: repeat(5, 1fr); }
+.mm-grid-3-promo { grid-template-columns: 1fr 1fr 280px; }
+.mm-grid-4-promo { grid-template-columns: 1fr 1fr 1fr 260px; }
+.mm-grid-2-wide  { grid-template-columns: 2fr 1fr; }
+
+/* ── 2.9 Kolumna megamenu ── */
+.mm-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── 2.10 Nagłówek kolumny ── */
+.mm-col-title {
+  display: block;
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mm-heading-color);
+  padding: 0 var(--mm-item-px) var(--mm-item-py);
+  border-bottom: 2px solid var(--mm-border);
+  margin-bottom: 8px;
+}
+
+.mm-col-title .fas,
+.mm-col-title .far {
+  margin-right: 6px;
+  font-size: var(--mm-icon-size);
+  color: var(--color-theme-primary, #8B0000);
+}
+
+/* ── 2.11 Link w dropdown ── */
+.mm-link,
+#pos_megamenu .sub-menu li a,
+#pos_megamenu .megamenu-content li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--mm-item-py) var(--mm-item-px);
+  font-family: var(--font-family-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mm-item-color);
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background-color var(--mm-transition-fast),
+              color var(--mm-transition-fast),
+              transform var(--mm-transition-fast);
+  line-height: 1.4;
+}
+
+.mm-link:hover,
+#pos_megamenu .sub-menu li a:hover,
+#pos_megamenu .megamenu-content li a:hover {
+  background-color: var(--mm-item-hover-bg);
+  color: var(--mm-item-hover-color);
+  text-decoration: none;
+  transform: translateX(3px);
+}
+
+.mm-link .fas,
+.mm-link .far,
+.mm-link .fab {
+  font-size: 14px;
+  color: var(--color-theme-secondary, #0056A3);
+  width: 18px;
+  flex-shrink: 0;
+  transition: color var(--mm-transition-fast);
+}
+
+.mm-link:hover .fas,
+.mm-link:hover .far {
+  color: var(--color-theme-primary, #8B0000);
+}
+
+/* Link z opisem (two-line) */
+.mm-link-rich {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 10px 14px;
+}
+
+.mm-link-rich .mm-link-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--mm-item-color);
+  transition: color var(--mm-transition-fast);
+}
+
+.mm-link-rich .mm-link-desc {
+  font-size: 0.75rem;
+  color: var(--mm-item-color-sub);
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+.mm-link-rich:hover .mm-link-title {
+  color: var(--color-theme-primary, #8B0000);
+}
+
+/* ── 2.12 Separator poziomy ── */
+.mm-divider {
+  height: 1px;
+  background: var(--mm-border);
+  margin: 12px 0;
+}
+
+/* ── 2.13 Panel CTA / promo ── */
+.mm-promo-panel {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: var(--mm-promo-height);
+  background: linear-gradient(135deg, #1a1a1a 0%, #3d0000 60%, #8B0000 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 20px 20px;
+}
+
+.mm-promo-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%);
+  z-index: 1;
+}
+
+.mm-promo-panel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform 0.5s ease;
+}
+
+.mm-promo-panel:hover img {
+  transform: scale(1.04);
+}
+
+.mm-promo-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+.mm-promo-badge {
+  display: inline-block;
+  background: var(--color-accent-yellow, #FFD700);
+  color: #151515;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+
+.mm-promo-title {
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.mm-promo-sub {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.mm-promo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-theme-primary, #8B0000);
+  color: #fff;
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.mm-promo-btn:hover {
+  background: var(--color-theme-three, #ca0000);
+  color: #fff;
+  text-decoration: none;
+  transform: translateX(2px);
+}
+
+/* ── 2.14 Blok USP / cechy ── */
+.mm-usp-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px var(--mm-dropdown-padding);
+  background: #f6f6f6;
+  border-top: 1px solid var(--mm-border);
+  margin: var(--mm-dropdown-padding) calc(-1 * var(--mm-dropdown-padding)) calc(-1 * var(--mm-dropdown-padding));
+}
+
+.mm-usp-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  text-decoration: none;
+}
+
+.mm-usp-item .fas {
+  font-size: 18px;
+  color: var(--color-theme-primary, #8B0000);
+}
+
+.mm-usp-item-text strong {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-heading-primary, #2D2D2D);
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+}
+
+.mm-usp-item-text span {
+  font-size: 0.7rem;
+  color: var(--mm-item-color-sub);
+}
+
+/* ── 2.15 Blok certyfikatów/norm ── */
+.mm-cert-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.mm-cert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff;
+  border: 1px solid var(--mm-border);
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-theme-secondary, #0056A3);
+  font-family: var(--font-family-mono, monospace);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mm-cert-badge:hover {
+  border-color: var(--color-theme-secondary, #0056A3);
+  box-shadow: 0 2px 8px rgba(0,86,163,0.15);
+  text-decoration: none;
+  color: var(--color-theme-secondary, #0056A3);
+}
+
+.mm-cert-badge .fas {
+  color: var(--color-theme-secondary, #0056A3);
+  font-size: 12px;
+}
+
+/* ── 2.16 Karty kontaktowe / info ── */
+.mm-contact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  background: var(--mm-item-hover-bg);
+  border-radius: 4px;
+  border-left: 3px solid var(--color-theme-primary, #8B0000);
+  text-decoration: none;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mm-contact-card:hover {
+  background: rgba(139,0,0,0.10);
+  box-shadow: 0 2px 12px rgba(139,0,0,0.12);
+  text-decoration: none;
+}
+
+.mm-contact-card .mm-contact-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--color-theme-primary, #8B0000);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mm-contact-card .mm-contact-icon .fas {
+  font-size: 16px;
+  color: #fff;
+}
+
+.mm-contact-card .mm-contact-body strong {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-heading-primary, #2D2D2D);
+  margin-bottom: 2px;
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+}
+
+.mm-contact-card .mm-contact-body span {
+  font-size: 0.8rem;
+  color: var(--mm-item-color-sub);
+}
+
+/* ── 2.17 Specjalny element "Wszystkie kategorie" w menu ── */
+.mm-all-cats-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 16px;
+  height: var(--mm-top-item-height);
+  background: var(--color-theme-primary, #8B0000);
+  color: #fff !important;
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+  border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+.mm-all-cats-btn:hover {
+  background: var(--color-theme-three, #ca0000);
+  color: #fff;
+  text-decoration: none;
+}
+
+.mm-all-cats-btn .fas {
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   SEKCJA 3: VERTICAL MEGAMENU — kolumna kategorii sklepu (lewa strona)
+   Moduł: posmegamenuvertical | Hook: displayLeftColumn
+   ========================================================================== */
+
+/* ── 3.1 Wrapper całego vertical menu ── */
+#pos_vertical_megamenu,
+.pos-vertical-megamenu,
+.block-categories.vertical-mm {
+  position: relative;
+  width: var(--vmm-width);
+  background: var(--vmm-bg);
+  border-radius: 4px;
+  box-shadow: var(--shadow-sm, 0 2px 8px rgba(0,0,0,0.08));
+  overflow: visible;
+  z-index: var(--z-dropdown, 1000);
+}
+
+/* ── 3.2 Header vertical menu (tytuł "Kategorie") ── */
+.vmm-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: var(--vmm-header-height);
+  padding: 0 18px;
+  background: var(--vmm-header-bg);
+  cursor: default;
+  border-radius: 4px 4px 0 0;
+}
+
+.vmm-header .fas {
+  font-size: 16px;
+  color: rgba(255,255,255,0.9);
+}
+
+.vmm-header-title {
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  flex: 1;
+}
+
+.vmm-header-subtitle {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── 3.3 Lista kategorii ── */
+.vmm-list,
+#pos_vertical_megamenu ul,
+.pos-vertical-megamenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── 3.4 Pozycja listy (kategoria) ── */
+.vmm-item,
+#pos_vertical_megamenu ul > li,
+.pos-vertical-megamenu ul > li {
+  position: relative;
+  border-bottom: 1px solid var(--mm-border);
+}
+
+.vmm-item:last-child,
+#pos_vertical_megamenu ul > li:last-child {
+  border-bottom: none;
+}
+
+/* ── 3.5 Link kategorii ── */
+.vmm-link,
+#pos_vertical_megamenu ul > li > a,
+.pos-vertical-megamenu ul > li > a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: var(--vmm-item-height);
+  padding: 0 16px;
+  font-family: var(--font-family-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mm-item-color);
+  text-decoration: none;
+  transition: background-color var(--mm-transition-fast),
+              color var(--mm-transition-fast);
+  position: relative;
+}
+
+.vmm-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 60%;
+  background: var(--color-theme-primary, #8B0000);
+  border-radius: 0 2px 2px 0;
+  transition: transform var(--mm-transition-fast);
+}
+
+.vmm-link:hover,
+.vmm-item:hover > .vmm-link,
+#pos_vertical_megamenu ul > li:hover > a {
+  background-color: var(--mm-item-hover-bg);
+  color: var(--mm-item-hover-color);
+  text-decoration: none;
+}
+
+.vmm-link:hover::before,
+.vmm-item:hover > .vmm-link::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+/* Ikona kategorii */
+.vmm-link .vmm-icon,
+.vmm-link .fas {
+  font-size: 14px;
+  color: var(--color-theme-secondary, #0056A3);
+  width: 18px;
+  flex-shrink: 0;
+  transition: color var(--mm-transition-fast),
+              transform var(--mm-transition-fast);
+}
+
+.vmm-link:hover .vmm-icon,
+.vmm-link:hover .fas,
+.vmm-item:hover > .vmm-link .fas {
+  color: var(--color-theme-primary, #8B0000);
+  transform: scale(1.1);
+}
+
+/* Strzałka wskazująca flyout */
+.vmm-link .vmm-arrow {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--mm-item-color-sub);
+  transition: transform var(--mm-transition-fast), color var(--mm-transition-fast);
+  flex-shrink: 0;
+}
+
+.vmm-item:hover > .vmm-link .vmm-arrow {
+  transform: translateX(2px);
+  color: var(--color-theme-primary, #8B0000);
+}
+
+/* ── 3.6 Badge przy kategorii ── */
+.vmm-link .vmm-badge {
+  margin-left: auto;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+}
+
+.vmm-badge.new  { background: var(--mm-badge-new-bg); color: #fff; margin-right: 4px; }
+.vmm-badge.hot  { background: var(--mm-badge-hot-bg); color: #fff; margin-right: 4px; }
+.vmm-badge.sale { background: var(--mm-badge-sale-bg); color: #151515; margin-right: 4px; }
+.vmm-badge.pro  { background: var(--color-theme-secondary, #0056A3); color: #fff; margin-right: 4px; }
+
+/* ── 3.7 Panel flyout (wylatujący panel w prawo) ── */
+.vmm-flyout,
+#pos_vertical_megamenu ul > li > .sub-menu,
+.pos-vertical-megamenu ul > li > .sub-menu {
+  position: absolute;
+  top: -4px;
+  left: calc(var(--vmm-width) - 1px);
+  width: var(--vmm-flyout-width);
+  min-height: 100%;
+  background: var(--mm-bg);
+  border-top: var(--mm-accent-line);
+  border-left: none;
+  box-shadow: var(--vmm-shadow);
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(8px);
+  transition: opacity var(--mm-transition),
+              transform var(--mm-transition),
+              visibility 0s var(--mm-transition);
+  border-radius: 0 4px 4px 0;
+  z-index: calc(var(--z-dropdown, 1000) + 1);
+}
+
+.vmm-item:hover > .vmm-flyout,
+#pos_vertical_megamenu ul > li:hover > .sub-menu,
+.pos-vertical-megamenu ul > li:hover > .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: translateX(0);
+  transition: opacity var(--mm-transition),
+              transform var(--mm-transition),
+              visibility 0s 0s;
+}
+
+/* ── 3.8 Siatka wewnątrz flyout ── */
+.vmm-flyout-grid {
+  display: grid;
+  gap: 20px;
+  align-items: start;
+}
+
+.vmm-flyout-grid-2 { grid-template-columns: 1fr 1fr; }
+.vmm-flyout-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+.vmm-flyout-grid-2-wide { grid-template-columns: 1.5fr 1fr; }
+.vmm-flyout-grid-promo { grid-template-columns: 1fr 1fr 220px; }
+
+/* ── 3.9 Flyout nagłówek ── */
+.vmm-flyout-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--mm-border);
+  margin-bottom: 16px;
+}
+
+.vmm-flyout-header-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--color-bg-primary-tint, rgba(139,0,0,0.06));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vmm-flyout-header-icon .fas {
+  font-size: 16px;
+  color: var(--color-theme-primary, #8B0000);
+}
+
+.vmm-flyout-header-text strong {
+  display: block;
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--color-heading-primary, #2D2D2D);
+  letter-spacing: 0.02em;
+}
+
+.vmm-flyout-header-text span {
+  font-size: 0.75rem;
+  color: var(--mm-item-color-sub);
+}
+
+.vmm-flyout-header .vmm-flyout-see-all {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-theme-primary, #8B0000);
+  text-decoration: none;
+  transition: gap 0.2s ease;
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+}
+
+.vmm-flyout-see-all:hover {
+  gap: 8px;
+  text-decoration: none;
+  color: var(--color-theme-three, #ca0000);
+}
+
+/* ── 3.10 Podkategorie w flyout ── */
+.vmm-subcat-title {
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mm-heading-color);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--mm-border);
+}
+
+.vmm-subcat-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.vmm-subcat-list li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  font-size: 0.84rem;
+  color: var(--mm-item-color);
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background 0.16s ease, color 0.16s ease, transform 0.16s ease;
+}
+
+.vmm-subcat-list li a:hover {
+  background: var(--mm-item-hover-bg);
+  color: var(--mm-item-hover-color);
+  transform: translateX(4px);
+  text-decoration: none;
+}
+
+.vmm-subcat-list li a .fas {
+  font-size: 12px;
+  color: var(--color-theme-secondary, #0056A3);
+  width: 14px;
+  flex-shrink: 0;
+}
+
+/* ── 3.11 Promo panel w flyout (mały banner boczny) ── */
+.vmm-flyout-promo {
+  border-radius: 4px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a1a 0%, #3d0000 60%, #8B0000 100%);
+  padding: 20px;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.vmm-flyout-promo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(139,0,0,0.85) 0%, rgba(26,26,26,0.6) 100%);
+}
+
+.vmm-flyout-promo-content {
+  position: relative;
+  z-index: 1;
+}
+
+.vmm-flyout-promo-content .badge {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  background: var(--color-accent-yellow, #FFD700);
+  color: #151515;
+  padding: 3px 8px;
+  margin-bottom: 10px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 800;
+  border-radius: 2px;
+}
+
+.vmm-flyout-promo-content h4 {
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.vmm-flyout-promo-content p {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.vmm-flyout-promo-content a.vmm-promo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff;
+  color: var(--color-theme-primary, #8B0000);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 7px 14px;
+  border-radius: 2px;
+  text-decoration: none;
+  font-family: var(--font-family-heading, 'Montserrat', sans-serif);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.vmm-flyout-promo-content a.vmm-promo-link:hover {
+  background: var(--color-accent-yellow, #FFD700);
+  color: #151515;
+  text-decoration: none;
+}
+
+/* ── 3.12 Pasek certyfikatów na dole flyout ── */
+.vmm-cert-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: #f6f6f6;
+  border-top: 1px solid var(--mm-border);
+  margin: 20px -24px -24px;
+  flex-wrap: wrap;
+}
+
+.vmm-cert-bar .vmm-cert-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-theme-secondary, #0056A3);
+  font-family: var(--font-family-mono, monospace);
+}
+
+.vmm-cert-bar .vmm-cert-item .fas {
+  color: var(--color-theme-primary, #8B0000);
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   SEKCJA 4: MOBILE — ukrywanie flyoutów, hamburger
+   Mobile-first: poniżej 1024px megamenu przechodzi w drawer/accordion
+   ========================================================================== */
+
+@media (max-width: 1023.98px) {
+
+  /* Ukryj desktop megamenu na mobile */
+  #pos_megamenu ul.megamenu > li > .sub-menu,
+  #pos_megamenu ul.megamenu > li > .megamenu-content,
+  .pos-megamenu > ul > li > .dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border-top: none;
+    border-left: 3px solid var(--color-theme-primary, #8B0000);
+    padding: 8px 0 8px 16px;
+    background: #f9f9f9;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    display: none; /* sterowane przez JS accordion */
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  #pos_megamenu ul.megamenu > li.open > .megamenu-content,
+  #pos_megamenu ul.megamenu > li.active-mobile > .megamenu-content {
+    display: block;
+  }
+
+  /* Vertical megamenu flyout — full-width na mobile */
+  .vmm-flyout,
+  #pos_vertical_megamenu ul > li > .sub-menu {
+    position: static;
+    width: 100%;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    box-shadow: none;
+    border: none;
+    border-left: 3px solid var(--color-theme-primary, #8B0000);
+    border-radius: 0;
+    padding: 8px 0 8px 16px;
+    background: #f9f9f9;
+    display: none;
+    transition: none;
+  }
+
+  .vmm-item.open > .vmm-flyout {
+    display: block;
+  }
+
+  /* Uproszczony układ grid na mobile */
+  .mm-grid-2,
+  .mm-grid-3,
+  .mm-grid-4,
+  .mm-grid-5,
+  .mm-grid-3-promo,
+  .mm-grid-4-promo,
+  .mm-grid-2-wide {
+    grid-template-columns: 1fr;
+  }
+
+  .vmm-flyout-grid-2,
+  .vmm-flyout-grid-3,
+  .vmm-flyout-grid-2-wide,
+  .vmm-flyout-grid-promo {
+    grid-template-columns: 1fr;
+  }
+
+  /* Ukryj panele promo na mobile */
+  .mm-promo-panel,
+  .vmm-flyout-promo {
+    display: none;
+  }
+
+  /* USP bar — scroll poziomy na mobile */
+  .mm-usp-bar {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 16px;
+    padding: 12px 16px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .mm-usp-bar::-webkit-scrollbar { display: none; }
+
+  .mm-usp-item {
+    flex-shrink: 0;
+    min-width: 140px;
+  }
+
+  /* Vertical megamenu — pełna szerokość */
+  #pos_vertical_megamenu,
+  .pos-vertical-megamenu {
+    width: 100%;
+  }
+}
+
+/* Tablet portrait — 768px–1023px */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .mm-grid-3,
+  .mm-grid-4,
+  .mm-grid-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vmm-flyout-grid-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Desktop 1024px+ */
+@media (min-width: 1024px) {
+  #pos_megamenu ul.megamenu > li > .megamenu-content,
+  .pos-megamenu > ul > li > .dropdown-menu {
+    display: block !important; /* zawsze widoczne, kontrolowane przez opacity/visibility */
+  }
+}
+
+/* Large desktop — poszerzony flyout */
+@media (min-width: 1440px) {
+  :root {
+    --vmm-flyout-width: 780px;
+    --mm-dropdown-padding: 36px;
+  }
+}
+
+/* ==========================================================================
+   SEKCJA 5: ANIMACJE I EFEKTY PREMIUM
+   ========================================================================== */
+
+/* Staggered animation dla linków w dropdownie */
+#pos_megamenu ul.megamenu > li:hover .mm-link:nth-child(1) { transition-delay: 0.02s; }
+#pos_megamenu ul.megamenu > li:hover .mm-link:nth-child(2) { transition-delay: 0.04s; }
+#pos_megamenu ul.megamenu > li:hover .mm-link:nth-child(3) { transition-delay: 0.06s; }
+#pos_megamenu ul.megamenu > li:hover .mm-link:nth-child(4) { transition-delay: 0.08s; }
+#pos_megamenu ul.megamenu > li:hover .mm-link:nth-child(5) { transition-delay: 0.10s; }
+#pos_megamenu ul.megamenu > li:hover .mm-link:nth-child(6) { transition-delay: 0.12s; }
+
+/* Pulsujący efekt dla odznaki HOT */
+@keyframes kw-pulse-badge {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(202,0,0,0.4); }
+  50%       { box-shadow: 0 0 0 5px rgba(202,0,0,0); }
+}
+
+.mm-label.hot,
+.menu-label-hot,
+.vmm-badge.hot {
+  animation: kw-pulse-badge 2.5s ease-in-out infinite;
+}
+
+/* Efekt shimmer dla paneli promo */
+@keyframes kw-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.mm-promo-panel.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: kw-shimmer 1.5s linear infinite;
+  z-index: 3;
+}
+
+/* Respektuj preferencje zmniejszonego ruchu */
+@media (prefers-reduced-motion: reduce) {
+  .mm-label.hot,
+  .vmm-badge.hot {
+    animation: none;
+  }
+
+  #pos_megamenu ul.megamenu > li > .megamenu-content,
+  .vmm-flyout {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   SEKCJA 6: DOSTĘPNOŚĆ (Accessibility)
+   WCAG 2.1 AA — focus states, keyboard nav, ARIA
+   ========================================================================== */
+
+/* Focus visible — klawiatura */
+#pos_megamenu a:focus-visible,
+.vmm-link:focus-visible,
+.vmm-subcat-list a:focus-visible,
+.mm-link:focus-visible {
+  outline: 2px solid var(--color-theme-secondary, #0056A3);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Skip link megamenu */
+.mm-skip-nav {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--color-theme-primary, #8B0000);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 0 0 4px 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: var(--z-max, 9999);
+  transition: top 0.2s ease;
+}
+
+.mm-skip-nav:focus {
+  top: 0;
+  color: #fff;
+}
